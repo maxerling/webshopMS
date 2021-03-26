@@ -24,8 +24,8 @@ function createElementsForProduct(product) {
   //col-xs-12 col-md-10 col-lg-5
   const div = createNode("div");
   addClass(div, "p-1");
-  addClass(div, "col-xs-3");
-  addClass(div, "col-md-3");
+  addClass(div, "col-xs-12");
+  addClass(div, "col-md-6");
   addClass(div, "col-lg-3");
   addClass(div);
   addClass(div, "border");
