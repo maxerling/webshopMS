@@ -1,0 +1,78 @@
+[
+  {
+    "id": 1,
+    "title": "Havegryn",
+    "brand": "AXA",
+    "description": "Nyckelhålsmärkta havregryn. Rika på fibrer, vitaminer och mineraler. Perfekta till bakningen eller gröten",
+    "image": "https://cdn4.matsmart.se/sites/se/files/styles/product_zoom/public/products/axa_havregryn_750g_ny.jpg?itok=pOCVoEG4",
+    "price": 12,
+    "quantity:": 5,
+    "units": "750g",
+    "category": "skafferi"
+  },
+  {
+    "id": 2,
+    "title": "Vitlökssås",
+    "brand": "Felix",
+    "description": "Vitlöksås som är tillagad i Blekinge med mild svensk rapsolja, svenska ägg från frigående höns och finhackad persilja. Passar utmärkt till grillat, fisk, skaldjur, kebab och falafel.",
+    "image": "https://cdn4.matsmart.se/sites/se/files/styles/product_zoom/public/products/_vitloksdressing_370ml_felix.jpg?itok=vTffnSqz",
+    "price": 15,
+    "units": "370ml",
+    "category": "skafferi"
+  },
+  {
+    "id": 3,
+    "title": "Earl Gray",
+    "brand": "Life by follis",
+    "description": "Life by Follis är Tekompaniets eget varumärke med kontroll över hela tillverkningen från teplanta till kopp. Life by Follis producerar te av premiumkvalitet med spännande smaker från noggrant utvalda råvaror. Teet växer högt upp i bergen i Indien och kommer från ett och samma plantage, så kallat Single Estaste. Life by Follis är både ekologiskt och Fairtraidecertifierat.",
+    "image": "https://cdn4.matsmart.se/sites/se/files/styles/product_zoom/public/products/ms121320-lif_earl_gray_40g_ekojpg.jpg?itok=F5ErYdJU",
+    "price": 29,
+    "quantity:": 5,
+    "units": "40g",
+    "category": "skafferi"
+  },
+  {
+    "id": 4,
+    "title": "Bryggkaffe Kasenga",
+    "brand": "Rutasoka",
+    "description": "Kasenga är ett mörkrostat kaffe bestående av 100 procent noga utvalda och ekologiska arabicabönor. Malningen passar utmärkt för din vanliga hemmabryggare.",
+    "image": "https://cdn1.matsmart.se/sites/se/files/styles/product_zoom/public/products/rutasoka_kasenga_bryggmalet_ny.jpg?itok=ZZFlI5s-",
+    "price": 79,
+    "quantity:": 5,
+    "units": "450g",
+    "category": "skafferi"
+  },
+  {
+    "id": 5,
+    "title": "Happy Cherries",
+    "brand": "Haribo",
+    "description": "2475g godis i form av en körsbär! Mums!",
+    "image": "https://cdn4.matsmart.se/sites/se/files/styles/product_zoom/public/products/ms121632-happy_cherriesjpg.jpg?itok=oNJevPCy",
+    "price": 69,
+    "quantity:": 5,
+    "units": "2475g",
+    "category": "snacks-godis"
+  },
+  {
+    "id": 6,
+    "title": "Valnötter",
+    "brand": "WH",
+    "description": "Valnötter från WH.",
+    "image": "https://cdn4.matsmart.se/sites/se/files/styles/product_zoom/public/products/wh_valnotter_250g_.jpg?itok=XqgcKtiU",
+    "price": 39,
+    "quantity:": 5,
+    "units": "250g",
+    "category": "snacks-godis"
+  },
+  {
+    "id": 7,
+    "title": "Sköljmedel White Flower",
+    "brand": "Softlan",
+    "description": "Sköljmedel för känslig hud med ingredienser från hållbara källor och naturligt ursprung. Formulan är också biolgiskt nedbrytbar. Dermatologiskt testad.",
+    "image": "https://cdn4.matsmart.se/sites/se/files/styles/product_zoom/public/products/ms120252_sof_softlan_skoljmedel_plant_based_white_flower_650_ml_650mljpg.jpg?itok=IWVl9UAE",
+    "price": 19,
+    "quantity:": 5,
+    "units": "650ml",
+    "category": "hem-stad"
+  }
+]
