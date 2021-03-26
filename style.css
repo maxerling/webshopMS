@@ -3,28 +3,34 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 #main {
   background-color: #f8f8f8; /*#f8f8f8*/
-  width: 70%;
-  padding: 1em 1em 5em;
+  min-height: calc(100vh - 70px);
 }
 
 .footer {
   width: 100%;
-  position: absolute;
+  position: relative;
   /*box-shadow*/
   bottom: 0;
 }
 
-#sidebar ul {
-  width: 15%;
+.container {
+  background-color: #ebebeb;
+  width: 15% !important;
+}
+
+.product {
+  background-color: #fff;
+}
+
+#sidebar {
   position: fixed;
-  background-color: transparent;
-  height: 100%;
+}
+
+#sidebar ul {
   background-color: #ebebeb; /*#f7f7f7*/
-  left: 0;
-  float: left;
-  padding-right: 100px;
 }
 
 #sidebar p {
@@ -41,12 +47,7 @@
   border-left: 0.25rem solid #f80035;
   background: #fff;
   margin: 0 -0.8125rem;
-
   padding-right: 2rem;
-}
-
-#sidebar {
-  background-color: red;
 }
 
 .navbar-toggler-icon {
