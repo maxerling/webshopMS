@@ -6,14 +6,6 @@
 
 #main {
   background-color: #f8f8f8; /*#f8f8f8*/
-  min-height: calc(100vh - 70px);
-}
-
-.footer {
-  width: 100%;
-  position: relative;
-  /*box-shadow*/
-  bottom: 0;
 }
 
 .container {
