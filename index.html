@@ -17,14 +17,37 @@
       integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
   </head>
 
   <body onload="getData()">
+    <header>
     <nav class="navbar sticky-top navbar-light bg-light">
-      <a id="logo" href="index.html">Hakims Livs</a>
+      <a id="logo" href="index.html"
+        ><img id="logoImg" src="./images/logo/Hakims-logo.png" alt="logo"
+      /></a>
+      <!-- START Search input -->
+      <div class="search-field">
+        <input
+          type="text"
+          placeholder="Sök..."
+          name="query"
+          value=""
+          class="search-field-input"
+          autocomplete="off"
+          autocorrect="off"
+        />
+      </div>
+      <!-- END Search input -->
 
       <!--<span class="navbar-toggler-icon ham-menu"></span>-->
-      <div class="ms-auto">
+
+      <div class="ms-10">
         <button id="logIn" class="btn btn-secondary" type="button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +66,7 @@
           Logga in
         </button>
         <button id="cart" class="btn btn-warning" type="button">
-          <svg
+          <!-- <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
@@ -54,13 +77,43 @@
             <path
               d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
             />
-          </svg>
+          </svg> -->
+          <i class="fas fa-shopping-cart"></i
+          ><!--Är inte bättre att använda det här??-->
           Kundvagn
         </button>
       </div>
     </nav>
+  </header>
+    <!-- START Header hero image -->
 
+    <div class="hero-image d-flex justify-content-center align-items-center">
+      <div class="hero-text ">
+        <a
+         
+          class="text-decoration-none "
+          href="skafferi.html"
+          >
+          <h3  id="hero-text" class="" >DAGENS HAKIMS DEAL</h3>
+        </a>
+      </div>
+    </div>
+
+    <!-- END Header hero image -->
+<!--START main -->
     <div id="main" class="container-fluid">
+      <!-- 
+      <div class=" container">
+        <div class="row">
+          <aside class="col-3"></aside>
+          <div id="products" class="col-6">  vi kan justera för alla enheter i det här !!
+
+          </div>
+        </div>
+      </div>   Är det inte ett bra sätt? 
+      https://getbootstrap.com/docs/5.0/layout/grid/
+    -->
+
       <div id="sidebar">
         <ul id="sbg" class="navbar-nav p-3">
           <p>Kategorier</p>
@@ -76,6 +129,7 @@
 
       <div id="products" class="row"></div>
     </div>
+    <!--END main -->
 
     <div class="footer mt-auto py-3 text-black bg-light">
       <div class="container-fluid">

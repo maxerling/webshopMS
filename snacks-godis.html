@@ -17,14 +17,39 @@
       integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
       crossorigin="anonymous"
     />
+    <link
+    rel="stylesheet"
+    href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+    crossorigin="anonymous"
+  />
   </head>
 
   <body onload="getData()">
     <nav class="navbar sticky-top navbar-light bg-light">
-      <a id="logo" href="index.html">Hakims Livs</a>
+      <a id="logo" href="index.html"
+        ><img id="logoImg" src="./images/logo/Hakims-logo.png" alt="logo"
+      /></a>
+      <!-- START Search input -->
+      <div class="search-field">
+        <input
+          type="text"
+          placeholder="Sök..."
+          name="query"
+          value=""
+          class="search-field-input"
+          autocomplete="off"
+          autocorrect="off"
+        />
+       
+      </div>
+      <!-- END Search input -->
+
+    
 
       <!--<span class="navbar-toggler-icon ham-menu"></span>-->
-      <div class="ms-auto">
+
+      <div class="ms-10">
         <button id="logIn" class="btn btn-secondary" type="button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
