@@ -66,3 +66,8 @@ function createElementsForProduct(product) {
     append(products, div);
   }
 }
+
+$(document).on("click", "#register", function() {
+$("#registerModal").modal("show");})
+$(document).on("click", "#closeModal", function() {
+$("#registerModal").modal("hide");})
