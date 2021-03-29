@@ -1,31 +1,28 @@
-body {
+* {
   margin: 0;
   padding: 0;
-  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+  box-sizing: border-box;
 }
 
 #main {
   background-color: #f8f8f8; /*#f8f8f8*/
-  width: 70%;
-  padding: 1em 1em 5em;
 }
 
-.footer {
-  width: 100%;
-  position: absolute;
-  /*box-shadow*/
-  bottom: 0;
+.container {
+  background-color: #ebebeb;
+  width: 15% !important;
+}
+
+.product {
+  background-color: #fff;
+}
+
+#sidebar {
+  position: fixed;
 }
 
 #sidebar ul {
-  width: 15%;
-  position: fixed;
-  background-color: transparent;
-  height: 100%;
   background-color: #ebebeb; /*#f7f7f7*/
-  left: 0;
-  float: left;
-  padding-right: 100px;
 }
 
 #sidebar p {
@@ -42,12 +39,7 @@ body {
   border-left: 0.25rem solid #f80035;
   background: #fff;
   margin: 0 -0.8125rem;
-
   padding-right: 2rem;
-}
-
-#sidebar {
-  background-color: red;
 }
 
 .navbar-toggler-icon {

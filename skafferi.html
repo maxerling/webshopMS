@@ -24,6 +24,7 @@
       <a id="logo" href="index.html">Hakims Livs</a>
 
       <!--<span class="navbar-toggler-icon ham-menu"></span>-->
+      <!--##-->
       <div class="ms-auto">
         <button id="logIn" class="btn btn-secondary" type="button">
           <svg
@@ -60,25 +61,31 @@
       </div>
     </nav>
 
-    <div class="container-fluid">
-      <div id="sidebar">
-        <ul class="navbar-nav p-3">
-          <p>Kategorier</p>
-          <li class="nav-item">
-            <a class="nav-link active-link" href="skafferi.html">Skafferi</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="snacks-godis.html">Snacks & godis</a>
-          </li>
-        </ul>
+    <div class="parent-container d-flex">
+      <div class="container">
+        <div id="sidebar" class="row">
+          <ul class="navbar-nav p-3">
+            <p>Kategorier</p>
+            <li class="nav-item">
+              <a class="nav-link" href="skafferi.html">Skafferi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="snacks-godis.html">Snacks & godis</a>
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <div class="container">
-        <h2 id="category" data-value="skafferi" class="pt-5 pb-3">Skafferi</h2>
-        <div id="products" class="row"></div>
+      <div id="main" class="container-fluid min-vh-100">
+        <div class="row">
+          <h2 id="category" data-value="skafferi" class="pt-5 pb-3">
+            Skafferi
+          </h2>
+
+          <div id="products" class="row"></div>
+        </div>
       </div>
     </div>
-
     <div class="footer mt-auto py-3 text-black bg-light">
       <div class="container-fluid">
         <div>Grupp 3 (KVA20 JAVA20) &#169; Copyright 2021</div>

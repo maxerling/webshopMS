@@ -21,15 +21,15 @@ function loadData(data) {
 function createElementsForProduct(product) {
   const h2 = document.getElementById("category");
   const h2Value = h2.getAttribute("data-value");
-  //col-xs-12 col-md-10 col-lg-5
   const div = createNode("div");
-  addClass(div, "p-1");
-  addClass(div, "col-xs-3");
-  addClass(div, "col-md-3");
+  addClass(h2, "m-2");
+  addClass(div, "p-2");
+  addClass(div, "col-xs-12");
+  addClass(div, "col-md-6");
   addClass(div, "col-lg-3");
-  addClass(div);
   addClass(div, "border");
   addClass(div, "text-center");
+  addClass(div, "product");
 
   const img = createNode("img");
   addClass(img, "mb-4");
