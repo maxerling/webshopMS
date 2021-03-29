@@ -1,0 +1,175 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  #main {
+    background-color: #f8f8f8; /#f8f8f8/
+  }
+
+  /*START header & NavBar style*/
+nav{
+    padding:.5rem 1rem
+  }
+  #logoImg:hover {
+    transform: scale(1.05);
+    transition-duration: 0.3s;
+  }
+  
+  #logoImg {
+    width: 100%;
+  }
+  
+  #logo {
+    width: 15%;
+    height: 100%;
+  }
+  
+  #logIn {
+    background-color: #fff;
+    color: black;
+    border: 0.0625rem solid #d9d9d9;
+    border-radius: 0.3125rem;
+    outline: none;
+    box-shadow: none;
+  }
+  
+  #logIn:hover {
+    background: #e2e2e2;
+  }
+  
+  #cart {
+    border: 0.0625rem solid #fff;
+    box-sizing: border-box;
+    border-radius: 0.3125rem;
+    outline: none;
+    box-shadow: none;
+  }
+  
+  .search-field{
+    width:40%;
+  }
+  .search-field input {
+    padding: .5rem .2rem .5rem 2rem;
+    background: url(../images/icons/search-icon.svg) no-repeat left;
+     width: 100%;
+     border: 1px solid #bbb;
+     border-radius: 5px
+  }
+  /*END header & NavBar style*/
+  
+  /* START Header hero image*/
+  .hero-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url("./images/hero/hero-original.png");
+    height: 400px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+  #hero-text:hover{
+    color: #f8be00;
+    transform: scale(1.05);
+    transition-duration: 0.3s;
+  
+  }
+  #hero-text{
+    color:#ffffff8c;
+    display:block;;
+    width: 100%;
+  }
+  
+  /* END Header hero image*/
+  
+  .container {
+    background-color: #ebebeb;
+    width: 15% !important;
+  }
+  
+  .product {
+    background-color: #fff;
+  }
+  
+  #sidebar {
+    position: fixed;
+  }
+  
+  #sidebar ul {
+    background-color: #ebebeb; /#f7f7f7/
+  }
+  
+  #sidebar p {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  #sidebar a {
+    color: #4a4a4a;
+    padding: 7px;
+  }
+  
+  #sidebar a:hover {
+    border-left: 0.25rem solid #f80035;
+    background: #fff;
+    margin: 0 -0.8125rem;
+    padding-right: 2rem;
+  }
+  
+  .navbar-toggler-icon {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+  
+  .navbar-toggler-icon:hover {
+    opacity: 1;
+  }
+  
+  .bg-light {
+    box-shadow: 0 0.0625rem 0.4375rem 0.0625rem rgba(0, 0, 0, 0.1);
+  }
+  
+  #logIn {
+    background-color: #fff;
+    color: black;
+    border: 0.0625rem solid #d9d9d9;
+    border-radius: 0.3125rem;
+    outline: none;
+    box-shadow: none;
+  }
+  
+  #logIn:hover {
+    background: #e2e2e2;
+  }
+  
+  #cart {
+    border: 0.0625rem solid #fff;
+    box-sizing: border-box;
+    border-radius: 0.3125rem;
+    outline: none;
+    box-shadow: none;
+  }
+  
+  .active-link {
+    border-left: 0.25rem solid #f80035;
+    background: #fff;
+    margin: 0 -0.8125rem;
+    padding-left: 0.75rem;
+  }
+  
+ 
+  
+  #products .col-sm-3 {
+    background-color: #fff;
+  }
+  
+  #products img:hover {
+    transform: scale(1.05);
+    transition-duration: 0.3s;
+  }
+  
+  #products img {
+    width: 137px;
+    height: 137px;
+  }

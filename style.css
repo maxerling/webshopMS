@@ -1,8 +1,7 @@
-/* Reset Stylesheet*/
-body {
+* {
   margin: 0;
   padding: 0;
-  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+  box-sizing: border-box;
 }
 a{
   text-decoration: none;
@@ -100,13 +99,23 @@ nav{
 /*START sidebar style*/
 #sidebar ul {
   width: 15%;
+}
+
+.container {
+  background-color: #ebebeb;
+  width: 15% !important;
+}
+
+.product {
+  background-color: #fff;
+}
+
+#sidebar {
   position: fixed;
-  background-color: transparent;
-  height: 100%;
+}
+
+#sidebar ul {
   background-color: #ebebeb; /*#f7f7f7*/
-  left: 0;
-  float: left;
-  padding-right: 100px;
 }
 
 #sidebar p {
@@ -123,7 +132,6 @@ nav{
   border-left: 0.25rem solid #f80035;
   background: #fff;
   margin: 0 -0.8125rem;
-
   padding-right: 2rem;
 }
 
