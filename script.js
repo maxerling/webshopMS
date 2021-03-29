@@ -72,6 +72,13 @@ function createElementsForProduct(product) {
   const p2 = createNode("p");
   const p3 = createNode("p");
   const btn = createNode("button");
+  addClass(btn, "btn-primary");
+  addClass(btn, "btn");
+  console.log(product);
+  console.log(product.quantity);
+  if (product.quantity == 0) {
+    btn.setAttribute("disabled", "disabled");
+  }
   const products = document.getElementById("products");
   if (h2Value == "produkter") {
     img.src = product.image;
