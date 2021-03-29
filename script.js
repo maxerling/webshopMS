@@ -22,7 +22,9 @@ let addClass = (element, className) => element.classList.add(className);
  * @returns
  */
 let append = (parent, el) => parent.appendChild(el);
-
+/**
+ * Fetch data from url/path
+ */
 function getData() {
   const url = "data/products.json";
 
