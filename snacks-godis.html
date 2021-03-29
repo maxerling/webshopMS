@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Snacks & godis</title>
-    <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="style2.css" type="text/css" media="all" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
@@ -17,14 +17,39 @@
       integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
       crossorigin="anonymous"
     />
+    <link
+    rel="stylesheet"
+    href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+    crossorigin="anonymous"
+  />
   </head>
 
   <body onload="getData()">
     <nav class="navbar sticky-top navbar-light bg-light">
-      <a id="logo" href="index.html">Hakims Livs</a>
+      <a id="logo" href="index.html"
+        ><img id="logoImg" src="./images/logo/Hakims-logo.png" alt="logo"
+      /></a>
+      <!-- START Search input -->
+      <div class="search-field">
+        <input
+          type="text"
+          placeholder="Sök..."
+          name="query"
+          value=""
+          class="search-field-input"
+          autocomplete="off"
+          autocorrect="off"
+        />
+       
+      </div>
+      <!-- END Search input -->
+
+    
 
       <!--<span class="navbar-toggler-icon ham-menu"></span>-->
-      <div class="ms-auto">
+
+      <div class="ms-10">
         <button id="logIn" class="btn btn-secondary" type="button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
