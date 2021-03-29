@@ -1,25 +1,25 @@
 /**
  * Creating element
- * 
- * @param {string} element - The element you wanna creaate 
- * @returns 
+ *
+ * @param {string} element - The element you wanna creaate
+ * @returns
  */
 let createNode = (element) => document.createElement(element);
 
 /**
  * Adding class to element
- * 
+ *
  * @param {string} element - The element you wanna pick
  * @param {string} className - The class you wanna add
- * @returns 
+ * @returns
  */
 let addClass = (element, className) => element.classList.add(className);
 /**
  * Add child element to parent element
- * 
+ *
  * @param {string} parent - The parent element
  * @param {string} el - The child element
- * @returns 
+ * @returns
  */
 let append = (parent, el) => parent.appendChild(el);
 
@@ -28,15 +28,19 @@ function getData() {
 
   fetch(url)
     .then((resp) => resp.json())
-    .then((data) => loadData(data))
+    .then((data) => storeData(data))
     .catch((err) => console.log(err));
 }
-function loadData(data) {
-  data.map(function (product) {
-    createElementsForProduct(product);
-  });
+function storeData(data) {
+  products = new Array();
+  console.log(products);
+  products = data;
+  console.log(products);
 }
 
+window.addEventListener("load", () => {
+  getData();
+});
 function createElementsForProduct(product) {
   const h2 = document.getElementById("category");
   const h2Value = h2.getAttribute("data-value");
