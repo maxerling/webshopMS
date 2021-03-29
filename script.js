@@ -19,6 +19,14 @@ let createNode = (element) => document.createElement(element);
  */
 let addClass = (element, className) => element.classList.add(className);
 /**
+ * Removing class form element
+ *
+ * @param {string} element - element you wanna pick
+ * @param {string} className - the class you wanna remove
+ * @returns
+ */
+let removeClass = (element, className) => element.classList.remove(className);
+/**
  * Add child element to parent element
  *
  * @param {string} parent - The parent element
@@ -68,6 +76,7 @@ function createElementsForProduct(product) {
 
   const img = createNode("img");
   addClass(img, "mb-4");
+  addClass(img, "product-hover");
   const p1 = createNode("p");
   const p2 = createNode("p");
   const p3 = createNode("p");
@@ -78,6 +87,10 @@ function createElementsForProduct(product) {
   console.log(product.quantity);
   if (product.quantity == 0) {
     btn.setAttribute("disabled", "disabled");
+    p1.setAttribute("style", "color:grey;");
+    p2.setAttribute("style", "color:grey;");
+    p3.setAttribute("style", "color:grey;");
+    removeClass(img, "product-hover");
   }
   const products = document.getElementById("products");
   if (h2Value == "produkter") {
