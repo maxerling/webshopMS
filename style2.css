@@ -183,7 +183,7 @@ nav {
 
 .modal-input-password {
   width: 50%;
-  padding-bottom: 15px;
+  padding-bottom: 30px;
 }
 
 .modal-title {
@@ -204,11 +204,21 @@ nav {
 }
 
 .modal-login-button button {
+  height: 40px;
   color: white;
   width: 100%;
   background-color: #011e62;
-  border-radius: 2px;
+  border-radius: 6px;
   border: none;
+  box-shadow: 3px 3px 2px 2px #8092CC;
+}
+
+.modal-login-button button:hover {
+  transform: translateY(2px);
+}
+
+.modal-login-button button:active {
+  transform: translateY(3px);
 }
 
 /* MODAL END */
