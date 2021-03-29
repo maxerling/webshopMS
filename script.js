@@ -38,17 +38,21 @@ function getData() {
     .catch((err) => console.log(err));
 }
 /**
- * Stroing data from fetch, promise into array
+ * Storing data from fetch, promise into array
  * @param {object} data - Result of taking JSON as input and
- *  parsing it to produce a JS Ojbect
+ *  parsing it to produce a JS object
  */
 function storeData(data) {
   products = new Array();
-  console.log(products);
   products = data;
   console.log(products);
+  products.forEach((product) => createElementsForProduct(product));
 }
 
+/**
+ * Create elements based on product data (object data)
+ * @param {object} product - object of array of objects
+ */
 function createElementsForProduct(product) {
   const h2 = document.getElementById("category");
   const h2Value = h2.getAttribute("data-value");
