@@ -33,6 +33,11 @@ function getData() {
     .then((data) => storeData(data))
     .catch((err) => console.log(err));
 }
+/**
+ * 
+ * @param {object} data - Result of taking JSON as input and
+ *  parsing it to produce a JS Ojbect
+ */
 function storeData(data) {
   products = new Array();
   console.log(products);
