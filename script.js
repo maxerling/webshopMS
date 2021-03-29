@@ -34,7 +34,7 @@ function getData() {
     .catch((err) => console.log(err));
 }
 /**
- * 
+ * Stroing data from fetch, promise into array
  * @param {object} data - Result of taking JSON as input and
  *  parsing it to produce a JS Ojbect
  */
