@@ -72,7 +72,7 @@
           Kundvagn
         </button>
         <!-- Ta bort denna sen -->
-         <button id="register" class="btn btn-dark" type="button"></i>Registrera nu! (Flytta)</button>
+         <button id="register" class="btn btn-outline-dark" type="button"></i>Registrera nu! (Flytta)</button>
          <!-- Ta bort denna sen -->
       </div>
     </nav>
@@ -143,31 +143,47 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" >Skapa konto</h5>
-        <button id="closeModal"type="button" class="btn btn-dark" data-dismiss="modal" onclick="close()">Stäng</button>
+        <button id="closeModal"type="button" class="btn btn-outline-dark" data-dismiss="modal" onclick="close()">Stäng</button>
       </div>
       <div class="modal-body">
         <form>
-        <label for="name">Namn:</label><br />
-        <input type="text" id="form-name" name="name" /> <br />
+          <div class="form-floating">
+            <input class="form-control" type="text" id="floating-name" name="name" placeholder="Namn"/> 
+            <label for="floating-name">Namn</label><br />
+          </div>
 
-        <label for="phoneNumber">Tel.:</label><br />
-        <input type="text" id="form-number" name="number" /> <br />
+          <div class="form-floating">
+            <input class="form-control" type="text" id="floating-number" name="number" placeholder="Telefon"/> 
+            <label for="floating-number">Telefon</label><br />
+          </div>
 
-        <label for="email">Email:</label><br />
-        <input type="text" id="form-email" name="email" /> <br />
+          <div class="form-floating">
+            <input class="form-control" type="email" id="floating-email" name="email" placeholder="E-mail"/> 
+            <label for="floating-email">E-mail</label><br />
+          </div>
 
-        <label for="email">Lösenord:</label><br />
-        <input type="password" id="form-email" name="email" /> <br />
+          <div class="form-floating">
+            <input class="form-control" type="password" id="floating-password" name="password" placeholder="Lösenord"/> 
+            <label for="floating-password">Lösenord</label><br />
+          </div>
 
-        <label for="adress">Adress:</label><br />
-        <input type="text" id="form-street" name="street" placeholder="Gata"/><br />
+          <div class="form-floating">
+            <input class="form-control" type="text" id="floating-street" name="street" placeholder="Gata"/> 
+            <label for="floating-street">Gata</label><br />
+          </div>
 
-        <input type="text" id="form-zip" name="zip" placeholder="Postnummer" /><br />
+          <div class="form-floating">
+            <input class="form-control" type="text" id="floating-zip" name="zip" placeholder="Postnummer"/> 
+            <label for="floating-zip">Postnummer</label><br />
+          </div>
 
-        <input type="text" id="form-city" name="city" placeholder="Ort" /><br /><br />
+          <div class="form-floating">
+            <input class="form-control" type="text" id="floating-city" name="city" placeholder="Ort"/> 
+            <label for="floating-city">Ort</label><br />
+          </div>
 
-        <input type="submit" class="btn btn-dark" value="Skapa ett konto!">
-      </form>
+          <input type="submit" class="btn btn-outline-primary" value="Skapa ett konto!">
+        </form>
       </div>
     </div>
   </div>
