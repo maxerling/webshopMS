@@ -173,3 +173,69 @@ nav{
     width: 137px;
     height: 137px;
   }
+
+
+  /* MODAL START */
+
+
+.modal-dialog {
+  width: 30% !important;
+}
+
+  .modal-input-username {
+  width: 50%;
+}
+
+.modal-input-password {
+  width: 50%;
+}
+
+  .modal-title {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  .modal-subtitle {
+    font-size: 0.7rem;
+    text-align: center;
+  }
+
+/*
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  .modal-content {
+    background-color: white;
+    margin: 20% auto;
+    padding: 20px;
+    width: 100px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+  }
+
+  .closeBtn {
+    float: left;
+    font-size: 30px;
+  }
+
+  .closeBtn:hover {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .closeBtn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+*/
+  /* MODAL END */
