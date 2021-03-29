@@ -146,40 +146,51 @@
         <button id="closeModal"type="button" class="btn btn-outline-dark" data-dismiss="modal" onclick="close()">Stäng</button>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="form-floating">
-            <input class="form-control" type="text" id="floating-name" name="name" placeholder="Namn"/> 
-            <label for="floating-name">Namn</label><br />
+        <form class="row g-3">
+          <div class="form-floating col-md-6">
+            <input class="form-control" type="text" id="floating-surname" name="surname" placeholder="Förnamn"/> 
+            <label for="floating-surname">Förnamn</label><br />
           </div>
 
-          <div class="form-floating">
-            <input class="form-control" type="text" id="floating-number" name="number" placeholder="Telefon"/> 
-            <label for="floating-number">Telefon</label><br />
+          <div class="form-floating col-md-6">
+            <input class="form-control" type="text" id="floating-lastname" name="lastname" placeholder="Efternamn"/> 
+            <label for="floating-lastname">Efternamn</label><br />
           </div>
 
-          <div class="form-floating">
+          <div class="form-floating col-md-6">
             <input class="form-control" type="email" id="floating-email" name="email" placeholder="E-mail"/> 
             <label for="floating-email">E-mail</label><br />
           </div>
 
-          <div class="form-floating">
+          <div class="form-floating col-md-6">
+            <input class="form-control" type="text" id="floating-number" name="number" placeholder="Telefon"/> 
+            <label for="floating-number">Telefon</label><br />
+          </div>
+
+          <div class="form-floating col-md-6">
             <input class="form-control" type="password" id="floating-password" name="password" placeholder="Lösenord"/> 
             <label for="floating-password">Lösenord</label><br />
           </div>
 
-          <div class="form-floating">
+          <div class="form-floating col-md-6">
+            <input class="form-control" type="password" id="floating-password" name="password" placeholder="Upprepa lösenord"/> 
+            <label for="floating-password">Upprepa lösenord</label><br />
+          </div>
+
+          <div class="form-floating col-md-5">
             <input class="form-control" type="text" id="floating-street" name="street" placeholder="Gata"/> 
             <label for="floating-street">Gata</label><br />
           </div>
 
-          <div class="form-floating">
-            <input class="form-control" type="text" id="floating-zip" name="zip" placeholder="Postnummer"/> 
-            <label for="floating-zip">Postnummer</label><br />
-          </div>
-
-          <div class="form-floating">
+          <div class="form-floating col-md-4">
             <input class="form-control" type="text" id="floating-city" name="city" placeholder="Ort"/> 
             <label for="floating-city">Ort</label><br />
+          </div>
+
+
+          <div class="form-floating col-md-3">
+            <input class="form-control" type="text" id="floating-zip" name="zip" placeholder="Postnummer"/> 
+            <label for="floating-zip">Postnummer</label><br />
           </div>
 
           <input type="submit" class="btn btn-outline-primary" value="Skapa ett konto!">
