@@ -1,7 +1,26 @@
+/**
+ * Creating element
+ * 
+ * @param {string} element - The element you wanna creaate 
+ * @returns 
+ */
 let createNode = (element) => document.createElement(element);
 
+/**
+ * Adding class to element
+ * 
+ * @param {string} element - The element you wanna pick
+ * @param {string} className - The class you wanna add
+ * @returns 
+ */
 let addClass = (element, className) => element.classList.add(className);
-
+/**
+ * Add child element to parent element
+ * 
+ * @param {string} parent - The parent element
+ * @param {string} el - The child element
+ * @returns 
+ */
 let append = (parent, el) => parent.appendChild(el);
 
 function getData() {
