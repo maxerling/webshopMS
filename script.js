@@ -1,3 +1,7 @@
+window.addEventListener("load", () => {
+  getData();
+});
+
 /**
  * Creating element
  *
@@ -45,9 +49,6 @@ function storeData(data) {
   console.log(products);
 }
 
-window.addEventListener("load", () => {
-  getData();
-});
 function createElementsForProduct(product) {
   const h2 = document.getElementById("category");
   const h2Value = h2.getAttribute("data-value");
