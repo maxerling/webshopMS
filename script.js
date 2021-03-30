@@ -83,8 +83,7 @@ function createElementsForProduct(product) {
   const btn = createNode("button");
   addClass(btn, "btn-primary");
   addClass(btn, "btn");
-  console.log(product);
-  console.log(product.quantity);
+
   if (product.quantity == 0) {
     $(btn).attr("disabled", "disabled");
     $(p1).attr("style", "color:gray;");
@@ -95,11 +94,10 @@ function createElementsForProduct(product) {
   const products = $("#products")[0];
   if (h2Value == "produkter") {
     $(img).attr("src", product.image);
-    img.src = product.image;
-    p1.innerHTML = `${product.price} kr`;
-    p2.innerHTML = product.title;
-    p3.innerHTML = `${product.brand} | ${product.units}`;
-    btn.innerHTML = "Köp";
+    $(p1).html(`${product.price} kr`);
+    $(p2).html(product.title);
+    $(p3).html(`${product.brand} | ${product.units}`);
+    $(btn).html("Köp");
 
     append(div, img);
     append(div, p1);
@@ -108,11 +106,11 @@ function createElementsForProduct(product) {
     append(div, btn);
     append(products, div);
   } else if (h2Value == product.category) {
-    img.src = product.image;
-    p1.innerHTML = `${product.price} kr`;
-    p2.innerHTML = product.title;
-    p3.innerHTML = `${product.brand} | ${product.units}`;
-    btn.innerHTML = "Köp";
+    $(img).attr("src", product.image);
+    $(p1).html(`${product.price} kr`);
+    $(p2).html(product.title);
+    $(p3).html(`${product.brand} | ${product.units}`);
+    $(btn).html("Köp");
 
     append(div, img);
     append(div, p1);
