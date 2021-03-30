@@ -269,7 +269,7 @@ nav {
   transform: translateY(3px);
 }
 
-.form-control::-webkit-input-placeholder {
+.create-new-account-forms input::-webkit-input-placeholder {
   font-size: 11px;
 }
 
