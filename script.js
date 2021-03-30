@@ -17,7 +17,7 @@ let createNode = (element) => document.createElement(element);
  * @param {string} className - The class you wanna add
  * @returns
  */
-let addClass = (element, className) => element.classList.add(className);
+let addClass = (element, className) => $(element).addClass(className);
 /**
  * Removing class form element
  *
@@ -25,7 +25,7 @@ let addClass = (element, className) => element.classList.add(className);
  * @param {string} className - the class you wanna remove
  * @returns
  */
-let removeClass = (element, className) => element.classList.remove(className);
+let removeClass = (element, className) => $(element).removeClass(className);
 /**
  * Add child element to parent element
  *
@@ -33,7 +33,7 @@ let removeClass = (element, className) => element.classList.remove(className);
  * @param {string} el - The child element
  * @returns
  */
-let append = (parent, el) => parent.appendChild(el);
+let append = (parent, el) => $(parent).append(el);
 /**
  * Fetch data from url/path
  */
