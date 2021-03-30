@@ -51,11 +51,11 @@ function getData() {
  *  parsing it to produce a JS object
  */
 function storeData(data) {
-  products = new Array();
-  products = data;
-  localStorage.setItem("allProducts", products);
+  let products = new Array();
   let inCartArray = new Array();
-  localStorage.setItem("cart", inCartArray);
+  products = data;
+  localStorage.setItem("allProducts", JSON.stringify(products));
+  localStorage.setItem("cart", JSON.stringify(inCartArray));
   products.forEach((product) => createElementsForProduct(product));
 }
 
@@ -123,17 +123,19 @@ function createElementsForProduct(product) {
     append(div, btn);
     append(products, div);
   }
-  $(document).on("click", "#logIn", function() {
+  $(document).on("click", "#logIn", function () {
     $("#loginModal").modal("show");
   });
 
-  $(document).on("click", ".register-new-user-button", function() {
+  $(document).on("click", ".register-new-user-button", function () {
     $("#registerModal").modal("show");
     $("#loginModal").modal("hide");
-  }) 
+  });
 
-  $(document).on("click", "#register", function() {
-  $("#registerModal").modal("show");})
-  $(document).on("click", "#closeModal", function() {
-  $("#registerModal").modal("hide");})
+  $(document).on("click", "#register", function () {
+    $("#registerModal").modal("show");
+  });
+  $(document).on("click", "#closeModal", function () {
+    $("#registerModal").modal("hide");
+  });
 }
