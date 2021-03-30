@@ -119,4 +119,17 @@ function createElementsForProduct(product) {
     append(div, btn);
     append(products, div);
   }
+  $(document).on("click", "#logIn", function() {
+    $("#loginModal").modal("show");
+  });
+
+  $(document).on("click", ".register-new-user-button", function() {
+    $("#registerModal").modal("show");
+    $("#loginModal").modal("hide");
+  }) 
+
+  $(document).on("click", "#register", function() {
+  $("#registerModal").modal("show");})
+  $(document).on("click", "#closeModal", function() {
+  $("#registerModal").modal("hide");})
 }
