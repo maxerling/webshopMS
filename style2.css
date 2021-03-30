@@ -174,11 +174,12 @@ nav {
 /* MODAL START */
 
 .modal-dialog {
-  width: 30% !important;
+  width: 100% !important;
 }
 
 .modal-input-username {
   width: 50%;
+  padding-bottom: 15px;
 }
 
 .modal-input-password {
@@ -219,7 +220,7 @@ nav {
   transform: translateY(2px);
 }
 
-.register-new-user-button:active {
+.register-new-user-button :active {
   transform: translateY(3px);
 }
 

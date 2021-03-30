@@ -69,11 +69,9 @@ $(function () {
     }
   }
   
-  
   $(document).on("click", "#logIn", function() {
     $("#loginModal").modal("show");
-    
-  })
+  });
 
 });
 
