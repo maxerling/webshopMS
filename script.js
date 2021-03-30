@@ -53,7 +53,9 @@ function getData() {
 function storeData(data) {
   products = new Array();
   products = data;
-  console.log(products);
+  localStorage.setItem("allProducts", products);
+  let inCartArray = new Array();
+  localStorage.setItem("cart", inCartArray);
   products.forEach((product) => createElementsForProduct(product));
 }
 
@@ -90,6 +92,8 @@ function createElementsForProduct(product) {
     $(p2).attr("style", "color:gray;");
     $(p3).attr("style", "color:gray;");
     removeClass(img, "product-hover");
+  } else {
+    $(btn).click(() => addToCart(`${product.id}`, products));
   }
   const products = $("#products")[0];
   if (h2Value == "produkter") {
