@@ -1,5 +1,7 @@
 "use strict";
 
+let cartItems = [];
+
 /*********************************************** */
 // Adderar mockdata till local storage tills vidare (tills data läggs till i local storage i index.html)
 const productArray = [];
@@ -24,27 +26,34 @@ console.log(productArray);
 
 /*********************************************** */
 
-let cartItems = localStorage.getItem("prodarray");
-
 function getDataFromLocalStorage() {
+  let data = localStorage.getItem("prodarray");
+  if (cartItems != null) {
+    cartItems = JSON.parse(data);
+  }
   for (let i = 0; i < cartItems.length; i++) {
     $("#tbodyTable").append(htmlGenerator(cartItems[i]));
+    // console.log(cartItems[i]);
+    // console.log(cartItems);
   }
 }
 
 function htmlGenerator(data) {
   return `<tr id = "product">
-  <th scope="row">
+  <th class="row">
       <img src="${data.image}" alt="" id="cartImage">
   </th>
   <td>
   <div id = "productID" style = "display: none;">
            ${data.id}
       </div>
+      <div id="productTitle" class="col-4">
       ${data.title}
+      </div>
+      
   </td>
   <td>
-      <div class="number-input md-number-input">
+      <div class="number-input md-number-input col-9">
           <button class="btn btn-secondary" id="removeOneProduct">-</button>
           <input min="1" name="quantity" value="1" type="text" readonly="" id="cartQuantity">
           <button class="btn btn-secondary" id="addOneProduct">+</button>

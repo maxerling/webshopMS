@@ -213,7 +213,7 @@ nav {
   background-color: white;
   border-radius: 6px;
   border: none;
-  box-shadow: 3px 3px 2px 2px #F2D2D3;
+  box-shadow: 3px 3px 2px 2px #f2d2d3;
 }
 
 .register-new-user-button:hover {
@@ -223,7 +223,6 @@ nav {
 .register-new-user-button :active {
   transform: translateY(3px);
 }
-
 
 .modal-login-button {
   width: 50%;
@@ -237,7 +236,7 @@ nav {
   background-color: #011e62;
   border-radius: 6px;
   border: none;
-  box-shadow: 3px 3px 2px 2px #8092CC;
+  box-shadow: 3px 3px 2px 2px #8092cc;
 }
 
 .modal-login-button button:hover {
@@ -258,7 +257,7 @@ nav {
   background-color: #011e62;
   border-radius: 6px;
   border: none;
-  box-shadow: 3px 3px 2px 2px #8092CC;
+  box-shadow: 3px 3px 2px 2px #8092cc;
 }
 
 .create-new-account-button:hover {
@@ -277,4 +276,12 @@ nav {
 .footer-bg {
   background-color: #26272b;
   color: #737373;
+}
+
+#cartQuantity {
+  width: 30px;
+}
+
+#productTitle {
+  width: 200px;
 }
