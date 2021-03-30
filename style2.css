@@ -247,6 +247,16 @@ nav {
 .modal-login-button button:active {
   transform: translateY(3px);
 }
+
+.modal-cancel-button img{
+  width: 15px;
+  height: 15px;
+}
+
+.modal-cancel-button {
+  border: none;
+  background-color: white;
+}
 /* LOG IN MODAL END */
 
 /* CREATE ACCOUNT MODAL START */
