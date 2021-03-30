@@ -269,8 +269,8 @@ nav {
   transform: translateY(3px);
 }
 
-input::-webkit-input-placeholder {
-  font-size: 12px;
+.form-control::-webkit-input-placeholder {
+  font-size: 11px;
 }
 
 /* CREATE ACCOUNT MODAL END */
