@@ -1,23 +1,66 @@
+window.addEventListener("load", () => {
+  getData();
+});
+
+/**
+ * Creating element
+ *
+ * @param {string} element - The element you wanna creaate
+ * @returns
+ */
 let createNode = (element) => document.createElement(element);
 
+/**
+ * Adding class to element
+ *
+ * @param {string} element - The element you wanna pick
+ * @param {string} className - The class you wanna add
+ * @returns
+ */
 let addClass = (element, className) => element.classList.add(className);
-
+/**
+ * Removing class form element
+ *
+ * @param {string} element - element you wanna pick
+ * @param {string} className - the class you wanna remove
+ * @returns
+ */
+let removeClass = (element, className) => element.classList.remove(className);
+/**
+ * Add child element to parent element
+ *
+ * @param {string} parent - The parent element
+ * @param {string} el - The child element
+ * @returns
+ */
 let append = (parent, el) => parent.appendChild(el);
-
+/**
+ * Fetch data from url/path
+ */
 function getData() {
   const url = "data/products.json";
 
   fetch(url)
     .then((resp) => resp.json())
-    .then((data) => loadData(data))
+    .then((data) => storeData(data))
     .catch((err) => console.log(err));
 }
-function loadData(data) {
-  data.map(function (product) {
-    createElementsForProduct(product);
-  });
+/**
+ * Storing data from fetch, promise into array
+ * @param {object} data - Result of taking JSON as input and
+ *  parsing it to produce a JS object
+ */
+function storeData(data) {
+  products = new Array();
+  products = data;
+  console.log(products);
+  products.forEach((product) => createElementsForProduct(product));
 }
 
+/**
+ * Create elements based on product data (object data)
+ * @param {object} product - object of array of objects
+ */
 function createElementsForProduct(product) {
   const h2 = document.getElementById("category");
   const h2Value = h2.getAttribute("data-value");
@@ -33,10 +76,22 @@ function createElementsForProduct(product) {
 
   const img = createNode("img");
   addClass(img, "mb-4");
+  addClass(img, "product-hover");
   const p1 = createNode("p");
   const p2 = createNode("p");
   const p3 = createNode("p");
   const btn = createNode("button");
+  addClass(btn, "btn-primary");
+  addClass(btn, "btn");
+  console.log(product);
+  console.log(product.quantity);
+  if (product.quantity == 0) {
+    btn.setAttribute("disabled", "disabled");
+    p1.setAttribute("style", "color:grey;");
+    p2.setAttribute("style", "color:grey;");
+    p3.setAttribute("style", "color:grey;");
+    removeClass(img, "product-hover");
+  }
   const products = document.getElementById("products");
   if (h2Value == "produkter") {
     img.src = product.image;
