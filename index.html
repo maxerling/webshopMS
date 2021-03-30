@@ -88,7 +88,84 @@
 
     <!-- END Header hero image -->
 
-    <!--START main -->
+<!--START main -->
+
+<!-- LOG IN MODAL START-->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-title">Välkommen!</div>
+        <div class="modal-subtitle">Logga in för att få ut mer av din vardag!</div>
+        <div class="modal-input-username mx-auto pt-2">
+          <label for="inputUsername">Ange användarnamn: </label>
+          <input type="text" class="form-control" id="inputUsername" placeholder="Användarnamn">
+        </div>
+        <div class="modal-input-password mx-auto">
+          <label for="inputPassword">Ange lösenord: </label>
+          <input type="password" class="form-control" id="inputPassword" placeholder="Lösenord">
+        </div>
+        <div class="modal-login-button">
+          <button id = "modal-login-button">Logga in</button>
+        </div>
+        <div class="register-new-user">
+          <label for="register-new-user-button">Ny hos Hakims livs?</label>
+          <button class="register-new-user-button">Skapa konto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- LOG IN MODAL END-->
+
+<!-- START register modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body px-5">
+        <div class="modal-title pb-1">Skapa konto!</div>
+        <div class="modal-subtitle pb-3">"Din närlivs - vart du vill"</div>
+          <!-- <button id="closeModal"type="button" class="btn btn-outline-dark" data-dismiss="modal" onclick="close()">Stäng</button> -->
+        <div class="create-new-account-forms">
+          <form class="row g-3">
+          <div class="col-md-6">
+            <input class="form-control" type="text" id="create-new-account-surname" name="surname" placeholder="Förnamn"/> 
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" type="text" id="create-new-account-lastname" name="lastname" placeholder="Efternamn"/> 
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" type="email" id="create-new-account-email" name="email" placeholder="E-mail"/> 
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" type="text" id="create-new-account-number" name="number" placeholder="Telefon"/> 
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" type="password" id="create-new-account-password" name="password" placeholder="Lösenord"/> 
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" type="password" id="create-new-account-repeat-password" name="repeat-password" placeholder="Upprepa lösenord"/> 
+          </div>
+          <div class="col-md-5">
+            <input class="form-control" type="text" id="create-new-account-street" name="street" placeholder="Gata"/> 
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" type="text" id="create-new-account-city" name="city" placeholder="Ort"/> 
+          </div>
+          <div class="col-md-3">
+            <input class="form-control" type="text" id="create-new-account-zip" name="zip" placeholder="Postnummer"/> 
+          </div>
+          <div class="register-new-account pb-4 pt-2">
+            <button class="create-new-account-button">Skapa konto</button>
+          </div>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END register modal -->
+
     <div class="parent-container d-flex">
       <div class="container">
         <div id="sidebar" class="row">
@@ -148,6 +225,8 @@
         </div>
       </footer>
     </section>
+
+    
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
