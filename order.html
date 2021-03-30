@@ -11,113 +11,90 @@
       rel="stylesheet"
     />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link
-    rel="stylesheet"
-    href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-    crossorigin="anonymous"
-  />
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
   </head>
 
-  <body onload="arrayToCart()">
-    <nav class="navbar sticky-top navbar-light bg-light">
-      <a id="logo" href="index.html"
-        ><img id="logoImg" src="./images/logo/Hakims-logo.png" alt="logo"
-      /></a>
- 
-
-      <!--<span class="navbar-toggler-icon ham-menu"></span>-->
-
-      <div class="ms-10">
-        <button id="logIn" class="btn btn-secondary" type="button">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-person-circle"
-            viewBox="0 0 16 16"
-          >
-            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-            <path
-              fill-rule="evenodd"
-              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
-            />
-          </svg>
-          Logga in
-        </button>
-        <a  href="index.html"  class="btn btn-warning" type="button">
-          <i href="index.html" class="fas fa-times-circle"></i>
-          Fortstätt handla
-        </a>
-      </div>
-    </nav>
-    <div class="container p-3 mt-5">
-      <h3>Cart</h3>
-
-      <table class="table">
-        <thead class="table-dark">
-          <tr>
-            <th scope="col"></th>
-            <th scope="col">Name</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Price</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody id="userCart">
-        </tbody>
-      </table>
-
-      <div class="row">
-        <p id="summary" class="fw-bold">Sum: 0.00$</p>
-        <div class="col align-self-end">
-          <button id="next" class="btn btn-primary">Next</button>
+  <body>
+    <header>
+      <nav class="navbar sticky-top navbar-light bg-light">
+        <a id="logo" href="index.html"
+          ><img id="logoImg" src="./images/logo/Hakims-logo.png" alt="logo"
+        /></a>
+        <!-- START Search input -->
+        <div class="search-field">
+          <input
+            type="text"
+            placeholder="Sök..."
+            name="query"
+            value=""
+            class="search-field-input"
+            autocomplete="off"
+            autocorrect="off"
+          />
         </div>
+        <!-- END Search input -->
+
+        <!--<span class="navbar-toggler-icon ham-menu"></span>-->
+
+        <div class="ms-10">
+          <button id="logIn" class="btn btn-secondary" type="button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-person-circle"
+              viewBox="0 0 16 16"
+            >
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+              <path
+                fill-rule="evenodd"
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+              />
+            </svg>
+            Logga in
+          </button>
+          <button id="cart" class="btn btn-warning" type="button">
+            <i class="fas fa-shopping-cart"></i>
+            Kundvagn
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!--START main -->
+    <div class="parent-container d-flex">
+      <div class="row">
+        <h2 id="category" data-value="produkter" class="pt-5 pb-3">
+          Produkter i varukorgen
+        </h2>
+
+        <div id="products" class="row"></div>
       </div>
-   
-      <h3>Order</h3>
-
-      <form>
-        <fieldset id="status" disabled>
-          <div class="mb-3">
-            <label for="firstNameInput" class="form-label">* First Name</label>
-            <input type="text" class="form-control" id="firstNameInput"/>
-            <p id="firstNameResponse" class="invalid"></p>
-          </div>
-          <div class="mb-3">
-            <label for="lastNameInput" class="form-label">* Last Name</label>
-            <input type="text" class="form-control" id="lastNameInput"/>
-            <p id="lastNameResponse" class="invalid"></p>
-          </div>
-          <div class="mb-3">
-            <label for="numberInput" class="form-label">* Number</label>
-            <input type="tel" class="form-control" id="numberInput"/>
-            <p id="numberResponse"  class="invalid"></p>
-          </div>
-          <div class="mb-3">
-            <label for="emailInput" class="form-label">* E-Mail</label>
-            <input type="email" class="form-control" id="emailInput"/>
-            <p id="emailResponse"  class="invalid"></p>
-          </div>
-          <div class="mb-3">
-            <label for="addressInput" class="form-label">* Address</label>
-            <input type="text" class="form-control" id="addressInput"/>
-            <p id="addressResponse"  class="invalid"></p>
-          </div>
-
-          <button id="submit" type="button" class="btn btn-primary mb-5">Submit</button>
-        </fieldset>
-      </form>
     </div>
-    <footer class="navbar fixed-bottom text-white bg-dark ">
-      <div class="container-fluid"> 
-        <div>Max Erling &#169 Copyright 2021</div>
+    <!-- Replace footer later  -->
+    <div class="footer mt-auto py-3 text-black bg-light">
+      <div class="container-fluid">
+        <div>Grupp 3 (KVA20 JAVA20) &#169; Copyright 2021</div>
       </div>
-    </footer>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js"></script>
   </body>
 </html>
