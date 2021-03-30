@@ -285,3 +285,18 @@ nav {
 #productTitle {
   width: 200px;
 }
+
+#products {
+  box-sizing: border-box;
+}
+
+#cartImage {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+#articleTable {
+  width: 70%;
+}
+
+

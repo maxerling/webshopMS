@@ -25,7 +25,7 @@ console.log(productArray);
 // productArray.forEach((product) => createElementsForProduct(product));
 
 /*********************************************** */
-
+/*
 function getDataFromLocalStorage() {
   let data = localStorage.getItem("prodarray");
   if (cartItems != null) {
@@ -68,5 +68,6 @@ function htmlGenerator(data) {
   </tr>
   `;
 }
+*/
 
 getDataFromLocalStorage();

@@ -76,21 +76,51 @@
 
     <!--START main -->
     <!-- Displays products -->
-    <div class="parent-container d-flex">
+    <div class="parent-container">
       <div class="row">
         <h2 id="category" data-value="produkter" class="pt-5 pb-3 ps-5">
           Produkter i varukorgen
         </h2>
+      </div>
 
         <div id="products" class="row table-responsive">
-          <table class="table" id="articleTable">
+          <table class="table mx-auto" id="articleTable">
             <thead>
               <tr>
                 <th scope="col" class="">Artiklar</th>
               </tr>
             </thead>
 
-            <tbody id="tbodyTable"></tbody>
+            <tbody id="tbodyTable">
+              <tr class="row"> <!-- STARTAR ROW FÖR EN PRODUKT-->
+              <th class="col col-lg-2 d-none d-sm-block">
+                <img src="https://picsum.photos/100" alt="" id="cartImage">
+            </th>
+            <td class="col col-lg-4">
+                <div id="productTitle">
+                Havregryn jättegott
+                </div>
+                
+            </td>
+            <td class="col col-lg-1">
+                <div class="number-input md-number-input">
+                    <!--<button class="btn btn-secondary" id="removeOneProduct">-</button> -->
+                    <input min="1" name="quantity" value="1" type="text" readonly="" id="cartQuantity">
+                    <!--<button class="btn btn-secondary" id="addOneProduct">+</button> -->
+                  </div>
+            </td>
+            <td class="col col-lg-1">
+              <div class="">
+                SEK 150.00
+              </div>
+                
+            </td>
+            <td class="col col-lg-1">
+                <button class = "btn btn-warning p-1" id = "removeBtn">X</button>
+            </td>
+            </tr> <!-- HÄR SLUTAR ROW FÖR EN PRODUKT-->
+
+            </tbody>
           </table>
         </div>
       </div>
