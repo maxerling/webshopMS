@@ -73,6 +73,11 @@ $(function () {
     $("#loginModal").modal("show");
   });
 
+  $(document).on("click", ".register-new-user-button", function() {
+    $("#registerModal").modal("show");
+    $("#loginModal").modal("hide");
+  }) 
+
   $(document).on("click", "#register", function() {
   $("#registerModal").modal("show");})
   $(document).on("click", "#closeModal", function() {

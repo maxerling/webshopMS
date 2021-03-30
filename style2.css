@@ -171,7 +171,7 @@ nav {
   height: 137px;
 }
 
-/* MODAL START */
+/* LOG IN MODAL START */
 
 .modal-dialog {
   width: 100% !important;
@@ -247,6 +247,30 @@ nav {
 .modal-login-button button:active {
   transform: translateY(3px);
 }
+/* LOG IN MODAL END */
 
+/* CREATE ACCOUNT MODAL START */
 
-/* MODAL END */
+.create-new-account-button {
+  height: 40px;
+  color: white;
+  width: 100%;
+  background-color: #011e62;
+  border-radius: 6px;
+  border: none;
+  box-shadow: 3px 3px 2px 2px #8092CC;
+}
+
+.create-new-account-button:hover {
+  transform: translateY(2px);
+}
+
+.create-new-account-button:active {
+  transform: translateY(3px);
+}
+
+input::-webkit-input-placeholder {
+  font-size: 12px;
+}
+
+/* CREATE ACCOUNT MODAL END */

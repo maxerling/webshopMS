@@ -95,6 +95,7 @@
 
 <!--START main -->
 
+<!-- LOG IN MODAL START-->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -120,6 +121,54 @@
     </div>
   </div>
 </div>
+<!-- LOG IN MODAL END-->
+
+<!-- START register modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body px-5">
+        <div class="modal-title pb-3">Skapa konto!</div>
+          <!-- <button id="closeModal"type="button" class="btn btn-outline-dark" data-dismiss="modal" onclick="close()">Stäng</button> -->
+        <div class="create-new-account-forms">
+          <form class="row g-3">
+          <div class="col-md-6">
+            <input class="form-control" type="text" id="create-new-account-surname" name="surname" placeholder="Förnamn"/> 
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" type="text" id="create-new-account-lastname" name="lastname" placeholder="Efternamn"/> 
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" type="email" id="create-new-account-email" name="email" placeholder="E-mail"/> 
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" type="text" id="create-new-account-number" name="number" placeholder="Telefon"/> 
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" type="password" id="create-new-account-password" name="password" placeholder="Lösenord"/> 
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" type="password" id="create-new-account-repeat-password" name="repeat-password" placeholder="Upprepa lösenord"/> 
+          </div>
+          <div class="col-md-5">
+            <input class="form-control" type="text" id="create-new-account-street" name="street" placeholder="Gata"/> 
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" type="text" id="create-new-account-city" name="city" placeholder="Ort"/> 
+          </div>
+          <div class="col-md-3">
+            <input class="form-control" type="text" id="create-new-account-zip" name="zip" placeholder="Postnummer"/> 
+          </div>
+          <div class="register-new-account pb-4">
+            <button class="create-new-account-button">Skapa konto</button>
+          </div>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END register modal -->
 
     <div class="parent-container d-flex">
       <div class="container">
@@ -164,69 +213,7 @@
       </div>
     </div>
 
-    <!-- START register modal -->
-<div class="modal fade" id="registerModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" >Skapa konto</h5>
-        <button id="closeModal"type="button" class="btn btn-outline-dark" data-dismiss="modal" onclick="close()">Stäng</button>
-      </div>
-      <div class="modal-body">
-        <form class="row g-3">
-          <div class="form-floating col-md-6">
-            <input class="form-control" type="text" id="floating-surname" name="surname" placeholder="Förnamn"/> 
-            <label for="floating-surname">Förnamn</label><br />
-          </div>
-
-          <div class="form-floating col-md-6">
-            <input class="form-control" type="text" id="floating-lastname" name="lastname" placeholder="Efternamn"/> 
-            <label for="floating-lastname">Efternamn</label><br />
-          </div>
-
-          <div class="form-floating col-md-6">
-            <input class="form-control" type="email" id="floating-email" name="email" placeholder="E-mail"/> 
-            <label for="floating-email">E-mail</label><br />
-          </div>
-
-          <div class="form-floating col-md-6">
-            <input class="form-control" type="text" id="floating-number" name="number" placeholder="Telefon"/> 
-            <label for="floating-number">Telefon</label><br />
-          </div>
-
-          <div class="form-floating col-md-6">
-            <input class="form-control" type="password" id="floating-password" name="password" placeholder="Lösenord"/> 
-            <label for="floating-password">Lösenord</label><br />
-          </div>
-
-          <div class="form-floating col-md-6">
-            <input class="form-control" type="password" id="floating-password" name="password" placeholder="Upprepa lösenord"/> 
-            <label for="floating-password">Upprepa lösenord</label><br />
-          </div>
-
-          <div class="form-floating col-md-5">
-            <input class="form-control" type="text" id="floating-street" name="street" placeholder="Gata"/> 
-            <label for="floating-street">Gata</label><br />
-          </div>
-
-          <div class="form-floating col-md-4">
-            <input class="form-control" type="text" id="floating-city" name="city" placeholder="Ort"/> 
-            <label for="floating-city">Ort</label><br />
-          </div>
-
-
-          <div class="form-floating col-md-3">
-            <input class="form-control" type="text" id="floating-zip" name="zip" placeholder="Postnummer"/> 
-            <label for="floating-zip">Postnummer</label><br />
-          </div>
-
-          <input type="submit" class="btn btn-outline-primary" value="Skapa ett konto!">
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- END register modal -->
+    
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
