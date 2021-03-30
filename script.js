@@ -1,4 +1,4 @@
-window.addEventListener("load", () => {
+$(document).ready(function () {
   getData();
 });
 
@@ -62,8 +62,8 @@ function storeData(data) {
  * @param {object} product - object of array of objects
  */
 function createElementsForProduct(product) {
-  const h2 = document.getElementById("category");
-  const h2Value = h2.getAttribute("data-value");
+  const h2 = $("#category")[0];
+  const h2Value = $(h2).attr("data-value");
   const div = createNode("div");
   addClass(h2, "m-2");
   addClass(div, "p-2");
@@ -86,14 +86,15 @@ function createElementsForProduct(product) {
   console.log(product);
   console.log(product.quantity);
   if (product.quantity == 0) {
-    btn.setAttribute("disabled", "disabled");
-    p1.setAttribute("style", "color:grey;");
-    p2.setAttribute("style", "color:grey;");
-    p3.setAttribute("style", "color:grey;");
+    $(btn).attr("disabled", "disabled");
+    $(p1).attr("style", "color:gray;");
+    $(p2).attr("style", "color:gray;");
+    $(p3).attr("style", "color:gray;");
     removeClass(img, "product-hover");
   }
-  const products = document.getElementById("products");
+  const products = $("#products")[0];
   if (h2Value == "produkter") {
+    $(img).attr("src", product.image);
     img.src = product.image;
     p1.innerHTML = `${product.price} kr`;
     p2.innerHTML = product.title;
