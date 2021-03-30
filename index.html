@@ -95,11 +95,16 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <div class="modal-title">Välkommen!</div>
+          <button class="modal-cancel-button">
+            <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true">
+          </button>
+
+        <div class="modal-title d-none d-sm-block">Välkommen!</div>
+        <div class="sm-modal-title d-block d-sm-none">Välkommen!</div>
         <div class="modal-subtitle">Logga in för att få ut mer av din vardag!</div>
         <div class="modal-input-username mx-auto pt-2">
-          <label for="inputUsername">Ange användarnamn: </label>
-          <input type="text" class="form-control" id="inputUsername" placeholder="Användarnamn">
+          <label for="inputUsername">Ange email: </label>
+          <input type="text" class="form-control" id="inputUsername" placeholder="Email">
         </div>
         <div class="modal-input-password mx-auto">
           <label for="inputPassword">Ange lösenord: </label>
@@ -122,8 +127,13 @@
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
+
       <div class="modal-body px-5">
-        <div class="modal-title pb-1">Skapa konto!</div>
+        <button class="modal-cancel-button">
+          <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true">
+        </button>
+        <div class="modal-title pb-1 d-none d-sm-block">Skapa konto!</div>
+        <div class="sm-modal-title d-block d-sm-none">Skapa konto!</div>
         <div class="modal-subtitle pb-3">"Din närlivs - vart du vill"</div>
           <!-- <button id="closeModal"type="button" class="btn btn-outline-dark" data-dismiss="modal" onclick="close()">Stäng</button> -->
         <div class="create-new-account-forms">

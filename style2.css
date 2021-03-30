@@ -247,6 +247,16 @@ nav {
 .modal-login-button button:active {
   transform: translateY(3px);
 }
+
+.modal-cancel-button img{
+  width: 15px;
+  height: 15px;
+}
+
+.modal-cancel-button {
+  border: none;
+  background-color: white;
+}
 /* LOG IN MODAL END */
 
 /* CREATE ACCOUNT MODAL START */
@@ -261,6 +271,26 @@ nav {
   box-shadow: 3px 3px 2px 2px #8092CC;
 }
 
+.sm-modal-title {
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 900;
+  color: #011e62;
+}
+
+@media screen and (max-width: 320px) {
+  .create-new-account-forms input {
+    height: 20px;
+  }
+
+}
+
+@media screen and (max-width: 320px) {
+  .create-new-account-forms input::-webkit-input-placeholder {
+    font-size: 0.6rem;
+  }
+}
+
 .create-new-account-button:hover {
   transform: translateY(2px);
 }
@@ -269,9 +299,7 @@ nav {
   transform: translateY(3px);
 }
 
-.create-new-account-forms input::-webkit-input-placeholder {
-  font-size: 11px;
-}
+
 
 /* CREATE ACCOUNT MODAL END */
 .footer-bg {

@@ -129,6 +129,9 @@ function createElementsForProduct(product) {
 
   $(document).on("click", ".register-new-user-button", function () {
     $("#registerModal").modal("show");
+  });
+
+  $(document).on("click", ".modal-cancel-button", function() {
     $("#loginModal").modal("hide");
   });
 
