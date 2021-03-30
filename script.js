@@ -1,4 +1,4 @@
-window.addEventListener("load", () => {
+$(document).ready(function () {
   getData();
 });
 
@@ -17,7 +17,7 @@ let createNode = (element) => document.createElement(element);
  * @param {string} className - The class you wanna add
  * @returns
  */
-let addClass = (element, className) => element.classList.add(className);
+let addClass = (element, className) => $(element).addClass(className);
 /**
  * Removing class form element
  *
@@ -25,7 +25,7 @@ let addClass = (element, className) => element.classList.add(className);
  * @param {string} className - the class you wanna remove
  * @returns
  */
-let removeClass = (element, className) => element.classList.remove(className);
+let removeClass = (element, className) => $(element).removeClass(className);
 /**
  * Add child element to parent element
  *
@@ -33,7 +33,7 @@ let removeClass = (element, className) => element.classList.remove(className);
  * @param {string} el - The child element
  * @returns
  */
-let append = (parent, el) => parent.appendChild(el);
+let append = (parent, el) => $(parent).append(el);
 /**
  * Fetch data from url/path
  */
@@ -62,8 +62,8 @@ function storeData(data) {
  * @param {object} product - object of array of objects
  */
 function createElementsForProduct(product) {
-  const h2 = document.getElementById("category");
-  const h2Value = h2.getAttribute("data-value");
+  const h2 = $("#category")[0];
+  const h2Value = $(h2).attr("data-value");
   const div = createNode("div");
   addClass(h2, "m-2");
   addClass(div, "p-2");
@@ -83,22 +83,21 @@ function createElementsForProduct(product) {
   const btn = createNode("button");
   addClass(btn, "btn-primary");
   addClass(btn, "btn");
-  console.log(product);
-  console.log(product.quantity);
+
   if (product.quantity == 0) {
-    btn.setAttribute("disabled", "disabled");
-    p1.setAttribute("style", "color:grey;");
-    p2.setAttribute("style", "color:grey;");
-    p3.setAttribute("style", "color:grey;");
+    $(btn).attr("disabled", "disabled");
+    $(p1).attr("style", "color:gray;");
+    $(p2).attr("style", "color:gray;");
+    $(p3).attr("style", "color:gray;");
     removeClass(img, "product-hover");
   }
-  const products = document.getElementById("products");
+  const products = $("#products")[0];
   if (h2Value == "produkter") {
-    img.src = product.image;
-    p1.innerHTML = `${product.price} kr`;
-    p2.innerHTML = product.title;
-    p3.innerHTML = `${product.brand} | ${product.units}`;
-    btn.innerHTML = "Köp";
+    $(img).attr("src", product.image);
+    $(p1).html(`${product.price} kr`);
+    $(p2).html(product.title);
+    $(p3).html(`${product.brand} | ${product.units}`);
+    $(btn).html("Köp");
 
     append(div, img);
     append(div, p1);
@@ -107,11 +106,11 @@ function createElementsForProduct(product) {
     append(div, btn);
     append(products, div);
   } else if (h2Value == product.category) {
-    img.src = product.image;
-    p1.innerHTML = `${product.price} kr`;
-    p2.innerHTML = product.title;
-    p3.innerHTML = `${product.brand} | ${product.units}`;
-    btn.innerHTML = "Köp";
+    $(img).attr("src", product.image);
+    $(p1).html(`${product.price} kr`);
+    $(p2).html(product.title);
+    $(p3).html(`${product.brand} | ${product.units}`);
+    $(btn).html("Köp");
 
     append(div, img);
     append(div, p1);
