@@ -25,55 +25,53 @@
     />
   </head>
 
-  <body onload="getData()">
+  <body>
     <header>
-    <nav class="navbar sticky-top navbar-light bg-light">
-      <a id="logo" href="index.html"
-        ><img id="logoImg" src="./images/logo/Hakims-logo.png" alt="logo"
-      /></a>
-      <!-- START Search input -->
-      <div class="search-field">
-        <input
-          type="text"
-          placeholder="Sök..."
-          name="query"
-          value=""
-          class="search-field-input"
-          autocomplete="off"
-          autocorrect="off"
-        />
-      </div>
-      <!-- END Search input -->
+      <nav class="navbar sticky-top navbar-light bg-light">
+        <a id="logo" href="index.html"
+          ><img id="logoImg" src="./images/logo/Hakims-logo.png" alt="logo"
+        /></a>
+        <!-- START Search input -->
+        <div class="search-field">
+          <input
+            type="text"
+            placeholder="Sök..."
+            name="query"
+            value=""
+            class="search-field-input"
+            autocomplete="off"
+            autocorrect="off"
+          />
+        </div>
+        <!-- END Search input -->
 
-      <!--<span class="navbar-toggler-icon ham-menu"></span>-->
+        <!--<span class="navbar-toggler-icon ham-menu"></span>-->
 
-      <div class="ms-10">
-        <button id="logIn" class="btn btn-secondary" type="button">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-person-circle"
-            viewBox="0 0 16 16"
-          >
-            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-            <path
-              fill-rule="evenodd"
-              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
-            />
-          </svg>
-          Logga in
-        </button>
-        <button id="cart" class="btn btn-warning" type="button">
-  
-          <i class="fas fa-shopping-cart"></i
-          >
-          Kundvagn
-        </button>
-      </div>
-    </nav>
-  </header>
+        <div class="ms-10">
+          <button id="logIn" class="btn btn-secondary" type="button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-person-circle"
+              viewBox="0 0 16 16"
+            >
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+              <path
+                fill-rule="evenodd"
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+              />
+            </svg>
+            Logga in
+          </button>
+          <button id="cart" class="btn btn-warning" type="button">
+            <i class="fas fa-shopping-cart"></i>
+            Kundvagn
+          </button>
+        </div>
+      </nav>
+    </header>
     <!-- START Header hero image -->
 
     <!-- <div class="hero-image d-flex justify-content-center align-items-center">
@@ -181,21 +179,18 @@
             </li>
           </ul>
         </div>
-        
       </div>
 
-      <div id="main" class="container-fluid min-vh-100">
-        <div class="hero-image d-flex justify-content-center align-items-center">
-          <div class="hero-text ">
-            <a
-             
-              class="text-decoration-none "
-              href="skafferi.html"
-              >
-              <h3  id="hero-text" class="" >DAGENS HAKIMS DEAL</h3>
+      <div id="main" class="container-fluid min-vh-100 pb-5">
+        <div
+          class="hero-image d-flex justify-content-center align-items-center"
+        >
+          <div class="hero-text">
+            <a class="text-decoration-none" href="skafferi.html">
+              <h3 id="hero-text" class="">DAGENS HAKIMS DEAL</h3>
             </a>
           </div>
-        </div> 
+        </div>
         <div class="row">
           <h2 id="category" data-value="produkter" class="pt-5 pb-3">
             Produkter
@@ -205,11 +200,31 @@
         </div>
       </div>
     </div>
-    <div class="footer mt-auto py-3 text-black bg-light">
-      <div class="container-fluid">
-        <div>Grupp 3 (KVA20 JAVA20) &#169; Copyright 2021</div>
-      </div>
-    </div>
+
+    <section class="">
+      <footer class="footer-bg text-start pt-4">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 mb-4 mb-md-0 ps-4">
+              <h6 class="text-uppercase text-white">Kontaktuppgifter</h6>
+              <p>
+                Hakim Livs HB <br />
+                Telefon: 08-123456 <br />
+                Epost: hakim@hakims.se <br />
+                Adress: Vägen 3 <br />
+                167 45 Bromma <br />
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="text-center p-3"
+          style="background-color: rgba(0, 0, 0, 0.2)"
+        >
+          © 2021 Copyright: Hakims Livs
+        </div>
+      </footer>
+    </section>
 
     
 
