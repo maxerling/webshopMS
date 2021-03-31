@@ -137,13 +137,14 @@ function createElementsForProduct(product) {
 }
 
 function confirmBtn() {
-
-  localStorage.clear();
   $("#orderModal").modal("show");
 
-  let currentDate = new Date().toLocaleString().replaceAll("/", "-");
+  let orderNum;
+  let orderDate = new Date().toISOString().replaceAll("T", ", Kl: ");
+  let orderPrice;
 
-  //document.getElementById("p-order").innerHTML =
-  document.getElementById("p-date").innerHTML = "Beställningsdatum: " + currentDate.substring(0,17);
-  //document.getElementById("p-sum").innerHTML. 
+  document.getElementById("p-order").innerHTML = "Order nummer: " + orderNum;
+  document.getElementById("p-date").innerHTML = "Beställningsdatum: " + orderDate.substring(0,21);
+  document.getElementById("p-sum").innerHTML = "Total belopp: " + orderPrice;
+  localStorage.removeItem("inCartArray"); //Dubbelkolla key name
 }
