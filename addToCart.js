@@ -1,17 +1,20 @@
+/**
+ * Gets arrays from localStorage and checks if product exist in cartArray. If object doesnt match productid, the object get stored in cartArray
+ * else it will +1 object.quantity in cartArray. This is later stored in localStorage.
+ * 
+ * @param {number} productId - The current product ID
+ */
 function addToCart(productId) {
-  let inCartArray = JSON.parse(localStorage.getItem("cart"));
+  let cartArray = JSON.parse(localStorage.getItem("cart"));
   let allProducts = JSON.parse(localStorage.getItem("allProducts"));
-  console.log(inCartArray);
-  console.log();
-  console.log();
+
   let item = allProducts.find((item) => item.id == productId);
-  let cartIndex = inCartArray.findIndex((e) => e.id == productId);
-  console.log(item);
-  console.log(cartIndex);
+  let cartIndex = cartArray.findIndex((e) => e.id == productId);
+
   if (item != undefined && cartIndex != -1) {
     console.log("if");
     console.log(cartIndex);
-    inCartArray[cartIndex].quantity++;
+    cartArray[cartIndex].quantity++;
   } else {
     console.log("else");
     let itemIndex = allProducts.findIndex((e) => e.id == productId);
@@ -24,9 +27,8 @@ function addToCart(productId) {
       units: allProducts[itemIndex].units,
       category: allProducts[itemIndex].category,
     };
-    inCartArray.push(selectedPrd);
+    cartArray.push(selectedPrd);
   }
 
-  localStorage.setItem("cart", JSON.stringify(inCartArray));
-  console.log(inCartArray);
+  localStorage.setItem("cart", JSON.stringify(cartArray));
 }

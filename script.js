@@ -52,10 +52,10 @@ function getData() {
  */
 function storeData(data) {
   let products = new Array();
-  let inCartArray = new Array();
+  let cartArray = new Array();
   products = data;
   localStorage.setItem("allProducts", JSON.stringify(products));
-  localStorage.setItem("cart", JSON.stringify(inCartArray));
+  localStorage.setItem("cart", JSON.stringify(cartArray));
   products.forEach((product) => createElementsForProduct(product));
 }
 
@@ -131,7 +131,7 @@ function createElementsForProduct(product) {
     $("#registerModal").modal("show");
   });
 
-  $(document).on("click", ".modal-cancel-button", function() {
+  $(document).on("click", ".modal-cancel-button", function () {
     $("#loginModal").modal("hide");
   });
 
