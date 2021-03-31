@@ -4,7 +4,6 @@
   box-sizing: border-box;
 }
 
-
 /*START header & NavBar style*/
 header {
   padding: 0.5rem;
@@ -127,7 +126,7 @@ header {
   background-color: white;
   border-radius: 6px;
   border: none;
-  box-shadow: 3px 3px 2px 2px #F2D2D3;
+  box-shadow: 3px 3px 2px 2px #f2d2d3;
 }
 
 .register-new-user-button:hover {
@@ -137,7 +136,6 @@ header {
 .register-new-user-button :active {
   transform: translateY(3px);
 }
-
 
 .modal-login-button {
   width: 50%;
@@ -151,7 +149,7 @@ header {
   background-color: #011e62;
   border-radius: 6px;
   border: none;
-  box-shadow: 3px 3px 2px 2px #8092CC;
+  box-shadow: 3px 3px 2px 2px #8092cc;
 }
 
 .modal-login-button button:hover {
@@ -162,17 +160,20 @@ header {
   transform: translateY(3px);
 }
 
-.login-modal-cancel-button img, .register-modal-cancel-button img{
+.login-modal-cancel-button img,
+.register-modal-cancel-button img {
   width: 15px;
   height: 15px;
   float: right;
 }
 
-.login-modal-cancel-button, .register-modal-cancel-button{
+.login-modal-cancel-button,
+.register-modal-cancel-button {
   padding: 15px;
 }
 
-.login-modal-cancel-button, .register-modal-cancel-button {
+.login-modal-cancel-button,
+.register-modal-cancel-button {
   border: none;
   background-color: white;
 }
@@ -187,7 +188,7 @@ header {
   background-color: #011e62;
   border-radius: 6px;
   border: none;
-  box-shadow: 3px 3px 2px 2px #8092CC;
+  box-shadow: 3px 3px 2px 2px #8092cc;
 }
 
 .sm-modal-title {
@@ -201,7 +202,6 @@ header {
   .create-new-account-forms input {
     height: 20px;
   }
-
 }
 
 @media screen and (max-width: 375px) {
@@ -220,7 +220,6 @@ header {
 
 /* CREATE ACCOUNT MODAL END */
 
-
 /* PRODUCT START*/
 .product {
   background-color: #fff;
@@ -231,7 +230,7 @@ header {
   background-color: #fff;
 }
 
-#products img:hover {
+.product-hover:hover {
   transform: scale(1.05);
   transition-duration: 0.3s;
 }
@@ -241,15 +240,14 @@ header {
   height: 137px;
 }
 #products {
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-bottom: 10px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 10px;
 }
 /* PRODUCT END*/
 
-
 /* FOOTER START*/
-footer{
+footer {
   z-index: 1;
   position: relative;
 }
