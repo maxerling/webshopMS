@@ -186,6 +186,10 @@ $(document).on("click", "#logIn", function () {
   console.log("HEEEEEEEEEEEE");
 });
 
+$(document).on("click", "#mobileLogin", function() {
+  $(".login-modal").modal("show");
+})
+
 // MODAL CANCEL BUTTONS
 $(document).on("click", ".login-modal-cancel-button", function () {
   $(".login-modal").modal("hide");
