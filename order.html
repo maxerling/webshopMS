@@ -75,7 +75,7 @@
     </header>
 
     <!--START main -->
-    <!-- Displays products -->
+    <!-- Displays products start -->
     <div class="parent-container">
       <div class="row">
         <h2 id="category" data-value="produkter" class="pt-5 pb-3 ps-5">
@@ -83,48 +83,41 @@
         </h2>
       </div>
 
-        <div id="products" class="row table-responsive">
-          <table class="table mx-auto" id="articleTable">
-            <thead>
-              <tr>
-                <th scope="col" class="">Artiklar</th>
-              </tr>
-            </thead>
-
-            <tbody id="tbodyTable">
-              <tr class="row"> <!-- STARTAR ROW FÖR EN PRODUKT-->
-              <th class="col col-lg-2 d-none d-sm-block">
-                <img src="https://picsum.photos/100" alt="" id="cartImage">
-            </th>
-            <td class="col col-lg-4">
-                <div id="productTitle">
-                Havregryn jättegott
-                </div>
-                
-            </td>
-            <td class="col col-lg-1">
-                <div class="number-input md-number-input">
-                    <!--<button class="btn btn-secondary" id="removeOneProduct">-</button> -->
-                    <input min="1" name="quantity" value="1" type="text" readonly="" id="cartQuantity">
-                    <!--<button class="btn btn-secondary" id="addOneProduct">+</button> -->
+      <div class="shopping-cart">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Artikel</th>
+              <th scope="col">Kvantitet</th>
+              <th scope="col">Pris</th>
+              <th scope=""></th>
+            </tr>
+          </thead>
+          <tbody class = "cart-table">
+            <tr>
+              <td><img src="https://picsum.photos/100" alt="" style="width: 60px;"></td>
+              <td class = "td-title">Sköljmedel white flower</td>
+                <td class = "row">
+                  <input class="col-sm-12" min="1" name="quantity" value="1" type="number" id="cart-quantity">
+                  <div class="sm-remove-and-add-button col-6">
+                    <div class="sm-add-one-product"><i class="fas fa-minus"></i></div>
+                    <div class="sm-remove-one-product"><i class="fas fa-plus"></i></div>
+                  </div>
+                  
+                  <div class="md-remove-and-add-button">
+                    <div class="md-add-one-product"><i class="fas fa-minus"></i></div>
+                    <div class="md-remove-one-product"><i class="fas fa-plus"></i></div>
                   </div>
             </td>
-            <td class="col col-lg-1">
-              <div class="">
-                SEK 150.00
-              </div>
-                
-            </td>
-            <td class="col col-lg-1">
-                <button class = "btn btn-warning p-1" id = "removeBtn">X</button>
-            </td>
-            </tr> <!-- HÄR SLUTAR ROW FÖR EN PRODUKT-->
-
-            </tbody>
-          </table>
-        </div>
+              <td>SEK 150.00</td>
+              <td><button class="cart-remove-product"><i class="far fa-trash-alt" class="trash-bin-image"></i></button></td>
+              </tr>
+          </tbody>
+        </table>
       </div>
-    </div>
+ 
+      <!-- Displays products end-->
 
     <!-- Footer -->
     <section class="">
