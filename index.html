@@ -4,7 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Startsida</title>
-    <link rel="stylesheet" href="style2.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="sidebar.css" type="text/css" media="all" />
+
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
@@ -26,217 +28,259 @@
   </head>
 
   <body>
-    <header>
-      <nav class="navbar sticky-top navbar-light bg-light">
-        <a id="logo" href="index.html"
-          ><img id="logoImg" src="./images/logo/Hakims-logo.png" alt="logo"
-        /></a>
-        <!-- START Search input -->
-        <div class="search-field">
-          <input
-            type="text"
-            placeholder="Sök..."
-            name="query"
-            value=""
-            class="search-field-input"
-            autocomplete="off"
-            autocorrect="off"
-          />
-        </div>
-        <!-- END Search input -->
-
-        <!--<span class="navbar-toggler-icon ham-menu"></span>-->
-
-        <div class="ms-10">
-          <button id="logIn" class="btn btn-secondary" type="button">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-person-circle"
-              viewBox="0 0 16 16"
-            >
-              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-              <path
-                fill-rule="evenodd"
-                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
-              />
-            </svg>
-            Logga in
-          </button>
-          <button id="cart" class="btn btn-warning" type="button">
-            <i class="fas fa-shopping-cart"></i>
-            Kundvagn
-          </button>
-        </div>
-      </nav>
-    </header>
-    <!-- START Header hero image -->
-
-    <!-- <div class="hero-image d-flex justify-content-center align-items-center">
-      <div class="hero-text ">
-        <a
-         
-          class="text-decoration-none "
-          href="skafferi.html"
-          >
-          <h3  id="hero-text" class="" >DAGENS HAKIMS DEAL</h3>
-        </a>
+    <!-- START header -->
+    <header class="navbar sticky-top navbar-light bg-light">
+      <span class="navbar-icon">
+        <i class="fas fa-bars"></i>
+      </span>
+      <a id="logo" href="index.html"
+        ><img id="logoImg" src="./images/logo/Hakims-logo.png" alt="logo"
+      /></a>
+      <!-- START Search input -->
+      <div class="search-field">
+        <input
+          type="text"
+          placeholder="Sök..."
+          name="query"
+          value=""
+          class="search-field-input"
+          autocomplete="off"
+          autocorrect="off"
+        />
       </div>
-    </div>  -->
-
-    <!-- END Header hero image -->
-
-<!--START main -->
-
-<!-- LOG IN MODAL START-->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-          <button class="modal-cancel-button">
-            <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true">
-          </button>
-
-        <div class="modal-title d-none d-sm-block">Välkommen!</div>
-        <div class="sm-modal-title d-block d-sm-none">Välkommen!</div>
-        <div class="modal-subtitle">Logga in för att få ut mer av din vardag!</div>
-        <div class="modal-input-username mx-auto pt-2">
-          <label for="inputUsername">Ange email: </label>
-          <input type="text" class="form-control" id="inputUsername" placeholder="Email">
-        </div>
-        <div class="modal-input-password mx-auto">
-          <label for="inputPassword">Ange lösenord: </label>
-          <input type="password" class="form-control" id="inputPassword" placeholder="Lösenord">
-        </div>
-        <div class="modal-login-button">
-          <button id = "modal-login-button">Logga in</button>
-        </div>
-        <div class="register-new-user">
-          <label for="register-new-user-button">Ny hos Hakims livs?</label>
-          <button class="register-new-user-button">Skapa konto</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- LOG IN MODAL END-->
-
-<!-- START register modal -->
-<div class="modal fade" id="registerModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-
-      <div class="modal-body px-5">
-        <button class="modal-cancel-button">
-          <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true">
+      <span id="search" class="fas fa-search fa-lg"> </span>
+    
+      <!-- END Search input -->
+      
+      <div class="btn2">
+        <button id="logIn" class="btn btn-secondary btn-lg" type="button">
+          <i class="fa fa-sign-in" aria-hidden="true"></i>
+          Logga in
         </button>
-        <div class="modal-title pb-1 d-none d-sm-block">Skapa konto!</div>
-        <div class="sm-modal-title d-block d-sm-none">Skapa konto!</div>
-        <div class="modal-subtitle pb-3">"Din närlivs - vart du vill"</div>
-          <!-- <button id="closeModal"type="button" class="btn btn-outline-dark" data-dismiss="modal" onclick="close()">Stäng</button> -->
-        <div class="create-new-account-forms">
-          <form class="row g-3">
-          <div class="col-md-6">
-            <input class="form-control" type="text" id="create-new-account-surname" name="surname" placeholder="Förnamn"/> 
-          </div>
-          <div class="col-md-6">
-            <input class="form-control" type="text" id="create-new-account-lastname" name="lastname" placeholder="Efternamn"/> 
-          </div>
-          <div class="col-md-6">
-            <input class="form-control" type="email" id="create-new-account-email" name="email" placeholder="E-mail"/> 
-          </div>
-          <div class="col-md-6">
-            <input class="form-control" type="text" id="create-new-account-number" name="number" placeholder="Telefon"/> 
-          </div>
-          <div class="col-md-6">
-            <input class="form-control" type="password" id="create-new-account-password" name="password" placeholder="Lösenord"/> 
-          </div>
-          <div class="col-md-6">
-            <input class="form-control" type="password" id="create-new-account-repeat-password" name="repeat-password" placeholder="Upprepa lösenord"/> 
-          </div>
-          <div class="col-md-5">
-            <input class="form-control" type="text" id="create-new-account-street" name="street" placeholder="Gata"/> 
-          </div>
-          <div class="col-md-4">
-            <input class="form-control" type="text" id="create-new-account-city" name="city" placeholder="Ort"/> 
-          </div>
-          <div class="col-md-3">
-            <input class="form-control" type="text" id="create-new-account-zip" name="zip" placeholder="Postnummer"/> 
-          </div>
-          <div class="register-new-account pb-4 pt-2">
-            <button class="create-new-account-button">Skapa konto</button>
-          </div>
-        </form>
-      </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- END register modal -->
 
-    <div class="parent-container d-flex">
-      <div class="container">
-        <div id="sidebar" class="row">
-          <ul class="navbar-nav p-3">
-            <p>Kategorier</p>
-            <li class="nav-item">
-              <a class="nav-link" href="skafferi.html">Skafferi</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="snacks-godis.html">Snacks & godis</a>
-            </li>
-          </ul>
-        </div>
+        <button id="cart" class="btn btn-warning btn-lg" type="button">
+          <i class="fas fa-shopping-cart"></i>
+          Kundvagn
+        </button>
       </div>
+      <i id="mobileLogin" class="fa fa-sign-in fa-2x" aria-hidden="true"></i>
+    </header>
+    <!-- END header -->
 
-      <div id="main" class="container-fluid min-vh-100 pb-5">
-        <div
-          class="hero-image d-flex justify-content-center align-items-center"
-        >
-          <div class="hero-text">
-            <a class="text-decoration-none" href="skafferi.html">
-              <h3 id="hero-text" class="">DAGENS HAKIMS DEAL</h3>
-            </a>
-          </div>
-        </div>
-        <div class="row">
-          <h2 id="category" data-value="produkter" class="pt-5 pb-3">
-            Produkter
-          </h2>
+    <!-- LOG IN MODAL START-->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button class="modal-cancel-button">
+              <img
+                src="images/icons/cancel-icon.png"
+                alt="Cancel button"
+                aria-hidden="true"
+              />
+            </button>
 
-          <div id="products" class="row"></div>
-        </div>
-      </div>
-    </div>
-
-    <section class="">
-      <footer class="footer-bg text-start pt-4">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-12 col-md-12 mb-4 mb-md-0 ps-4">
-              <h6 class="text-uppercase text-white">Kontaktuppgifter</h6>
-              <p>
-                Hakim Livs HB <br />
-                Telefon: 08-123456 <br />
-                Epost: hakim@hakims.se <br />
-                Adress: Vägen 3 <br />
-                167 45 Bromma <br />
-              </p>
+            <div class="modal-title d-none d-sm-block">Välkommen!</div>
+            <div class="sm-modal-title d-block d-sm-none">Välkommen!</div>
+            <div class="modal-subtitle">
+              Logga in för att få ut mer av din vardag!
+            </div>
+            <div class="modal-input-username mx-auto pt-2">
+              <label for="inputUsername">Ange email: </label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputUsername"
+                placeholder="Email"
+              />
+            </div>
+            <div class="modal-input-password mx-auto">
+              <label for="inputPassword">Ange lösenord: </label>
+              <input
+                type="password"
+                class="form-control"
+                id="inputPassword"
+                placeholder="Lösenord"
+              />
+            </div>
+            <div class="modal-login-button">
+              <button id="modal-login-button">Logga in</button>
+            </div>
+            <div class="register-new-user">
+              <label for="register-new-user-button">Ny hos Hakims livs?</label>
+              <button class="register-new-user-button">Skapa konto</button>
             </div>
           </div>
         </div>
-        <div
-          class="text-center p-3"
-          style="background-color: rgba(0, 0, 0, 0.2)"
-        >
-          © 2021 Copyright: Hakims Livs
-        </div>
-      </footer>
-    </section>
+      </div>
+    </div>
+    <!-- LOG IN MODAL END-->
 
-    
+    <!-- START register modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body px-5">
+            <button class="modal-cancel-button">
+              <img
+                src="images/icons/cancel-icon.png"
+                alt="Cancel button"
+                aria-hidden="true"
+              />
+            </button>
+            <div class="modal-title pb-1 d-none d-sm-block">Skapa konto!</div>
+            <div class="sm-modal-title d-block d-sm-none">Skapa konto!</div>
+            <div class="modal-subtitle pb-3">"Din närlivs - vart du vill"</div>
+            <!-- <button id="closeModal"type="button" class="btn btn-outline-dark" data-dismiss="modal" onclick="close()">Stäng</button> -->
+            <div class="create-new-account-forms">
+              <form class="row g-3">
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="create-new-account-surname"
+                    name="surname"
+                    placeholder="Förnamn"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="create-new-account-lastname"
+                    name="lastname"
+                    placeholder="Efternamn"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="email"
+                    id="create-new-account-email"
+                    name="email"
+                    placeholder="E-mail"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="create-new-account-number"
+                    name="number"
+                    placeholder="Telefon"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="password"
+                    id="create-new-account-password"
+                    name="password"
+                    placeholder="Lösenord"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="password"
+                    id="create-new-account-repeat-password"
+                    name="repeat-password"
+                    placeholder="Upprepa lösenord"
+                  />
+                </div>
+                <div class="col-md-5">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="create-new-account-street"
+                    name="street"
+                    placeholder="Gata"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="create-new-account-city"
+                    name="city"
+                    placeholder="Ort"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="create-new-account-zip"
+                    name="zip"
+                    placeholder="Postnummer"
+                  />
+                </div>
+                <div class="register-new-account pb-4 pt-2">
+                  <button class="create-new-account-button">Skapa konto</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END register modal -->
+
+    <!--START main -->
+    <div class="container">
+      <div class="row mt-2">
+        <nav id="sidebar">
+          <ul class="navbar-nav">
+            <div class="d-flex">
+              <p class="h2">Kategorier</p>
+              <span
+                class="close-sidebar fas fa-window-close fa-lg ms-4 mt-2"
+              ></span>
+            </div>
+          </ul>
+        </nav>
+
+        <main class="col-12 col-lg-9">
+          <div
+            class="hero-image d-flex justify-content-center align-items-center"
+          >
+            <div class="hero-text">
+              <a class="text-decoration-none" href="index.html">
+                <h3 id="hero-text" class="">DAGENS HAKIMS DEAL</h3>
+              </a>
+            </div>
+          </div>
+          <div class="">
+            <h2 id="category" class="pt-5 pb-3">Produkter</h2>
+
+            <div id="products" class="row"></div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <!--END main -->
+
+    <!--START footer  -->
+    <footer class="footer-bg text-start pt-4 z-index-2">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 mb-4 mb-md-0 ps-4">
+            <h6 class="text-uppercase text-white">Kontaktuppgifter</h6>
+            <p>
+              Hakim Livs HB <br />
+              Telefon: 08-123456 <br />
+              Epost: hakim@hakims.se <br />
+              Adress: Vägen 3 <br />
+              167 45 Bromma <br />
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © 2021 Copyright: Hakims Livs
+      </div>
+    </footer>
+    <!--END footer  -->
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
@@ -245,6 +289,7 @@
     ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="script.js"></script>
+    <script src="ham-menu.js"></script>
     <script src="addToCart.js"></script>
   </body>
 </html>
