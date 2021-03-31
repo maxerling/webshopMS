@@ -170,7 +170,9 @@ function loadCategories(data) {
     document.querySelector(".navbar-nav").appendChild(li);
   }
 }
-
+/**
+ * Added function to show order modal, remove ls, show info in order modal
+ */
 function confirmBtn() {
   $("#orderModal").modal("show");
 
