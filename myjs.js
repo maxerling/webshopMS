@@ -10,7 +10,7 @@ let productsData = [];
  *
  *
  */
-window.addEventListener("load", () => {
+ $(document).ready(function () {
   getData();
 });
 /**
@@ -40,6 +40,10 @@ function loadData(data) {
     createElementsForProduct(product);
   });
 }
+/**
+ *
+ *
+ */
 function loadCategories(data) {
   data.map(function (product) {
     createCategory(product.category);
