@@ -183,6 +183,7 @@ function categoryLinkListener() {
 
 $(document).on("click", "#logIn", function () {
   $(".login-modal").modal("show");
+  console.log("HEEEEEEEEEEEE");
 });
 
 $(document).on("click", "#mobileLogin", function() {
@@ -203,3 +204,6 @@ $(document).on("click", ".register-new-user-button", function () {
   $(".login-modal").modal("hide");
   $(".register-modal").modal("show");
 });
+$(document).on("click", "#mobileLogin", function() {
+  $(".login-modal").modal("show");
+})
