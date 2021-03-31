@@ -248,12 +248,17 @@ nav {
   transform: translateY(3px);
 }
 
-.modal-cancel-button img{
+.login-modal-cancel-button img, .register-modal-cancel-button img{
   width: 15px;
   height: 15px;
+  float: right;
 }
 
-.modal-cancel-button {
+.login-modal-cancel-button, .register-modal-cancel-button{
+  padding: 15px;
+}
+
+.login-modal-cancel-button, .register-modal-cancel-button {
   border: none;
   background-color: white;
 }
