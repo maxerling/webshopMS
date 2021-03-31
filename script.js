@@ -2,10 +2,16 @@ $(document).ready(function () {
   getData();
 });
 
+/** Global variable */
+let cat = "produkter";
+let products = document.getElementById("products");
+let productsData = [];
+
+
 /**
  * Creating element
  *
- * @param {string} element - The element you wanna creaate
+ * @param {string} element - The element you wanna create
  * @returns
  */
 let createNode = (element) => document.createElement(element);
@@ -42,7 +48,12 @@ function getData() {
 
   fetch(url)
     .then((resp) => resp.json())
-    .then((data) => storeData(data))
+    .then((data)=>{
+      productsData = data;
+      storeData(data);
+      loadCategories(data);
+      categoryLinkListener();
+    })
     .catch((err) => console.log(err));
 }
 /**
@@ -51,23 +62,33 @@ function getData() {
  *  parsing it to produce a JS object
  */
 function storeData(data) {
-  let products = new Array();
+  document.getElementById("category").innerText = cat;
   let cartArray = new Array();
-  products = data;
-  localStorage.setItem("allProducts", JSON.stringify(products));
+  localStorage.setItem("allProducts", JSON.stringify(productsData));
   localStorage.setItem("cart", JSON.stringify(cartArray));
-  products.forEach((product) => createElementsForProduct(product));
+  data.forEach((product) => createElementsForProduct(product));
 }
+
+/**
+ * Map data to createCategory function.
+ * @param {object} data - Result of taking JSON as input and
+ *  parsing it to produce a JS object
+ */
+function loadCategories(data) {
+  data.map(function (product) {
+    createCategory(product.category);
+  });
+}
+
 
 /**
  * Create elements based on product data (object data)
  * @param {object} product - object of array of objects
  */
-function createElementsForProduct(product) {
-  const h2 = $("#category")[0];
-  const h2Value = $(h2).attr("data-value");
+ function createElementsForProduct(product) {
+  
+  console.log(product.category);
   const div = createNode("div");
-  addClass(h2, "m-2");
   addClass(div, "p-2");
   addClass(div, "col-xs-12");
   addClass(div, "col-md-6");
@@ -78,7 +99,6 @@ function createElementsForProduct(product) {
 
   const img = createNode("img");
   addClass(img, "mb-4");
-  addClass(img, "product-hover");
   const p1 = createNode("p");
   const p2 = createNode("p");
   const p3 = createNode("p");
@@ -95,27 +115,26 @@ function createElementsForProduct(product) {
   } else {
     $(btn).click(() => addToCart(`${product.id}`, products));
   }
-  const products = $("#products")[0];
-  if (h2Value == "produkter") {
-    $(img).attr("src", product.image);
-    $(p1).html(`${product.price} kr`);
-    $(p2).html(product.title);
-    $(p3).html(`${product.brand} | ${product.units}`);
-    $(btn).html("Köp");
-
+ 
+  if (cat == "produkter") {
+    img.src = product.image;
+    p1.innerHTML = `${product.price} kr`;
+    p2.innerHTML = product.title;
+    p3.innerHTML = `${product.brand} | ${product.units}`;
+    btn.innerHTML = "Köp";
     append(div, img);
     append(div, p1);
     append(div, p2);
     append(div, p3);
     append(div, btn);
     append(products, div);
-  } else if (h2Value == product.category) {
-    $(img).attr("src", product.image);
-    $(p1).html(`${product.price} kr`);
-    $(p2).html(product.title);
-    $(p3).html(`${product.brand} | ${product.units}`);
-    $(btn).html("Köp");
-
+  } else if (cat == product.category) {
+    console.log(cat + "else");
+    img.src = product.image;
+    p1.innerHTML = `${product.price} kr`;
+    p2.innerHTML = product.title;
+    p3.innerHTML = `${product.brand} | ${product.units}`;
+    btn.innerHTML = "Köp";
     append(div, img);
     append(div, p1);
     append(div, p2);
@@ -123,24 +142,60 @@ function createElementsForProduct(product) {
     append(div, btn);
     append(products, div);
   }
-  
-  $(document).on("click", "#logIn", function () {
-    $(".login-modal").modal("show");
-  });
-
-  // MODAL CANCEL BUTTONS
-  $(document).on("click", ".login-modal-cancel-button", function () {
-    $(".login-modal").modal("hide");
-  });
-
-  $(document).on("click", ".register-modal-cancel-button", function () {
-    $(".register-modal").modal("hide");
-  });
-
-  // MODAL SKAPA KONTO BUTTON
-  $(document).on("click", ".register-new-user-button", function () {
-    $(".login-modal").modal("hide");
-    $(".register-modal").modal("show");
-  });
-
 }
+
+
+
+/**
+ * Create element base on category name.
+ * @param {string} category . All of categories
+ */
+ function createCategory(category) {
+   
+  let li = document.createElement("li");
+  li.setAttribute("class", "nav-item");
+
+  if (document.getElementById(category) == null) {
+    let div = document.createElement("a");
+    div.setAttribute("class", "cat h4 nav-link");
+    div.id = category;
+    div.innerText = category;
+
+    li.appendChild(div);
+    document.querySelector(".navbar-nav").appendChild(li);
+  }
+}
+
+/**
+ * Add category function when you press element.
+ */
+function categoryLinkListener() {
+  document.querySelectorAll(".cat").forEach((item) => {
+    item.addEventListener("click", function (event) {
+      let target = event.target;
+      cat = target.innerText;
+      products.innerHTML = "";
+      storeData(productsData);
+    });
+  });
+}
+
+
+$(document).on("click", "#logIn", function () {
+  $(".login-modal").modal("show");
+});
+
+// MODAL CANCEL BUTTONS
+$(document).on("click", ".login-modal-cancel-button", function () {
+  $(".login-modal").modal("hide");
+});
+
+$(document).on("click", ".register-modal-cancel-button", function () {
+  $(".register-modal").modal("hide");
+});
+
+// MODAL SKAPA KONTO BUTTON
+$(document).on("click", ".register-new-user-button", function () {
+  $(".login-modal").modal("hide");
+  $(".register-modal").modal("show");
+});

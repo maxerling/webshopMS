@@ -1,5 +1,6 @@
 /**
- * Gets arrays from localStorage and checks if product exist in cartArray. If object doesnt match productid, the object get stored in cartArray
+ * Gets arrays from localStorage and checks if product exist in cartArray. 
+ * If object doesn't match productid, the object get stored in cartArray
  * else it will +1 object.quantity in cartArray. This is later stored in localStorage.
  * 
  * @param {number} productId - The current product ID
