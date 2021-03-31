@@ -65,9 +65,13 @@
             </svg>
             Logga in
           </button>
-          <button id="cart" class="btn btn-warning" type="button">
+          <button id="cart" class="btn btn-warning" type="button" onclick="test()">
             <i class="fas fa-shopping-cart"></i>
             Kundvagn
+          </button>
+
+          <button id="cart" class="btn btn-dark" onclick="confirmBtn()" type="button">
+            Confirmation(Ta bort sen)
           </button>
         </div>
       </nav>
@@ -175,6 +179,36 @@
   </div>
 </div>
 <!-- END register modal -->
+
+<!-- ORDER CONFIRMATION MODAL START-->
+<div class="modal fade" id="orderModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+          <button class="modal-cancel-button">
+            <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true">
+          </button>
+
+        <div class="modal-title d-none d-sm-block order-modal-title">Tack för din beställning!</div>
+        <div class="sm-modal-title d-block d-sm-none">Tack för din beställning!</div>
+        <div class="order-modal-subtitle">Din beställning är mottagen och behandlas. 
+          Du kommer att motta ett mejl med beställningsinformation!
+        </div>
+        <div>
+          <p class="order-modal-p">
+            Order nummer: <br>
+            Beställningsdatum: <br>
+            Total belopp:
+          </p>
+        </div>
+        <div class="shop-again-btn">
+          <button id = "shop-again-btn">Handla igen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ORDER CONFIRMATION MODAL END-->
 
     <div class="parent-container d-flex">
       <div class="container">

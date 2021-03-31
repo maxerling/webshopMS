@@ -131,6 +131,12 @@ function createElementsForProduct(product) {
   $(document).on("click", ".modal-cancel-button", function() {
     $("#loginModal").modal("hide");
     $("#registerModal").modal("hide");
+    $("#orderModal").modal("hide");
   })
 
+}
+
+function confirmBtn() {
+  localStorage.clear();
+  $("#orderModal").modal("show");
 }

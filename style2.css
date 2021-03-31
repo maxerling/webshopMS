@@ -213,7 +213,7 @@ nav {
   background-color: white;
   border-radius: 6px;
   border: none;
-  box-shadow: 3px 3px 2px 2px #F2D2D3;
+  box-shadow: 3px 3px 2px 2px #f2d2d3;
 }
 
 .register-new-user-button:hover {
@@ -224,31 +224,30 @@ nav {
   transform: translateY(3px);
 }
 
-
-.modal-login-button {
+.modal-login-button, .shop-again-btn {
   width: 50%;
   margin: auto;
 }
 
-.modal-login-button button {
+.modal-login-button button, .shop-again-btn button {
   height: 40px;
   color: white;
   width: 100%;
   background-color: #011e62;
   border-radius: 6px;
   border: none;
-  box-shadow: 3px 3px 2px 2px #8092CC;
+  box-shadow: 3px 3px 2px 2px #8092cc;
 }
 
-.modal-login-button button:hover {
+.modal-login-button button:hover, .shop-again-btn button:hover {
   transform: translateY(2px);
 }
 
-.modal-login-button button:active {
+.modal-login-button button:active, .shop-again-btn button:active {
   transform: translateY(3px);
 }
 
-.modal-cancel-button img{
+.modal-cancel-button img {
   width: 15px;
   height: 15px;
 }
@@ -268,7 +267,7 @@ nav {
   background-color: #011e62;
   border-radius: 6px;
   border: none;
-  box-shadow: 3px 3px 2px 2px #8092CC;
+  box-shadow: 3px 3px 2px 2px #8092cc;
 }
 
 .sm-modal-title {
@@ -282,7 +281,6 @@ nav {
   .create-new-account-forms input {
     height: 20px;
   }
-
 }
 
 @media screen and (max-width: 320px) {
@@ -299,10 +297,29 @@ nav {
   transform: translateY(3px);
 }
 
-
-
 /* CREATE ACCOUNT MODAL END */
 .footer-bg {
   background-color: #26272b;
   color: #737373;
 }
+
+/* ORDER CONFIRMATION MODAL START */
+
+.order-modal-title {
+  font-size: 2.3rem;
+}
+
+.order-modal-subtitle {
+  font-size: 1rem;
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.order-modal-p {
+  font-size: 1rem;
+  padding-top: 1rem;
+  padding-left: 1.2rem;
+}
+
+
+/* ORDER CONFIRMATION MODAL END */
