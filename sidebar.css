@@ -1,0 +1,131 @@
+/* START Sidebar stylesheets*/
+#sidebar {
+  display: none;
+  position: absolute;
+  z-index: 900;
+  width: 184px;
+  height: auto;
+  background-color: #ebebeb; /*#f7f7f7*/
+}
+.cat {
+  cursor: pointer;
+}
+#sidebar a {
+  color: #4a4a4a;
+}
+.active-link {
+  border-left: 0.25rem solid #f80035;
+  background: #fff;
+  margin: 0 -0.8125rem;
+  padding-left: 0.75rem;
+}
+
+#sidebar a:hover {
+  border-left: 0.25rem solid #f80035;
+  /* margin: 0 -0.8125rem;
+    padding-right: 2rem; */
+}
+/* END Sidebar stylesheets*/
+
+#logIn{
+  display: none;
+}
+
+.sidebar-close {
+  display: block;
+}
+
+.navbar-icon {
+  display: inline-block;
+  font-size: 16pt;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.navbar-toggler-icon:hover {
+  opacity: 1;
+}
+
+
+
+/*  X-Small devices (portrait phones, less than 576px)
+ No media query for `xs` since this is the default in Bootstrap
+
+ Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  #sidebar {
+    width: 200px;
+  }
+
+  .navbar-icon {
+    display: inline-block;
+  }
+}
+
+/*  Medium devices (tablets, 768px and up) */
+@media (min-width: 769px) {
+  #mobileLogin{
+    display: none;
+  }
+  #logIn{
+    display: inline-block;
+  }
+  #sidebar {
+    display: block;
+    height:100%;
+    position: fixed;
+    width: 200px;
+    left: unset !important;
+    z-index: 0;
+  }
+  .close-sidebar {
+    display: none !important;
+  }
+  main {
+    margin-left: 200px;
+  }
+  .navbar-icon {
+    display: none;
+  }
+  #logo {
+    width: 15%;
+  }
+  header {
+    padding: 0.5rem 4rem;
+  }
+  #search {
+    display: none;
+  }
+  .search-field {
+    display: block;
+  }
+  
+}
+
+/*  Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+ 
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  #sidebar {
+    width: 300px;
+  }
+  main {
+    margin-left: 300px;
+  }
+}
+
+/*  XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+  #sidebar {
+    width: 300px;
+  }
+  main {
+    margin-left: 300px;
+  }
+  header {
+    padding: 0.5rem 4rem;
+  }
+}
