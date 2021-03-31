@@ -51,9 +51,11 @@ function getData() {
  *  parsing it to produce a JS object
  */
 function storeData(data) {
-  products = new Array();
+  let products = new Array();
+  let cartArray = new Array();
   products = data;
-  console.log(products);
+  localStorage.setItem("allProducts", JSON.stringify(products));
+  localStorage.setItem("cart", JSON.stringify(cartArray));
   products.forEach((product) => createElementsForProduct(product));
 }
 
@@ -90,6 +92,8 @@ function createElementsForProduct(product) {
     $(p2).attr("style", "color:gray;");
     $(p3).attr("style", "color:gray;");
     removeClass(img, "product-hover");
+  } else {
+    $(btn).click(() => addToCart(`${product.id}`, products));
   }
   const products = $("#products")[0];
   if (h2Value == "produkter") {
@@ -119,18 +123,22 @@ function createElementsForProduct(product) {
     append(div, btn);
     append(products, div);
   }
-  $(document).on("click", "#logIn", function() {
+  $(document).on("click", "#logIn", function () {
     $("#loginModal").modal("show");
   });
 
-  $(document).on("click", ".register-new-user-button", function() {
-    $("#loginModal").modal("hide");
+  $(document).on("click", ".register-new-user-button", function () {
     $("#registerModal").modal("show");
   });
 
-  $(document).on("click", ".modal-cancel-button", function() {
+  $(document).on("click", ".modal-cancel-button", function () {
     $("#loginModal").modal("hide");
-    $("#registerModal").modal("hide");
-  })
+  });
 
+  $(document).on("click", "#register", function () {
+    $("#registerModal").modal("show");
+  });
+  $(document).on("click", "#closeModal", function () {
+    $("#registerModal").modal("hide");
+  });
 }
