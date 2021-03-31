@@ -46,9 +46,25 @@ function htmlGenerator(data) {
   <td>SEK ${data.price.toFixed(2)}</td>
   <td><button class="cart-remove-product"><i class="far fa-trash-alt class="trash-bin-image"></i></button></td>
   </tr>
-  `
-  ;
+  `;
 }
 
+// $(".fa-plus").click("input", function () {});
+$(document).on("click", ".fa-plus", function () {
+  let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
+  q++;
+  $(this).closest(".quantity-td").find("input").attr("value", q);
+});
+
+$(document).on("click", ".fa-minus", function () {
+  let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
+  if (q === 1) return;
+  q--;
+  $(this).closest(".quantity-td").find("input").attr("value", q);
+});
+
+$(document).on("click", ".cart-remove-product", function () {
+  $(this).closest(".quantity-tr").remove();
+});
 
 getDataFromLocalStorage();
