@@ -52,7 +52,7 @@ function getData() {
       productsData = data;
       storeData(data);
       loadCategories(data);
-      addListener();
+      categoryLinkListener();
     })
     .catch((err) => console.log(err));
 }
@@ -63,14 +63,16 @@ function getData() {
  */
 function storeData(data) {
   document.getElementById("category").innerText = cat;
-  // products = new Array();
-  // products = data;
+  let cartArray = new Array();
+  localStorage.setItem("allProducts", JSON.stringify(productsData));
+  localStorage.setItem("cart", JSON.stringify(cartArray));
   data.forEach((product) => createElementsForProduct(product));
 }
 
 /**
- *
- *
+ * Map data to createCategory function.
+ * @param {object} data - Result of taking JSON as input and
+ *  parsing it to produce a JS object
  */
 function loadCategories(data) {
   data.map(function (product) {
@@ -101,7 +103,19 @@ function loadCategories(data) {
   const p2 = createNode("p");
   const p3 = createNode("p");
   const btn = createNode("button");
+  addClass(btn, "btn-primary");
+  addClass(btn, "btn");
 
+  if (product.quantity == 0) {
+    $(btn).attr("disabled", "disabled");
+    $(p1).attr("style", "color:gray;");
+    $(p2).attr("style", "color:gray;");
+    $(p3).attr("style", "color:gray;");
+    removeClass(img, "product-hover");
+  } else {
+    $(btn).click(() => addToCart(`${product.id}`, products));
+  }
+ 
   if (cat == "produkter") {
     img.src = product.image;
     p1.innerHTML = `${product.price} kr`;
@@ -130,11 +144,14 @@ function loadCategories(data) {
   }
 }
 
+
+
 /**
- *
- *
+ * Create element base on category name.
+ * @param {string} category . All of categories
  */
  function createCategory(category) {
+   
   let li = document.createElement("li");
   li.setAttribute("class", "nav-item");
 
@@ -150,16 +167,15 @@ function loadCategories(data) {
 }
 
 /**
- *
- *
+ * Add category function when you press element.
  */
-function addListener() {
+function categoryLinkListener() {
   document.querySelectorAll(".cat").forEach((item) => {
     item.addEventListener("click", function (event) {
       let target = event.target;
       cat = target.innerText;
       products.innerHTML = "";
-      loadData(productsData);
+      storeData(productsData);
     });
   });
 }
@@ -169,13 +185,17 @@ function addListener() {
     $("#loginModal").modal("show");
   });
 
-  $(document).on("click", ".register-new-user-button", function() {
-    $("#loginModal").modal("hide");
+  $(document).on("click", ".register-new-user-button", function () {
     $("#registerModal").modal("show");
   });
 
-  $(document).on("click", ".modal-cancel-button", function() {
+  $(document).on("click", ".modal-cancel-button", function () {
     $("#loginModal").modal("hide");
-    $("#registerModal").modal("hide");
-  })
+  });
 
+  $(document).on("click", "#register", function () {
+    $("#registerModal").modal("show");
+  });
+  $(document).on("click", "#closeModal", function () {
+    $("#registerModal").modal("hide");
+  });

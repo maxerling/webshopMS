@@ -56,11 +56,8 @@ header {
   box-shadow: none;
 }
 
-.active-link {
-  border-left: 0.25rem solid #f80035;
-  background: #fff;
-  margin: 0 -0.8125rem;
-  padding-left: 0.75rem;
+.bg-light {
+  box-shadow: 0 0.0625rem 0.4375rem 0.0625rem rgba(0, 0, 0, 0.1);
 }
 
 /*END header & NavBar style*/
@@ -176,6 +173,7 @@ header {
 }
 /* LOG IN MODAL END */
 
+/* CREATE ACCOUNT MODAL START*/
 .create-new-account-button {
   height: 40px;
   color: white;
@@ -213,25 +211,14 @@ header {
 .create-new-account-button:active {
   transform: translateY(3px);
 }
-
-
-
 /* CREATE ACCOUNT MODAL END */
-.footer-bg {
-  background-color: #26272b;
-  color: #737373;
-}
 
+
+/* PRODUCT START*/
 .product {
   background-color: #fff;
   margin-left: 0px;
 }
-
-.bg-light {
-  box-shadow: 0 0.0625rem 0.4375rem 0.0625rem rgba(0, 0, 0, 0.1);
-}
-
-
 
 #products .col-sm-3 {
   background-color: #fff;
@@ -250,7 +237,16 @@ header {
   margin-left: 2px;
   margin-bottom: 10px;
 }
+/* PRODUCT END*/
 
-.cat {
-  cursor: pointer;
+
+/* FOOTER START*/
+footer{
+  z-index: 1;
+  position: relative;
 }
+.footer-bg {
+  background-color: #26272b;
+  color: #737373;
+}
+/* FOOTER END*/

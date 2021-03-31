@@ -7,8 +7,17 @@
   height: auto;
   background-color: #ebebeb; /*#f7f7f7*/
 }
+.cat {
+  cursor: pointer;
+}
 #sidebar a {
   color: #4a4a4a;
+}
+.active-link {
+  border-left: 0.25rem solid #f80035;
+  background: #fff;
+  margin: 0 -0.8125rem;
+  padding-left: 0.75rem;
 }
 
 #sidebar a:hover {
