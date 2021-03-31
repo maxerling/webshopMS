@@ -162,18 +162,24 @@ header {
   transform: translateY(3px);
 }
 
-.modal-cancel-button img{
+.login-modal-cancel-button img, .register-modal-cancel-button img{
   width: 15px;
   height: 15px;
+  float: right;
 }
 
-.modal-cancel-button {
+.login-modal-cancel-button, .register-modal-cancel-button{
+  padding: 15px;
+}
+
+.login-modal-cancel-button, .register-modal-cancel-button {
   border: none;
   background-color: white;
 }
 /* LOG IN MODAL END */
 
-/* CREATE ACCOUNT MODAL START*/
+/* CREATE ACCOUNT MODAL START */
+
 .create-new-account-button {
   height: 40px;
   color: white;
@@ -191,14 +197,14 @@ header {
   color: #011e62;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .create-new-account-forms input {
     height: 20px;
   }
 
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .create-new-account-forms input::-webkit-input-placeholder {
     font-size: 0.6rem;
   }
@@ -211,6 +217,7 @@ header {
 .create-new-account-button:active {
   transform: translateY(3px);
 }
+
 /* CREATE ACCOUNT MODAL END */
 
 

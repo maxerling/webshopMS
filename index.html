@@ -68,163 +68,86 @@
     <!-- END header -->
 
     <!-- LOG IN MODAL START-->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <button class="modal-cancel-button">
-              <img
-                src="images/icons/cancel-icon.png"
-                alt="Cancel button"
-                aria-hidden="true"
-              />
-            </button>
-
-            <div class="modal-title d-none d-sm-block">Välkommen!</div>
-            <div class="sm-modal-title d-block d-sm-none">Välkommen!</div>
-            <div class="modal-subtitle">
-              Logga in för att få ut mer av din vardag!
-            </div>
-            <div class="modal-input-username mx-auto pt-2">
-              <label for="inputUsername">Ange email: </label>
-              <input
-                type="text"
-                class="form-control"
-                id="inputUsername"
-                placeholder="Email"
-              />
-            </div>
-            <div class="modal-input-password mx-auto">
-              <label for="inputPassword">Ange lösenord: </label>
-              <input
-                type="password"
-                class="form-control"
-                id="inputPassword"
-                placeholder="Lösenord"
-              />
-            </div>
-            <div class="modal-login-button">
-              <button id="modal-login-button">Logga in</button>
-            </div>
-            <div class="register-new-user">
-              <label for="register-new-user-button">Ny hos Hakims livs?</label>
-              <button class="register-new-user-button">Skapa konto</button>
-            </div>
-          </div>
+<div class="login-modal modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <button class="login-modal-cancel-button">
+        <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true">
+      </button>
+      <div class="modal-body">
+        <div class="modal-title d-none d-sm-block">Välkommen!</div>
+        <div class="sm-modal-title d-block d-sm-none">Välkommen!</div>
+        <div class="modal-subtitle pb-2">Logga in för att få ut mer av din vardag!</div>
+        <div class="modal-input-username mx-auto pt-2">
+          <input type="text" class="form-control" id="input-username" placeholder="E-mail">
+        </div>
+        <div class="modal-input-password mx-auto">
+          <input type="password" class="form-control" id="input-password" placeholder="Lösenord">
+        </div>
+        <div class="modal-login-button">
+          <button id = "modal-login-button">Logga in</button>
+        </div>
+        <div class="register-new-user">
+          <label for="register-new-user-button">Ny hos Hakim livs?</label>
+          <button class="register-new-user-button">Skapa konto</button>
         </div>
       </div>
     </div>
-    <!-- LOG IN MODAL END-->
+  </div>
+</div>
+<!-- LOG IN MODAL END-->
 
-    <!-- START register modal -->
-    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-body px-5">
-            <button class="modal-cancel-button">
-              <img
-                src="images/icons/cancel-icon.png"
-                alt="Cancel button"
-                aria-hidden="true"
-              />
-            </button>
-            <div class="modal-title pb-1 d-none d-sm-block">Skapa konto!</div>
-            <div class="sm-modal-title d-block d-sm-none">Skapa konto!</div>
-            <div class="modal-subtitle pb-3">"Din närlivs - vart du vill"</div>
-            <!-- <button id="closeModal"type="button" class="btn btn-outline-dark" data-dismiss="modal" onclick="close()">Stäng</button> -->
-            <div class="create-new-account-forms">
-              <form class="row g-3">
-                <div class="col-md-6">
-                  <input
-                    class="form-control"
-                    type="text"
-                    id="create-new-account-surname"
-                    name="surname"
-                    placeholder="Förnamn"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <input
-                    class="form-control"
-                    type="text"
-                    id="create-new-account-lastname"
-                    name="lastname"
-                    placeholder="Efternamn"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <input
-                    class="form-control"
-                    type="email"
-                    id="create-new-account-email"
-                    name="email"
-                    placeholder="E-mail"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <input
-                    class="form-control"
-                    type="text"
-                    id="create-new-account-number"
-                    name="number"
-                    placeholder="Telefon"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <input
-                    class="form-control"
-                    type="password"
-                    id="create-new-account-password"
-                    name="password"
-                    placeholder="Lösenord"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <input
-                    class="form-control"
-                    type="password"
-                    id="create-new-account-repeat-password"
-                    name="repeat-password"
-                    placeholder="Upprepa lösenord"
-                  />
-                </div>
-                <div class="col-md-5">
-                  <input
-                    class="form-control"
-                    type="text"
-                    id="create-new-account-street"
-                    name="street"
-                    placeholder="Gata"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <input
-                    class="form-control"
-                    type="text"
-                    id="create-new-account-city"
-                    name="city"
-                    placeholder="Ort"
-                  />
-                </div>
-                <div class="col-md-3">
-                  <input
-                    class="form-control"
-                    type="text"
-                    id="create-new-account-zip"
-                    name="zip"
-                    placeholder="Postnummer"
-                  />
-                </div>
-                <div class="register-new-account pb-4 pt-2">
-                  <button class="create-new-account-button">Skapa konto</button>
-                </div>
-              </form>
-            </div>
+<!-- START register modal -->
+<div class="register-modal modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <button class="register-modal-cancel-button">
+        <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true">
+      </button>
+      <div class="modal-body px-5">
+        <div class="modal-title pb-1 d-none d-sm-block">Skapa konto!</div>
+        <div class="sm-modal-title d-block d-sm-none">Skapa konto!</div>
+        <div class="modal-subtitle pb-3">"Din närlivs - vart du vill"</div>
+        <div class="create-new-account-forms">
+          <form class="row g-3">
+          <div class="col-md-6">
+            <input class="form-control" type="text" id="create-new-account-surname" name="surname" placeholder="Förnamn"/> 
           </div>
-        </div>
+          <div class="col-md-6">
+            <input class="form-control" type="text" id="create-new-account-lastname" name="lastname" placeholder="Efternamn"/> 
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" type="email" id="create-new-account-email" name="email" placeholder="E-mail"/> 
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" type="text" id="create-new-account-number" name="number" placeholder="Telefon"/> 
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" type="password" id="create-new-account-password" name="password" placeholder="Lösenord"/> 
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" type="password" id="create-new-account-repeat-password" name="repeat-password" placeholder="Upprepa lösenord"/> 
+          </div>
+          <div class="col-md-5">
+            <input class="form-control" type="text" id="create-new-account-street" name="street" placeholder="Gata"/> 
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" type="text" id="create-new-account-city" name="city" placeholder="Ort"/> 
+          </div>
+          <div class="col-md-3">
+            <input class="form-control" type="text" id="create-new-account-zip" name="zip" placeholder="Postnummer"/> 
+          </div>
+          <div class="register-new-account pb-4 pt-2">
+            <button class="create-new-account-button">Skapa konto</button>
+          </div>
+        </form>
+      </div>
       </div>
     </div>
-    <!-- END register modal -->
+  </div>
+</div>
+<!-- END register modal -->
+
 
     <!--START main -->
     <div class="container">

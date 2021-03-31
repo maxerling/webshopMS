@@ -181,21 +181,21 @@ function categoryLinkListener() {
 }
 
 
-  $(document).on("click", "#logIn", function() {
-    $("#loginModal").modal("show");
-  });
+$(document).on("click", "#logIn", function () {
+  $(".login-modal").modal("show");
+});
 
-  $(document).on("click", ".register-new-user-button", function () {
-    $("#registerModal").modal("show");
-  });
+// MODAL CANCEL BUTTONS
+$(document).on("click", ".login-modal-cancel-button", function () {
+  $(".login-modal").modal("hide");
+});
 
-  $(document).on("click", ".modal-cancel-button", function () {
-    $("#loginModal").modal("hide");
-  });
+$(document).on("click", ".register-modal-cancel-button", function () {
+  $(".register-modal").modal("hide");
+});
 
-  $(document).on("click", "#register", function () {
-    $("#registerModal").modal("show");
-  });
-  $(document).on("click", "#closeModal", function () {
-    $("#registerModal").modal("hide");
-  });
+// MODAL SKAPA KONTO BUTTON
+$(document).on("click", ".register-new-user-button", function () {
+  $(".login-modal").modal("hide");
+  $(".register-modal").modal("show");
+});
