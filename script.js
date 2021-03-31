@@ -137,6 +137,13 @@ function createElementsForProduct(product) {
 }
 
 function confirmBtn() {
+
   localStorage.clear();
   $("#orderModal").modal("show");
+
+  let currentDate = new Date().toLocaleString().replaceAll("/", "-");
+
+  //document.getElementById("p-order").innerHTML =
+  document.getElementById("p-date").innerHTML = "Beställningsdatum: " + currentDate.substring(0,17);
+  //document.getElementById("p-sum").innerHTML. 
 }

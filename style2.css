@@ -312,14 +312,17 @@ nav {
 .order-modal-subtitle {
   font-size: 1rem;
   text-align: center;
-  padding-top: 1rem;
+  padding: 1rem;
 }
 
 .order-modal-p {
   font-size: 1rem;
-  padding-top: 1rem;
   padding-left: 1.2rem;
+  margin: 0.2rem
 }
 
+.shop-again-btn {
+  padding-top: 1.2rem;
+}
 
 /* ORDER CONFIRMATION MODAL END */
