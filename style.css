@@ -265,8 +265,9 @@ header {
   height: 137px;
 }
 #products {
-  margin-left: 2px;
-  margin-bottom: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 10px;
 }
 /* PRODUCT END*/
 
