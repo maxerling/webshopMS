@@ -46,7 +46,7 @@
           />
         </div>
         <!-- END Search input -->
- 
+
         <!--<span class="navbar-toggler-icon ham-menu"></span>-->
 
         <div class="ms-10">
@@ -85,7 +85,7 @@
       </div>
 
       <div class="shopping-cart">
-        <table class="table" style="width: 100%;">
+        <table class="table" style="width: 100%">
           <thead>
             <tr>
               <th scope="col"></th>
@@ -95,36 +95,48 @@
               <th scope=""></th>
             </tr>
           </thead>
-          <tbody class = "cart-table">
-            
+          <tbody class="cart-table">
+            <!-- Produkter i cart -->            
           </tbody>
         </table>
-        <div class = "total-price-div"> <!-- total-price ID FÖR TOTAL PRISET-->
-          <table class="table table-borderless m-0" style="color: white;">
+
+        <div class="total-price-div">
+          <!-- total-price ID FÖR TOTAL PRISET-->
+          <table class="table table-borderless m-0" style="color: white">
             <tbody>
               <tr>
-                <td class = "p-0">Summa varor:</td>
-                <td id = "products-total-price" class = "p-0"></td>
+                <td class="p-0">Summa varor:</td>
+                <td id="products-total-price" class="p-0"></td>
               </tr>
               <tr>
-                <td class = "p-0">Leverans:</td>
-                <td class = "p-0">40kr</td>
+                <td class="p-0">Leverans:</td>
+                <td class="p-0">40kr</td>
               </tr>
               <tr>
-                <td class = "p-0">Moms:</td>
-                <td id = "vat" class = "p-0"></td>
+                <td class="p-0">Moms:</td>
+                <td id="vat" class="p-0"></td>
               </tr>
               <tr>
-                <td class = "p-0">Total:</td>
-                <td id = "total-price" class = "p-0"></td>
+                <td class="p-0">Total:</td>
+                <td id="total-price" class="p-0"></td>
               </tr>
             </tbody>
           </table>
         </div>
-      </div>
 
- 
-      <!-- Displays products end-->
+        <div class="total-price-div">
+          <div class="person-content-title text-center">Personuppgifter</div>
+          <div class="customer-info">
+            <input class="form-control mx-auto mb-1" type="text" value="Test Testsson" readonly disabled/>
+            <input class="form-control mx-auto mb-1" type="text" value="Testgatan 33b" readonly disabled/>
+            <input class="form-control mx-auto mb-1" type="text" value="113 34 Stockholm" readonly disabled/>
+            <input class="form-control mx-auto mb-1" type="text" value="0733332221" readonly disabled/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Displays products end-->
 
     <!-- Footer -->
     <section class="">

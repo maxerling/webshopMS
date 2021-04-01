@@ -322,7 +322,7 @@ footer {
   background: none;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 576px) {
   .shopping-cart {
     width: 70%;
     margin-right: auto;
@@ -340,16 +340,15 @@ footer {
     font-weight: bold;
     padding: 10px;
     margin-top: 15px;
-    margin-bot
+    margin-bottom: 15px;
     margin-left: auto;
     background-color: #26272b;
     border-radius: 10px;
     color: white;
   }
-
 }
 
- @media screen and (max-width: 576px) {
+@media screen and (max-width: 576px) {
   .total-price-div {
     width: 100%;
     font-size: 1.4rem;
@@ -360,7 +359,15 @@ footer {
     background-color: #26272b;
     color: white;
   }
+
+  .customer-info input {
+    width: 70%; 
+    border: 0;    
+  }
 }
+
+/* cart customer information readonly inputs */
+
 /*
 @media screen and (min-width: 768px) {
   .sm-add-one-product {
@@ -376,5 +383,5 @@ footer {
     display: none;
   }
 }
-*/ 
+*/
 /* CART PAGE STUFF END */
