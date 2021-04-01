@@ -201,6 +201,16 @@ function categoryLinkListener() {
   });
 }
 
+function checkCartStatus(){
+  const list = JSON.parse(localStorage.getItem("cart"));
+  if(list.length === 0) {
+    $("#cart").attr("disabled","disabled");
+    $("cart-btn-link").attr("disabled","disabled");
+  }
+}
+
+checkCartStatus();
+
 $(document).on("click", "#logIn", function () {
   $(".login-modal").modal("show");
   console.log("HEEEEEEEEEEEE");
