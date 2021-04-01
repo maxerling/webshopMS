@@ -11,7 +11,9 @@ $(document).ready(function () {
   $("#search").click(function () {
     $(this).css("display", "none");
     $("#logo").css("display", "none");
+    
     $(".search-field").css("display", "block");
+    $(".search-field-input").focus();
   });
 
 
