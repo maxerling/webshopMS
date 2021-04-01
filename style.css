@@ -137,12 +137,17 @@ header {
   transform: translateY(3px);
 }
 
+<<<<<<< HEAD
 .modal-login-button {
+=======
+.modal-login-button, .shop-again-btn {
+
+>>>>>>> 937fa0bffeb2257d0de6cf29558149fe0f963454
   width: 50%;
   margin: auto;
 }
 
-.modal-login-button button {
+.modal-login-button button, .shop-again-btn button {
   height: 40px;
   color: white;
   width: 100%;
@@ -152,28 +157,47 @@ header {
   box-shadow: 3px 3px 2px 2px #8092cc;
 }
 
-.modal-login-button button:hover {
+.modal-login-button button:hover, .shop-again-btn button:hover{
   transform: translateY(2px);
 }
 
-.modal-login-button button:active {
+.modal-login-button button:active, .shop-again-btn button:active{
   transform: translateY(3px);
 }
 
+<<<<<<< HEAD
 .login-modal-cancel-button img,
 .register-modal-cancel-button img {
+=======
+
+.login-modal-cancel-button img,
+.register-modal-cancel-button img, 
+.order-modal-cancel-button img {
+
+>>>>>>> 937fa0bffeb2257d0de6cf29558149fe0f963454
   width: 15px;
   height: 15px;
   float: right;
 }
 
+<<<<<<< HEAD
 .login-modal-cancel-button,
 .register-modal-cancel-button {
+=======
+
+.login-modal-cancel-button, .register-modal-cancel-button, .order-modal-cancel-button{
+>>>>>>> 937fa0bffeb2257d0de6cf29558149fe0f963454
   padding: 15px;
 }
 
 .login-modal-cancel-button,
+<<<<<<< HEAD
 .register-modal-cancel-button {
+=======
+.register-modal-cancel-button, 
+.order-modal-cancel-button {
+
+>>>>>>> 937fa0bffeb2257d0de6cf29558149fe0f963454
   border: none;
   background-color: white;
 }
@@ -220,6 +244,30 @@ header {
 
 /* CREATE ACCOUNT MODAL END */
 
+/* ORDER CONFIRMATION MODAL START */
+
+.order-modal-title {
+  font-size: 2.3rem;
+}
+
+.order-modal-subtitle {
+  font-size: 1rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.order-modal-p {
+  font-size: 1rem;
+  padding-left: 1.2rem;
+  margin: 0.2rem
+}
+
+.shop-again-btn {
+  padding: 1.5rem;
+}
+
+/* ORDER CONFIRMATION MODAL END */
+
 /* PRODUCT START*/
 .product {
   background-color: #fff;
@@ -230,7 +278,7 @@ header {
   background-color: #fff;
 }
 
-#products img:hover {
+.product-hover:hover {
   transform: scale(1.05);
   transition-duration: 0.3s;
 }
@@ -240,7 +288,8 @@ header {
   height: 137px;
 }
 #products {
-  margin-left: 2px;
+  margin-left: 0px;
+  margin-right: 0px;
   margin-bottom: 10px;
 }
 /* PRODUCT END*/
@@ -333,3 +382,4 @@ footer {
   }
 } */
 /* CART PAGE STUFF END */
+

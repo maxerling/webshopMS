@@ -7,7 +7,6 @@ let cat = "produkter";
 let products = document.getElementById("products");
 let productsData = [];
 
-
 /**
  * Creating element
  *
@@ -48,7 +47,7 @@ function getData() {
 
   fetch(url)
     .then((resp) => resp.json())
-    .then((data)=>{
+    .then((data) => {
       productsData = data;
       storeData(data);
       loadCategories(data);
@@ -80,13 +79,11 @@ function loadCategories(data) {
   });
 }
 
-
 /**
  * Create elements based on product data (object data)
  * @param {object} product - object of array of objects
  */
- function createElementsForProduct(product) {
-  
+function createElementsForProduct(product) {
   console.log(product.category);
   const div = createNode("div");
   addClass(div, "p-2");
@@ -99,6 +96,7 @@ function loadCategories(data) {
 
   const img = createNode("img");
   addClass(img, "mb-4");
+  addClass(img, "product-hover");
   const p1 = createNode("p");
   const p2 = createNode("p");
   const p3 = createNode("p");
@@ -106,16 +104,6 @@ function loadCategories(data) {
   addClass(btn, "btn-primary");
   addClass(btn, "btn");
 
-  if (product.quantity == 0) {
-    $(btn).attr("disabled", "disabled");
-    $(p1).attr("style", "color:gray;");
-    $(p2).attr("style", "color:gray;");
-    $(p3).attr("style", "color:gray;");
-    removeClass(img, "product-hover");
-  } else {
-    $(btn).click(() => addToCart(`${product.id}`, products));
-  }
- 
   if (cat == "produkter") {
     img.src = product.image;
     p1.innerHTML = `${product.price} kr`;
@@ -142,16 +130,29 @@ function loadCategories(data) {
     append(div, btn);
     append(products, div);
   }
+
+  if (product.quantity == 0) {
+    $(btn).attr("disabled", "disabled");
+    $(btn).html("Slut i lager");
+    $(p1).attr("style", "color:gray;");
+    $(p2).attr("style", "color:gray;");
+    $(p3).attr("style", "color:gray;");
+    removeClass(img, "product-hover");
+  } else {
+    $(btn).click(() => addToCart(`${product.id}`, products));
+  }
 }
 
-
-
+  $(document).on("click", ".modal-cancel-button", function() {
+    $("#loginModal").modal("hide");
+    $("#registerModal").modal("hide");
+    $("#orderModal").modal("hide");
+  })
 /**
  * Create element base on category name.
  * @param {string} category . All of categories
  */
- function createCategory(category) {
-   
+function createCategory(category) {
   let li = document.createElement("li");
   li.setAttribute("class", "nav-item");
 
@@ -165,7 +166,21 @@ function loadCategories(data) {
     document.querySelector(".navbar-nav").appendChild(li);
   }
 }
+/**
+ * Added function to show order modal, remove ls, show info in order modal
+ */
+function confirmBtn() {
+  $("#orderModal").modal("show");
 
+  let orderNum;
+  let orderDate = new Date().toISOString().replaceAll("T", ", Kl: ");
+  let orderPrice;
+
+  document.getElementById("p-order").innerHTML = "<b>Order nummer: </b>" + orderNum;
+  document.getElementById("p-date").innerHTML = "<b>Beställningsdatum: </b>" + orderDate.substring(0,21);
+  document.getElementById("p-sum").innerHTML = "<b>Total belopp: </b>" + orderPrice;
+  localStorage.removeItem("inCartArray"); //Dubbelkolla key name
+}
 /**
  * Add category function when you press element.
  */
@@ -180,8 +195,12 @@ function categoryLinkListener() {
   });
 }
 
-
 $(document).on("click", "#logIn", function () {
+  $(".login-modal").modal("show");
+  console.log("HEEEEEEEEEEEE");
+});
+
+$(document).on("click", "#mobileLogin", function () {
   $(".login-modal").modal("show");
 });
 
@@ -194,8 +213,15 @@ $(document).on("click", ".register-modal-cancel-button", function () {
   $(".register-modal").modal("hide");
 });
 
+$(document).on("click", ".order-modal-cancel-button", function () {
+  $(".order-modal").modal("hide");
+});
+
 // MODAL SKAPA KONTO BUTTON
 $(document).on("click", ".register-new-user-button", function () {
   $(".login-modal").modal("hide");
   $(".register-modal").modal("show");
+});
+$(document).on("click", "#mobileLogin", function () {
+  $(".login-modal").modal("show");
 });
