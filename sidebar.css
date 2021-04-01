@@ -5,7 +5,7 @@
   z-index: 900;
   width: 184px;
   height: auto;
-  background-color: #ebebeb; /*#f7f7f7*/
+  /*background-color: #ebebeb;*/
 }
 .cat {
   cursor: pointer;
@@ -103,12 +103,12 @@
   .search-field {
     display: block;
   }
-  
+
 }
 
 /*  Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
- 
+
 }
 
 /* X-Large devices (large desktops, 1200px and up) */
