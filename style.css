@@ -336,8 +336,8 @@ footer {
 
   .total-price-div {
     width: 30%;
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: .9rem;
+    /* font-weight: bold; */
     padding: 10px;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -351,18 +351,20 @@ footer {
 @media screen and (max-width: 576px) {
   .total-price-div {
     width: 100%;
-    font-size: 1.4rem;
-    font-weight: bold;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    font-size: 1rem;
+    /* font-weight: bold; */
+    padding: 10px 20px;
     margin: 15px auto;
     background-color: #26272b;
     color: white;
   }
 
   .customer-info input {
-    width: 70%; 
-    border: 0;    
+    width: 80%;         
+  }
+
+  .customer-info {
+    padding-bottom: 20px;
   }
 }
 
