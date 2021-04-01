@@ -137,17 +137,14 @@ header {
   transform: translateY(3px);
 }
 
-<<<<<<< HEAD
-.modal-login-button {
-=======
-.modal-login-button, .shop-again-btn {
-
->>>>>>> 937fa0bffeb2257d0de6cf29558149fe0f963454
+.modal-login-button,
+.shop-again-btn {
   width: 50%;
   margin: auto;
 }
 
-.modal-login-button button, .shop-again-btn button {
+.modal-login-button button,
+.shop-again-btn button {
   height: 40px;
   color: white;
   width: 100%;
@@ -157,47 +154,33 @@ header {
   box-shadow: 3px 3px 2px 2px #8092cc;
 }
 
-.modal-login-button button:hover, .shop-again-btn button:hover{
+.modal-login-button button:hover,
+.shop-again-btn button:hover {
   transform: translateY(2px);
 }
 
-.modal-login-button button:active, .shop-again-btn button:active{
+.modal-login-button button:active,
+.shop-again-btn button:active {
   transform: translateY(3px);
 }
 
-<<<<<<< HEAD
 .login-modal-cancel-button img,
-.register-modal-cancel-button img {
-=======
-
-.login-modal-cancel-button img,
-.register-modal-cancel-button img, 
+.register-modal-cancel-button img,
 .order-modal-cancel-button img {
-
->>>>>>> 937fa0bffeb2257d0de6cf29558149fe0f963454
   width: 15px;
   height: 15px;
   float: right;
 }
 
-<<<<<<< HEAD
 .login-modal-cancel-button,
-.register-modal-cancel-button {
-=======
-
-.login-modal-cancel-button, .register-modal-cancel-button, .order-modal-cancel-button{
->>>>>>> 937fa0bffeb2257d0de6cf29558149fe0f963454
+.register-modal-cancel-button,
+.order-modal-cancel-button {
   padding: 15px;
 }
 
 .login-modal-cancel-button,
-<<<<<<< HEAD
-.register-modal-cancel-button {
-=======
-.register-modal-cancel-button, 
+.register-modal-cancel-button,
 .order-modal-cancel-button {
-
->>>>>>> 937fa0bffeb2257d0de6cf29558149fe0f963454
   border: none;
   background-color: white;
 }
@@ -259,7 +242,7 @@ header {
 .order-modal-p {
   font-size: 1rem;
   padding-left: 1.2rem;
-  margin: 0.2rem
+  margin: 0.2rem;
 }
 
 .shop-again-btn {
@@ -382,4 +365,3 @@ footer {
   }
 } */
 /* CART PAGE STUFF END */
-
