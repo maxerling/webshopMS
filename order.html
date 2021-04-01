@@ -85,7 +85,7 @@
       </div>
 
       <div class="shopping-cart">
-        <table class="table">
+        <table class="table" style="width: 100%;">
           <thead>
             <tr>
               <th scope="col"></th>
@@ -99,10 +99,30 @@
             
           </tbody>
         </table>
+        <div class = "total-price-div"> <!-- total-price ID FÖR TOTAL PRISET-->
+          <table class="table table-borderless m-0" style="color: white;">
+            <tbody>
+              <tr>
+                <td class = "p-0">Summa varor:</td>
+                <td id = "products-total-price" class = "p-0"></td>
+              </tr>
+              <tr>
+                <td class = "p-0">Leverans:</td>
+                <td class = "p-0">40kr</td>
+              </tr>
+              <tr>
+                <td class = "p-0">Moms:</td>
+                <td id = "vat" class = "p-0"></td>
+              </tr>
+              <tr>
+                <td class = "p-0">Total:</td>
+                <td id = "total-price" class = "p-0"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class = "total-price-div">
-        <span >Total price: </span><span id="total-price"></span>
-      </div>
+
  
       <!-- Displays products end-->
 
