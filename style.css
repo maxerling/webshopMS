@@ -137,13 +137,14 @@ header {
   transform: translateY(3px);
 }
 
-.modal-login-button, .shop-again-btn {
-
+.modal-login-button,
+.shop-again-btn {
   width: 50%;
   margin: auto;
 }
 
-.modal-login-button button, .shop-again-btn button {
+.modal-login-button button,
+.shop-again-btn button {
   height: 40px;
   color: white;
   width: 100%;
@@ -153,33 +154,33 @@ header {
   box-shadow: 3px 3px 2px 2px #8092cc;
 }
 
-.modal-login-button button:hover, .shop-again-btn button:hover{
+.modal-login-button button:hover,
+.shop-again-btn button:hover {
   transform: translateY(2px);
 }
 
-.modal-login-button button:active, .shop-again-btn button:active{
+.modal-login-button button:active,
+.shop-again-btn button:active {
   transform: translateY(3px);
 }
 
-
 .login-modal-cancel-button img,
-.register-modal-cancel-button img, 
+.register-modal-cancel-button img,
 .order-modal-cancel-button img {
-
   width: 15px;
   height: 15px;
   float: right;
 }
 
-
-.login-modal-cancel-button, .register-modal-cancel-button, .order-modal-cancel-button{
+.login-modal-cancel-button,
+.register-modal-cancel-button,
+.order-modal-cancel-button {
   padding: 15px;
 }
 
 .login-modal-cancel-button,
-.register-modal-cancel-button, 
+.register-modal-cancel-button,
 .order-modal-cancel-button {
-
   border: none;
   background-color: white;
 }
@@ -241,7 +242,7 @@ header {
 .order-modal-p {
   font-size: 1rem;
   padding-left: 1.2rem;
-  margin: 0.2rem
+  margin: 0.2rem;
 }
 
 .shop-again-btn {
@@ -286,3 +287,62 @@ footer {
   color: #737373;
 }
 /* FOOTER END*/
+
+/* CART PAGE STUFF START */
+
+#cart-quantity {
+  width: 45px;
+}
+
+#productTitle {
+  width: 200px;
+}
+
+#products {
+  box-sizing: border-box;
+}
+
+#cartImage {
+  max-width: 75px;
+  max-height: 75px;
+}
+
+/* .shopping-cart {
+  width: 100%;
+} */
+
+.cart-remove-product {
+  background: none;
+  border: none;
+}
+
+#remove-one-product,
+#add-one-product {
+  border: none;
+  background: none;
+}
+
+#total-price-area {
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 10px;
+  margin: 15px;
+  background-color: #26272b;
+  border-radius: 10px;
+  color: white;
+}
+
+@media screen and (min-width: 992px) {
+  .shopping-cart {
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  #category {
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+/* CART PAGE STUFF END */
