@@ -62,10 +62,15 @@ function getData() {
  *  parsing it to produce a JS object
  */
 function storeData(data) {
-  document.getElementById("category").innerText = cat;
-  let cartArray = new Array();
+  let cartArray = JSON.parse(localStorage.getItem("cart"));
+  console.log(cartArray);
+  if (cartArray.length == 0) {
+    let cartArray = new Array();
+  }
+
   localStorage.setItem("allProducts", JSON.stringify(productsData));
   localStorage.setItem("cart", JSON.stringify(cartArray));
+  document.getElementById("category").innerText = cat;
   data.forEach((product) => createElementsForProduct(product));
 }
 
@@ -85,7 +90,6 @@ function loadCategories(data) {
  * @param {object} product - object of array of objects
  */
 function createElementsForProduct(product) {
-  console.log(product.category);
   const div = createNode("div");
   addClass(div, "p-2");
   addClass(div, "col-xs-12");
@@ -118,7 +122,6 @@ function createElementsForProduct(product) {
     append(div, btn);
     append(products, div);
   } else if (cat == product.category) {
-    console.log(cat + "else");
     img.src = product.image;
     p1.innerHTML = `${product.price} kr`;
     p2.innerHTML = product.title;
@@ -144,11 +147,11 @@ function createElementsForProduct(product) {
   }
 }
 
-  $(document).on("click", ".modal-cancel-button", function() {
-    $("#loginModal").modal("hide");
-    $("#registerModal").modal("hide");
-    $("#orderModal").modal("hide");
-  })
+$(document).on("click", ".modal-cancel-button", function () {
+  $("#loginModal").modal("hide");
+  $("#registerModal").modal("hide");
+  $("#orderModal").modal("hide");
+});
 /**
  * Create element base on category name.
  * @param {string} category . All of categories
@@ -177,9 +180,12 @@ function confirmBtn() {
   let orderDate = new Date().toISOString().replaceAll("T", ", Kl: ");
   let orderPrice;
 
-  document.getElementById("p-order").innerHTML = "<b>Order nummer: </b>" + orderNum;
-  document.getElementById("p-date").innerHTML = "<b>Beställningsdatum: </b>" + orderDate.substring(0,21);
-  document.getElementById("p-sum").innerHTML = "<b>Total belopp: </b>" + orderPrice;
+  document.getElementById("p-order").innerHTML =
+    "<b>Order nummer: </b>" + orderNum;
+  document.getElementById("p-date").innerHTML =
+    "<b>Beställningsdatum: </b>" + orderDate.substring(0, 21);
+  document.getElementById("p-sum").innerHTML =
+    "<b>Total belopp: </b>" + orderPrice;
   localStorage.removeItem("inCartArray"); //Dubbelkolla key name
 }
 /**
