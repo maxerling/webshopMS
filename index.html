@@ -277,44 +277,21 @@
       <button class="order-modal-cancel-button">
         <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true">
       </button>
-      <div class="modal-body px-5">
-        <div class="modal-title pb-1 d-none d-sm-block">Skapa konto!</div>
-        <div class="sm-modal-title d-block d-sm-none">Skapa konto!</div>
-        <div class="modal-subtitle pb-3">"Din närlivs - vart du vill"</div>
-        <div class="create-new-account-forms">
-          <form class="row g-3">
-          <div class="col-md-6">
-            <input class="form-control" type="text" id="create-new-account-surname" name="surname" placeholder="Förnamn" maxlength="100"/> 
-          </div>
-          <div class="col-md-6">
-            <input class="form-control" type="text" id="create-new-account-lastname" name="lastname" placeholder="Efternamn" maxlength="100"/> 
-          </div>
-          <div class="col-md-6">
-            <input class="form-control" type="email" id="create-new-account-email" name="email" placeholder="E-mail" maxlength="100"/> 
-          </div>
-          <div class="col-md-6">
-            <input class="form-control" type="text" id="create-new-account-number" name="number" placeholder="Telefon" maxlength="100"/> 
-          </div>
-          <div class="col-md-6">
-            <input class="form-control" type="password" id="create-new-account-password" name="password" placeholder="Lösenord" maxlength="100"/> 
-          </div>
-          <div class="col-md-6">
-            <input class="form-control" type="password" id="create-new-account-repeat-password" name="repeat-password" placeholder="Upprepa lösenord" maxlength="100"/> 
-          </div>
-          <div class="col-md-5">
-            <input class="form-control" type="text" id="create-new-account-street" name="street" placeholder="Gata" maxlength="100"/> 
-          </div>
-          <div class="col-md-4">
-            <input class="form-control" type="text" id="create-new-account-city" name="city" placeholder="Ort" maxlength="100"/> 
-          </div>
-          <div class="col-md-3">
-            <input class="form-control" type="text" id="create-new-account-zip" name="zip" placeholder="Postnummer" maxlength="100"/> 
-          </div>
-          <div class="register-new-account pb-4 pt-2">
-            <button class="create-new-account-button">Skapa konto</button>
-          </div>
-        </form>
-      </div>
+      <div class="modal-body">
+
+        <div class="modal-title d-none d-sm-block order-modal-title">Tack för din beställning!</div>
+        <div class="sm-modal-title d-block d-sm-none">Tack för din beställning!</div>
+        <div class="order-modal-subtitle">Din beställning är mottagen och behandlas. 
+          Du kommer att motta ett mejl med beställningsinformation!
+        </div>
+        <div>
+          <p class="order-modal-p" id="p-order"></p>
+          <p class="order-modal-p" id="p-date"></p>
+          <p class="order-modal-p" id="p-sum"></p>
+        </div>
+        <div class="shop-again-btn">
+          <button id ="shop-again-btn" onclick="window.location.href='index.html'">Handla igen</button>
+        </div>
       </div>
     </div>
   </div>
