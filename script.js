@@ -143,6 +143,11 @@ function createElementsForProduct(product) {
   }
 }
 
+  $(document).on("click", ".modal-cancel-button", function() {
+    $("#loginModal").modal("hide");
+    $("#registerModal").modal("hide");
+    $("#orderModal").modal("hide");
+  })
 /**
  * Create element base on category name.
  * @param {string} category . All of categories
@@ -161,7 +166,21 @@ function createCategory(category) {
     document.querySelector(".navbar-nav").appendChild(li);
   }
 }
+/**
+ * Added function to show order modal, remove ls, show info in order modal
+ */
+function confirmBtn() {
+  $("#orderModal").modal("show");
 
+  let orderNum;
+  let orderDate = new Date().toISOString().replaceAll("T", ", Kl: ");
+  let orderPrice;
+
+  document.getElementById("p-order").innerHTML = "<b>Order nummer: </b>" + orderNum;
+  document.getElementById("p-date").innerHTML = "<b>Beställningsdatum: </b>" + orderDate.substring(0,21);
+  document.getElementById("p-sum").innerHTML = "<b>Total belopp: </b>" + orderPrice;
+  localStorage.removeItem("inCartArray"); //Dubbelkolla key name
+}
 /**
  * Add category function when you press element.
  */
@@ -192,6 +211,10 @@ $(document).on("click", ".login-modal-cancel-button", function () {
 
 $(document).on("click", ".register-modal-cancel-button", function () {
   $(".register-modal").modal("hide");
+});
+
+$(document).on("click", ".order-modal-cancel-button", function () {
+  $(".order-modal").modal("hide");
 });
 
 // MODAL SKAPA KONTO BUTTON

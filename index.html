@@ -63,6 +63,13 @@
           <i class="fas fa-shopping-cart"></i>
           Kundvagn
         </button>
+
+                  <!--Ta bort sen-->
+          <button id="cart" class="btn btn-dark btn-lg" onclick="confirmBtn()" type="button">
+            Confirmation(Ta bort sen)
+          </button>
+                    <!--Ta bort sen-->
+
       </div>
 
       <div
@@ -248,7 +255,38 @@
         </div>
       </div>
     </div>
-    <!-- END register modal -->
+  </div>
+</div>
+<!-- END register modal -->
+
+<!-- ORDER CONFIRMATION MODAL START-->
+<div class="order-modal modal fade" id="orderModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <button class="order-modal-cancel-button">
+        <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true">
+      </button>
+      <div class="modal-body">
+
+        <div class="modal-title d-none d-sm-block order-modal-title">Tack för din beställning!</div>
+        <div class="sm-modal-title d-block d-sm-none">Tack för din beställning!</div>
+        <div class="order-modal-subtitle">Din beställning är mottagen och behandlas. 
+          Du kommer att motta ett mejl med beställningsinformation!
+        </div>
+        <div>
+          <p class="order-modal-p" id="p-order"></p>
+          <p class="order-modal-p" id="p-date"></p>
+          <p class="order-modal-p" id="p-sum"></p>
+        </div>
+        <div class="shop-again-btn">
+          <button id ="shop-again-btn" onclick="window.location.href='index.html'">Handla igen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ORDER CONFIRMATION MODAL END-->
+
 
     <!--START main -->
     <div class="container">

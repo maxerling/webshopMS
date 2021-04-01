@@ -137,12 +137,13 @@ header {
   transform: translateY(3px);
 }
 
-.modal-login-button {
+.modal-login-button, .shop-again-btn {
+
   width: 50%;
   margin: auto;
 }
 
-.modal-login-button button {
+.modal-login-button button, .shop-again-btn button {
   height: 40px;
   color: white;
   width: 100%;
@@ -152,28 +153,33 @@ header {
   box-shadow: 3px 3px 2px 2px #8092cc;
 }
 
-.modal-login-button button:hover {
+.modal-login-button button:hover, .shop-again-btn button:hover{
   transform: translateY(2px);
 }
 
-.modal-login-button button:active {
+.modal-login-button button:active, .shop-again-btn button:active{
   transform: translateY(3px);
 }
 
+
 .login-modal-cancel-button img,
-.register-modal-cancel-button img {
+.register-modal-cancel-button img, 
+.order-modal-cancel-button img {
+
   width: 15px;
   height: 15px;
   float: right;
 }
 
-.login-modal-cancel-button,
-.register-modal-cancel-button {
+
+.login-modal-cancel-button, .register-modal-cancel-button, .order-modal-cancel-button{
   padding: 15px;
 }
 
 .login-modal-cancel-button,
-.register-modal-cancel-button {
+.register-modal-cancel-button, 
+.order-modal-cancel-button {
+
   border: none;
   background-color: white;
 }
@@ -219,6 +225,30 @@ header {
 }
 
 /* CREATE ACCOUNT MODAL END */
+
+/* ORDER CONFIRMATION MODAL START */
+
+.order-modal-title {
+  font-size: 2.3rem;
+}
+
+.order-modal-subtitle {
+  font-size: 1rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.order-modal-p {
+  font-size: 1rem;
+  padding-left: 1.2rem;
+  margin: 0.2rem
+}
+
+.shop-again-btn {
+  padding: 1.5rem;
+}
+
+/* ORDER CONFIRMATION MODAL END */
 
 /* PRODUCT START*/
 .product {
