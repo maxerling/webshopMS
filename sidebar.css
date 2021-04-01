@@ -21,13 +21,13 @@
 }
 
 #sidebar a:hover {
-  border-left: 0.25rem solid #f80035;
+  border-left: 0.25rem solid #ff0000;
   /* margin: 0 -0.8125rem;
     padding-right: 2rem; */
 }
 /* END Sidebar stylesheets*/
 
-#logIn{
+.btn2{
   display: none;
 }
 
@@ -64,10 +64,14 @@
 
 /*  Medium devices (tablets, 768px and up) */
 @media (min-width: 769px) {
-  #mobileLogin{
+  #products{
+    margin-left: 2px;
+    margin-bottom: 10px;
+  }
+  #mobile-cart-login{
     display: none;
   }
-  #logIn{
+  .btn2{
     display: inline-block;
   }
   #sidebar {
