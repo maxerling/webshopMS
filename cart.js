@@ -79,15 +79,21 @@ $(document).on("click", ".fa-plus", function () {
 $(document).on("click", ".fa-minus", function () {
   let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
   let id = Number($(this).closest(".quantity-tr").attr("id"));
-  if (q === 1) return;
+  if (q === 1) {
+    $(this)
+      .closest(".quantity-tr")
+      .find(".cart-remove-product")
+      .trigger("click");
+    return;
+  }
   q--;
   checkNewQuantity(id, q);
   $(this).closest(".quantity-td").find("input").attr("value", q);
 });
 
 $(document).on("click", ".cart-remove-product", function () {
-  $(this).closest(".quantity-tr").remove();
   let id = Number($(this).closest(".quantity-tr").attr("id"));
+  $(this).closest(".quantity-tr").remove();
   removeFromList(id);
 });
 
