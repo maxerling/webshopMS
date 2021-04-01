@@ -7,7 +7,6 @@ let cat = "produkter";
 let products = document.getElementById("products");
 let productsData = [];
 
-
 /**
  * Creating element
  *
@@ -48,7 +47,7 @@ function getData() {
 
   fetch(url)
     .then((resp) => resp.json())
-    .then((data)=>{
+    .then((data) => {
       productsData = data;
       storeData(data);
       loadCategories(data);
@@ -80,13 +79,11 @@ function loadCategories(data) {
   });
 }
 
-
 /**
  * Create elements based on product data (object data)
  * @param {object} product - object of array of objects
  */
- function createElementsForProduct(product) {
-  
+function createElementsForProduct(product) {
   console.log(product.category);
   const div = createNode("div");
   addClass(div, "p-2");
@@ -99,6 +96,7 @@ function loadCategories(data) {
 
   const img = createNode("img");
   addClass(img, "mb-4");
+  addClass(img, "product-hover");
   const p1 = createNode("p");
   const p2 = createNode("p");
   const p3 = createNode("p");
@@ -106,16 +104,6 @@ function loadCategories(data) {
   addClass(btn, "btn-primary");
   addClass(btn, "btn");
 
-  if (product.quantity == 0) {
-    $(btn).attr("disabled", "disabled");
-    $(p1).attr("style", "color:gray;");
-    $(p2).attr("style", "color:gray;");
-    $(p3).attr("style", "color:gray;");
-    removeClass(img, "product-hover");
-  } else {
-    $(btn).click(() => addToCart(`${product.id}`, products));
-  }
- 
   if (cat == "produkter") {
     img.src = product.image;
     p1.innerHTML = `${product.price} kr`;
@@ -142,16 +130,24 @@ function loadCategories(data) {
     append(div, btn);
     append(products, div);
   }
+
+  if (product.quantity == 0) {
+    $(btn).attr("disabled", "disabled");
+    $(btn).html("Slut i lager");
+    $(p1).attr("style", "color:gray;");
+    $(p2).attr("style", "color:gray;");
+    $(p3).attr("style", "color:gray;");
+    removeClass(img, "product-hover");
+  } else {
+    $(btn).click(() => addToCart(`${product.id}`, products));
+  }
 }
-
-
 
 /**
  * Create element base on category name.
  * @param {string} category . All of categories
  */
- function createCategory(category) {
-   
+function createCategory(category) {
   let li = document.createElement("li");
   li.setAttribute("class", "nav-item");
 
@@ -180,15 +176,14 @@ function categoryLinkListener() {
   });
 }
 
-
 $(document).on("click", "#logIn", function () {
   $(".login-modal").modal("show");
   console.log("HEEEEEEEEEEEE");
 });
 
-$(document).on("click", "#mobileLogin", function() {
+$(document).on("click", "#mobileLogin", function () {
   $(".login-modal").modal("show");
-})
+});
 
 // MODAL CANCEL BUTTONS
 $(document).on("click", ".login-modal-cancel-button", function () {
@@ -204,6 +199,6 @@ $(document).on("click", ".register-new-user-button", function () {
   $(".login-modal").modal("hide");
   $(".register-modal").modal("show");
 });
-$(document).on("click", "#mobileLogin", function() {
+$(document).on("click", "#mobileLogin", function () {
   $(".login-modal").modal("show");
-})
+});
