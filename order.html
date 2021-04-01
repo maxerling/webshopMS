@@ -76,20 +76,39 @@
     </header>
 
     <!--START main -->
-    <!-- Displays products -->
-    <div class="parent-container d-flex">
+    <!-- Displays products start -->
+    <div class="parent-container">
       <div class="row">
         <h2 id="category" data-value="produkter" class="pt-5 pb-3 ps-5">
           Produkter i varukorgen
         </h2>
-
-        <div id="products" class="row"></div>
       </div>
-    </div>
+
+      <div class="shopping-cart">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Artikel</th>
+              <th scope="col">Kvantitet</th>
+              <th scope="col">Pris</th>
+              <th scope=""></th>
+            </tr>
+          </thead>
+          <tbody class = "cart-table">
+            
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <span >Total price: </span><span id="total-price"></span>
+      </div>
+ 
+      <!-- Displays products end-->
 
     <!-- Footer -->
     <section class="">
-      <footer class="fixed-bottom footer-bg text-start pt-4">
+      <footer class="footer-bg text-start pt-4">
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-12 col-md-12 mb-4 mb-md-0 ps-4">
