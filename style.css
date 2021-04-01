@@ -322,6 +322,16 @@ footer {
   background: none;
 }
 
+#total-price-area {
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 10px;
+  margin: 15px;
+  background-color: #26272b;
+  border-radius: 10px;
+  color: white;
+}
+
 @media screen and (min-width: 992px) {
   .shopping-cart {
     width: 70%;
@@ -335,33 +345,4 @@ footer {
   }
 }
 
-/* @media screen and (max-width: 576px) {
-  .sm-add-one-product {
-    display: none;
-  }
-  .sm-remove-one-product {
-    display: none;
-  }
-  .md-add-one-product {
-    display: block;
-  }
-  .md-remove-one-product {
-    display: block;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .sm-add-one-product {
-    display: block;
-  }
-  .sm-remove-one-product {
-    display: block;
-  }
-  .md-add-one-product {
-    display: none;
-  }
-  .md-remove-one-product {
-    display: none;
-  }
-} */
 /* CART PAGE STUFF END */
