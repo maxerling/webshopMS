@@ -14,6 +14,23 @@ function getDataFromLocalStorage() {
   for (let i = 0; i < cartItems.length; i++) {
     $(".cart-table").append(htmlGenerator(cartItems[i]));
   }
+  $(".amount-changed").change(function () {
+    let newValue = this.value.match(/^\d+$/);
+    let id = Number($(this).closest(".quantity-tr").attr("id"));
+    let id2 = cartItems.filter((item) => {
+      item.id == id;
+    }); // unfinished code. Do not touch!
+    console.log(id);
+    console.log(`id2: ${id2}`);
+    if (newValue && Number(newValue) > 0) {
+      setNewQuantity(id, newValue);
+      $(this).closest(".quantity-td").find("input").attr("value", newValue);
+    } else {
+      $(this).val(id2.quantity);
+      setNewQuantity(id, this.value);
+    }
+    console.log(newValue);
+  });
 }
 
 /**
@@ -28,9 +45,9 @@ function htmlGenerator(data) {
               <td class = "td-title">${data.title}</td>
                 <td class="quantity-td">
                   <div class = "row mx-0 px-0">
-                    <input class="col-12 col-sm-12 col-md-6" min="1" name="quantity" value="${
+                    <input class="amount-changed col-12 col-sm-12 col-md-6" min="1" name="quantity" value="${
                       data.quantity
-                    }" type="text" readonly id="cart-quantity">
+                    }" type="text" id="cart-quantity">
                     <div class="md-remove-one-product col-3 d-none d-sm-block"><i class="fas fa-minus"></i></i></div>
                     <div class="md-add-one-product col-3 d-none d-sm-block"><i class="fas fa-plus"></i></div>
                   </div>
@@ -69,6 +86,7 @@ function setNewQuantity(id, qty) {
   for (let i = 0; i < cartItems.length; i++) {
     if (Number(cartItems[i].id) === id) {
       cartItems[i].quantity = qty;
+      localStorage.setItem("cart", JSON.stringify(cartItems));
       break;
     }
   }
@@ -137,6 +155,22 @@ $(document).on("click", ".cart-remove-product", function () {
   $(this).closest(".quantity-tr").remove();
   removeFromList(id);
 });
+
+// $(".amount-changed").on("change", function () {
+//   console.log("hej");
+//   let test = $(this).val();
+//   console.log(test);
+//   // let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
+//   // let id = Number($(this).closest(".quantity-tr").attr("id"));
+//   // console.log(id);
+//   // q++;
+//   // setNewQuantity(id, q);
+//   // $(this).closest(".quantity-td").find("input").attr("value", q);
+// });
+
+// $("input").live("change", function (e) {
+//   alert("Hello");
+// });
 
 // Runs on page load.
 getDataFromLocalStorage();
