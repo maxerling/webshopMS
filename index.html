@@ -113,13 +113,15 @@
             <div class="modal-subtitle pb-2">
               Logga in för att få ut mer av din vardag!
             </div>
-            <div class="modal-input-username mx-auto pt-2">
+            <form class="needs-validation">
+              <div class="modal-input-username mx-auto pt-2">
               <input
                 type="text"
                 class="form-control"
                 id="input-username"
                 placeholder="E-mail"
-                maxlength="100"
+                maxlength="254"
+                required
               />
             </div>
             <div class="modal-input-password mx-auto">
@@ -134,6 +136,7 @@
             <div class="modal-login-button">
               <button id="modal-login-button">Logga in</button>
             </div>
+            </form>
             <div class="register-new-user">
               <label for="register-new-user-button">Ny hos Hakim livs?</label>
               <button class="register-new-user-button">Skapa konto</button>
