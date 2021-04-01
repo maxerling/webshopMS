@@ -180,9 +180,9 @@ function confirmBtn() {
   let orderDate = new Date().toISOString().replaceAll("T", ", Kl: ");
   let orderPrice;
 
-  document.getElementById("p-order").innerHTML = "Order nummer: " + orderNum;
-  document.getElementById("p-date").innerHTML = "Beställningsdatum: " + orderDate.substring(0,21);
-  document.getElementById("p-sum").innerHTML = "Total belopp: " + orderPrice;
+  document.getElementById("p-order").innerHTML = "<b>Order nummer: </b>" + orderNum;
+  document.getElementById("p-date").innerHTML = "<b>Beställningsdatum: </b>" + orderDate.substring(0,21);
+  document.getElementById("p-sum").innerHTML = "<b>Total belopp: </b>" + orderPrice;
   localStorage.removeItem("inCartArray"); //Dubbelkolla key name
 }
 /**
