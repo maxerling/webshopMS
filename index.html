@@ -113,16 +113,20 @@
             <div class="modal-subtitle pb-2">
               Logga in för att få ut mer av din vardag!
             </div>
-            <form class="needs-validation">
+            <form class="needs-validation" novalidate>
               <div class="modal-input-username mx-auto pt-2">
               <input
-                type="text"
+                type="email"
                 class="form-control"
                 id="input-username"
                 placeholder="E-mail"
                 maxlength="254"
                 required
               />
+             
+              <div class="invalid-feedback">
+                Enter a valid email!
+              </div>
             </div>
             <div class="modal-input-password mx-auto">
               <input
@@ -131,10 +135,14 @@
                 id="input-password"
                 placeholder="Lösenord"
                 maxlength="100"
-              />
+              required/>
+              
+              <div class="invalid-feedback">
+                Wrong password!
+              </div>
             </div>
             <div class="modal-login-button">
-              <button id="modal-login-button">Logga in</button>
+              <button type="submit" id="modal-login-button">Logga in</button>
             </div>
             </form>
             <div class="register-new-user">
