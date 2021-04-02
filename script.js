@@ -288,19 +288,28 @@ function logInValidation() {
     emailField.reportValidity();
   }
 
+  console.log(emailCheck(emailField.value));
+  console.log(passField.value != "");
+
   if (emailCheck(emailField.value) && passField.value != "") {
-    msg = "";
-    invalidMsg[0].innerHTML = msg;
-    invalidMsg[1].innerHTML = msg;
-    passField.setCustomValidity(msg);
-    passField.reportValidity();
-    emailField.setCustomValidity(msg);
-    emailField.reportValidity();
+    console.log(auth(emailField, passField, invalidMsg));
+    if (auth(emailField, passField, invalidMsg)) {
+      console.log("Sucessful");
+    } else {
+      msg = "Felaktig e-post eller lösenord!";
+      invalidMsg[0].innerHTML = msg;
+      invalidMsg[1].innerHTML = msg;
+      passField.setCustomValidity(msg);
+      passField.reportValidity();
+      emailField.setCustomValidity(msg);
+      emailField.reportValidity();
+    }
   } else if (passField.value == "") {
     msg = "Obligatoriskt fält!";
     invalidMsg[1].innerHTML = msg;
     passField.setCustomValidity(msg);
     passField.reportValidity();
+    emailField.reportValidity();
   } else {
     msg = "";
     invalidMsg[1].innerHTML = msg;
@@ -313,4 +322,34 @@ function emailCheck(userInput) {
   let regEx = /[0-9?A-z0-9?]+(\.)?[0-9?A-z0-9?]+@[A-z]+\.[A-z]{3}.?[A-z]{0,3}$/;
 
   return userInput.match(regEx) ? true : false;
+}
+
+function auth(emailField, passField, invalidMsg) {
+  const url = "data/users.json";
+
+  fetch(url)
+    .then((resp) => resp.json())
+    .then((data) => {
+      data.forEach((user) => {
+        if (
+          user.email == emailField.value &&
+          user.password == passField.value
+        ) {
+          msg = "";
+          invalidMsg[0].innerHTML = msg;
+          invalidMsg[1].innerHTML = msg;
+          passField.setCustomValidity(msg);
+          passField.reportValidity();
+          emailField.setCustomValidity(msg);
+          emailField.reportValidity();
+
+          console.log(user.email);
+          console.log(user.password);
+          return true;
+        }
+
+        return false;
+      });
+    })
+    .catch((err) => console.log(err));
 }
