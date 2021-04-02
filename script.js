@@ -263,18 +263,54 @@ function validationTest() {
 function logInValidation() {
   const emailField = document.getElementById("input-username");
   const passField = document.getElementById("input-password");
-  const emailInvalidMsg = document.getElementsByClassName(
-    "invalid-feedback-email"
-  );
+  const invalidMsg = document.getElementsByClassName("invalid-feedback");
+  let msg = "";
 
-  emailInvalidMsg[0].style.color = "red";
-  emailInvalidMsg[0].style.fontSize = "1em";
+  for (msg of invalidMsg) {
+    msg.style.color = "red";
+    msg.style.fontSize = "1em";
+  }
 
   if (emailField.value == "") {
-    let msg = "Obligatoriskt fält!";
-    emailInvalidMsg[0].innerHTML = msg;
+    msg = "Obligatoriskt fält!";
+    invalidMsg[0].innerHTML = msg;
     emailField.setCustomValidity(msg);
     emailField.reportValidity();
-  } else if (emailCheck()) {
+  } else if (!emailCheck(emailField.value)) {
+    msg = "Giltig e-post krävs!";
+    invalidMsg[0].innerHTML = msg;
+    emailField.setCustomValidity(msg);
+    emailField.reportValidity();
+  } else if (emailCheck(emailField.value)) {
+    msg = "";
+    invalidMsg[0].innerHTML = msg;
+    emailField.setCustomValidity(msg);
+    emailField.reportValidity();
   }
+
+  if (emailCheck(emailField.value) && passField.value != "") {
+    msg = "";
+    invalidMsg[0].innerHTML = msg;
+    invalidMsg[1].innerHTML = msg;
+    passField.setCustomValidity(msg);
+    passField.reportValidity();
+    emailField.setCustomValidity(msg);
+    emailField.reportValidity();
+  } else if (passField.value == "") {
+    msg = "Obligatoriskt fält!";
+    invalidMsg[1].innerHTML = msg;
+    passField.setCustomValidity(msg);
+    passField.reportValidity();
+  } else {
+    msg = "";
+    invalidMsg[1].innerHTML = msg;
+    passField.setCustomValidity(msg);
+    passField.reportValidity();
+  }
+}
+
+function emailCheck(userInput) {
+  let regEx = /[0-9?A-z0-9?]+(\.)?[0-9?A-z0-9?]+@[A-z]+\.[A-z]{3}.?[A-z]{0,3}$/;
+
+  return userInput.match(regEx) ? true : false;
 }
