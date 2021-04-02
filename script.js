@@ -247,17 +247,34 @@ function validationTest() {
   var forms = document.querySelectorAll(".needs-validation");
 
   Array.prototype.slice.call(forms).forEach(function (form) {
-    form.addEventListener(
-      "submit",
-      function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
+    form.addEventListener("submit", function (event) {
+      logInValidation();
+      if (!form.checkValidity()) {
+      }
 
-        form.classList.add("was-validated");
-      },
-      false
-    );
+      event.preventDefault();
+      event.stopPropagation();
+
+      form.classList.add("was-validated");
+    });
   });
+}
+
+function logInValidation() {
+  const emailField = document.getElementById("input-username");
+  const passField = document.getElementById("input-password");
+  const emailInvalidMsg = document.getElementsByClassName(
+    "invalid-feedback-email"
+  );
+
+  emailInvalidMsg[0].style.color = "red";
+  emailInvalidMsg[0].style.fontSize = "1em";
+
+  if (emailField.value == "") {
+    let msg = "Obligatoriskt fält!";
+    emailInvalidMsg[0].innerHTML = msg;
+    emailField.setCustomValidity(msg);
+    emailField.reportValidity();
+  } else if (emailCheck()) {
+  }
 }
