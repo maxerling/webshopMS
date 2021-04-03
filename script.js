@@ -233,14 +233,6 @@ $(document).on("click", "#mobileLogin", function () {
   $(".login-modal").modal("show");
 });
 
-function validateLogin() {
-  let loginInput = document.getElementById("#input-username").value;
-
-  if (!loginInput.match()) {
-    alert("FAIL");
-  }
-}
-
 function validationTest() {
   "use strict";
 
@@ -248,12 +240,10 @@ function validationTest() {
 
   Array.prototype.slice.call(forms).forEach(function (form) {
     form.addEventListener("submit", function (event) {
-      logInValidation();
-      if (!form.checkValidity()) {
+      if (!logInValidation()) {
+        event.preventDefault();
+        event.stopPropagation();
       }
-
-      event.preventDefault();
-      event.stopPropagation();
 
       form.classList.add("was-validated");
     });
@@ -288,13 +278,11 @@ function logInValidation() {
     emailField.reportValidity();
   }
 
-  console.log(emailCheck(emailField.value));
-  console.log(passField.value != "");
-
   if (emailCheck(emailField.value) && passField.value != "") {
     console.log(auth(emailField, passField, invalidMsg));
     if (auth(emailField, passField, invalidMsg)) {
       console.log("Sucessful");
+      return true;
     } else {
       msg = "Felaktig e-post eller lösenord!";
       invalidMsg[0].innerHTML = msg;
@@ -326,7 +314,6 @@ function emailCheck(userInput) {
 
 function auth(emailField, passField, invalidMsg) {
   const url = "data/users.json";
-
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => {
@@ -335,6 +322,7 @@ function auth(emailField, passField, invalidMsg) {
           user.email == emailField.value &&
           user.password == passField.value
         ) {
+          console.log("if");
           msg = "";
           invalidMsg[0].innerHTML = msg;
           invalidMsg[1].innerHTML = msg;
@@ -342,14 +330,31 @@ function auth(emailField, passField, invalidMsg) {
           passField.reportValidity();
           emailField.setCustomValidity(msg);
           emailField.reportValidity();
-
-          console.log(user.email);
-          console.log(user.password);
           return true;
+          //console.log(user.email);
+          //console.log(user.password);
         }
-
-        return false;
       });
     })
     .catch((err) => console.log(err));
+}
+
+function authData(data, emailField, passField, invalidMsg) {
+  console.log("top");
+  for (user of data) {
+    if (user.email == emailField.value && user.password == passField.value) {
+      console.log("if");
+      msg = "";
+      invalidMsg[0].innerHTML = msg;
+      invalidMsg[1].innerHTML = msg;
+      passField.setCustomValidity(msg);
+      passField.reportValidity();
+      emailField.setCustomValidity(msg);
+      emailField.reportValidity();
+      return true;
+      //console.log(user.email);
+      //console.log(user.password);
+    }
+  }
+  console.log("end");
 }
