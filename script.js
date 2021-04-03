@@ -1,6 +1,6 @@
 $(document).ready(function () {
   getData();
-  validationTest();
+  formValidation();
 });
 
 /** Global variable */
@@ -233,7 +233,7 @@ $(document).on("click", "#mobileLogin", function () {
   $(".login-modal").modal("show");
 });
 
-function validationTest() {
+function formValidation() {
   "use strict";
 
   var forms = document.querySelectorAll(".needs-validation");
@@ -279,7 +279,6 @@ function logInValidation() {
   }
 
   if (emailCheck(emailField.value) && passField.value != "") {
-    console.log(auth(emailField, passField, invalidMsg));
     if (auth(emailField, passField, invalidMsg)) {
       console.log("Sucessful");
       return true;
@@ -312,38 +311,9 @@ function emailCheck(userInput) {
   return userInput.match(regEx) ? true : false;
 }
 
-function auth(emailField, passField, invalidMsg) {
-  const url = "data/users.json";
-  fetch(url)
-    .then((resp) => resp.json())
-    .then((data) => {
-      data.forEach((user) => {
-        if (
-          user.email == emailField.value &&
-          user.password == passField.value
-        ) {
-          console.log("if");
-          msg = "";
-          invalidMsg[0].innerHTML = msg;
-          invalidMsg[1].innerHTML = msg;
-          passField.setCustomValidity(msg);
-          passField.reportValidity();
-          emailField.setCustomValidity(msg);
-          emailField.reportValidity();
-          return true;
-          //console.log(user.email);
-          //console.log(user.password);
-        }
-      });
-    })
-    .catch((err) => console.log(err));
-}
-
 function authData(data, emailField, passField, invalidMsg) {
-  console.log("top");
   for (user of data) {
     if (user.email == emailField.value && user.password == passField.value) {
-      console.log("if");
       msg = "";
       invalidMsg[0].innerHTML = msg;
       invalidMsg[1].innerHTML = msg;
@@ -356,5 +326,5 @@ function authData(data, emailField, passField, invalidMsg) {
       //console.log(user.password);
     }
   }
-  console.log("end");
+  return false;
 }
