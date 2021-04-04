@@ -2,8 +2,8 @@
   {
     "id": 1,
     "name": {
-      "first-name": "Britt",
-      "last-name": "Hansson"
+      "firstName": "Britt",
+      "lastName": "Hansson"
     },
     "email": "Sincere@april.biz",
     "password": "123",
@@ -14,13 +14,13 @@
     },
     "number": "+46732883455",
     "status": 0,
-    "account-type": 0
+    "accountType": 0
   },
   {
     "id": 2,
     "name": {
-      "first-name": "Hans",
-      "last-name": "Eriksson"
+      "firstName": "Hans",
+      "lastName": "Eriksson"
     },
     "email": "hans.erik@gmail.com",
     "password": "123",
@@ -31,13 +31,13 @@
     },
     "number": "+46700000000",
     "status": 1,
-    "account-type": 0
+    "accountType": 0
   },
   {
     "id": 3,
     "name": {
-      "first-name": "Kjell",
-      "last-name": "Company"
+      "firstName": "Kjell",
+      "lastName": "Company"
     },
     "email": "kjell.company@outlook.com",
     "password": "123",
@@ -48,13 +48,13 @@
     },
     "number": "+46732000770",
     "status": 0,
-    "account-type": 0
+    "accountType": 0
   },
   {
     "id": 4,
     "name": {
-      "first-name": "Hakim",
-      "last-name": "Hakim"
+      "firstName": "Hakim",
+      "lastName": "Hakim"
     },
     "email": "Hakim@livs.com",
     "password": "123",
@@ -65,6 +65,6 @@
     },
     "number": "+46732883455",
     "status": 0,
-    "account-type": 1
+    "accountType": 1
   }
 ]
