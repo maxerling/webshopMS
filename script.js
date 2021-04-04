@@ -90,6 +90,7 @@ function loadCategories(data) {
  * @param {object} product - object of array of objects
  */
 function createElementsForProduct(product) {
+
   const div = createNode("div");
   addClass(div, "p-2");
   addClass(div, "col-xs-12");
@@ -204,7 +205,6 @@ function categoryLinkListener() {
 
 $(document).on("click", "#logIn", function () {
   $(".login-modal").modal("show");
-  console.log("HEEEEEEEEEEEE");
 });
 
 $(document).on("click", "#mobileLogin", function () {
