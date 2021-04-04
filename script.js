@@ -279,8 +279,16 @@ function logInValidation() {
   }
 
   if (emailCheck(emailField.value) && passField.value != "") {
-    if (auth(emailField, passField, invalidMsg)) {
-      console.log("Sucessful");
+    if (emailField.value == "hh@h.com" && passField.value == "h") {
+      console.log("Sucess");
+
+      msg = "";
+      invalidMsg[1].innerHTML = msg;
+      passField.setCustomValidity(msg);
+      passField.reportValidity();
+      invalidMsg[0].innerHTML = msg;
+      emailField.setCustomValidity(msg);
+      emailField.reportValidity();
       return true;
     } else {
       msg = "Felaktig e-post eller lösenord!";
@@ -309,22 +317,4 @@ function emailCheck(userInput) {
   let regEx = /[0-9?A-z0-9?]+(\.)?[0-9?A-z0-9?]+@[A-z]+\.[A-z]{3}.?[A-z]{0,3}$/;
 
   return userInput.match(regEx) ? true : false;
-}
-
-function authData(data, emailField, passField, invalidMsg) {
-  for (user of data) {
-    if (user.email == emailField.value && user.password == passField.value) {
-      msg = "";
-      invalidMsg[0].innerHTML = msg;
-      invalidMsg[1].innerHTML = msg;
-      passField.setCustomValidity(msg);
-      passField.reportValidity();
-      emailField.setCustomValidity(msg);
-      emailField.reportValidity();
-      return true;
-      //console.log(user.email);
-      //console.log(user.password);
-    }
-  }
-  return false;
 }
