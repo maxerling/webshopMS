@@ -316,7 +316,9 @@ function checkPostNr() {
     return true;
   }
 }
-
+/**
+ * 
+ */
 function setProfileFromLS(){
   let data = JSON.parse(localStorage.getItem("customer"));
   let firstName = $("#validationCustom01").val(data.name.firstName);

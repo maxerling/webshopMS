@@ -1,5 +1,8 @@
 
-/* sort function */
+/**
+ * sort text column a-z, display table data ordered by ascending, descending
+ * @param {index of table column} n 
+ */
 function sortTable(n) {
   var table,
     rows,
@@ -62,7 +65,10 @@ function sortTable(n) {
     }
   }
 }
-
+/**
+ * sort numeric column , display table data ordered by ascending, descending
+ * @param {index of table column} n 
+ */
 function numericSortTable(n) {
   var table,
     rows,

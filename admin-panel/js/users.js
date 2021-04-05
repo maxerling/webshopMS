@@ -1,5 +1,8 @@
 let customers = [];
-
+/**
+ * fetch all users from the database JSON object! 
+ * call createCustomerElements method to create customers table
+ */
 function getData() {
   const url = "../../data/users.json";
 
@@ -7,11 +10,15 @@ function getData() {
     .then((resp) => resp.json())
     .then((data) => {
       customers = data;
-      render(data);
+      createCustomerElements(data);
     })
     .catch((err) => console.log(err));
 }
-function render(users) {
+/**
+ * create elements based on customer data
+ * @param {object} users all of customers info
+ */
+function createCustomerElements(users) {
   let output = "";
   let tbody = document.querySelector("tbody");
   let trTable = "";

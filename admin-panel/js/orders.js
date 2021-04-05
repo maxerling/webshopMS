@@ -1,8 +1,9 @@
-
-
 let invoiceList = [];
-
-function render(json) {
+/**
+ * Create elements based on order data (object data)
+ * @param {object} json all orders
+ */
+function createOrderElements(json) {
   let output = "";
   let tbody = document.querySelector("tbody");
   let trTable = "";
@@ -59,15 +60,16 @@ function render(json) {
   });
   tbody.innerHTML = output;
 }
-
+/**
+ * Create Modal based on order data 
+ * @param {product-id} id For compare order row with database to show order line item.
+ */
 function createModal(id) {
-
   let trModal = "";
   let output = "";
   invoiceList.forEach((item) => {
     if (item.id == id) {
       item.products.forEach((product) => {
-        
         trModal = `
                 <tr>
                     <td>${product.productid}</td>
@@ -86,8 +88,7 @@ function createModal(id) {
                         >
                     </td>
                     `;
-                    
-                   
+
         output += trModal;
       });
 
@@ -98,26 +99,22 @@ function createModal(id) {
 }
 
 $(document).ready(function () {
-
-    fetch("../../data/orders.json")
+  // fetch order and call render function
+  fetch("../../data/orders.json")
     .then((response) => response.json())
-    .then((data) => render(data))
+    .then((data) => createOrderElements(data))
     .catch((error) => console.error(error));
 
-  
   $('[data-toggle="tooltip"]').tooltip();
- 
+
   // Append table with add row form on add new button click
   //console.log(actions);
   $(".add-new").click(function () {
-
-  
     var actions = $("#myTable2 td:last-child").html();
     $(this).attr("disabled", "disabled");
     var index = $("#myTable2 tbody tr:last-child").index();
 
-    var row =
-      `<tr> 
+    var row = `<tr> 
       <td class="cut"><input type="text" class="form-control"  name="title" id="product"></td>
       <td class="cut"><input type="text" class="form-control"  name="brand" id="qty"></td>
       <td class="cut"><input type="text" class="form-control"  name="description" id="price"></td>
@@ -126,14 +123,13 @@ $(document).ready(function () {
        ${actions}
       </td>
       </tr>`;
-      
-        $("#myTable2").append(row);
-        $("#myTable2 tbody tr")
-        .eq(index + 1)
-        .find(".add, .edit")
-        .toggle();
-        $('[data-toggle="tooltip"]').tooltip();
 
+    $("#myTable2").append(row);
+    $("#myTable2 tbody tr")
+      .eq(index + 1)
+      .find(".add, .edit")
+      .toggle();
+    $('[data-toggle="tooltip"]').tooltip();
   });
   // Add row on add button click
   $(document).on("click", ".add", function () {
@@ -181,8 +177,8 @@ $(document).ready(function () {
   });
 
   $(document).on("click", ".submitStatus", function () {
-    let val=$(this).parents("td").find(".statusList").val()
-    $(this).parents("td").find(".status span").text(val) 
+    let val = $(this).parents("td").find(".statusList").val();
+    $(this).parents("td").find(".status span").text(val);
     $(this).parents("td").find(".status").show();
     $(this).parents("td").find(".statusEdit").hide();
   });

@@ -1,4 +1,8 @@
-function render(products) {
+/**
+ * Create elements based on product data (object data)
+ * @param {object} products All of products
+ */
+function createProductElements(products) {
   let output = "";
   let tbody = document.querySelector("tbody");
   let trTable = "";
@@ -35,7 +39,7 @@ function render(products) {
 $(document).ready(function () {
   fetch("../../data/products.json")
   .then((response) => response.json())
-  .then((data) => render(data))
+  .then((data) => createProductElements(data))
   .catch((error) => console.error(error));
 
 // Delete row on delete button click
