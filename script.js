@@ -63,8 +63,9 @@ function getData() {
 function storeData(data) {
   let cartArray = JSON.parse(localStorage.getItem("cart"));
 
-  if (cartArray.length == 0 || cartArray == null) {
-    let cartArray = new Array();
+  if (cartArray == null || cartArray.length == 0) {
+    cartArray = new Array();
+    console.log(cartArray);
   }
 
   localStorage.setItem("allProducts", JSON.stringify(productsData));
