@@ -17,8 +17,9 @@
   
   #frame{
     width: 80%;
-    height: auto;
+    height: 100%;
     border: none;
+    overflow: scroll;
   }
   .table-wrapper {
     /* width: 700px; */

@@ -82,12 +82,16 @@ body {
   overflow-y: auto;
 }
 
+#sidebar{
+  width:20%;
+}
+
 .fw-semibold { font-weight: 600; }
 .lh-tight { line-height: 1.25; }
 
 @media screen and (max-width: 668px) {
   #sidebar{
-    visibility: hidden;
+    display: none;
   
   }
 }

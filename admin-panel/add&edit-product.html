@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/" />
+    <link rel="stylesheet" href="add&edit-product.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        
+    <form class="form mt-5 col-8 m-auto">
+        <h2>Add/edit product</h2>
+
+        <div class="form-group mt-3 ">
+            <label for="" class="control-label">Title</label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="form-group mt-3">
+            <label for="" class="control-label">Brand</label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="form-group mt-3 mb-5">
+            <label for="" class="control-label">Description</label>
+            <textarea class="form-control"></textarea>
+        </div>
+
+         <!-- Uploaded image area-->
+         <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
+         <div class="image-area mt-4 mb-4 m-auto">
+             <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+        </div>
+
+        <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+
+            <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0">
+            <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>
+
+            <div class="input-group-append">
+                <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> 
+                    <i class="fa fa-cloud-upload mr-2 text-muted"></i>
+                    <small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+            </div>
+
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="" class="control-label">Price</label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="form-group mt-3">
+            <label for="" class="control-label">Quantity</label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="form-group mt-3">
+            <label for="" class="control-label">Units</label>
+            <input type="text" class="form-control" name="">
+        </div>
+        <div class="form-group mt-3">
+            <label for="" class="control-label">Category</label>
+            <select class="form-control" name="" id="category">
+            
+                <option>skafferi</option>
+                <option>godis</option>
+                <option>hem-stad</option>
+            </select>
+
+        </div>
+        <div class="form-group mt-3 float-end w-75 m-auto">
+            <button type="reset" class="btn btn-warning  w-25">Radera form</button>
+            <button type="submit" class="btn btn-success w-25">Bekräfta form</button>
+        </div>
+    </form>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/add&edit-product.js"></script>
+</body>
+
+</html>

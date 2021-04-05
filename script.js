@@ -48,6 +48,7 @@ function getData() {
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => {
+      console.log(data);
       productsData = data;
       storeData(data);
       loadCategories(data);
@@ -61,10 +62,11 @@ function getData() {
  *  parsing it to produce a JS object
  */
 function storeData(data) {
-  let cartArray = JSON.parse(localStorage.getItem("cart"));
-  console.log(cartArray);
-  if (cartArray.length == 0) {
-    let cartArray = new Array();
+  let cartArray=[]
+  if (localStorage.getItem("cart") === null) {
+     cartArray = new Array();
+  }else{
+    cartArray = JSON.parse(localStorage.getItem("cart"));
   }
 
   localStorage.setItem("allProducts", JSON.stringify(productsData));
@@ -197,6 +199,7 @@ function categoryLinkListener() {
       let target = event.target;
       cat = target.innerText;
       products.innerHTML = "";
+      $("#sidebar").animate({ left: "-200" }, "slow");
       storeData(productsData);
     });
   });

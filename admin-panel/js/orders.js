@@ -1,6 +1,6 @@
 
 
-let invoceList = [];
+let invoiceList = [];
 
 function render(json) {
   let output = "";
@@ -16,22 +16,22 @@ function render(json) {
             <td class="cut">
 
                 <div class="statusEdit">
-                    <select name="" id="" class="">
-                    <option value="">-</option>
-                    <option value="">Utskriven</option>
-                    <option value="">Skickad</option>
-                    <option value="">Levererad</option>
+                    <select name="" id="" class="statusList" >
+                      <option value="-">-</option>
+                      <option value="Utskriven">Utskriven</option>
+                      <option value="Skickad">Skickad</option>
+                      <option value="Levererad">Levererad</option>
                     </select>
 
                     <a class="cancelStatus" title="cancelStatus" 
-                    ><i class="material-icons">X</i></a>
+                    ><i class="material-icons">&#xE5C9;</i></a>
 
                     <a class="submitStatus" title="submitStatus" 
-                    ><i class="material-icons">Y</i></a>
+                    ><i class="material-icons">&#xE86C;</i></a>
                 </div>
 
                 <div class="status">
-                    ${order.status} 
+                    <span > ${order.status} </span>
                     <a class="editStatus" title="Edit" 
                     ><i class="material-icons">&#xE254;</i></a>
                 </div>
@@ -53,7 +53,7 @@ function render(json) {
     modalData.id = order.id;
     modalData.products = order.products;
     modalData.totalPrice = order.totalPrice;
-    invoceList.push(modalData);
+    invoiceList.push(modalData);
 
     output += trTable;
   });
@@ -64,10 +64,10 @@ function createModal(id) {
 
   let trModal = "";
   let output = "";
-  invoceList.forEach((item) => {
+  invoiceList.forEach((item) => {
     if (item.id == id) {
       item.products.forEach((product) => {
-        console.log(product.productid);
+        
         trModal = `
                 <tr>
                     <td>${product.productid}</td>
@@ -178,6 +178,18 @@ $(document).ready(function () {
   $(document).on("click", ".editStatus", function () {
     $(this).parents("td").find(".status").hide();
     $(this).parents("td").find(".statusEdit").show();
+  });
+
+  $(document).on("click", ".submitStatus", function () {
+    let val=$(this).parents("td").find(".statusList").val()
+    $(this).parents("td").find(".status span").text(val) 
+    $(this).parents("td").find(".status").show();
+    $(this).parents("td").find(".statusEdit").hide();
+  });
+
+  $(document).on("click", ".cancelStatus", function () {
+    $(this).parents("td").find(".status").show();
+    $(this).parents("td").find(".statusEdit").hide();
   });
 
   // Delete row on delete button click

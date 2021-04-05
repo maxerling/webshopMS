@@ -316,3 +316,20 @@ function checkPostNr() {
     return true;
   }
 }
+
+function setProfileFromLS(){
+  let data = JSON.parse(localStorage.getItem("customer"));
+  let firstName = $("#validationCustom01").val(data.name.firstName);
+  let lastName = $("#validationCustom02").val(data.name.lastName);
+  let email = $("#validationCustom03").val(data.email);
+  let password = $("#validationCustom04").val(data.password);
+  let phoneNumber = $("#validationCustom05").val(data.number);
+  let address = $("#validationCustom06").val(data.address.city);
+  let street = $("#validationCustom07").val(data.address.street);
+  let postNr = $("#validationCustom08").val(data.address.zipcode);
+  $("#welcomeText").text("Hej "+ data.name.firstName +" "+ data.name.lastName)
+  $("#welcomeEmail").text(data.email)
+
+}
+
+setProfileFromLS()

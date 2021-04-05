@@ -152,7 +152,7 @@
     <div
       id="sidebar"
       class="h-100 d-flex flex-column p-3 text-white bg-secondary"
-      style="width: 280px"
+      
     >
       <a
         href="index.html"
@@ -167,9 +167,17 @@
       <hr />
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="dashboard.html" class="nav-link active text-white" target="frame" onclick="activeClass(event)">
+          <a href="../index.html" class="nav-link  text-white"  onclick="activeClass(event)">
             <svg class="bi me-2" width="16" height="16">
               <use xlink:href="#home" />
+            </svg>
+            Shopping home page
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="dashboard.html" class="nav-link active text-white" target="frame" onclick="activeClass(event)">
+            <svg class="bi me-2" width="16" height="16">
+              <use xlink:href="#toggles2" />
             </svg>
             Dashboard
           </a>
@@ -177,7 +185,7 @@
         <li class="nav-item">
           <a href="best-selling.html" class="nav-link  text-white" target="frame" onclick="activeClass(event)">
             <svg class="bi me-2" width="16" height="16">
-              <use xlink:href="#home" />
+              <use xlink:href="#geo-fill" />
             </svg>
             Best selling products
           </a>
@@ -185,7 +193,7 @@
         <li class="nav-item">
           <a href="VIP.html" class="nav-link  text-white" target="frame" onclick="activeClass(event)">
             <svg class="bi me-2" width="16" height="16">
-              <use xlink:href="#home" />
+              <use xlink:href="#people-circle" />
             </svg>
             VIP Customers
           </a>
@@ -193,7 +201,7 @@
         <li class="nav-item">
           <a href="users.html" class="nav-link text-white" target="frame" onclick="activeClass(event)">
             <svg class="bi me-2" width="16" height="16">
-              <use xlink:href="#home" />
+              <use xlink:href="#people-circle" />
             </svg>
             Users
           </a>
@@ -201,7 +209,7 @@
         <li>
           <a href="orders.html" class="nav-link text-white" target="frame" onclick="activeClass(event)">
             <svg class="bi me-2" width="16" height="16">
-              <use xlink:href="#speedometer2" />
+              <use xlink:href="#gear-fill" />
             </svg>
             Orders
           </a>
@@ -232,17 +240,17 @@
             height="32"
             class="rounded-circle me-2"
           />
-          <strong>mdo</strong>
+          <strong>HAKIM</strong>
         </a>
         <ul
           class="dropdown-menu dropdown-menu-dark text-small shadow"
           aria-labelledby="dropdownUser1"
         >
-          <li><a class="dropdown-item" href="#">New project...</a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li>
-          <li><a class="dropdown-item" href="#">Profile</a></li>
+          
+          <li><a class="dropdown-item" href="../profile.html">Profile</a></li><!-- måste skickas info till profil -->
           <li><hr class="dropdown-divider" /></li>
-          <li><a class="dropdown-item" href="#">Sign out</a></li>
+          <li><a class="dropdown-item" href="../index.html">Sign out</a></li> <!-- måste raderas info av lokal storage -->
+          
         </ul>
       </div>
     </div>
