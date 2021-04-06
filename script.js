@@ -207,11 +207,11 @@ function categoryLinkListener() {
   });
 }
 
-function checkCartStatus(){
+function checkCartStatus() {
   const list = JSON.parse(localStorage.getItem("cart"));
-  if(list.length === 0) {
-    $("#cart").attr("disabled","disabled");
-    $("cart-btn-link").attr("disabled","disabled");
+  if (list.length === 0) {
+    $("#cart").attr("disabled", "disabled");
+    $("cart-btn-link").attr("disabled", "disabled");
   }
 }
 
@@ -311,7 +311,6 @@ function cartButton() {
     cartBtn.disabled = true;
   } else {
     cartBtn.disabled = false;
-    console.log("oo");
     cartBtn.addEventListener("click", () => {
       window.location.href = "order.html";
     });
