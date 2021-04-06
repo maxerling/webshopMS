@@ -2,6 +2,10 @@ $(document).ready(function () {
   getData();
 });
 
+window.addEventListener("load", function () {
+  cartButton();
+});
+
 /** Global variable */
 let cat = "produkter";
 let products = document.getElementById("products");
@@ -48,7 +52,6 @@ function getData() {
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => {
-      console.log(data);
       productsData = data;
       storeData(data);
       loadCategories(data);
@@ -62,10 +65,10 @@ function getData() {
  *  parsing it to produce a JS object
  */
 function storeData(data) {
-  let cartArray=[]
+  let cartArray = [];
   if (localStorage.getItem("cart") === null) {
-     cartArray = new Array();
-  }else{
+    cartArray = new Array();
+  } else {
     cartArray = JSON.parse(localStorage.getItem("cart"));
   }
 
@@ -204,6 +207,16 @@ function categoryLinkListener() {
   });
 }
 
+function checkCartStatus() {
+  const list = JSON.parse(localStorage.getItem("cart"));
+  if (list.length === 0) {
+    $("#cart").attr("disabled", "disabled");
+    $("cart-btn-link").attr("disabled", "disabled");
+  }
+}
+
+checkCartStatus();
+
 $(document).on("click", "#logIn", function () {
   $(".login-modal").modal("show");
 });
@@ -234,14 +247,13 @@ $(document).on("click", "#mobileLogin", function () {
   $(".login-modal").modal("show");
 });
 
-
 /*Global variable for save customer to array list*/
 let customers = [];
 /**
  * fetch all users for check login form!
  */
 function getCustomers() {
-    fetch("../../data/users.json")
+  fetch("../../data/users.json")
     .then((resp) => resp.json())
     .then((data) => {
       customers = data;
@@ -253,28 +265,54 @@ function getCustomers() {
  * when a user logs in send them to their own  page.
  */
 $(document).on("click", "#modal-login-button", function () {
-  
   getCustomers();
 
-  var username = $('#input-username').val();
-  var password = $('#input-password').val();
+  var username = $("#input-username").val();
+  var password = $("#input-password").val();
 
   console.log(username);
   console.log(password);
-customers.forEach((customer) => {
-  if(customer.email == username && customer.password == password){
-      if(customer.accountType == 1){
-          alert("Hello "+customer.name.firstName+" "+customer.name.lastName+" ---> you are admin")
-          location.href = "/admin-panel/index.html"
-      }else if(customer.accountType == 0){
-          alert("Hello "+customer.name.firstName+" "+customer.name.lastName+" ---> you are customer")
-          localStorage.setItem("customer", JSON.stringify(customer));
-          location.href ="profile.html"
+  customers.forEach((customer) => {
+    if (customer.email == username && customer.password == password) {
+      if (customer.accountType == 1) {
+        alert(
+          "Hello " +
+            customer.name.firstName +
+            " " +
+            customer.name.lastName +
+            " ---> you are admin"
+        );
+        location.href = "/admin-panel/index.html";
+      } else if (customer.accountType == 0) {
+        alert(
+          "Hello " +
+            customer.name.firstName +
+            " " +
+            customer.name.lastName +
+            " ---> you are customer"
+        );
+        localStorage.setItem("customer", JSON.stringify(customer));
+        location.href = "profile.html";
       }
-
-  }
-});
+    }
+  });
 
   // alert("Please enter correct email and password")
-
 });
+
+/**
+ * Disables cart button if the cartArray is empty or null else it will rederict to order.html
+ */
+
+function cartButton() {
+  let cartArray = JSON.parse(localStorage.getItem("cart"));
+  const cartBtn = document.getElementById("cart");
+  if (cartArray == null || cartArray.length == 0) {
+    cartBtn.disabled = true;
+  } else {
+    cartBtn.disabled = false;
+    cartBtn.addEventListener("click", () => {
+      window.location.href = "order.html";
+    });
+  }
+}
