@@ -14,22 +14,22 @@ function getDataFromLocalStorage() {
   for (let i = 0; i < cartItems.length; i++) {
     $(".cart-table").append(htmlGenerator(cartItems[i]));
   }
+  /**
+   * Listener for input fields in cart that checks if value is positive.
+   * If not it resets the old value.
+   */
   $(".amount-changed").change(function () {
-    let newValue = this.value.match(/^\d+$/);
+    let newValue = Number(this.value.match(/^\d+$/));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
-    let id2 = cartItems.filter((item) => {
-      item.id == id;
-    }); // unfinished code. Do not touch!
-    console.log(id);
-    console.log(`id2: ${id2}`);
+    let tempProd = cartItems.filter((item) => {
+      return item.id == id;
+    })[0];
     if (newValue && Number(newValue) > 0) {
       setNewQuantity(id, newValue);
       $(this).closest(".quantity-td").find("input").attr("value", newValue);
     } else {
-      $(this).val(id2.quantity);
-      setNewQuantity(id, this.value);
+      $(this).val(tempProd.quantity);
     }
-    console.log(newValue);
   });
 }
 
@@ -47,7 +47,7 @@ function htmlGenerator(data) {
                   <div class = "row mx-0 px-0">
                     <input class="amount-changed col-12 col-sm-12 col-md-6" min="1" name="quantity" value="${
                       data.quantity
-                    }" type="text" id="cart-quantity">
+                    }" type="number" id="cart-quantity">
                     <div class="md-remove-one-product col-3 d-none d-sm-block"><i class="fas fa-minus"></i></i></div>
                     <div class="md-add-one-product col-3 d-none d-sm-block"><i class="fas fa-plus"></i></div>
                   </div>
