@@ -48,6 +48,7 @@ function getData() {
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => {
+      console.log(data);
       productsData = data;
       storeData(data);
       loadCategories(data);
@@ -61,10 +62,11 @@ function getData() {
  *  parsing it to produce a JS object
  */
 function storeData(data) {
-  let cartArray = JSON.parse(localStorage.getItem("cart"));
-  console.log(cartArray);
-  if (cartArray.length == 0) {
-    let cartArray = new Array();
+  let cartArray=[]
+  if (localStorage.getItem("cart") === null) {
+     cartArray = new Array();
+  }else{
+    cartArray = JSON.parse(localStorage.getItem("cart"));
   }
 
   localStorage.setItem("allProducts", JSON.stringify(productsData));
@@ -197,6 +199,7 @@ function categoryLinkListener() {
       let target = event.target;
       cat = target.innerText;
       products.innerHTML = "";
+      $("#sidebar").animate({ left: "-200" }, "slow");
       storeData(productsData);
     });
   });
@@ -230,4 +233,49 @@ $(document).on("click", ".register-new-user-button", function () {
 });
 $(document).on("click", "#mobileLogin", function () {
   $(".login-modal").modal("show");
+});
+
+
+/*Global variable for save customer to array list*/
+let customers = [];
+/**
+ * fetch all users for check login form!
+ */
+function getCustomers() {
+    fetch("../../data/users.json")
+    .then((resp) => resp.json())
+    .then((data) => {
+      customers = data;
+    })
+    .catch((err) => console.log(err));
+}
+/**
+ * Function on login button to check customer and admin account and
+ * when a user logs in send them to their own  page.
+ */
+$(document).on("click", "#modal-login-button", function () {
+  
+  getCustomers();
+
+  var username = $('#input-username').val();
+  var password = $('#input-password').val();
+
+  console.log(username);
+  console.log(password);
+customers.forEach((customer) => {
+  if(customer.email == username && customer.password == password){
+      if(customer.accountType == 1){
+          alert("Hello "+customer.name.firstName+" "+customer.name.lastName+" ---> you are admin")
+          location.href = "/admin-panel/index.html"
+      }else if(customer.accountType == 0){
+          alert("Hello "+customer.name.firstName+" "+customer.name.lastName+" ---> you are customer")
+          localStorage.setItem("customer", JSON.stringify(customer));
+          location.href ="profile.html"
+      }
+
+  }
+});
+
+  // alert("Please enter correct email and password")
+
 });
