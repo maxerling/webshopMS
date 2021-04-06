@@ -7,6 +7,10 @@ body {
   background-image: url(../images/bg--se.webp);
 }
 
+html {
+  overflow-y: scroll;
+}
+
 /*START header & NavBar style*/
 header {
   padding: 0.5rem;
@@ -293,6 +297,10 @@ footer {
 
 /* CART PAGE STUFF START */
 
+#cartHeading {
+  text-align: center;
+}
+
 #cart-quantity {
   width: 45px;
 }
@@ -324,6 +332,10 @@ footer {
   border: none;
   background: none;
 }
+/* 
+.mobile-btn {
+  size: ;
+} */
 
 .total-price-div tbody {
   color: black;
@@ -354,6 +366,26 @@ footer {
 }
 
 @media screen and (min-width: 768px) {
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.customer-info input[type="text"] {
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 0;
+}
+
+@media screen and (min-width: 992px) {
   .shopping-cart {
     width: 50%;
     margin-right: auto;

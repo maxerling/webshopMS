@@ -2,6 +2,11 @@ $(document).ready(function () {
   getData();
 });
 
+window.addEventListener("load", function () {
+  cartButton();
+  updateCartBtn();
+});
+
 /** Global variable */
 let cat = "produkter";
 let products = document.getElementById("products");
@@ -48,7 +53,6 @@ function getData() {
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => {
-      console.log(data);
       productsData = data;
       storeData(data);
       loadCategories(data);
@@ -62,16 +66,18 @@ function getData() {
  *  parsing it to produce a JS object
  */
 function storeData(data) {
-  let cartArray=[]
+  let cartArray = [];
   if (localStorage.getItem("cart") === null) {
-     cartArray = new Array();
-  }else{
+    cartArray = new Array();
+  } else {
     cartArray = JSON.parse(localStorage.getItem("cart"));
   }
 
   localStorage.setItem("allProducts", JSON.stringify(productsData));
   localStorage.setItem("cart", JSON.stringify(cartArray));
+  cat = categoryFormatter(cat);
   document.getElementById("category").innerText = cat;
+  cat = categoryOrignalFormatter(cat);
   data.forEach((product) => createElementsForProduct(product));
 }
 
@@ -144,10 +150,25 @@ function createElementsForProduct(product) {
     $(p3).attr("style", "color:gray;");
     removeClass(img, "product-hover");
   } else {
-    $(btn).click(() => addToCart(`${product.id}`, products));
+    $(btn).click(() => {
+      addToCart(`${product.id}`, products);
+      updateCartBtn();
+    });
   }
 }
 
+function updateCartBtn() {
+  let cartArray = JSON.parse(localStorage.getItem("cart"));
+  const btn = document.getElementById("cart");
+  if (cartArray != null && cartArray.length > 0) {
+    let sum = 0;
+    for (let i = 0; i < cartArray.length; i++) {
+      sum += 1;
+    }
+
+    btn.innerHTML = `<i class="fas fa-shopping-cart"></i> Antal produkter: ${sum}`;
+  }
+}
 $(document).on("click", ".modal-cancel-button", function () {
   $("#loginModal").modal("hide");
   $("#registerModal").modal("hide");
@@ -158,6 +179,7 @@ $(document).on("click", ".modal-cancel-button", function () {
  * @param {string} category . All of categories
  */
 function createCategory(category) {
+  category = categoryFormatter(category);
   let li = document.createElement("li");
   li.setAttribute("class", "nav-item");
 
@@ -170,6 +192,25 @@ function createCategory(category) {
     li.appendChild(div);
     document.querySelector(".navbar-nav").appendChild(li);
   }
+}
+
+/**
+ * Formats the text to make it:
+ * 1. String[0] Uppercase
+ * 2. remove the - and replace it with " och "
+ * @param {string} category
+ * @returns string
+ */
+
+function categoryFormatter(category) {
+  category = category.replace(
+    category.charAt(0),
+    category.charAt(0).toUpperCase()
+  );
+
+  category = category.replace("-", " och ");
+
+  return category;
 }
 /**
  * Added function to show order modal, remove ls, show info in order modal
@@ -197,12 +238,41 @@ function categoryLinkListener() {
     item.addEventListener("click", function (event) {
       let target = event.target;
       cat = target.innerText;
+      cat = categoryOrignalFormatter(cat);
       products.innerHTML = "";
       $("#sidebar").animate({ left: "-200" }, "slow");
       storeData(productsData);
     });
   });
 }
+
+/**
+ * Revert back the text to its original form state
+ *
+ * @param {string} category
+ * @returns string
+ */
+
+function categoryOrignalFormatter(category) {
+  category = category.replace(
+    category.charAt(0),
+    category.charAt(0).toLowerCase()
+  );
+
+  category = category.replace(" och ", "-");
+
+  return category;
+}
+
+/*function checkCartStatus() {
+  const list = JSON.parse(localStorage.getItem("cart"));
+  if (list.length === 0) {
+    $("#cart").attr("disabled", "disabled");
+    $("cart-btn-link").attr("disabled", "disabled");
+  }
+}
+
+checkCartStatus();*/
 
 $(document).on("click", "#logIn", function () {
   $(".login-modal").modal("show");
@@ -234,14 +304,13 @@ $(document).on("click", "#mobileLogin", function () {
   $(".login-modal").modal("show");
 });
 
-
 /*Global variable for save customer to array list*/
 let customers = [];
 /**
  * fetch all users for check login form!
  */
 function getCustomers() {
-    fetch("../../data/users.json")
+  fetch("../../data/users.json")
     .then((resp) => resp.json())
     .then((data) => {
       customers = data;
@@ -253,28 +322,54 @@ function getCustomers() {
  * when a user logs in send them to their own  page.
  */
 $(document).on("click", "#modal-login-button", function () {
-  
   getCustomers();
 
-  var username = $('#input-username').val();
-  var password = $('#input-password').val();
+  var username = $("#input-username").val();
+  var password = $("#input-password").val();
 
   console.log(username);
   console.log(password);
-customers.forEach((customer) => {
-  if(customer.email == username && customer.password == password){
-      if(customer.accountType == 1){
-          alert("Hello "+customer.name.firstName+" "+customer.name.lastName+" ---> you are admin")
-          location.href = "/admin-panel/index.html"
-      }else if(customer.accountType == 0){
-          alert("Hello "+customer.name.firstName+" "+customer.name.lastName+" ---> you are customer")
-          localStorage.setItem("customer", JSON.stringify(customer));
-          location.href ="profile.html"
+  customers.forEach((customer) => {
+    if (customer.email == username && customer.password == password) {
+      if (customer.accountType == 1) {
+        alert(
+          "Hello " +
+            customer.name.firstName +
+            " " +
+            customer.name.lastName +
+            " ---> you are admin"
+        );
+        location.href = "/admin-panel/index.html";
+      } else if (customer.accountType == 0) {
+        alert(
+          "Hello " +
+            customer.name.firstName +
+            " " +
+            customer.name.lastName +
+            " ---> you are customer"
+        );
+        localStorage.setItem("customer", JSON.stringify(customer));
+        location.href = "profile.html";
       }
-
-  }
-});
+    }
+  });
 
   // alert("Please enter correct email and password")
-
 });
+
+/**
+ * Disables cart button if the cartArray is empty or null else it will rederict to order.html
+ */
+
+function cartButton() {
+  let cartArray = JSON.parse(localStorage.getItem("cart"));
+  const cartBtn = document.getElementById("cart");
+  if (cartArray == null || cartArray.length == 0) {
+    cartBtn.disabled = true;
+  } else {
+    cartBtn.disabled = false;
+    cartBtn.addEventListener("click", () => {
+      window.location.href = "order.html";
+    });
+  }
+}
