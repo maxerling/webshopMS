@@ -1,10 +1,10 @@
 $(document).ready(function () {
   getData();
-  updateCartBtn();
 });
 
 window.addEventListener("load", function () {
   cartButton();
+  updateCartBtn();
 });
 
 /** Global variable */

@@ -297,6 +297,10 @@ footer {
 
 /* CART PAGE STUFF START */
 
+#cartHeading {
+  text-align: center;
+}
+
 #cart-quantity {
   width: 45px;
 }
