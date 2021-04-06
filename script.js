@@ -300,6 +300,10 @@ $(document).on("click", "#modal-login-button", function () {
   // alert("Please enter correct email and password")
 });
 
+/**
+ * Disables cart button if the cartArray is empty or null else it will rederict to order.html
+ */
+
 function cartButton() {
   let cartArray = JSON.parse(localStorage.getItem("cart"));
   const cartBtn = document.getElementById("cart");
