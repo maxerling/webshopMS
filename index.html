@@ -47,7 +47,7 @@
           class="search-field-input"
           autocomplete="off"
           autocorrect="off"
-          maxlength="10"
+          maxlength="30"
         />
       </div>
 
@@ -59,10 +59,13 @@
           Logga in
         </button>
 
-        <button id="cart" class="btn btn-warning btn-lg" type="button">
-          <i class="fas fa-shopping-cart"></i>
-          Kundvagn
-        </button>
+        <a href="order.html">
+          <button id="cart" class="btn btn-warning btn-lg" type="button">
+            <i class="fas fa-shopping-cart"></i>
+            Kundvagn
+          </button>
+        </a>
+        
 
       </div>
 
@@ -78,7 +81,8 @@
           id= "mobileLogin"
         ></button>
         <div class="btn-group" role="group">
-          <button
+          <a href="order.html">
+            <button
             id="btnGroupDrop1"
             type="button"
             class="btn btn-warning dropdown-toggle fas fa-shopping-cart"
@@ -86,12 +90,13 @@
             aria-haspopup="true"
             aria-expanded="false"
           ></button>
+          </a>
+          <!-- If we choose to add dropdown meny, use code below -->
           <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
             <a class="dropdown-item" href="#">Dropdown link</a>
             <a class="dropdown-item" href="#">Dropdown link</a>
           </div>
         </div>
-        <!-- <button class="btn btn-primary fas fa-shopping-cart fa-2x"></button> -->
       </div>
     </header>
     <!-- END header -->
@@ -108,34 +113,37 @@
             />
           </button>
           <div class="modal-body">
-            <div class="modal-title d-none d-sm-block">Välkommen!</div>
-            <div class="sm-modal-title d-block d-sm-none">Välkommen!</div>
-            <div class="modal-subtitle pb-2">
-              Logga in för att få ut mer av din vardag!
-            </div>
-            <div class="modal-input-username mx-auto pt-2">
-              <input
-                type="text"
-                class="form-control"
-                id="input-username"
-                placeholder="E-mail"
-              />
-            </div>
-            <div class="modal-input-password mx-auto">
-              <input
-                type="password"
-                class="form-control"
-                id="input-password"
-                placeholder="Lösenord"
-              />
-            </div>
-            <div class="modal-login-button">
-              <button id="modal-login-button">Logga in</button>
-            </div>
-            <div class="register-new-user">
-              <label for="register-new-user-button">Ny hos Hakim livs?</label>
-              <button class="register-new-user-button">Skapa konto</button>
-            </div>
+              <div class="modal-title d-none d-sm-block">Välkommen!</div>
+              <div class="sm-modal-title d-block d-sm-none">Välkommen!</div>
+              <div class="modal-subtitle pb-2">
+                Logga in för att få ut mer av din vardag!
+              </div>
+              <div class="modal-input-username mx-auto pt-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="input-username"
+                  placeholder="E-mail"
+                  maxlength="100"
+                />
+              </div>
+              <div class="modal-input-password mx-auto">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="input-password"
+                  placeholder="Lösenord"
+                  maxlength="100"
+                />
+              </div>
+              <div class="modal-login-button">
+                <button id="modal-login-button">Logga in</button>
+              </div>
+              <div class="register-new-user">
+                <label for="register-new-user-button">Ny hos Hakim livs?</label>
+                <button class="register-new-user-button">Skapa konto</button>
+              </div>
+
           </div>
         </div>
       </div>
@@ -166,6 +174,7 @@
                     id="create-new-account-surname"
                     name="surname"
                     placeholder="Förnamn"
+                    maxlength="100"
                   />
                 </div>
                 <div class="col-md-6">
@@ -175,6 +184,7 @@
                     id="create-new-account-lastname"
                     name="lastname"
                     placeholder="Efternamn"
+                    maxlength="100"
                   />
                 </div>
                 <div class="col-md-6">
@@ -184,6 +194,7 @@
                     id="create-new-account-email"
                     name="email"
                     placeholder="E-mail"
+                    maxlength="100"
                   />
                 </div>
                 <div class="col-md-6">
@@ -193,6 +204,7 @@
                     id="create-new-account-number"
                     name="number"
                     placeholder="Telefon"
+                    maxlength="100"
                   />
                 </div>
                 <div class="col-md-6">
@@ -202,6 +214,7 @@
                     id="create-new-account-password"
                     name="password"
                     placeholder="Lösenord"
+                    maxlength="100"
                   />
                 </div>
                 <div class="col-md-6">
@@ -211,6 +224,7 @@
                     id="create-new-account-repeat-password"
                     name="repeat-password"
                     placeholder="Upprepa lösenord"
+                    maxlength="100"
                   />
                 </div>
                 <div class="col-md-5">
@@ -220,6 +234,7 @@
                     id="create-new-account-street"
                     name="street"
                     placeholder="Gata"
+                    maxlength="100"
                   />
                 </div>
                 <div class="col-md-4">
@@ -229,6 +244,7 @@
                     id="create-new-account-city"
                     name="city"
                     placeholder="Ort"
+                    maxlength="100"
                   />
                 </div>
                 <div class="col-md-3">
@@ -238,6 +254,7 @@
                     id="create-new-account-zip"
                     name="zip"
                     placeholder="Postnummer"
+                    maxlength="7"
                   />
                 </div>
                 <div class="register-new-account pb-4 pt-2">

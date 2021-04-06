@@ -43,6 +43,11 @@ body {
     border: solid 1px #BA68C8
 }
 
-#logIn{
-    display: none;
+@media (max-width: 769px) {
+    h1{
+        display: none;
+    }
+    .rounded-circle {
+        display: none;
+    }
 }

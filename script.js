@@ -48,6 +48,7 @@ function getData() {
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => {
+      console.log(data);
       productsData = data;
       storeData(data);
       loadCategories(data);
@@ -61,10 +62,16 @@ function getData() {
  *  parsing it to produce a JS object
  */
 function storeData(data) {
-  document.getElementById("category").innerText = cat;
-  let cartArray = new Array();
+  let cartArray=[]
+  if (localStorage.getItem("cart") === null) {
+     cartArray = new Array();
+  }else{
+    cartArray = JSON.parse(localStorage.getItem("cart"));
+  }
+
   localStorage.setItem("allProducts", JSON.stringify(productsData));
   localStorage.setItem("cart", JSON.stringify(cartArray));
+  document.getElementById("category").innerText = cat;
   data.forEach((product) => createElementsForProduct(product));
 }
 
@@ -84,7 +91,7 @@ function loadCategories(data) {
  * @param {object} product - object of array of objects
  */
 function createElementsForProduct(product) {
-  console.log(product.category);
+
   const div = createNode("div");
   addClass(div, "p-2");
   addClass(div, "col-xs-12");
@@ -117,7 +124,6 @@ function createElementsForProduct(product) {
     append(div, btn);
     append(products, div);
   } else if (cat == product.category) {
-    console.log(cat + "else");
     img.src = product.image;
     p1.innerHTML = `${product.price} kr`;
     p2.innerHTML = product.title;
@@ -143,11 +149,11 @@ function createElementsForProduct(product) {
   }
 }
 
-  $(document).on("click", ".modal-cancel-button", function() {
-    $("#loginModal").modal("hide");
-    $("#registerModal").modal("hide");
-    $("#orderModal").modal("hide");
-  })
+$(document).on("click", ".modal-cancel-button", function () {
+  $("#loginModal").modal("hide");
+  $("#registerModal").modal("hide");
+  $("#orderModal").modal("hide");
+});
 /**
  * Create element base on category name.
  * @param {string} category . All of categories
@@ -176,9 +182,12 @@ function confirmBtn() {
   let orderDate = new Date().toISOString().replaceAll("T", ", Kl: ");
   let orderPrice;
 
-  document.getElementById("p-order").innerHTML = "<b>Order nummer: </b>" + orderNum;
-  document.getElementById("p-date").innerHTML = "<b>Beställningsdatum: </b>" + orderDate.substring(0,21);
-  document.getElementById("p-sum").innerHTML = "<b>Total belopp: </b>" + orderPrice;
+  document.getElementById("p-order").innerHTML =
+    "<b>Order nummer: </b>" + orderNum;
+  document.getElementById("p-date").innerHTML =
+    "<b>Beställningsdatum: </b>" + orderDate.substring(0, 21);
+  document.getElementById("p-sum").innerHTML =
+    "<b>Total belopp: </b>" + orderPrice;
   localStorage.removeItem("inCartArray"); //Dubbelkolla key name
 }
 /**
@@ -190,6 +199,7 @@ function categoryLinkListener() {
       let target = event.target;
       cat = target.innerText;
       products.innerHTML = "";
+      $("#sidebar").animate({ left: "-200" }, "slow");
       storeData(productsData);
     });
   });
@@ -197,7 +207,6 @@ function categoryLinkListener() {
 
 $(document).on("click", "#logIn", function () {
   $(".login-modal").modal("show");
-  console.log("HEEEEEEEEEEEE");
 });
 
 $(document).on("click", "#mobileLogin", function () {
@@ -224,4 +233,49 @@ $(document).on("click", ".register-new-user-button", function () {
 });
 $(document).on("click", "#mobileLogin", function () {
   $(".login-modal").modal("show");
+});
+
+
+/*Global variable for save customer to array list*/
+let customers = [];
+/**
+ * fetch all users for check login form!
+ */
+function getCustomers() {
+    fetch("../../data/users.json")
+    .then((resp) => resp.json())
+    .then((data) => {
+      customers = data;
+    })
+    .catch((err) => console.log(err));
+}
+/**
+ * Function on login button to check customer and admin account and
+ * when a user logs in send them to their own  page.
+ */
+$(document).on("click", "#modal-login-button", function () {
+  
+  getCustomers();
+
+  var username = $('#input-username').val();
+  var password = $('#input-password').val();
+
+  console.log(username);
+  console.log(password);
+customers.forEach((customer) => {
+  if(customer.email == username && customer.password == password){
+      if(customer.accountType == 1){
+          alert("Hello "+customer.name.firstName+" "+customer.name.lastName+" ---> you are admin")
+          location.href = "/admin-panel/index.html"
+      }else if(customer.accountType == 0){
+          alert("Hello "+customer.name.firstName+" "+customer.name.lastName+" ---> you are customer")
+          localStorage.setItem("customer", JSON.stringify(customer));
+          location.href ="profile.html"
+      }
+
+  }
+});
+
+  // alert("Please enter correct email and password")
+
 });
