@@ -10,7 +10,7 @@ form.addEventListener("submit", (e) => {
     msg.style.fontSize = "1em";
   }
 
-  if (checkEmail() & checkPassword() & validButDontMatchUser()) {
+  if (checkEmail() & checkPassword() & testValidButDontMatchUser()) {
     console.log("sucess");
   } else {
     console.log("unsucessful");
@@ -19,6 +19,10 @@ form.addEventListener("submit", (e) => {
   }
 });
 
+/**
+ * Checks for a valid email and show error message based on result
+ * @returns boolean
+ */
 function checkEmail() {
   if (emailField.value.length == 0) {
     msg = "Obligatoriskt fält!";
@@ -43,6 +47,11 @@ function checkEmail() {
   }
 }
 
+/**
+ * Checks for a valid pass and show error message based on result
+ * @returns boolean
+ */
+
 function checkPassword() {
   if (passField.value.length == 0) {
     msg = "Obligatoriskt fält!";
@@ -59,8 +68,11 @@ function checkPassword() {
     return true;
   }
 }
-
-function validButDontMatchUser() {
+/**
+ * test for a "valid user"
+ * @returns boolean
+ */
+function testValidButDontMatchUser() {
   if (emailField.value == "hh@h.com" && passField.value == "h") {
     msg = "";
     invalidMsg[1].innerHTML = msg;
@@ -89,6 +101,11 @@ function validButDontMatchUser() {
   return false;
 }
 
+/**
+ * checks for valid input based on regex 
+ * @param {string} userInput 
+ * @returns boolean
+ */
 function emailCheck(userInput) {
   let regEx = /[0-9?A-z0-9?]+(\.)?[0-9?A-z0-9?]+@[A-z]+\.[A-z]{3}.?[A-z]{0,3}$/;
 
