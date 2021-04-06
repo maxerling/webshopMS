@@ -158,10 +158,10 @@ function updateCartBtn() {
   if (cartArray != null && cartArray.length > 0) {
     let sum = 0;
     for (let i = 0; i < cartArray.length; i++) {
-      sum += cartArray[i].price * cartArray[i].quantity;
+      sum += 1;
     }
 
-    btn.innerHTML = `<i class="fas fa-shopping-cart"></i> Totalpris: ${sum.toFixed(2)}`;
+    btn.innerHTML = `<i class="fas fa-shopping-cart"></i> Antal produkter: ${sum}`;
   }
 }
 $(document).on("click", ".modal-cancel-button", function () {
