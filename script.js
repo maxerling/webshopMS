@@ -1,5 +1,6 @@
 $(document).ready(function () {
   getData();
+  updateCartBtn();
 });
 
 /** Global variable */
@@ -62,10 +63,10 @@ function getData() {
  *  parsing it to produce a JS object
  */
 function storeData(data) {
-  let cartArray=[]
+  let cartArray = [];
   if (localStorage.getItem("cart") === null) {
-     cartArray = new Array();
-  }else{
+    cartArray = new Array();
+  } else {
     cartArray = JSON.parse(localStorage.getItem("cart"));
   }
 
@@ -91,7 +92,6 @@ function loadCategories(data) {
  * @param {object} product - object of array of objects
  */
 function createElementsForProduct(product) {
-
   const div = createNode("div");
   addClass(div, "p-2");
   addClass(div, "col-xs-12");
@@ -145,10 +145,25 @@ function createElementsForProduct(product) {
     $(p3).attr("style", "color:gray;");
     removeClass(img, "product-hover");
   } else {
-    $(btn).click(() => addToCart(`${product.id}`, products));
+    $(btn).click(() => {
+      addToCart(`${product.id}`, products);
+      updateCartBtn();
+    });
   }
 }
 
+function updateCartBtn() {
+  let cartArray = JSON.parse(localStorage.getItem("cart"));
+  const btn = document.getElementById("cart");
+  if (cartArray != null && cartArray.length > 0) {
+    let sum = 0;
+    for (let i = 0; i < cartArray.length; i++) {
+      sum += cartArray[i].price * cartArray[i].quantity;
+    }
+
+    btn.innerHTML = `<i class="fas fa-shopping-cart"></i> Totalpris: ${sum.toFixed(2)}`;
+  }
+}
 $(document).on("click", ".modal-cancel-button", function () {
   $("#loginModal").modal("hide");
   $("#registerModal").modal("hide");
@@ -235,14 +250,13 @@ $(document).on("click", "#mobileLogin", function () {
   $(".login-modal").modal("show");
 });
 
-
 /*Global variable for save customer to array list*/
 let customers = [];
 /**
  * fetch all users for check login form!
  */
 function getCustomers() {
-    fetch("../../data/users.json")
+  fetch("../../data/users.json")
     .then((resp) => resp.json())
     .then((data) => {
       customers = data;
@@ -254,28 +268,37 @@ function getCustomers() {
  * when a user logs in send them to their own  page.
  */
 $(document).on("click", "#modal-login-button", function () {
-  
   getCustomers();
 
-  var username = $('#input-username').val();
-  var password = $('#input-password').val();
+  var username = $("#input-username").val();
+  var password = $("#input-password").val();
 
   console.log(username);
   console.log(password);
-customers.forEach((customer) => {
-  if(customer.email == username && customer.password == password){
-      if(customer.accountType == 1){
-          alert("Hello "+customer.name.firstName+" "+customer.name.lastName+" ---> you are admin")
-          location.href = "/admin-panel/index.html"
-      }else if(customer.accountType == 0){
-          alert("Hello "+customer.name.firstName+" "+customer.name.lastName+" ---> you are customer")
-          localStorage.setItem("customer", JSON.stringify(customer));
-          location.href ="profile.html"
+  customers.forEach((customer) => {
+    if (customer.email == username && customer.password == password) {
+      if (customer.accountType == 1) {
+        alert(
+          "Hello " +
+            customer.name.firstName +
+            " " +
+            customer.name.lastName +
+            " ---> you are admin"
+        );
+        location.href = "/admin-panel/index.html";
+      } else if (customer.accountType == 0) {
+        alert(
+          "Hello " +
+            customer.name.firstName +
+            " " +
+            customer.name.lastName +
+            " ---> you are customer"
+        );
+        localStorage.setItem("customer", JSON.stringify(customer));
+        location.href = "profile.html";
       }
-
-  }
-});
+    }
+  });
 
   // alert("Please enter correct email and password")
-
 });
