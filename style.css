@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  background-image: url(../images/bg--se.webp)
+  background-image: url(../images/bg--se.webp);
 }
 
 /*START header & NavBar style*/
@@ -342,7 +342,6 @@ footer {
     margin-left: auto;
   }
   #category {
-    width: 70%;
     margin-right: auto;
     margin-left: auto;
   }

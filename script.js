@@ -71,7 +71,9 @@ function storeData(data) {
 
   localStorage.setItem("allProducts", JSON.stringify(productsData));
   localStorage.setItem("cart", JSON.stringify(cartArray));
+  cat = categoryFormatter(cat);
   document.getElementById("category").innerText = cat;
+  cat = categoryOrignalFormatter(cat); 
   data.forEach((product) => createElementsForProduct(product));
 }
 
@@ -174,8 +176,6 @@ function createCategory(category) {
 }
 
 function categoryFormatter(category) {
-  console.log(category);
-  console.log(category.charAt(0).toUpperCase());
   category = category.replace(
     category.charAt(0),
     category.charAt(0).toUpperCase()
@@ -211,11 +211,23 @@ function categoryLinkListener() {
     item.addEventListener("click", function (event) {
       let target = event.target;
       cat = target.innerText;
+      cat = categoryOrignalFormatter(cat);
       products.innerHTML = "";
       $("#sidebar").animate({ left: "-200" }, "slow");
       storeData(productsData);
     });
   });
+}
+
+function categoryOrignalFormatter(category) {
+  category = category.replace(
+    category.charAt(0),
+    category.charAt(0).toLowerCase()
+  );
+
+  category = category.replace(" och ", "-");
+
+  return category;
 }
 
 $(document).on("click", "#logIn", function () {
