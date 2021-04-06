@@ -81,7 +81,7 @@
       </div>
 
       <div class="shopping-cart">
-        <table class="table" style="width: 100%">
+        <table class="table">
           <thead>
             <tr>
               <th scope="col"></th>
@@ -96,39 +96,45 @@
           </tbody>
         </table>
 
-        <div class="total-price-div">
+        <div class="row">
+          <div class="col-md-6 customer-information">
+            <div class="person-content-title text-center mb-3">Dina uppgifter</div>
+            <div class="customer-info">
+              <label for="customer-information-name">Ditt namn:</label>
+              <input class="form-control mx-auto mb-1" id="customer-information-name" type="text" value="Test Testsson" readonly disabled/>
+              <label for="customer-information-address">Din adress:</label>
+              <input class="form-control mx-auto mb-1" id="customer-information-address" type="text" value="Testgatan 33b" readonly disabled/>
+              <label for="customer-information-zip">Ditt postnummer:</label>
+              <input class="form-control mx-auto mb-1" id="customer-information-zip" type="text" value="113 34 Stockholm" readonly disabled/>
+              <label for="customer-information-telephone-number">Ditt telefonnummer:</label>
+              <input class="form-control mx-auto mb-1" id="customer-information-telephone-number" type="text" value="0733332221" readonly disabled/>
+            </div>
+          </div>
+
+        <div class="col-md-4 total-price-div">
           <!-- #total-price ID FÖR TOTAL PRISET-->
-          <table class="table table-borderless" style="color: white">
+          <table class="pricing-table table">
             <tbody>
               <tr>
-                <td class="p-0">Summa varor:</td>
-                <td id="products-total-price" class="p-0"></td>
+                <td class="products-total-price-title py-3 px-0">Summa varor:</td>
+                <td class="products-total-price py-3"></td>
               </tr>
               <tr>
-                <td class="p-0">Leverans:</td>
-                <td class="p-0"></td>
+                <td class="py-3 px-0">Leverans:</td>
+                <td class="shipping-cost py-3">49.00</td>
               </tr>
               <tr>
-                <td class="p-0">Moms:</td>
-                <td id="vat" class="p-0"></td>
+                <td class="py-3 px-0">Moms:</td>
+                <td class="vat py-3">20.00</td>
               </tr>
               <tr>
-                <td class="p-0">Total:</td>
-                <td id="total-price" class="p-0"></td>
+                <td class="py-3 px-0 total-price-title">Total:</td>
+                <td class="total-price py-3"></td>
               </tr>
             </tbody>
           </table>
         </div>
-
-        <div class="total-price-div">
-          <div class="person-content-title text-center mb-3">Personuppgifter</div>
-          <div class="customer-info">
-            <input class="form-control mx-auto mb-1" type="text" value="Test Testsson" readonly disabled/>
-            <input class="form-control mx-auto mb-1" type="text" value="Testgatan 33b" readonly disabled/>
-            <input class="form-control mx-auto mb-1" type="text" value="113 34 Stockholm" readonly disabled/>
-            <input class="form-control mx-auto mb-1" type="text" value="0733332221" readonly disabled/>
-          </div>
-        </div>
+      </div>
       </div>
     </div>
 

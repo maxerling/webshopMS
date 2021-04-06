@@ -1,6 +1,9 @@
 "use strict";
 
 let cartItems = [];
+let freeShippingThreshold = 250;
+let shippingCost = 49;
+let vat = 1.12;
 
 /**
  *  Fetches data as an array with JSON object from local storage
@@ -57,7 +60,33 @@ function calcPrice() {
   for (let i = 0; i < cartItems.length; i++) {
     sum += cartItems[i].price * cartItems[i].quantity;
   }
-  $("#total-price").html(sum.toFixed(2));
+
+  $(".products-total-price").html(sum.toFixed(2));
+  calcVat(sum);
+
+  if(sum > freeShippingThreshold) {
+    $(".total-price").html(sum.toFixed(2));
+  } else {
+    sum += shippingCost;
+    $(".total-price").html(sum.toFixed(2));
+  }
+  
+}
+
+function calcVat(sum) {
+  let temp;
+  let shippingTemp;
+  if(sum > freeShippingThreshold) {
+    temp = (sum) - (sum / vat);
+    console.log(temp);
+  } else {
+    temp = (sum) - (sum / vat);
+    shippingTemp = shippingCost / vat;
+    console.log(shippingTemp);
+  }
+
+  $(".vat").html(temp.toFixed(2));
+  
 }
 
 /**

@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  background-image: url(../images/bg--se.webp)
+  background-image: url(../images/bg--se.webp);
 }
 
 /*START header & NavBar style*/
@@ -325,45 +325,84 @@ footer {
   background: none;
 }
 
-@media screen and (min-width: 576px) {
+.total-price-div tbody {
+  color: black;
+}
+
+.customer-information {
+  color: black;
+}
+
+.total-price-title {
+  font-weight: bold;
+}
+
+#total-price {
+  font-weight: bold;
+}
+
+.products-total-price,
+.shipping-cost,
+.vat,
+.total-price {
+  text-align: right;
+}
+
+.customer-information input {
+  padding: 12px 20px;
+  margin: 8px 0;
+}
+
+@media screen and (min-width: 768px) {
   .shopping-cart {
-    width: 70%;
+    width: 50%;
     margin-right: auto;
     margin-left: auto;
   }
   #category {
-    width: 70%;
+    width: 50%;
     margin-right: auto;
     margin-left: auto;
   }
 
   .total-price-div {
-    width: 30%;
-    font-size: .9rem;
-    /* font-weight: bold; */
+    margin: auto;
+  }
+
+  .customer-information {
+    font-size: 0.9rem;
     padding: 10px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    margin-left: auto;
-    background-color: #26272b;
-    border-radius: 10px;
-    color: white;
   }
 }
 
-@media screen and (max-width: 576px) {
-  .total-price-div {
-    width: 100%;
-    font-size: 1rem;
-    /* font-weight: bold; */
-    padding: 10px 20px;
-    margin: 15px auto;
-    background-color: #26272b;
-    color: white;
+.person-content-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .products-total-price,
+  .shipping-cost,
+  .vat,
+  .total-price {
+    text-align: center;
   }
 
-  .customer-info input {
-    width: 80%;         
+  .customer-information {
+    width: 80% !important;
+    font-size: 1rem;
+    padding: 10px 20px;
+    margin: 15px auto;
+  }
+
+  .total-price-div {
+    margin: auto;
+    width: 60% !important;
+  }
+
+  .customer-info {
+    width: 80%;
+    margin: auto;
   }
 
   .customer-info {
