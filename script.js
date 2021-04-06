@@ -4,6 +4,7 @@ $(document).ready(function () {
 
 window.addEventListener("load", function () {
   cartButton();
+  updateCartBtn();
 });
 
 /** Global variable */
@@ -74,7 +75,9 @@ function storeData(data) {
 
   localStorage.setItem("allProducts", JSON.stringify(productsData));
   localStorage.setItem("cart", JSON.stringify(cartArray));
+  cat = categoryFormatter(cat);
   document.getElementById("category").innerText = cat;
+  cat = categoryOrignalFormatter(cat);
   data.forEach((product) => createElementsForProduct(product));
 }
 
@@ -147,10 +150,25 @@ function createElementsForProduct(product) {
     $(p3).attr("style", "color:gray;");
     removeClass(img, "product-hover");
   } else {
-    $(btn).click(() => addToCart(`${product.id}`, products));
+    $(btn).click(() => {
+      addToCart(`${product.id}`, products);
+      updateCartBtn();
+    });
   }
 }
 
+function updateCartBtn() {
+  let cartArray = JSON.parse(localStorage.getItem("cart"));
+  const btn = document.getElementById("cart");
+  if (cartArray != null && cartArray.length > 0) {
+    let sum = 0;
+    for (let i = 0; i < cartArray.length; i++) {
+      sum += 1;
+    }
+
+    btn.innerHTML = `<i class="fas fa-shopping-cart"></i> Antal produkter: ${sum}`;
+  }
+}
 $(document).on("click", ".modal-cancel-button", function () {
   $("#loginModal").modal("hide");
   $("#registerModal").modal("hide");
@@ -161,6 +179,7 @@ $(document).on("click", ".modal-cancel-button", function () {
  * @param {string} category . All of categories
  */
 function createCategory(category) {
+  category = categoryFormatter(category);
   let li = document.createElement("li");
   li.setAttribute("class", "nav-item");
 
@@ -173,6 +192,25 @@ function createCategory(category) {
     li.appendChild(div);
     document.querySelector(".navbar-nav").appendChild(li);
   }
+}
+
+/**
+ * Formats the text to make it:
+ * 1. String[0] Uppercase
+ * 2. remove the - and replace it with " och "
+ * @param {string} category
+ * @returns string
+ */
+
+function categoryFormatter(category) {
+  category = category.replace(
+    category.charAt(0),
+    category.charAt(0).toUpperCase()
+  );
+
+  category = category.replace("-", " och ");
+
+  return category;
 }
 /**
  * Added function to show order modal, remove ls, show info in order modal
@@ -200,6 +238,7 @@ function categoryLinkListener() {
     item.addEventListener("click", function (event) {
       let target = event.target;
       cat = target.innerText;
+      cat = categoryOrignalFormatter(cat);
       products.innerHTML = "";
       $("#sidebar").animate({ left: "-200" }, "slow");
       storeData(productsData);
@@ -207,7 +246,25 @@ function categoryLinkListener() {
   });
 }
 
-function checkCartStatus() {
+/**
+ * Revert back the text to its original form state
+ *
+ * @param {string} category
+ * @returns string
+ */
+
+function categoryOrignalFormatter(category) {
+  category = category.replace(
+    category.charAt(0),
+    category.charAt(0).toLowerCase()
+  );
+
+  category = category.replace(" och ", "-");
+
+  return category;
+}
+
+/*function checkCartStatus() {
   const list = JSON.parse(localStorage.getItem("cart"));
   if (list.length === 0) {
     $("#cart").attr("disabled", "disabled");
@@ -215,7 +272,7 @@ function checkCartStatus() {
   }
 }
 
-checkCartStatus();
+checkCartStatus();*/
 
 $(document).on("click", "#logIn", function () {
   $(".login-modal").modal("show");

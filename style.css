@@ -297,6 +297,10 @@ footer {
 
 /* CART PAGE STUFF START */
 
+#cartHeading {
+  text-align: center;
+}
+
 #cart-quantity {
   width: 45px;
 }
@@ -362,7 +366,6 @@ input[type="number"] {
     margin-left: auto;
   }
   #category {
-    width: 70%;
     margin-right: auto;
     margin-left: auto;
   }
