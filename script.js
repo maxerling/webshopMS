@@ -180,7 +180,8 @@ function categoryFormatter(category) {
     category.charAt(0),
     category.charAt(0).toUpperCase()
   );
-  
+
+  category = category.replace("-", " och ");
 
   return category;
 }
