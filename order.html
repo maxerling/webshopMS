@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <title>Cart</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="all" />
     <link rel="stylesheet" href="sidebar.css" type="text/css" media="all" />
@@ -43,6 +43,7 @@
             class="search-field-input"
             autocomplete="off"
             autocorrect="off"
+            maxlength="100"
           />
         </div>
         <!-- END Search input -->
@@ -64,7 +65,7 @@
     <!--START main -->
     <!-- Displays products start -->
     <div class="parent-container">
-      <div class="row">
+      <div class="row  container-fluid" >
         <h2 id="category" data-value="produkter" class="pt-5 pb-3 ps-5">
           Produkter i varukorgen
         </h2>
@@ -73,10 +74,10 @@
       <div class="shopping-cart">
         <table class="table">
           <thead>
-            <tr>
+            <tr >
               <th scope="col"></th>
               <th scope="col">Artikel</th>
-              <th scope="col">Kvantitet</th>
+              <th scope="col" class="text-center">Kvantitet</th>
               <th scope="col">Pris</th>
               <th scope=""></th>
             </tr>

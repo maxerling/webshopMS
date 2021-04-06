@@ -47,20 +47,22 @@ $(document).ready(function () {
   function htmlGenerator(data) {
     return `
   <tr class="quantity-tr" id="${data.id}">
-              <td><img src="${data.image}" alt="" style="width: 60px;"></td>
+              <td><img class="d-sm-block d-none" src="${
+                data.image
+              }" alt="" style="width: 60px;"></td>
               <td class = "td-title">${data.title}</td>
-                <td class="quantity-td">
+                <td class="quantity-td d-table-cell justify-content-center">
                   <div class = "row mx-0 px-0">
-                    <div class="md-remove-one-product col-3 d-none d-sm-block"><i class="fas fa-minus"></i></i></div>
+                    <div align="center" style="margin:auto; display:block;" class="md-remove-one-product col-3 d-none d-sm-block"><i class="fas fa-minus fa-2x"></i></i></div>
 
                     <input class="amount-changed col-12 col-sm-12 col-md-6" min="1" name="quantity" value="${
                       data.quantity
                     }" type="number" id="cart-quantity">
-                    <div class="md-add-one-product col-3 d-none d-sm-block"><i class="fas fa-plus"></i></div>
+                    <div align="center" style="margin:auto; display:block;" class="md-add-one-product col-3 d-none d-sm-block"><i class="fas fa-plus fa-2x"></i></div>
                   </div>
                   <div class="row">
-                    <div class="sm-remove-one-product col-3 col-sm-3 col-md-3 d-block d-sm-none"><i class="fas fa-minus"></i></div>
-                    <div class="sm-add-one-product col-3 col-sm-3 col-md-3 d-block d-sm-none"><i class="fas fa-plus"></i></div>
+                    <div class="sm-remove-one-product col-3 col-sm-3 col-md-3 d-block d-sm-none"><i class="fas fa-minus fa-2x mt-2 me-2"></i></div>
+                    <div class="sm-add-one-product col-3 col-sm-3 col-md-3 d-block d-sm-none"><i class="fas fa-plus fa-2x mt-2 ms-2"></i></div>
                   </div>
                 </td>
               <td>${data.price.toFixed(2)}</td>

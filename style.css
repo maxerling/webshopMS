@@ -7,6 +7,10 @@ body {
   background-image: url(../images/bg--se.webp);
 }
 
+html {
+  overflow-y: scroll;
+}
+
 /*START header & NavBar style*/
 header {
   padding: 0.5rem;
@@ -324,6 +328,10 @@ footer {
   border: none;
   background: none;
 }
+/* 
+.mobile-btn {
+  size: ;
+} */
 
 #total-price-area {
   font-size: 1.4rem;
