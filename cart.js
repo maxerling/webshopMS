@@ -23,7 +23,7 @@ $(document).ready(function () {
   //  * If not it resets the old value.
   //  */
   function checkInputField() {
-    $(".amount-changed").change(function () {
+    $(".amount-changed").on("keyup change", function () {
       let newValue = Number(this.value.match(/^\d+$/));
       let id = Number($(this).closest(".quantity-tr").attr("id"));
       let tempProd = cartItems.filter((item) => {
@@ -32,9 +32,10 @@ $(document).ready(function () {
       if (newValue && Number(newValue) > 0) {
         setNewQuantity(id, newValue);
         $(this).closest(".quantity-td").find("input").val(newValue);
-      } else {
-        $(this).val(tempProd.quantity);
       }
+      // if (Number($(this).val()) === 0) {
+      //   $(this).val(tempProd.quantity);
+      // }
     });
   }
 
@@ -50,10 +51,11 @@ $(document).ready(function () {
               <td class = "td-title">${data.title}</td>
                 <td class="quantity-td">
                   <div class = "row mx-0 px-0">
+                    <div class="md-remove-one-product col-3 d-none d-sm-block"><i class="fas fa-minus"></i></i></div>
+
                     <input class="amount-changed col-12 col-sm-12 col-md-6" min="1" name="quantity" value="${
                       data.quantity
                     }" type="number" id="cart-quantity">
-                    <div class="md-remove-one-product col-3 d-none d-sm-block"><i class="fas fa-minus"></i></i></div>
                     <div class="md-add-one-product col-3 d-none d-sm-block"><i class="fas fa-plus"></i></div>
                   </div>
                   <div class="row">
