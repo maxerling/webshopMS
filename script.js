@@ -2,6 +2,10 @@ $(document).ready(function () {
   getData();
 });
 
+window.addEventListener("load", function () {
+  cartButton();
+});
+
 /** Global variable */
 let cat = "produkter";
 let products = document.getElementById("products");
@@ -48,7 +52,6 @@ function getData() {
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => {
-      console.log(data);
       productsData = data;
       storeData(data);
       loadCategories(data);
@@ -245,6 +248,16 @@ function categoryOrignalFormatter(category) {
   return category;
 }
 
+/*function checkCartStatus() {
+  const list = JSON.parse(localStorage.getItem("cart"));
+  if (list.length === 0) {
+    $("#cart").attr("disabled", "disabled");
+    $("cart-btn-link").attr("disabled", "disabled");
+  }
+}
+
+checkCartStatus();*/
+
 $(document).on("click", "#logIn", function () {
   $(".login-modal").modal("show");
 });
@@ -327,3 +340,20 @@ $(document).on("click", "#modal-login-button", function () {
 
   // alert("Please enter correct email and password")
 });
+
+/**
+ * Disables cart button if the cartArray is empty or null else it will rederict to order.html
+ */
+
+function cartButton() {
+  let cartArray = JSON.parse(localStorage.getItem("cart"));
+  const cartBtn = document.getElementById("cart");
+  if (cartArray == null || cartArray.length == 0) {
+    cartBtn.disabled = true;
+  } else {
+    cartBtn.disabled = false;
+    cartBtn.addEventListener("click", () => {
+      window.location.href = "order.html";
+    });
+  }
+}
