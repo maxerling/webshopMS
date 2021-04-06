@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <title>Cart</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="all" />
     <link rel="stylesheet" href="sidebar.css" type="text/css" media="all" />
@@ -43,6 +43,7 @@
             class="search-field-input"
             autocomplete="off"
             autocorrect="off"
+            maxlength="100"
           />
         </div>
         <!-- END Search input -->
@@ -50,23 +51,13 @@
         <!--<span class="navbar-toggler-icon ham-menu"></span>-->
 
         <div class="ms-10">
-          <button id="logIn" class="btn btn-secondary" type="button">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-person-circle"
-              viewBox="0 0 16 16"
-            >
-              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-              <path
-                fill-rule="evenodd"
-                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
-              />
-            </svg>
-            Logga in
-          </button>
+          <a href="index.html">
+            <!-- Lägg till ikon från font awesome vid tillfälle -->
+            <button id="logIn" class="btn btn-secondary" type="button">
+              Fortsätt handla
+            </button>
+          </a>
+          
         </div>
       </nav>
     </header>
@@ -74,7 +65,7 @@
     <!--START main -->
     <!-- Displays products start -->
     <div class="parent-container">
-      <div class="row">
+      <div class="row  container-fluid" >
         <h2 id="category" data-value="produkter" class="pt-5 pb-3 ps-5">
           Produkter i varukorgen
         </h2>
@@ -83,10 +74,10 @@
       <div class="shopping-cart">
         <table class="table">
           <thead>
-            <tr>
+            <tr >
               <th scope="col"></th>
               <th scope="col">Artikel</th>
-              <th scope="col">Kvantitet</th>
+              <th scope="col" class="text-center">Kvantitet</th>
               <th scope="col">Pris</th>
               <th scope=""></th>
             </tr>
