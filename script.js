@@ -73,7 +73,7 @@ function storeData(data) {
   localStorage.setItem("cart", JSON.stringify(cartArray));
   cat = categoryFormatter(cat);
   document.getElementById("category").innerText = cat;
-  cat = categoryOrignalFormatter(cat); 
+  cat = categoryOrignalFormatter(cat);
   data.forEach((product) => createElementsForProduct(product));
 }
 
@@ -175,6 +175,14 @@ function createCategory(category) {
   }
 }
 
+/**
+ * Formats the text to make it:
+ * 1. String[0] Uppercase
+ * 2. remove the - and replace it with " och "
+ * @param {string} category
+ * @returns string
+ */
+
 function categoryFormatter(category) {
   category = category.replace(
     category.charAt(0),
@@ -218,6 +226,13 @@ function categoryLinkListener() {
     });
   });
 }
+
+/**
+ * Revert back the text to its original form state
+ * 
+ * @param {string} category
+ * @returns string
+ */
 
 function categoryOrignalFormatter(category) {
   category = category.replace(
