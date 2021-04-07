@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Startsida</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="sidebar.css" type="text/css" media="all" />
+
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
@@ -17,71 +19,349 @@
       integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
   </head>
 
-  <body onload="getData()">
-    <nav class="navbar sticky-top navbar-light bg-light">
-      <a id="logo" href="index.html">Hakims Livs</a>
+  <body>
+    <!-- START header -->
+    <header class="navbar sticky-top navbar-light bg-light">
+      <span class="navbar-icon">
+        <i class="fas fa-bars"></i>
+      </span>
+      <a id="logo" href="index.html"
+        ><img id="logoImg" src="./images/logo/Hakims-logo.png" alt="logo"
+      /></a>
+      <!-- START Search input -->
+      <span id="search" class="fas fa-search"> </span>
+      <div class="search-field">
+        <input
+          type="text"
+          placeholder="Sök..."
+          name="query"
+          value=""
+          class="search-field-input"
+          autocomplete="off"
+          autocorrect="off"
+          maxlength="30"
+        />
+      </div>
 
-      <!--<span class="navbar-toggler-icon ham-menu"></span>-->
-      <div class="ms-auto">
-        <button id="logIn" class="btn btn-secondary" type="button">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-person-circle"
-            viewBox="0 0 16 16"
-          >
-            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-            <path
-              fill-rule="evenodd"
-              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
-            />
-          </svg>
+      <!-- END Search input -->
+
+      <div class="btn2">
+        <button id="logIn" class="btn btn-secondary btn-lg" type="button">
+          <i class="fa fa-sign-in" aria-hidden="true"></i>
           Logga in
         </button>
-        <button id="cart" class="btn btn-warning" type="button">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-cart4"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
+        
+          <button id="cart" class="btn btn-warning btn-lg" type="button">
+            <i class="fas fa-shopping-cart"></i>
+            Kundvagn
+          </button>
+  
+        
+
+      </div>
+
+      <div
+        class="btn-group btn-sm"
+        role="group"
+        aria-label="Button group with nested dropdown"
+        id="mobile-cart-login"
+      >
+        <button
+          class="btn btn-secondary fa fa-sign-in"
+          aria-hidden="true"
+          id= "mobileLogin"
+        ></button>
+        <div class="btn-group" role="group">
+          <a href="order.html">
+            <button
+            id="btnGroupDrop1"
+            type="button"
+            class="btn btn-warning dropdown-toggle fas fa-shopping-cart"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          ></button>
+          </a>
+          <!-- If we choose to add dropdown meny, use code below -->
+          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a class="dropdown-item" href="#">Dropdown link</a>
+            <a class="dropdown-item" href="#">Dropdown link</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- END header -->
+
+    <!-- LOG IN MODAL START-->
+    <div class="login-modal modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <button class="login-modal-cancel-button">
+            <img
+              src="images/icons/cancel-icon.png"
+              alt="Cancel button"
+              aria-hidden="true"
             />
-          </svg>
-          Kundvagn
-        </button>
+          </button>
+          <div class="modal-body">
+            <div class="modal-title d-none d-sm-block">Välkommen!</div>
+            <div class="sm-modal-title d-block d-sm-none">Välkommen!</div>
+            <div class="modal-subtitle pb-2">
+              Logga in för att få ut mer av din vardag!
+            </div>
+            <form id="form" action="/" method="GET" class="needs-validation" novalidate>
+              <div class="modal-input-username mx-auto pt-2">
+              <input
+                type="email"
+                class="form-control"
+                id="input-username"
+                placeholder="E-mail"
+                maxlength="100"
+                required
+              />
+             
+              <div class="invalid-feedback">
+              </div>
+            </div>
+            <div class="modal-input-password mx-auto">
+              <input
+                type="password"
+                class="form-control"
+                id="input-password"
+                placeholder="Lösenord"
+                maxlength="100"
+              required/>
+              
+              <div class="invalid-feedback">
+              </div>
+            </div>
+            <div class="modal-login-button">
+              <button type="submit" id="modal-login-button">Logga in</button>
+            </div>
+            </form>
+            <div class="register-new-user">
+              <label for="register-new-user-button">Ny hos Hakim livs?</label>
+              <button class="register-new-user-button">Skapa konto</button>
+            </div>
+          </div>
+        </div>
       </div>
-    </nav>
-
-    <div id="main" class="container-fluid">
-      <div id="sidebar">
-        <ul id="sbg" class="navbar-nav p-3">
-          <p>Kategorier</p>
-          <li class="nav-item">
-            <a class="nav-link" href="skafferi.html">Skafferi</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="snacks-godis.html">Snacks & godis</a>
-          </li>
-        </ul>
-      </div>
-      <h2 id="category" data-value="produkter" class="pt-5 pb-3">Produkter</h2>
-
-      <div id="products" class="row"></div>
     </div>
+    <!-- LOG IN MODAL END-->
 
-    <div class="footer mt-auto py-3 text-black bg-light">
+    <!-- START register modal -->
+    <div class="register-modal modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <button class="register-modal-cancel-button">
+            <img
+              src="images/icons/cancel-icon.png"
+              alt="Cancel button"
+              aria-hidden="true"
+            />
+          </button>
+          <div class="modal-body px-5">
+            <div class="modal-title pb-1 d-none d-sm-block">Skapa konto!</div>
+            <div class="sm-modal-title d-block d-sm-none">Skapa konto!</div>
+            <div class="modal-subtitle pb-3">"Din närlivs - vart du vill"</div>
+            <div class="create-new-account-forms">
+              <form class="row g-3">
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="create-new-account-surname"
+                    name="surname"
+                    placeholder="Förnamn"
+                    maxlength="100"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="create-new-account-lastname"
+                    name="lastname"
+                    placeholder="Efternamn"
+                    maxlength="100"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="email"
+                    id="create-new-account-email"
+                    name="email"
+                    placeholder="E-mail"
+                    maxlength="100"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="create-new-account-number"
+                    name="number"
+                    placeholder="Telefon"
+                    maxlength="100"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="password"
+                    id="create-new-account-password"
+                    name="password"
+                    placeholder="Lösenord"
+                    maxlength="100"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="password"
+                    id="create-new-account-repeat-password"
+                    name="repeat-password"
+                    placeholder="Upprepa lösenord"
+                    maxlength="100"
+                  />
+                </div>
+                <div class="col-md-5">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="create-new-account-street"
+                    name="street"
+                    placeholder="Gata"
+                    maxlength="100"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="create-new-account-city"
+                    name="city"
+                    placeholder="Ort"
+                    maxlength="100"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="create-new-account-zip"
+                    name="zip"
+                    placeholder="Postnummer"
+                    maxlength="7"
+                  />
+                </div>
+                <div class="register-new-account pb-4 pt-2">
+                  <button class="create-new-account-button">Skapa konto</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END register modal -->
+
+<!-- ORDER CONFIRMATION MODAL START-->
+<div class="order-modal modal fade" id="orderModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <button class="order-modal-cancel-button">
+        <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true">
+      </button>
+      <div class="modal-body">
+
+        <div class="modal-title d-none d-sm-block order-modal-title">Tack för din beställning!</div>
+        <div class="sm-modal-title d-block d-sm-none">Tack för din beställning!</div>
+        <div class="order-modal-subtitle">Din beställning är mottagen och behandlas. 
+          Du kommer att motta ett mejl med beställningsinformation!
+        </div>
+        <div>
+          <p class="order-modal-p" id="p-order"></p>
+          <p class="order-modal-p" id="p-date"></p>
+          <p class="order-modal-p" id="p-sum"></p>
+        </div>
+        <div class="shop-again-btn">
+          <button id ="shop-again-btn" onclick="window.location.href='index.html'">Handla igen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ORDER CONFIRMATION MODAL END-->
+
+
+    <!--START main -->
+    <div class="container">
+      <div class="row mt-2">
+        <nav id="sidebar">
+          <ul class="navbar-nav">
+            <div class="d-flex">
+              <p class="h2">Kategorier</p>
+              <span
+                class="close-sidebar fas fa-window-close fa-lg ms-4 mt-2"
+              ></span>
+            </div>
+          </ul>
+        </nav>
+
+        <main class="col-12 col-lg-9">
+          <div
+            class="hero-image d-flex justify-content-center align-items-center"
+          >
+            <div class="hero-text">
+              <a class="text-decoration-none" href="index.html">
+                <h3 id="hero-text" class="">DAGENS HAKIMS DEAL</h3>
+              </a>
+            </div>
+          </div>
+          <div class="">
+            <h2 id="category" class="pt-5 pb-3">Produkter</h2>
+
+            <div id="products" class="row"></div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <!--END main -->
+
+    <!--START footer  -->
+    <footer class="footer-bg text-start pt-4 z-index-2">
       <div class="container-fluid">
-        <div>Grupp 3 (KVA20 JAVA20) &#169; Copyright 2021</div>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 mb-4 mb-md-0 ps-4">
+            <h6 class="text-uppercase text-white">Kontaktuppgifter</h6>
+            <p>
+              Hakim Livs HB <br />
+              Telefon: 08-123456 <br />
+              Epost: hakim@hakims.se <br />
+              Adress: Vägen 3 <br />
+              167 45 Bromma <br />
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © 2021 Copyright: Hakims Livs
+      </div>
+    </footer>
+    <!--END footer  -->
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
@@ -89,5 +369,8 @@
     ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="script.js"></script>
+    <script src="ham-menu.js"></script>
+    <script src="addToCart.js"></script>
+    <script src="login.js"></script>
   </body>
 </html>

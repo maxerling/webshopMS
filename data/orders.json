@@ -5,16 +5,20 @@
     "date": "2014-03-12",
     "customerid": 1,
     "status": "Utskriven",
+    "totalPrice": 1400,
     "products": [
       {
+        "price": 500,
         "productid": 1,
         "qunatity": 2
       },
       {
+        "price": 400,
         "productid": 2,
         "qunatity": 1
       }
     ]
+   
   },
   {
     "id": 2,
@@ -22,12 +26,15 @@
     "date": "2018-01-01",
     "customerid": 2,
     "status": "Skickad",
+    "totalPrice": 1500,
     "products": [
       {
+        "price": 500,
         "productid": 4,
         "qunatity": 2
       },
       {
+        "price": 500,
         "productid": 2,
         "qunatity": 1
       }
@@ -39,12 +46,15 @@
     "date": "2020-05-30",
     "customerid": 3,
     "status": "-",
+    "totalPrice": 2000,
     "products": [
       {
+        "price": 500,
         "productid": 4,
-        "qunatity": 2
+        "qunatity": 3
       },
       {
+        "price": 500,
         "productid": 5,
         "qunatity": 1
       }
@@ -56,12 +66,15 @@
     "date": "2020-02-20",
     "customerid": 3,
     "status": "Levererad",
+    "totalPrice": 3000,
     "products": [
       {
+        "price": 500,
         "productid": 1,
         "qunatity": 2
       },
       {
+        "price": 500,
         "productid": 5,
         "qunatity": 1
       }
