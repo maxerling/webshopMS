@@ -385,7 +385,7 @@ input[type="number"] {
   border-radius: 0;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 768px) {
   .shopping-cart {
     width: 50%;
     margin-right: auto;
