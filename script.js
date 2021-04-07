@@ -364,11 +364,18 @@ $(document).on("click", "#modal-login-button", function () {
 function cartButton() {
   let cartArray = JSON.parse(localStorage.getItem("cart"));
   const cartBtn = document.getElementById("cart");
+  const mobileCartBtn = document.getElementById("btnGroupDrop1");
   if (cartArray == null || cartArray.length == 0) {
     cartBtn.disabled = true;
+    mobileCartBtn.disabled = true;
   } else {
     cartBtn.disabled = false;
     cartBtn.addEventListener("click", () => {
+      window.location.href = "order.html";
+    });
+
+    mobileCartBtn.disabled = false;
+    mobileCartBtn.addEventListener("click", () => {
       window.location.href = "order.html";
     });
   }
