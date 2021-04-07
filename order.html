@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
     <title>Cart</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="all" />
     <link rel="stylesheet" href="sidebar.css" type="text/css" media="all" />
@@ -57,7 +60,6 @@
               Fortsätt handla
             </button>
           </a>
-          
         </div>
       </nav>
     </header>
@@ -65,16 +67,14 @@
     <!--START main -->
     <!-- Displays products start -->
     <div class="parent-container">
-      <div class="row  container-fluid" >
-        <h2  id="cartHeading" class="pt-5 pb-3 ps-5">
-          Produkter i varukorgen
-        </h2>
+      <div class="row container-fluid">
+        <h2 id="cartHeading" class="pt-5 pb-3 ps-5">Produkter i varukorgen</h2>
       </div>
 
       <div class="shopping-cart">
         <table class="table">
           <thead>
-            <tr >
+            <tr>
               <th scope="col"></th>
               <th scope="col">Artikel</th>
               <th scope="col" class="text-center">Kvantitet</th>
@@ -83,49 +83,86 @@
             </tr>
           </thead>
           <tbody class="cart-table">
-            <!-- Produkter i cart -->            
+            <!-- Produkter i cart -->
           </tbody>
         </table>
 
         <div class="row">
           <div class="col-md-6 customer-information">
-            <div class="person-content-title text-center mb-3">Dina uppgifter</div>
+            <div class="person-content-title text-center mb-3">
+              Dina uppgifter
+            </div>
             <div class="customer-info">
               <label for="customer-information-name">Ditt namn:</label>
-              <input class="form-control mx-auto mb-1" id="customer-information-name" type="text" value="Test Testsson" readonly disabled/>
+              <input
+                class="form-control mx-auto mb-1"
+                id="customer-information-name"
+                type="text"
+                value="Test Testsson"
+                readonly
+                disabled
+              />
               <label for="customer-information-address">Din adress:</label>
-              <input class="form-control mx-auto mb-1" id="customer-information-address" type="text" value="Testgatan 33b" readonly disabled/>
+              <input
+                class="form-control mx-auto mb-1"
+                id="customer-information-address"
+                type="text"
+                value="Testgatan 33b"
+                readonly
+                disabled
+              />
               <label for="customer-information-zip">Ditt postnummer:</label>
-              <input class="form-control mx-auto mb-1" id="customer-information-zip" type="text" value="113 34 Stockholm" readonly disabled/>
-              <label for="customer-information-telephone-number">Ditt telefonnummer:</label>
-              <input class="form-control mx-auto mb-1" id="customer-information-telephone-number" type="text" value="0733332221" readonly disabled/>
+              <input
+                class="form-control mx-auto mb-1"
+                id="customer-information-zip"
+                type="text"
+                value="113 34 Stockholm"
+                readonly
+                disabled
+              />
+              <label for="customer-information-telephone-number"
+                >Ditt telefonnummer:</label
+              >
+              <input
+                class="form-control mx-auto mb-1"
+                id="customer-information-telephone-number"
+                type="text"
+                value="0733332221"
+                readonly
+                disabled
+              />
             </div>
           </div>
 
-        <div class="col-md-4 total-price-div">
-          <!-- #total-price ID FÖR TOTAL PRISET-->
-          <table class="pricing-table table">
-            <tbody>
-              <tr>
-                <td class="products-total-price-title py-3 px-0">Summa varor:</td>
-                <td class="products-total-price py-3"></td>
-              </tr>
-              <tr>
-                <td class="py-3 px-0">Leverans:</td>
-                <td class="shipping-cost py-3">49.00</td>
-              </tr>
-              <tr>
-                <td class="py-3 px-0 total-price-title">Totalsumma:</td>
-                <td class="total-price py-3"></td>
-              </tr>
-              <tr>
-                <td class="py-3 px-0">Varav 12% moms:</td>
-                <td class="vat py-3"></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="col-md-4 total-price-div">
+            <!-- #total-price ID FÖR TOTAL PRISET-->
+            <table class="pricing-table table">
+              <tbody>
+                <tr>
+                  <td class="products-total-price-title py-3 px-0">
+                    Summa varor:
+                  </td>
+                  <td class="products-total-price py-3"></td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-0">Leverans:</td>
+                  <td class="shipping-cost py-3">49.00</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-0 total-price-title">Totalsumma:</td>
+                  <td class="total-price py-3"></td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-0">Varav 12% moms:</td>
+                  <td class="vat py-3"></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-center">
+              <button class="mb-4 order-button">Beställ</button>
+            </div>
+          </div>
         </div>
-      </div>
       </div>
     </div>
 

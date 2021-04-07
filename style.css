@@ -162,12 +162,14 @@ header {
 }
 
 .modal-login-button button:hover,
-.shop-again-btn button:hover {
+.shop-again-btn button:hover,
+.order-button:hover {
   transform: translateY(2px);
 }
 
 .modal-login-button button:active,
-.shop-again-btn button:active {
+.shop-again-btn button:active,
+.order-button:active {
   transform: translateY(3px);
 }
 
@@ -195,7 +197,8 @@ header {
 
 /* CREATE ACCOUNT MODAL START */
 
-.create-new-account-button {
+.create-new-account-button,
+.order-button {
   height: 40px;
   color: white;
   width: 100%;
@@ -366,12 +369,12 @@ footer {
 }
 
 @media screen and (min-width: 768px) {
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 /* Firefox */
