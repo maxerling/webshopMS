@@ -162,12 +162,14 @@ header {
 }
 
 .modal-login-button button:hover,
-.shop-again-btn button:hover {
+.shop-again-btn button:hover,
+.order-button:hover {
   transform: translateY(2px);
 }
 
 .modal-login-button button:active,
-.shop-again-btn button:active {
+.shop-again-btn button:active,
+.order-button:active {
   transform: translateY(3px);
 }
 
@@ -195,7 +197,8 @@ header {
 
 /* CREATE ACCOUNT MODAL START */
 
-.create-new-account-button {
+.create-new-account-button,
+.order-button {
   height: 40px;
   color: white;
   width: 100%;
@@ -337,21 +340,41 @@ footer {
   size: ;
 } */
 
-#total-price-area {
-  font-size: 1.4rem;
-  font-weight: bold;
-  padding: 10px;
-  margin: 15px;
-  background-color: #26272b;
-  border-radius: 10px;
-  color: white;
+.total-price-div tbody {
+  color: black;
 }
 
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.customer-information {
+  color: black;
+}
+
+.total-price-title {
+  font-weight: bold;
+}
+
+#total-price {
+  font-weight: bold;
+}
+
+.products-total-price,
+.shipping-cost,
+.vat,
+.total-price {
+  text-align: right;
+}
+
+.customer-information input {
+  padding: 12px 20px;
+  margin: 8px 0;
+}
+
+@media screen and (min-width: 768px) {
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 /* Firefox */
@@ -359,16 +382,85 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+.customer-info input[type="text"] {
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 0;
+}
+
 @media screen and (min-width: 992px) {
   .shopping-cart {
-    width: 70%;
+    width: 50%;
     margin-right: auto;
     margin-left: auto;
   }
   #category {
+    width: 50%;
     margin-right: auto;
     margin-left: auto;
   }
+
+  .total-price-div {
+    margin: auto;
+  }
+
+  .customer-information {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
 }
 
+.person-content-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .products-total-price,
+  .shipping-cost,
+  .vat,
+  .total-price {
+    text-align: center;
+  }
+
+  .customer-information {
+    width: 80% !important;
+    font-size: 1rem;
+    padding: 10px 20px;
+    margin: 15px auto;
+  }
+
+  .total-price-div {
+    margin: auto;
+    width: 60% !important;
+  }
+
+  .customer-info {
+    width: 80%;
+    margin: auto;
+  }
+
+  .customer-info {
+    padding-bottom: 20px;
+  }
+}
+
+/* cart customer information readonly inputs */
+
+/*
+@media screen and (min-width: 768px) {
+  .sm-add-one-product {
+    display: block;
+  }
+  .sm-remove-one-product {
+    display: block;
+  }
+  .md-add-one-product {
+    display: none;
+  }
+  .md-remove-one-product {
+    display: none;
+  }
+}
+*/
 /* CART PAGE STUFF END */
