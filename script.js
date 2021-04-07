@@ -304,58 +304,7 @@ $(document).on("click", "#mobileLogin", function () {
   $(".login-modal").modal("show");
 });
 
-/*Global variable for save customer to array list*/
-let customers = [];
-/**
- * fetch all users for check login form!
- */
-function getCustomers() {
-  fetch("../../data/users.json")
-    .then((resp) => resp.json())
-    .then((data) => {
-      customers = data;
-    })
-    .catch((err) => console.log(err));
-}
-/**
- * Function on login button to check customer and admin account and
- * when a user logs in send them to their own  page.
- */
-$(document).on("click", "#modal-login-button", function () {
-  getCustomers();
 
-  var username = $("#input-username").val();
-  var password = $("#input-password").val();
-
-  console.log(username);
-  console.log(password);
-  customers.forEach((customer) => {
-    if (customer.email == username && customer.password == password) {
-      if (customer.accountType == 1) {
-        alert(
-          "Hello " +
-            customer.name.firstName +
-            " " +
-            customer.name.lastName +
-            " ---> you are admin"
-        );
-        location.href = "/admin-panel/index.html";
-      } else if (customer.accountType == 0) {
-        alert(
-          "Hello " +
-            customer.name.firstName +
-            " " +
-            customer.name.lastName +
-            " ---> you are customer"
-        );
-        localStorage.setItem("customer", JSON.stringify(customer));
-        location.href = "profile.html";
-      }
-    }
-  });
-
-  // alert("Please enter correct email and password")
-});
 
 /**
  * Disables cart button if the cartArray is empty or null else it will rederict to order.html

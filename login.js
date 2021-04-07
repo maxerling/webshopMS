@@ -1,23 +1,22 @@
+/*Global variable for save customer to array list*/
+let customers = [];
 const form = document.getElementById("form");
 const emailField = document.getElementById("input-username");
 const passField = document.getElementById("input-password");
 const invalidMsg = document.getElementsByClassName("invalid-feedback");
 let msg = "";
+/**
+ * fetch all users for check login form!
+ */
+function getCustomers() {
+  fetch("../../data/users.json")
+    .then((resp) => resp.json())
+    .then((data) => {
+      customers = data;
+    })
+    .catch((err) => console.log(err));
+}
 
-form.addEventListener("submit", (e) => {
-  for (msg of invalidMsg) {
-    msg.style.color = "red";
-    msg.style.fontSize = "1em";
-  }
-
-  if (checkEmail() & checkPassword() & testValidButDontMatchUser()) {
-    console.log("sucess");
-  } else {
-    console.log("unsucessful");
-    e.preventDefault();
-    e.stopPropagation();
-  }
-});
 
 /**
  * Checks for a valid email and show error message based on result
@@ -38,6 +37,7 @@ function checkEmail() {
     return false;
   } else if (emailCheck(emailField.value)) {
     msg = "";
+
     invalidMsg[0].innerHTML = msg;
     invalidMsg[0].style.display = "none";
     removeClass(emailField, "is-invalid");
@@ -68,42 +68,10 @@ function checkPassword() {
     return true;
   }
 }
-/**
- * test for a "valid user"
- * @returns boolean
- */
-function testValidButDontMatchUser() {
-  if (emailField.value == "hh@h.com" && passField.value == "h") {
-    msg = "";
-    invalidMsg[1].innerHTML = msg;
-    invalidMsg[0].innerHTML = msg;
-    invalidMsg[0].style.display = "none";
-    invalidMsg[1].style.display = "none";
-    removeClass(emailField, "is-invalid");
-    addClass(emailField, "is-valid");
-    removeClass(passField, "is-invalid");
-    addClass(passField, "is-valid");
-    return true;
-  } else {
-    if (emailField.value.length > 0 && passField.value.length > 0) {
-      console.log("Felaktig e-post eller lösenord!");
-      msg = "Felaktig e-post eller lösenord!";
-      invalidMsg[0].innerHTML = msg;
-      invalidMsg[1].innerHTML = msg;
-      invalidMsg[0].style.display = "block";
-      invalidMsg[1].style.display = "block";
-      removeClass(emailField, "is-valid");
-      removeClass(passField, "is-valid");
-      addClass(emailField, "is-invalid");
-      addClass(passField, "is-invalid");
-    }
-  }
-  return false;
-}
 
 /**
- * checks for valid input based on regex 
- * @param {string} userInput 
+ * checks for valid input based on regex
+ * @param {string} userInput
  * @returns boolean
  */
 function emailCheck(userInput) {
@@ -111,3 +79,72 @@ function emailCheck(userInput) {
 
   return userInput.match(regEx) ? true : false;
 }
+
+/**
+ * Function on login button to check customer and admin account and
+ * when a user logs in send them to their own  page.
+ */
+$(document).on("click", "#modal-login-button", function (e) {
+
+  getCustomers();
+  for (msg of invalidMsg) {
+    msg.style.color = "red";
+    msg.style.fontSize = "1em";
+  }
+  console.log(checkEmail());
+  console.log(checkPassword())
+  if (checkEmail() & checkPassword()) {
+    e.preventDefault();
+    e.stopPropagation();
+    customers.forEach((customer) => {
+      if (
+        emailField.value == customer.email &&
+        passField.value == customer.password
+      ) {
+        msg = "";
+        invalidMsg[1].innerHTML = msg;
+        invalidMsg[0].innerHTML = msg;
+        invalidMsg[0].style.display = "none";
+        invalidMsg[1].style.display = "none";
+        removeClass(emailField, "is-invalid");
+        addClass(emailField, "is-valid");
+        removeClass(passField, "is-invalid");
+        addClass(passField, "is-valid");
+        if (customer.accountType == 1) {
+          alert(
+            "Hello " +
+              customer.name.firstName +
+              " " +
+              customer.name.lastName +
+              " ---> you are admin"
+          );
+          location.href = "/admin-panel/index.html";
+        } else if (customer.accountType == 0) {
+          alert(
+            "Hello " +
+              customer.name.firstName +
+              " " +
+              customer.name.lastName +
+              " ---> you are customer"
+          );
+          localStorage.setItem("customer", JSON.stringify(customer));
+          location.href = "profile.html";
+        }
+      }
+    });
+  } else {
+    console.log("unsucessful");
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("Felaktig e-post eller lösenord!");
+    msg = "Felaktig e-post eller lösenord!";
+    invalidMsg[0].innerHTML = msg;
+    invalidMsg[1].innerHTML = msg;
+    invalidMsg[0].style.display = "block";
+    invalidMsg[1].style.display = "block";
+    removeClass(emailField, "is-valid");
+    removeClass(passField, "is-valid");
+    addClass(emailField, "is-invalid");
+    addClass(passField, "is-invalid");
+  }
+});
