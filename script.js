@@ -160,6 +160,7 @@ function createElementsForProduct(product) {
 function updateCartBtn() {
   let cartArray = JSON.parse(localStorage.getItem("cart"));
   const btn = document.getElementById("cart");
+  const mobileCartBtn = document.getElementById("btnGroupDrop1");
   if (cartArray != null && cartArray.length > 0) {
     let sum = 0;
     for (let i = 0; i < cartArray.length; i++) {
@@ -167,6 +168,7 @@ function updateCartBtn() {
     }
 
     btn.innerHTML = `<i class="fas fa-shopping-cart"></i> Antal produkter: ${sum}`;
+    mobileCartBtn.innerHTML = `${sum}`;
   }
 }
 $(document).on("click", ".modal-cancel-button", function () {
@@ -304,8 +306,6 @@ $(document).on("click", "#mobileLogin", function () {
   $(".login-modal").modal("show");
 });
 
-
-
 /**
  * Disables cart button if the cartArray is empty or null else it will rederict to order.html
  */
@@ -313,11 +313,18 @@ $(document).on("click", "#mobileLogin", function () {
 function cartButton() {
   let cartArray = JSON.parse(localStorage.getItem("cart"));
   const cartBtn = document.getElementById("cart");
+  const mobileCartBtn = document.getElementById("btnGroupDrop1");
   if (cartArray == null || cartArray.length == 0) {
     cartBtn.disabled = true;
+    mobileCartBtn.disabled = true;
   } else {
     cartBtn.disabled = false;
     cartBtn.addEventListener("click", () => {
+      window.location.href = "order.html";
+    });
+
+    mobileCartBtn.disabled = false;
+    mobileCartBtn.addEventListener("click", () => {
       window.location.href = "order.html";
     });
   }
