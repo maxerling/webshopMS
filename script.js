@@ -163,7 +163,7 @@ function updateCartBtn() {
   if (cartArray != null && cartArray.length > 0) {
     let sum = 0;
     for (let i = 0; i < cartArray.length; i++) {
-      sum += 1;
+      sum += 1 * cartArray[i].quantity;
     }
 
     btn.innerHTML = `<i class="fas fa-shopping-cart"></i> Antal produkter: ${sum}`;
