@@ -147,13 +147,8 @@ $(document).ready(function () {
   $(document).on("click", ".fa-minus", function () {
     let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
-    if (q === 1) {
-      $(this)
-        .closest(".quantity-tr")
-        .find(".cart-remove-product")
-        .trigger("click");
-      return;
-    }
+    if (q === 1) return;
+
     q--;
     setNewQuantity(id, q);
     $(this).closest(".quantity-td").find("input").val(q);
