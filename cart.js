@@ -1,8 +1,9 @@
-"use strict";
 
 $(document).ready(function () {
   let cartItems = [];
-
+  let freeShippingThreshold = 250;
+  let shippingCost = 49;
+  let vat = 1.12;
   /**
    *  Fetches data as an array with JSON object from local storage
    *  Appends html-elements using function htmlGenerator that creates html.
@@ -84,7 +85,29 @@ $(document).ready(function () {
       sum += cartItems[i].price * cartItems[i].quantity;
     }
     $("#total-price").html(sum.toFixed(2));
+    $(".products-total-price").html(sum.toFixed(2));
+    calcVat(sum);
+  
+    if(sum > freeShippingThreshold) {
+      $(".total-price").html(sum.toFixed(2));
+    } else {
+      sum += shippingCost;
+      $(".total-price").html(sum.toFixed(2));
+    }
   }
+
+function calcVat(sum) {
+  let temp;
+  if(sum > freeShippingThreshold) {
+    temp = (sum) - (sum / vat);
+    console.log("SUMMA UTAN FRAKT");
+  } else {
+    temp = (sum) - (sum / vat) + (shippingCost) - (shippingCost / vat);
+    console.log("SUMMPA MED FRAKT");
+  }
+
+  $(".vat").html(temp.toFixed(2));
+}
 
   /**
    * Function that takes an id and new quantity and sets that element to the new quantity.
@@ -147,13 +170,8 @@ $(document).ready(function () {
   $(document).on("click", ".fa-minus", function () {
     let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
-    if (q === 1) {
-      $(this)
-        .closest(".quantity-tr")
-        .find(".cart-remove-product")
-        .trigger("click");
-      return;
-    }
+    if (q === 1) return;
+
     q--;
     setNewQuantity(id, q);
     $(this).closest(".quantity-td").find("input").val(q);
