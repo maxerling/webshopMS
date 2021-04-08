@@ -3,9 +3,13 @@ $(document).ready(function () {
 });
 
 window.addEventListener("load", function () {
-  disableCartButton();
-  updateCartBtn();
+  disableOrEnableCartButton();
+  updateCartBtnQtn();
 });
+
+/**
+ *  disableCartButton();
+  updateCartBtn();
 
 /** Global variable */
 let cat = "produkter";
@@ -171,7 +175,7 @@ function createElementsForProduct(product) {
   } else {
     $(btn).click(() => {
       addToCart(`${product.id}`, products);
-      updateCartBtn();
+      updateCartBtnQtn();
       valueChanger.style.display = "block";
       btn.style.display = "none";
       if (cartProduct != undefined) {
@@ -192,9 +196,9 @@ function createElementsForProduct(product) {
           cartItem.quantity = Number(field.value);
         }
       });
-      
+
       localStorage.setItem("cart", JSON.stringify(cartArray));
-      updateCartBtn();
+      updateCartBtnQtn();
     }
   });
 
@@ -202,31 +206,19 @@ function createElementsForProduct(product) {
     let field = minusBtn.parentNode.querySelector("input[type=number]");
     if (Number(field.value) - 1 > 0) {
       field.value = Number(field.value) - 1;
+      cartArray = JSON.parse(localStorage.getItem("cart"));
+      cartArray.forEach((cartItem) => {
+        if (cartItem.id === product.id) {
+          cartItem.quantity = Number(field.value);
+        }
+      });
+
+      localStorage.setItem("cart", JSON.stringify(cartArray));
+      updateCartBtnQtn();
     }
   });
 }
 
-/* 
-
-
-quantityInput.addEventListener("input", (e) => {
-    let inputValue = e.target.value;
-    console.log(isNaN(Number(inputValue)));
-
-    if (isNaN(inputValue)) {
-      let cartArray = JSON.parse(localStorage.getItem("cart"));
-      const index = cartArray.find((element) => {
-        element.id === product.id;
-        element.quantity = inputValue;
-      });
-      console.log(index);
-      cartArray[index].quantity = inputValue;
-      localStorage.setItem("cart", JSON.stringify(cartArray));
-    }
-  });
-
-
-*/
 
 /*
  * adds style to button quantity
@@ -284,7 +276,7 @@ function appendToDiv(
   append(products, div);
 }
 
-function updateCartBtn() {
+function updateCartBtnQtn() {
   let cartArray = JSON.parse(localStorage.getItem("cart"));
   const btn = document.getElementById("cart");
   const mobileCartBtn = document.getElementById("btnGroupDrop1");
@@ -437,7 +429,7 @@ $(document).on("click", "#mobileLogin", function () {
  * Disables cart button if the cartArray is empty or null else it will rederict to order.html
  */
 
-function disableCartButton() {
+function disableOrEnableCartButton() {
   let cartArray = JSON.parse(localStorage.getItem("cart"));
   const cartBtn = document.getElementById("cart");
   const mobileCartBtn = document.getElementById("btnGroupDrop1");
