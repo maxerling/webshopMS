@@ -7,9 +7,7 @@ window.addEventListener("load", function () {
   updateCartBtnQtn();
 });
 
-/**
- *  disableCartButton();
-  updateCartBtn();
+
 
 /** Global variable */
 let cat = "produkter";
@@ -236,7 +234,7 @@ function createElementsForProduct(product) {
       localStorage.setItem("cart", JSON.stringify(cartArray));
       updateCartBtnQtn();
     } else {
-      quantityInput.setCustomValidity("Invalid input");
+      quantityInput.setCustomValidity("Kvantitet ej tillgänlig!");
     }
   });
 }
