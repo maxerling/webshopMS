@@ -23,6 +23,7 @@ function getCustomers() {
  * @returns boolean
  */
 function checkEmail() {
+
   if (emailField.value.length == 0) {
     msg = "Obligatoriskt fält!";
     invalidMsg[0].innerHTML = msg;
@@ -84,18 +85,16 @@ function emailCheck(userInput) {
  * Function on login button to check customer and admin account and
  * when a user logs in send them to their own  page.
  */
-$(document).on("click", "#modal-login-button", function (e) {
-
+$(document).on("submit", "#form1", function (e) {
+  e.preventDefault();
   getCustomers();
   for (msg of invalidMsg) {
     msg.style.color = "red";
     msg.style.fontSize = "1em";
   }
-  console.log(checkEmail());
-  console.log(checkPassword())
+  
   if (checkEmail() & checkPassword()) {
-    e.preventDefault();
-    e.stopPropagation();
+    
     customers.forEach((customer) => {
       if (
         emailField.value == customer.email &&
@@ -111,30 +110,23 @@ $(document).on("click", "#modal-login-button", function (e) {
         removeClass(passField, "is-invalid");
         addClass(passField, "is-valid");
         if (customer.accountType == 1) {
-          alert(
-            "Hello " +
-              customer.name.firstName +
-              " " +
-              customer.name.lastName +
-              " ---> you are admin"
-          );
+        
+          this.classList.add("was-validated");
           location.href = "/admin-panel/index.html";
         } else if (customer.accountType == 0) {
-          alert(
-            "Hello " +
-              customer.name.firstName +
-              " " +
-              customer.name.lastName +
-              " ---> you are customer"
-          );
+         
           localStorage.setItem("customer", JSON.stringify(customer));
-          location.href = "profile.html";
+          document.querySelector('#logIn').style.display="none"
+          document.querySelector('#mobileLogin').style.display="none"
+          document.querySelector('#customer-name').innerText= customer.name.firstName
+          document.querySelector('.userLoggedIn').style.display="block"
+          $(".login-modal").modal("hide");
+          this.classList.add("was-validated");
         }
       }
     });
   } else {
     console.log("unsucessful");
-    e.preventDefault();
     e.stopPropagation();
     console.log("Felaktig e-post eller lösenord!");
     msg = "Felaktig e-post eller lösenord!";
@@ -147,4 +139,9 @@ $(document).on("click", "#modal-login-button", function (e) {
     addClass(emailField, "is-invalid");
     addClass(passField, "is-invalid");
   }
+});
+
+$(document).on("click","#signOut",function(){
+  localStorage.removeItem("customer")
+
 });

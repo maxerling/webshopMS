@@ -4,7 +4,10 @@
   box-sizing: border-box;
 }
 body {
-  background-image: url(../images/bg--se.webp);
+  background-image: url(../images/bgBody.webp);
+}
+a{
+text-decoration: none;
 }
 
 html {
@@ -52,6 +55,9 @@ header {
 
 #logIn:hover {
   background: #e2e2e2;
+}
+.userLoggedIn{
+  display: none;
 }
 
 #cart {
