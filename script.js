@@ -217,8 +217,29 @@ function createElementsForProduct(product) {
       updateCartBtnQtn();
     }
   });
-}
 
+  quantityInput.addEventListener("input", (e) => {
+    let inputValue = Number(e.target.value);
+
+    if (
+      Number.isInteger(Number(inputValue)) &&
+      Number(inputValue) > 0 &&
+      Number(inputValue <= product.quantity)
+    ) {
+      quantityInput.setCustomValidity("");
+      cartArray = JSON.parse(localStorage.getItem("cart"));
+      cartArray.forEach((cartItem) => {
+        if (cartItem.id === product.id) {
+          cartItem.quantity = inputValue;
+        }
+      });
+      localStorage.setItem("cart", JSON.stringify(cartArray));
+      updateCartBtnQtn();
+    } else {
+      quantityInput.setCustomValidity("Invalid input");
+    }
+  });
+}
 
 /*
  * adds style to button quantity
