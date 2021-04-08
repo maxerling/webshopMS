@@ -22,13 +22,13 @@ create table if not exists products
 (id int not null auto_increment,
 name varchar(30) not null unique,
 description varchar(100),
-price int not null,
+price double not null,
 measurement int not null,
 unit varchar(15) not null,
 supplier varchar(30),
 img_path varchar(5000),
 in_stock int not null,
-is_featured boolean not null,
+is_featured boolean not null default false,
 primary key (id),
 foreign key (unit) references units(unit)
 	on update cascade);
@@ -234,6 +234,101 @@ BEGIN
 	commit;
 END //
 Delimiter ;
+
+
+DROP PROCEDURE IF EXISTS addNewProduct;
+Delimiter //
+CREATE PROCEDURE addNewProduct(_name varchar(30), _description varchar(100), _price double, _measurement int, _unit varchar(15), _suppliers varchar(30), _img_path varchar(5000))
+	MODIFIES SQL DATA
+BEGIN
+	declare exit handler for sqlexception
+    begin
+		rollback;
+        RESIGNAL SET MESSAGE_TEXT  = 'SQL Exception - Could not add product to database.';
+    end;
+    
+	start transaction;
+		insert into products(
+		name, description,
+		price, measurement, unit, supplier, img_path, in_stock) values
+		(_name, _description, _price, _measurement, _unit, _suppliers, _img_path, 0);
+	commit;
+END //
+Delimiter ;
+
+
+DROP PROCEDURE IF EXISTS addToInventory;
+Delimiter //
+CREATE PROCEDURE addToInventory(product_id int, amount int)
+	MODIFIES SQL DATA
+BEGIN
+	declare exit handler for sqlexception
+    begin
+		rollback;
+        RESIGNAL SET MESSAGE_TEXT  = 'SQL Exception - Could not find and convert cart to an order for the selected user.';
+    end;
+    
+	start transaction;
+		update products set in_stock = in_stock + amount where id = product_id;
+	commit;
+END //
+Delimiter ;
+
+
+DROP PROCEDURE IF EXISTS setStatusForProductFeatured;
+Delimiter //
+CREATE PROCEDURE setStatusForProductFeatured(product_id int, status boolean)
+	MODIFIES SQL DATA
+BEGIN
+	declare exit handler for sqlexception
+    begin
+		rollback;
+        RESIGNAL SET MESSAGE_TEXT  = 'SQL Exception - Could not set status for featured product.';
+    end;
+    
+	start transaction;
+		update products set is_featured = status where id = product_id;
+	commit;
+END //
+Delimiter ;
+
+
+DROP PROCEDURE IF EXISTS addNewCategory;
+Delimiter //
+CREATE PROCEDURE addNewCategory(_name varchar(30))
+	MODIFIES SQL DATA
+BEGIN
+	declare exit handler for sqlexception
+    begin
+		rollback;
+        RESIGNAL SET MESSAGE_TEXT  = 'SQL Exception - Could not add product to database.';
+    end;
+    
+	start transaction;
+		insert into categories(name) values(_name);
+	commit;
+END //
+Delimiter ;
+
+
+DROP PROCEDURE IF EXISTS bindProductToCategory;
+Delimiter //
+CREATE PROCEDURE bindProductToCategory(_product_id int, _category varchar(30))
+	MODIFIES SQL DATA
+BEGIN
+	declare exit handler for sqlexception
+    begin
+		rollback;
+        RESIGNAL SET MESSAGE_TEXT  = 'SQL Exception - Could not add product to database.';
+    end;
+    
+	start transaction;
+		insert into belongs_to(product_id, category_id) values
+        (_product_id, (select id from categories where name = _category));
+	commit;
+END //
+Delimiter ;
+
 
 DROP PROCEDURE IF EXISTS addToCart;
 Delimiter //
