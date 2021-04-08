@@ -76,7 +76,7 @@
     display: none;
   }
   .btn2{
-    display: inline-block;
+    display:flex;
   }
   #sidebar {
     display: block;

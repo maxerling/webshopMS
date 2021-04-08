@@ -52,25 +52,46 @@
       </div>
 
       <!-- END Search input -->
-
-      <div class="btn2">
-        <button id="logIn" class="btn btn-secondary btn-lg" type="button">
-          <i class="fa fa-sign-in" aria-hidden="true"></i>
-          Logga in
-        </button>
-        
-          <button id="cart" class="btn btn-warning btn-lg" type="button">
-            <i class="fas fa-shopping-cart"></i>
-            Kundvagn
-          </button>
+      <div class="userLoggedIn dropdown">
+        <a
+          href="#"
+          class="d-flex align-items-center text-decoration-none text-dark dropdown-toggle"
+          id="dropdownUser1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+        <i class="fas fa-user me-2"></i>
+          <strong id="customer-name"></strong>
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-dark text-small shadow"
+          aria-labelledby="dropdownUser1"
+        >
+          
+          <li><a class="dropdown-item" href="../profile.html">Profile</a></li><!-- måste skickas info till profil -->
+          <li><hr class="dropdown-divider" /></li>
+          <li><a id="signOut" class="dropdown-item" href="../index.html">Sign out</a></li> <!-- måste raderas info av lokal storage -->
+          
+        </ul>
       </div>
+        <div class="btn2">
+       
+            <button id="logIn" class="btn btn-secondary btn-lg" type="button">
+              <i class="fa fa-sign-in" aria-hidden="true"></i>
+              Logga in
+            </button>
+            <button id="cart" class="btn btn-warning btn-lg ms-2" type="button">
+              <i class="fas fa-shopping-cart"></i>
+              Kundvagn
+            </button>
+        </div>
 
-      <div
+        <div
         class="btn-group btn-sm"
         role="group"
         aria-label="Button group with nested dropdown"
         id="mobile-cart-login"
-      >
+        >
         <button
           class="btn btn-secondary fa fa-sign-in"
           aria-hidden="true"
@@ -114,7 +135,7 @@
             <div class="modal-subtitle pb-2">
               Logga in för att få ut mer av din vardag!
             </div>
-            <form id="form" action="/" method="GET" class="needs-validation" novalidate>
+            <form id="form1" class="needs-validation" novalidate>
               <div class="modal-input-username mx-auto pt-2">
               <input
                 type="email"
@@ -144,6 +165,7 @@
               <button type="submit" id="modal-login-button">Logga in</button>
             </div>
             </form>
+
             <div class="register-new-user">
               <label for="register-new-user-button">Ny hos Hakim livs?</label>
               <button class="register-new-user-button">Skapa konto</button>
