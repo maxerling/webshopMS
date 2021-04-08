@@ -3,6 +3,7 @@ $(document).ready(function () {
 });
 
 window.addEventListener("load", function () {
+  loginButton();
   disableOrEnableCartButton();
   updateCartBtnQtn();
 });
@@ -466,4 +467,19 @@ function disableOrEnableCartButton() {
       window.location.href = "order.html";
     });
   }
+}
+function loginButton(){
+  let customer = JSON.parse(localStorage.getItem("customer"));
+  const logInBtn = document.getElementById("logIn");
+  const userIcon = document.querySelector(".userLoggedIn");
+  const customerName = document.querySelector("#customer-name ");
+
+  if(customer != null){
+      document.querySelector('#mobileLogin').style.display="none"
+
+      logInBtn.style.display = "none";
+      customerName.innerText= customer.name.firstName
+      userIcon.style.display = "block";
+  }
+
 }
