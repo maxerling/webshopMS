@@ -3,7 +3,7 @@ $(document).ready(function () {
 });
 
 window.addEventListener("load", function () {
-  cartButton();
+  disableCartButton();
   updateCartBtn();
 });
 
@@ -158,9 +158,7 @@ function createElementsForProduct(product) {
       valueChanger
     );
   }
-  /**
-   * Ska inte kuna köpa ifall produkten är
-   */
+
   let cartArray = JSON.parse(localStorage.getItem("cart"));
   const cartProduct = cartArray.find((element) => element.id === product.id);
   if (product.quantity == 0) {
@@ -176,9 +174,7 @@ function createElementsForProduct(product) {
       updateCartBtn();
       valueChanger.style.display = "block";
       btn.style.display = "none";
-      console.log(product.quantity);
       if (cartProduct != undefined) {
-        console.log(cartProduct.quantity);
         quantityInput.value = cartProduct.quantity + 1;
       } else {
         quantityInput.value = 1;
@@ -188,8 +184,17 @@ function createElementsForProduct(product) {
 
   plusBtn.addEventListener("click", () => {
     let field = plusBtn.parentNode.querySelector("input[type=number]");
-    if (Number(field.value) + 1 <= 10) {
+    if (Number(field.value) + 1 <= product.quantity) {
       field.value = Number(field.value) + 1;
+      cartArray = JSON.parse(localStorage.getItem("cart"));
+      cartArray.forEach((cartItem) => {
+        if (cartItem.id === product.id) {
+          cartItem.quantity = Number(field.value);
+        }
+      });
+      
+      localStorage.setItem("cart", JSON.stringify(cartArray));
+      updateCartBtn();
     }
   });
 
@@ -432,7 +437,7 @@ $(document).on("click", "#mobileLogin", function () {
  * Disables cart button if the cartArray is empty or null else it will rederict to order.html
  */
 
-function cartButton() {
+function disableCartButton() {
   let cartArray = JSON.parse(localStorage.getItem("cart"));
   const cartBtn = document.getElementById("cart");
   const mobileCartBtn = document.getElementById("btnGroupDrop1");
