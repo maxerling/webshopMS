@@ -285,6 +285,30 @@ header {
   margin-right: 0px;
   margin-bottom: 10px;
 }
+
+#quantityInput {
+  width: 2em;
+  height: 2em;
+}
+
+.quantity-value-changer {
+  border-radius: 50%;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  background-color: #f8be00;
+  color: #fff;
+  border: 2px solid white;
+}
+
+.quantity-value-changer:hover {
+  border: 2px solid #f8be00;
+  text-align: center;
+}
+
+.quantity-value-changer:active {
+  background-color: #b48b03;
+}
 /* PRODUCT END*/
 
 /* FOOTER START*/

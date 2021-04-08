@@ -113,35 +113,56 @@ function createElementsForProduct(product) {
   const p2 = createNode("p");
   const p3 = createNode("p");
   const btn = createNode("button");
+  const quantityInput = createNode("input");
+  addClass(quantityInput, "");
+  const plusBtn = createNode("button");
+  const minusBtn = createNode("button");
+  const valueChanger = createNode("div");
   addClass(btn, "btn-primary");
   addClass(btn, "btn");
+  quantityInput.type = "number";
+  quantityInput.id = "quantityInput";
+  quantityInput.min = 1;
+  addClass(quantityInput, "text-center");
+  plusBtn.innerHTML = "+";
+  minusBtn.innerHTML = "-";
+  addClassesToQuantityButton(plusBtn);
+  addClassesToQuantityButton(minusBtn);
 
   if (cat == "produkter") {
-    img.src = product.image;
-    p1.innerHTML = `${product.price} kr`;
-    p2.innerHTML = product.title;
-    p3.innerHTML = `${product.brand} | ${product.units}`;
-    btn.innerHTML = "Köp";
-    append(div, img);
-    append(div, p1);
-    append(div, p2);
-    append(div, p3);
-    append(div, btn);
-    append(products, div);
+    appendToDiv(
+      product,
+      img,
+      p1,
+      p2,
+      p3,
+      btn,
+      quantityInput,
+      plusBtn,
+      minusBtn,
+      div,
+      valueChanger
+    );
   } else if (cat == product.category) {
-    img.src = product.image;
-    p1.innerHTML = `${product.price} kr`;
-    p2.innerHTML = product.title;
-    p3.innerHTML = `${product.brand} | ${product.units}`;
-    btn.innerHTML = "Köp";
-    append(div, img);
-    append(div, p1);
-    append(div, p2);
-    append(div, p3);
-    append(div, btn);
-    append(products, div);
+    appendToDiv(
+      product,
+      img,
+      p1,
+      p2,
+      p3,
+      btn,
+      quantityInput,
+      plusBtn,
+      minusBtn,
+      div,
+      valueChanger
+    );
   }
-
+  /**
+   * Ska inte kuna köpa ifall produkten är
+   */
+  let cartArray = JSON.parse(localStorage.getItem("cart"));
+  const cartProduct = cartArray.find((element) => element.id === product.id);
   if (product.quantity == 0) {
     $(btn).attr("disabled", "disabled");
     $(btn).html("Slut i lager");
@@ -153,8 +174,109 @@ function createElementsForProduct(product) {
     $(btn).click(() => {
       addToCart(`${product.id}`, products);
       updateCartBtn();
+      valueChanger.style.display = "block";
+      btn.style.display = "none";
+      console.log(product.quantity);
+      if (cartProduct != undefined) {
+        console.log(cartProduct.quantity);
+        quantityInput.value = cartProduct.quantity + 1;
+      } else {
+        quantityInput.value = 1;
+      }
     });
   }
+
+  plusBtn.addEventListener("click", () => {
+    let field = plusBtn.parentNode.querySelector("input[type=number]");
+    if (Number(field.value) + 1 <= 10) {
+      field.value = Number(field.value) + 1;
+    }
+  });
+
+  minusBtn.addEventListener("click", () => {
+    let field = minusBtn.parentNode.querySelector("input[type=number]");
+    if (Number(field.value) - 1 > 0) {
+      field.value = Number(field.value) - 1;
+    }
+  });
+}
+
+/* 
+
+
+quantityInput.addEventListener("input", (e) => {
+    let inputValue = e.target.value;
+    console.log(isNaN(Number(inputValue)));
+
+    if (isNaN(inputValue)) {
+      let cartArray = JSON.parse(localStorage.getItem("cart"));
+      const index = cartArray.find((element) => {
+        element.id === product.id;
+        element.quantity = inputValue;
+      });
+      console.log(index);
+      cartArray[index].quantity = inputValue;
+      localStorage.setItem("cart", JSON.stringify(cartArray));
+    }
+  });
+
+
+*/
+
+/*
+ * adds style to button quantity
+ * @param {element} btn
+ */
+function addClassesToQuantityButton(btn) {
+  addClass(btn, "m-2");
+  addClass(btn, "quantity-value-changer");
+}
+
+/**
+ * Add all the elements to a "main" div
+ * @param {object} product
+ * @param {element} img
+ * @param {element} p1
+ * @param {element} p2
+ * @param {element} p3
+ * @param {element} btn
+ * @param {element} quantityInput
+ * @param {element} plusBtn
+ * @param {element} minusBtn
+ * @param {element} div
+ * @param {element} div
+ */
+
+function appendToDiv(
+  product,
+  img,
+  p1,
+  p2,
+  p3,
+  btn,
+  quantityInput,
+  plusBtn,
+  minusBtn,
+  div,
+  valueChanger
+) {
+  img.src = product.image;
+  p1.innerHTML = `${product.price} kr`;
+  p2.innerHTML = product.title;
+  p3.innerHTML = `${product.brand} | ${product.units}`;
+  btn.innerHTML = "Köp";
+  addClass(valueChanger, "value-changer");
+  append(div, img);
+  append(div, p1);
+  append(div, p2);
+  append(div, p3);
+  append(div, btn);
+  append(valueChanger, minusBtn);
+  append(valueChanger, quantityInput);
+  append(valueChanger, plusBtn);
+  append(div, valueChanger);
+  valueChanger.style.display = "none";
+  append(products, div);
 }
 
 function updateCartBtn() {
