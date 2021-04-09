@@ -280,6 +280,12 @@ function addProductIfDontExist(cartArray, productid, inputValue) {
   localStorage.setItem("cart", JSON.stringify(cartArray));
 }
 
+
+/**
+ * Checks if cartArray match with productid
+ * returns boolean
+ */
+
 function findMatch(cartArray, productid) {
   let i,
     match = false;
