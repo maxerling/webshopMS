@@ -242,10 +242,10 @@ function createElementsForProduct(product) {
               inputValue == null ||
               inputValue == "0"
             ) {
-              console.log("0,null, == 0");
+             
               cartItem.quantity = 0;
             } else {
-              console.log("greater than 0");
+              
               cartItem.quantity = Number(inputValue);
             }
           }
@@ -341,7 +341,6 @@ function appendToDiv(
 
 function updateCartBtnQtn() {
   let cartArray = JSON.parse(localStorage.getItem("cart"));
-  console.log(cartArray);
   const btn = document.getElementById("cart");
   const mobileCartBtn = document.getElementById("btnGroupDrop1");
   if (cartArray != null && cartArray.length > 0) {
