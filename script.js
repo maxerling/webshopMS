@@ -8,8 +8,6 @@ window.addEventListener("load", function () {
   updateCartBtnQtn();
 });
 
-
-
 /** Global variable */
 let cat = "produkter";
 let products = document.getElementById("products");
@@ -123,9 +121,10 @@ function createElementsForProduct(product) {
   const valueChanger = createNode("div");
   addClass(btn, "btn-primary");
   addClass(btn, "btn");
-  quantityInput.type = "number";
+  quantityInput.type = "tel";
   quantityInput.id = "quantityInput";
-  quantityInput.min = 1;
+  quantityInput.min = 0;
+  quantityInput.setAttribute("pattern", "[0-9]+");
   addClass(quantityInput, "text-center");
   plusBtn.innerHTML = "+";
   minusBtn.innerHTML = "-";
@@ -173,20 +172,29 @@ function createElementsForProduct(product) {
     removeClass(img, "product-hover");
   } else {
     $(btn).click(() => {
-      addToCart(`${product.id}`, products);
-      updateCartBtnQtn();
       valueChanger.style.display = "block";
       btn.style.display = "none";
-      if (cartProduct != undefined) {
+
+      if (
+        cartProduct != undefined &&
+        cartProduct.quantity + 1 <= product.quantity
+      ) {
         quantityInput.value = cartProduct.quantity + 1;
+        addToCart(`${product.id}`, products);
+      } else if (cartProduct != undefined && cartProduct.quantity > 0) {
+        quantityInput.value = cartProduct.quantity;
       } else {
         quantityInput.value = 1;
+        addToCart(`${product.id}`, products);
       }
+
+      updateCartBtnQtn();
+      disableOrEnableCartButton();
     });
   }
 
   plusBtn.addEventListener("click", () => {
-    let field = plusBtn.parentNode.querySelector("input[type=number]");
+    let field = plusBtn.parentNode.querySelector("input[type=tel]");
     if (Number(field.value) + 1 <= product.quantity) {
       field.value = Number(field.value) + 1;
       cartArray = JSON.parse(localStorage.getItem("cart"));
@@ -197,13 +205,15 @@ function createElementsForProduct(product) {
       });
 
       localStorage.setItem("cart", JSON.stringify(cartArray));
+      addProductIfDontExist(cartArray, product.id, field.value);
       updateCartBtnQtn();
+      disableOrEnableCartButton();
     }
   });
 
   minusBtn.addEventListener("click", () => {
-    let field = minusBtn.parentNode.querySelector("input[type=number]");
-    if (Number(field.value) - 1 > 0) {
+    let field = minusBtn.parentNode.querySelector("input[type=tel]");
+    if (Number(field.value) - 1 >= 0) {
       field.value = Number(field.value) - 1;
       cartArray = JSON.parse(localStorage.getItem("cart"));
       cartArray.forEach((cartItem) => {
@@ -214,30 +224,63 @@ function createElementsForProduct(product) {
 
       localStorage.setItem("cart", JSON.stringify(cartArray));
       updateCartBtnQtn();
+      disableOrEnableCartButton();
     }
   });
 
   quantityInput.addEventListener("input", (e) => {
-    let inputValue = Number(e.target.value);
-
-    if (
-      Number.isInteger(Number(inputValue)) &&
-      Number(inputValue) > 0 &&
-      Number(inputValue <= product.quantity)
-    ) {
+    e.target.value = e.target.value.replace(/[^0-9]+/, "");
+    let inputValue = e.target.value;
+    if (Number(inputValue) >= 0 && Number(inputValue <= product.quantity)) {
       quantityInput.setCustomValidity("");
-      cartArray = JSON.parse(localStorage.getItem("cart"));
-      cartArray.forEach((cartItem) => {
-        if (cartItem.id === product.id) {
-          cartItem.quantity = inputValue;
-        }
-      });
-      localStorage.setItem("cart", JSON.stringify(cartArray));
-      updateCartBtnQtn();
+      setTimeout(() => {
+        cartArray = JSON.parse(localStorage.getItem("cart"));
+        cartArray.forEach((cartItem) => {
+          if (cartItem.id === product.id) {
+            if (
+              inputValue.length == 0 ||
+              inputValue == null ||
+              inputValue == "0"
+            ) {
+             
+              cartItem.quantity = 0;
+            } else {
+              
+              cartItem.quantity = Number(inputValue);
+            }
+          }
+        });
+
+        addProductIfDontExist(cartArray, product.id, inputValue);
+        updateCartBtnQtn();
+        disableOrEnableCartButton();
+      }, 700);
     } else {
       quantityInput.setCustomValidity("Kvantitet ej tillgänlig!");
     }
   });
+}
+
+/**
+ * Checks if product exist in cart by comparing with AllProducts array.
+ *
+ * @param {array} cartArray
+ * @param {number} productid
+ * @param {string} inputValue - value from input[type="tel"]
+ */
+
+function addProductIfDontExist(cartArray, productid, inputValue) {
+  if (cartArray.some((item) => item.id != productid) || cartArray.length == 0) {
+    let allProducts = JSON.parse(localStorage.getItem("allProducts"));
+    let productThatWillBeAdded = allProducts.find(
+      (ele) => ele.id === productid
+    );
+    productThatWillBeAdded.quantity = Number(inputValue);
+    cartArray.push(productThatWillBeAdded);
+  }
+  cartArray = cartArray.filter((item) => item.quantity > 0);
+
+  localStorage.setItem("cart", JSON.stringify(cartArray));
 }
 
 /*
@@ -405,16 +448,6 @@ function categoryOrignalFormatter(category) {
   return category;
 }
 
-/*function checkCartStatus() {
-  const list = JSON.parse(localStorage.getItem("cart"));
-  if (list.length === 0) {
-    $("#cart").attr("disabled", "disabled");
-    $("cart-btn-link").attr("disabled", "disabled");
-  }
-}
-
-checkCartStatus();*/
-
 $(document).on("click", "#logIn", function () {
   $(".login-modal").modal("show");
 });
@@ -451,11 +484,15 @@ $(document).on("click", "#mobileLogin", function () {
 
 function disableOrEnableCartButton() {
   let cartArray = JSON.parse(localStorage.getItem("cart"));
+  cartArray = cartArray.filter((product) => product.quantity > 0);
   const cartBtn = document.getElementById("cart");
   const mobileCartBtn = document.getElementById("btnGroupDrop1");
   if (cartArray == null || cartArray.length == 0) {
     cartBtn.disabled = true;
     mobileCartBtn.disabled = true;
+    cartBtn.innerHTML = `<i class="fas fa-shopping-cart"></i>
+      Kundvagn`;
+    mobileCartBtn.innerHTML = "";
   } else {
     cartBtn.disabled = false;
     cartBtn.addEventListener("click", () => {
@@ -468,18 +505,17 @@ function disableOrEnableCartButton() {
     });
   }
 }
-function loginButton(){
+function loginButton() {
   let customer = JSON.parse(localStorage.getItem("customer"));
   const logInBtn = document.getElementById("logIn");
   const userIcon = document.querySelector(".userLoggedIn");
   const customerName = document.querySelector("#customer-name ");
 
-  if(customer != null){
-      document.querySelector('#mobileLogin').style.display="none"
+  if (customer != null) {
+    document.querySelector("#mobileLogin").style.display = "none";
 
-      logInBtn.style.display = "none";
-      customerName.innerText= customer.name.firstName
-      userIcon.style.display = "block";
+    logInBtn.style.display = "none";
+    customerName.innerText = customer.name.firstName;
+    userIcon.style.display = "block";
   }
-
 }
