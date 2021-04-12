@@ -464,3 +464,17 @@ input[type="number"] {
 }
 */
 /* CART PAGE STUFF END */
+
+.product-card-modal {
+  width: 50px
+}
+
+.product-card-desc {
+  margin-right: 10px;
+  text-align: left;
+}
+
+.card {
+  padding: 1em;
+  margin-bottom: 2em;
+}
