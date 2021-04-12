@@ -110,6 +110,9 @@ function createElementsForProduct(product) {
   const img = createNode("img");
   addClass(img, "mb-4");
   addClass(img, "product-hover");
+  $(img).click(() => {
+      btnEventHandler(`${product.id}`, products);
+    });
   const p1 = createNode("p");
   const p2 = createNode("p");
   const p3 = createNode("p");
@@ -496,6 +499,10 @@ $(document).on("click", ".order-modal-cancel-button", function () {
   $(".order-modal").modal("hide");
 });
 
+$(document).on("click", ".card-modal-cancel-button", function () {
+  $(".card-modal").modal("hide");
+});
+
 // MODAL SKAPA KONTO BUTTON
 $(document).on("click", ".register-new-user-button", function () {
   $(".login-modal").modal("hide");
@@ -546,3 +553,17 @@ function loginButton() {
     userIcon.style.display = "block";
   }
 }
+/** Function that shows bigger product card with info when clicking product image. */
+function btnEventHandler(itemID) {
+  let allProducts = JSON.parse(localStorage.getItem("allProducts"));
+  let item = allProducts.find((item) => item.id == itemID);
+  if (item != undefined) {
+    $(".product-card-title").text(item.title);
+    $(".product-card-desc").text(item.description);
+    $(".product-card-img").attr("src", item.image);
+    $(".card-modal").modal("show");
+    $(".product-specs").text(`${item.brand} | ${item.units}`);
+    $(".product-price").text("Pris: " + item.price + " kr");
+  }
+}
+
