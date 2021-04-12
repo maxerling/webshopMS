@@ -543,7 +543,7 @@ function loginButton() {
     userIcon.style.display = "block";
   }
 }
-
+/** Function that shows bigger product card with info when clicking product image. */
 function btnEventHandler(itemID) {
   let allProducts = JSON.parse(localStorage.getItem("allProducts"));
   let item = allProducts.find((item) => item.id == itemID);

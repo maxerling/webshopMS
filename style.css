@@ -511,6 +511,7 @@ input[type="number"] {
 .product-card-title {
   font-size: 2em;
   text-align: left;
+  padding-top: 1em;
 }
 
 .product-card-img {
