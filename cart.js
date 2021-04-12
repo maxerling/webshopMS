@@ -48,7 +48,7 @@ $(document).ready(function () {
   function htmlGenerator(data) {
     return `
   <tr class="quantity-tr" id="${data.id}">
-              <td><img class="d-sm-block d-none" src="${
+              <td><img class="d-sm-block d-none cart-image" src="${
                 data.image
               }" alt="" style="width: 60px;"></td>
               <td class = "td-title">${data.title}</td>
@@ -187,6 +187,22 @@ function calcVat(sum) {
     removeFromList(id);
   });
 
+  function getDataForModalFromLS() {
+    
+  }
+
+  $(document).on('click', '.cart-image', function() {
+    $('.cart-modal').modal('show');
+  })
+  $(document).on('click', '.td-title', function() {
+    $('.cart-modal').modal('show');
+  })
+  $('.modal-btn-close').click(function(){
+    $('.cart-modal').modal('hide');
+  })
+  $('.modal-btn-ok').click(function(){
+    $('.cart-modal').modal('hide');
+  })
   // Runs on page load.
   getDataFromLocalStorage();
   calcPrice();
