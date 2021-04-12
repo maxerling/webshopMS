@@ -4,7 +4,10 @@
   box-sizing: border-box;
 }
 body {
-  background-image: url(../images/bg--se.webp);
+  background-image: url(../images/bgBody.webp);
+}
+a{
+text-decoration: none;
 }
 
 html {
@@ -52,6 +55,9 @@ header {
 
 #logIn:hover {
   background: #e2e2e2;
+}
+.userLoggedIn{
+  display: none;
 }
 
 #cart {
@@ -284,6 +290,30 @@ header {
   margin-left: 0px;
   margin-right: 0px;
   margin-bottom: 10px;
+}
+
+#quantityInput {
+  width: 2em;
+  height: 2em;
+}
+
+.quantity-value-changer {
+  border-radius: 50%;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  background-color: #f8be00;
+  color: #fff;
+  border: 2px solid white;
+}
+
+.quantity-value-changer:hover {
+  border: 2px solid #f8be00;
+  text-align: center;
+}
+
+.quantity-value-changer:active {
+  background-color: #b48b03;
 }
 /* PRODUCT END*/
 

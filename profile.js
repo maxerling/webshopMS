@@ -16,7 +16,7 @@
         } else if (
           checkValidFirstName() &&
           checkValidLastName() &&
-          checkEmail() &&
+          // checkEmail() &&
           checkPassword() &&
           checkPhone() &&
           checkStreet() &&
@@ -49,9 +49,9 @@ $("#validationCustom02").focusout(function () {
   checkValidLastName();
 });
 
-$("#validationCustom03").focusout(function () {
-  checkEmail();
-});
+// $("#validationCustom03").focusout(function () {
+//   checkEmail();
+// });
 
 $("#validationCustom04").focusout(function () {
   checkPassword();
@@ -130,7 +130,7 @@ function checkValidLastName() {
     $(invalidDiv).hide();
     $(validDiv).text("Giltig");
     $(validDiv).show();
-
+    $(test).removeClass("is-invalid").addClass("is-valid");
     return true;
   }
 }
