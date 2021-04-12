@@ -489,6 +489,10 @@ $(document).on("click", ".order-modal-cancel-button", function () {
   $(".order-modal").modal("hide");
 });
 
+$(document).on("click", ".card-modal-cancel-button", function () {
+  $(".card-modal").modal("hide");
+});
+
 // MODAL SKAPA KONTO BUTTON
 $(document).on("click", ".register-new-user-button", function () {
   $(".login-modal").modal("hide");
@@ -547,11 +551,9 @@ function btnEventHandler(itemID) {
     $(".product-card-title").text(item.title);
     $(".product-card-desc").text(item.description);
     $(".product-card-img").attr("src", item.image);
-    $(".product-card-modal").modal("show");
+    $(".card-modal").modal("show");
     $(".product-specs").text(`${item.brand} | ${item.units}`);
-    
+    $(".product-price").text("Pris: " + item.price + " kr");
   }
-
-  
 }
 
