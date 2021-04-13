@@ -147,6 +147,30 @@ $(document).ready(function () {
   }
 
   /**
+   * Function that gets data from from localstorage
+   * and displays it in modal window when users clicks on a product.
+   * Uses a for-loop to confirm correct product.
+   * @param {number} id gets correct id of product and compares to products in i cart.
+   */
+  function getDataForModalFromLS(id) {
+    let data;
+    for (let i = 0; i < cartItems.length; i++) {
+      if (cartItems[i].id == id) {
+        data = cartItems[i];
+      }
+    }
+
+    $("#modal-left-space").html(
+      `<img id="modal-prod-img" src="${data.image}" alt="Product image">`
+    );
+    $("#prod-title").text(`${data.title}`);
+    $("#prod-descr").text(`${data.description}`);
+    $("#prod-brand").text(`${data.brand}`);
+    $("#prod-units").text(`${data.units}`);
+    $("#prod-price").text(`${data.price.toFixed(2)} SEK`);
+  }
+
+  /**
    * Listener for plus sign button on each item in the cart.
    * Finds id for product and updates elements quantity.
    * Calls function setNewQuantity().
@@ -170,7 +194,6 @@ $(document).ready(function () {
     let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
     if (q === 1) return;
-
     q--;
     setNewQuantity(id, q);
     $(this).closest(".quantity-td").find("input").val(q);
@@ -186,32 +209,10 @@ $(document).ready(function () {
     removeFromList(id);
   });
 
-  // <h5 class="title"><span class="prod-title">Title</span></h5>
-
-  // <p>Description: <span id="prod-descr"></span></span></p>
-  // <p>Brand: <span id="prod-brand"></span></span></p>
-  // <p>Units: <span id="prod-units"></span></p>
-  // <p>Price: <span id="prod-price"></span></p>
-
-  function getDataForModalFromLS(id) {
-    let data;
-    for (let i = 0; i < cartItems.length; i++) {
-      if (cartItems[i].id == id) {
-        data = cartItems[i];
-      }
-    }
-    console.log(data);
-
-    $("#modal-prod-img").html(
-      `<img id="modal-prod-img" src="${data.image}" alt="Product image"></img>}`
-    );
-    $("#prod-title").text(`${data.title}`);
-    $("#prod-descr").text(`${data.description}`);
-    $("#prod-brand").text(`${data.brand}`);
-    $("#prod-units").text(`${data.units}`);
-    $("#prod-price").text(`${data.price}`);
-  }
-
+  /**
+   * Listeners that displays and closes modal window of specific product
+   * when user clicks image or title of product.
+   */
   $(document).on("click", ".cart-image, .td-title", function () {
     let id = Number($(this).closest(".quantity-tr").attr("id"));
     getDataForModalFromLS(id);
@@ -220,9 +221,7 @@ $(document).ready(function () {
   $(".modal-btn-close").click(function () {
     $(".cart-modal").modal("hide");
   });
-  $(".modal-btn-ok").click(function () {
-    $(".cart-modal").modal("hide");
-  });
+
   // Runs on page load.
   getDataFromLocalStorage();
   calcPrice();

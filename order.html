@@ -170,7 +170,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="title">
-                <span id="prod-title" class="prod-title">Title</span>
+                <span id="prod-title" class="prod-title"></span>
               </h5>
               <button
                 type="button"
@@ -179,22 +179,16 @@
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
-              <div id="modal-left-space">
-                <img id="modal-prod-img" src="" alt="Product image" />
+            <div class="modal-body row">
+              <div id="modal-left-space" class="col-6 sm-col-12 md-col-6">
+                <img id="modal-prod-img" src="" alt="" />
               </div>
-              <div id="modal-right-space">
-                <p>Description: <span id="prod-descr"></span></p>
-                <p>Brand: <span id="prod-brand"></span></p>
-                <p>Units: <span id="prod-units"></span></p>
-                <p>Price: <span id="prod-price"></span></p>
+              <div id="modal-right-space" class="col-6 sm-col-12 md-col-6">
+                <p>Beskrivning: <span id="prod-descr"></span></p>
+                <p>Tillverkare: <span id="prod-brand"></span></p>
+                <p>Storlek: <span id="prod-units"></span></p>
+                <p>Pris: <span id="prod-price"></span></p>
               </div>
-            </div>
-            <div class="modal-footer">
-              <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-              <button type="button" class="btn btn-primary modal-btn-ok">
-                OK
-              </button>
             </div>
           </div>
         </div>
