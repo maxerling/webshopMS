@@ -218,9 +218,12 @@ function createElementsForProduct(product) {
     if (Number(field.value) - 1 >= 0) {
       field.value = Number(field.value) - 1;
       cartArray = JSON.parse(localStorage.getItem("cart"));
-      cartArray.forEach((cartItem) => {
+      cartArray.forEach((cartItem, i) => {
         if (cartItem.id === product.id) {
           cartItem.quantity = Number(field.value);
+          if (cartItem.quantity == 0) {
+            cartArray.splice(i, 1);
+          }
         }
       });
 
@@ -237,16 +240,23 @@ function createElementsForProduct(product) {
       quantityInput.setCustomValidity("");
       setTimeout(() => {
         cartArray = JSON.parse(localStorage.getItem("cart"));
-        cartArray.forEach((cartItem) => {
+        cartArray.forEach((cartItem, i) => {
+          console.log(inputValue != "");
+          console.log(inputValue == "0");
+          console.log(cartItem.id === product.id);
           if (cartItem.id === product.id) {
-            if (
-              inputValue.length == 0 ||
-              inputValue == null ||
-              inputValue == "0"
-            ) {
+            if ((inputValue == "0") & (inputValue != "")) {
+              console.log("d");
+              console.log(inputValue == 0);
+              console.log(inputValue === "0");
               cartItem.quantity = 0;
+              cartArray.splice(i, 1);
+              valueChanger.style.display = "none";
+              btn.style.display = "inline-block";
             } else {
-              cartItem.quantity = Number(inputValue);
+              if (inputValue != "") {
+                cartItem.quantity = Number(inputValue);
+              }
             }
           }
         });
@@ -254,7 +264,7 @@ function createElementsForProduct(product) {
         addProductIfDontExist(cartArray, product.id, inputValue);
         updateCartBtnQtn();
         disableOrEnableCartButton();
-      }, 700);
+      }, 500);
     } else {
       quantityInput.setCustomValidity("Kvantitet ej tillgänlig!");
     }
