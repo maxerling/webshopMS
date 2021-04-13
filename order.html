@@ -66,7 +66,7 @@
 
     <!--START main -->
     <!-- Displays products start -->
-    <div class="parent-container" style="min-height: calc(100vh - 171px);">
+    <div class="parent-container" style="min-height: calc(100vh - 171px)">
       <div class="row container-fluid">
         <h2 id="cartHeading" class="pt-5 pb-3 ps-5">Produkter i varukorgen</h2>
       </div>
@@ -86,9 +86,6 @@
             <!-- Produkter i cart -->
           </tbody>
         </table>
-
-        
-
 
         <div class="row">
           <div class="col-md-6 customer-information">
@@ -162,7 +159,7 @@
               </tbody>
             </table>
             <div class="d-flex justify-content-center">
-              <button class="mb-4 order-button">Beställ</button>  
+              <button class="mb-4 order-button">Beställ</button>
             </div>
           </div>
         </div>
@@ -172,24 +169,32 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="title"><span class="prod-title"></span>Title</h5>
-              <button type="button" class="btn-close modal-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h5 class="title">
+                <span id="prod-title" class="prod-title">Title</span>
+              </h5>
+              <button
+                type="button"
+                class="btn-close modal-btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
             <div class="modal-body">
               <div id="modal-left-space">
-                <img id="modal-prod-img" src="" alt="">
+                <img id="modal-prod-img" src="" alt="Product image" />
               </div>
               <div id="modal-right-space">
-                <p>Description: <span id="prod-descr"></span></span></p>
-                <p>Brand: <span id="prod-brand"></span></span></p>
+                <p>Description: <span id="prod-descr"></span></p>
+                <p>Brand: <span id="prod-brand"></span></p>
                 <p>Units: <span id="prod-units"></span></p>
                 <p>Price: <span id="prod-price"></span></p>
               </div>
-              
             </div>
             <div class="modal-footer">
               <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-              <button type="button" class="btn btn-primary modal-btn-ok">OK</button>
+              <button type="button" class="btn btn-primary modal-btn-ok">
+                OK
+              </button>
             </div>
           </div>
         </div>

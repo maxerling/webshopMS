@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
   let cartItems = [];
   let freeShippingThreshold = 250;
@@ -87,8 +86,8 @@ $(document).ready(function () {
     $("#total-price").html(sum.toFixed(2));
     $(".products-total-price").html(sum.toFixed(2));
     calcVat(sum);
-  
-    if(sum > freeShippingThreshold) {
+
+    if (sum > freeShippingThreshold) {
       $(".total-price").html(sum.toFixed(2));
     } else {
       sum += shippingCost;
@@ -96,18 +95,18 @@ $(document).ready(function () {
     }
   }
 
-function calcVat(sum) {
-  let temp;
-  if(sum > freeShippingThreshold) {
-    temp = (sum) - (sum / vat);
-    console.log("SUMMA UTAN FRAKT");
-  } else {
-    temp = (sum) - (sum / vat) + (shippingCost) - (shippingCost / vat);
-    console.log("SUMMPA MED FRAKT");
-  }
+  function calcVat(sum) {
+    let temp;
+    if (sum > freeShippingThreshold) {
+      temp = sum - sum / vat;
+      console.log("SUMMA UTAN FRAKT");
+    } else {
+      temp = sum - sum / vat + shippingCost - shippingCost / vat;
+      console.log("SUMMPA MED FRAKT");
+    }
 
-  $(".vat").html(temp.toFixed(2));
-}
+    $(".vat").html(temp.toFixed(2));
+  }
 
   /**
    * Function that takes an id and new quantity and sets that element to the new quantity.
@@ -187,22 +186,43 @@ function calcVat(sum) {
     removeFromList(id);
   });
 
-  function getDataForModalFromLS() {
-    
+  // <h5 class="title"><span class="prod-title">Title</span></h5>
+
+  // <p>Description: <span id="prod-descr"></span></span></p>
+  // <p>Brand: <span id="prod-brand"></span></span></p>
+  // <p>Units: <span id="prod-units"></span></p>
+  // <p>Price: <span id="prod-price"></span></p>
+
+  function getDataForModalFromLS(id) {
+    let data;
+    for (let i = 0; i < cartItems.length; i++) {
+      if (cartItems[i].id == id) {
+        data = cartItems[i];
+      }
+    }
+    console.log(data);
+
+    $("#modal-prod-img").html(
+      `<img id="modal-prod-img" src="${data.image}" alt="Product image"></img>}`
+    );
+    $("#prod-title").text(`${data.title}`);
+    $("#prod-descr").text(`${data.description}`);
+    $("#prod-brand").text(`${data.brand}`);
+    $("#prod-units").text(`${data.units}`);
+    $("#prod-price").text(`${data.price}`);
   }
 
-  $(document).on('click', '.cart-image', function() {
-    $('.cart-modal').modal('show');
-  })
-  $(document).on('click', '.td-title', function() {
-    $('.cart-modal').modal('show');
-  })
-  $('.modal-btn-close').click(function(){
-    $('.cart-modal').modal('hide');
-  })
-  $('.modal-btn-ok').click(function(){
-    $('.cart-modal').modal('hide');
-  })
+  $(document).on("click", ".cart-image, .td-title", function () {
+    let id = Number($(this).closest(".quantity-tr").attr("id"));
+    getDataForModalFromLS(id);
+    $(".cart-modal").modal("show");
+  });
+  $(".modal-btn-close").click(function () {
+    $(".cart-modal").modal("hide");
+  });
+  $(".modal-btn-ok").click(function () {
+    $(".cart-modal").modal("hide");
+  });
   // Runs on page load.
   getDataFromLocalStorage();
   calcPrice();
