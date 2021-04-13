@@ -181,7 +181,8 @@ header {
 
 .login-modal-cancel-button img,
 .register-modal-cancel-button img,
-.order-modal-cancel-button img {
+.order-modal-cancel-button img,
+.card-modal-cancel-button img {
   width: 15px;
   height: 15px;
   float: right;
@@ -189,13 +190,15 @@ header {
 
 .login-modal-cancel-button,
 .register-modal-cancel-button,
-.order-modal-cancel-button {
+.order-modal-cancel-button,
+.card-modal-cancel-button {
   padding: 15px;
 }
 
 .login-modal-cancel-button,
 .register-modal-cancel-button,
-.order-modal-cancel-button {
+.order-modal-cancel-button,
+.card-modal-cancel-button {
   border: none;
   background-color: white;
 }
@@ -494,3 +497,36 @@ input[type="number"] {
 }
 */
 /* CART PAGE STUFF END */
+
+/* PRODUCT CARD START*/
+.product-card-modal {
+  width: 50px
+}
+
+.product-card-desc {
+  margin-right: 10px;
+  text-align: left;
+}
+
+.product-card-title {
+  font-size: 2em;
+  text-align: left;
+  padding-top: 1em;
+}
+
+.product-card-img {
+  margin-right: 2em;
+}
+
+.product-price {
+  font-size: 1.5em;
+  font-weight: 900;
+  color: #011e62;
+}
+
+.card {
+  padding: 1em;
+  margin-bottom: 2em;
+}
+
+/* PRODUCT CARD END */
