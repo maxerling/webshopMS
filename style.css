@@ -528,4 +528,17 @@ input[type="number"] {
   margin-bottom: 2em;
 }
 
+#modal-cart-prodinfo p {
+  font-weight: bold;
+}
+
+#modal-cart-prodinfo span {
+  font-weight: normal;
+}
+
+#modal-cart-prodinfo img {
+  margin: 5px;
+  max-width: 90%;
+}
+
 /* PRODUCT CARD END */
