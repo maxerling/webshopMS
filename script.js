@@ -219,6 +219,11 @@ function createElementsForProduct(product) {
   minusBtn.addEventListener("click", () => {
     let field = minusBtn.parentNode.querySelector("input[type=tel]");
     if (Number(field.value) - 1 >= 0) {
+      if (Number(field.value) - 1 <= product.quantity) {
+        p4.style.display = "none";
+        quantityInput.setCustomValidity("");
+      }
+
       field.value = Number(field.value) - 1;
       cartArray = JSON.parse(localStorage.getItem("cart"));
       cartArray.forEach((cartItem, i) => {
@@ -245,14 +250,8 @@ function createElementsForProduct(product) {
       setTimeout(() => {
         cartArray = JSON.parse(localStorage.getItem("cart"));
         cartArray.forEach((cartItem, i) => {
-          console.log(inputValue != "");
-          console.log(inputValue == "0");
-          console.log(cartItem.id === product.id);
           if (cartItem.id === product.id) {
             if ((inputValue == "0") & (inputValue != "")) {
-              console.log("d");
-              console.log(inputValue == 0);
-              console.log(inputValue === "0");
               cartItem.quantity = 0;
               cartArray.splice(i, 1);
               valueChanger.style.display = "none";
