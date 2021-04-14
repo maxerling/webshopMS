@@ -112,7 +112,7 @@ $(document).on("submit", "#form1", function (e) {
         if (customer.accountType == 1) {
         
           this.classList.add("was-validated");
-          location.href = "/admin-panel/index.html";
+          location.href = "admin-panel/index.html";
         } else if (customer.accountType == 0) {
          
           localStorage.setItem("customer", JSON.stringify(customer));
