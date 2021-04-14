@@ -33,9 +33,6 @@ $(document).ready(function () {
         setNewQuantity(id, newValue);
         $(this).closest(".quantity-td").find("input").val(newValue);
       }
-      // if (Number($(this).val()) === 0) {
-      //   $(this).val(tempProd.quantity);
-      // }
     });
   }
 
@@ -213,11 +210,22 @@ $(document).ready(function () {
    * Listeners that displays and closes modal window of specific product
    * when user clicks image or title of product.
    */
-  $(document).on("click", ".cart-image, .td-title", function () {
-    let id = Number($(this).closest(".quantity-tr").attr("id"));
-    getDataForModalFromLS(id);
-    $(".cart-modal").modal("show");
+  $(document).on("click", ".td-title", function () {
+    if (window.innerWidth < 576) {
+      let id = Number($(this).closest(".quantity-tr").attr("id"));
+      getDataForModalFromLS(id);
+      $(".cart-modal").modal("show");
+    }
   });
+
+  $(document).on("click", ".cart-image", function () {
+    if (window.innerWidth >= 576) {
+      let id = Number($(this).closest(".quantity-tr").attr("id"));
+      getDataForModalFromLS(id);
+      $(".cart-modal").modal("show");
+    }
+  });
+
   $(".modal-btn-close").click(function () {
     $(".cart-modal").modal("hide");
   });
