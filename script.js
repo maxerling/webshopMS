@@ -111,11 +111,12 @@ function createElementsForProduct(product) {
   addClass(img, "mb-4");
   addClass(img, "product-hover");
   $(img).click(() => {
-      btnEventHandler(`${product.id}`, products);
-    });
+    btnEventHandler(`${product.id}`, products);
+  });
   const p1 = createNode("p");
   const p2 = createNode("p");
   const p3 = createNode("p");
+  const p4 = createNode("p");
   const btn = createNode("button");
   const quantityInput = createNode("input");
   addClass(quantityInput, "");
@@ -141,6 +142,7 @@ function createElementsForProduct(product) {
       p1,
       p2,
       p3,
+      p4,
       btn,
       quantityInput,
       plusBtn,
@@ -155,6 +157,7 @@ function createElementsForProduct(product) {
       p1,
       p2,
       p3,
+      p4,
       btn,
       quantityInput,
       plusBtn,
@@ -216,6 +219,11 @@ function createElementsForProduct(product) {
   minusBtn.addEventListener("click", () => {
     let field = minusBtn.parentNode.querySelector("input[type=tel]");
     if (Number(field.value) - 1 >= 0) {
+      if (Number(field.value) - 1 <= product.quantity) {
+        p4.style.display = "none";
+        quantityInput.setCustomValidity("");
+      }
+
       field.value = Number(field.value) - 1;
       cartArray = JSON.parse(localStorage.getItem("cart"));
       cartArray.forEach((cartItem, i) => {
@@ -237,18 +245,13 @@ function createElementsForProduct(product) {
     e.target.value = e.target.value.replace(/[^0-9]+/, "");
     let inputValue = e.target.value;
     if (Number(inputValue) >= 0 && Number(inputValue <= product.quantity)) {
+      p4.style.display = "none";
       quantityInput.setCustomValidity("");
       setTimeout(() => {
         cartArray = JSON.parse(localStorage.getItem("cart"));
         cartArray.forEach((cartItem, i) => {
-          console.log(inputValue != "");
-          console.log(inputValue == "0");
-          console.log(cartItem.id === product.id);
           if (cartItem.id === product.id) {
             if ((inputValue == "0") & (inputValue != "")) {
-              console.log("d");
-              console.log(inputValue == 0);
-              console.log(inputValue === "0");
               cartItem.quantity = 0;
               cartArray.splice(i, 1);
               valueChanger.style.display = "none";
@@ -266,7 +269,10 @@ function createElementsForProduct(product) {
         disableOrEnableCartButton();
       }, 500);
     } else {
-      quantityInput.setCustomValidity("Kvantitet ej tillgänlig!");
+      quantityInput.setCustomValidity(
+        "Tyvärr har vi inte så många produkter i lager"
+      );
+      p4.style.display = "inline-block";
     }
   });
 }
@@ -292,7 +298,6 @@ function addProductIfDontExist(cartArray, productid, inputValue) {
 
   localStorage.setItem("cart", JSON.stringify(cartArray));
 }
-
 
 /**
  * Checks if cartArray match with productid
@@ -329,6 +334,7 @@ function addClassesToQuantityButton(btn) {
  * @param {element} p1
  * @param {element} p2
  * @param {element} p3
+ * @param {element} p4
  * @param {element} btn
  * @param {element} quantityInput
  * @param {element} plusBtn
@@ -343,6 +349,7 @@ function appendToDiv(
   p1,
   p2,
   p3,
+  p4,
   btn,
   quantityInput,
   plusBtn,
@@ -354,12 +361,16 @@ function appendToDiv(
   p1.innerHTML = `${product.price} kr`;
   p2.innerHTML = product.title;
   p3.innerHTML = `${product.brand} | ${product.units}`;
+  p4.innerHTML = "Tyvärr har vi inte så många produkter i lager";
+  p4.style = "color:red;";
+  p4.style.display = "none";
   btn.innerHTML = "Köp";
   addClass(valueChanger, "value-changer");
   append(div, img);
   append(div, p1);
   append(div, p2);
   append(div, p3);
+  append(div, p4);
   append(div, btn);
   append(valueChanger, minusBtn);
   append(valueChanger, quantityInput);
@@ -566,4 +577,3 @@ function btnEventHandler(itemID) {
     $(".product-price").text("Pris: " + item.price + " kr");
   }
 }
-
