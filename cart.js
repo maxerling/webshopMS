@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
   let cartItems = [];
   let freeShippingThreshold = 250;
@@ -48,7 +47,7 @@ $(document).ready(function () {
   function htmlGenerator(data) {
     return `
   <tr class="quantity-tr" id="${data.id}">
-              <td><img class="d-sm-block d-none" src="${
+              <td><img class="d-sm-block d-none cart-image" src="${
                 data.image
               }" alt="" style="width: 60px;"></td>
               <td class = "td-title">${data.title}</td>
@@ -87,8 +86,8 @@ $(document).ready(function () {
     $("#total-price").html(sum.toFixed(2));
     $(".products-total-price").html(sum.toFixed(2));
     calcVat(sum);
-  
-    if(sum > freeShippingThreshold) {
+
+    if (sum > freeShippingThreshold) {
       $(".total-price").html(sum.toFixed(2));
     } else {
       sum += shippingCost;
@@ -96,18 +95,18 @@ $(document).ready(function () {
     }
   }
 
-function calcVat(sum) {
-  let temp;
-  if(sum > freeShippingThreshold) {
-    temp = (sum) - (sum / vat);
-    console.log("SUMMA UTAN FRAKT");
-  } else {
-    temp = (sum) - (sum / vat) + (shippingCost) - (shippingCost / vat);
-    console.log("SUMMPA MED FRAKT");
-  }
+  function calcVat(sum) {
+    let temp;
+    if (sum > freeShippingThreshold) {
+      temp = sum - sum / vat;
+      console.log("SUMMA UTAN FRAKT");
+    } else {
+      temp = sum - sum / vat + shippingCost - shippingCost / vat;
+      console.log("SUMMPA MED FRAKT");
+    }
 
-  $(".vat").html(temp.toFixed(2));
-}
+    $(".vat").html(temp.toFixed(2));
+  }
 
   /**
    * Function that takes an id and new quantity and sets that element to the new quantity.
@@ -148,6 +147,30 @@ function calcVat(sum) {
   }
 
   /**
+   * Function that gets data from from localstorage
+   * and displays it in modal window when users clicks on a product.
+   * Uses a for-loop to confirm correct product.
+   * @param {number} id gets correct id of product and compares to products in i cart.
+   */
+  function getDataForModalFromLS(id) {
+    let data;
+    for (let i = 0; i < cartItems.length; i++) {
+      if (cartItems[i].id == id) {
+        data = cartItems[i];
+      }
+    }
+
+    $("#modal-left-space").html(
+      `<img id="modal-prod-img" src="${data.image}" alt="Product image">`
+    );
+    $("#prod-title").text(`${data.title}`);
+    $("#prod-descr").text(`${data.description}`);
+    $("#prod-brand").text(`${data.brand}`);
+    $("#prod-units").text(`${data.units}`);
+    $("#prod-price").text(`${data.price.toFixed(2)} SEK`);
+  }
+
+  /**
    * Listener for plus sign button on each item in the cart.
    * Finds id for product and updates elements quantity.
    * Calls function setNewQuantity().
@@ -171,7 +194,6 @@ function calcVat(sum) {
     let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
     if (q === 1) return;
-
     q--;
     setNewQuantity(id, q);
     $(this).closest(".quantity-td").find("input").val(q);
@@ -185,6 +207,19 @@ function calcVat(sum) {
     let id = Number($(this).closest(".quantity-tr").attr("id"));
     $(this).closest(".quantity-tr").remove();
     removeFromList(id);
+  });
+
+  /**
+   * Listeners that displays and closes modal window of specific product
+   * when user clicks image or title of product.
+   */
+  $(document).on("click", ".cart-image, .td-title", function () {
+    let id = Number($(this).closest(".quantity-tr").attr("id"));
+    getDataForModalFromLS(id);
+    $(".cart-modal").modal("show");
+  });
+  $(".modal-btn-close").click(function () {
+    $(".cart-modal").modal("hide");
   });
 
   // Runs on page load.

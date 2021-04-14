@@ -6,8 +6,8 @@
 body {
   background-image: url(../images/bgBody.webp);
 }
-a{
-text-decoration: none;
+a {
+  text-decoration: none;
 }
 
 html {
@@ -56,7 +56,7 @@ header {
 #logIn:hover {
   background: #e2e2e2;
 }
-.userLoggedIn{
+.userLoggedIn {
   display: none;
 }
 
@@ -428,7 +428,6 @@ input[type="number"] {
     margin-left: auto;
   }
   #category {
-    width: 50%;
     margin-right: auto;
     margin-left: auto;
   }
@@ -500,7 +499,7 @@ input[type="number"] {
 
 /* PRODUCT CARD START*/
 .product-card-modal {
-  width: 50px
+  width: 50px;
 }
 
 .product-card-desc {
@@ -527,6 +526,19 @@ input[type="number"] {
 .card {
   padding: 1em;
   margin-bottom: 2em;
+}
+
+#modal-cart-prodinfo p {
+  font-weight: bold;
+}
+
+#modal-cart-prodinfo span {
+  font-weight: normal;
+}
+
+#modal-cart-prodinfo img {
+  margin: 5px;
+  max-width: 90%;
 }
 
 /* PRODUCT CARD END */
