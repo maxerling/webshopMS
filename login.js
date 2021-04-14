@@ -76,7 +76,7 @@ function checkPassword() {
  * @returns boolean
  */
 function emailCheck(userInput) {
-  let regEx = /[0-9?A-z0-9?]+(\.)?[0-9?A-z0-9?]+@[A-z]+\.[A-z]{3}.?[A-z]{0,3}$/;
+  let regEx = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 
   return userInput.match(regEx) ? true : false;
 }
