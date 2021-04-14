@@ -372,22 +372,5 @@
     "number": "+46732883455",
     "status": 0,
     "accountType": 1
-  },
-  {
-    "id": 21,
-    "name": {
-      "firstName": "Ashkan",
-      "lastName": "Amiri"
-    },
-    "email": "Ashkan.amiri@gmail.com",
-    "password": "123456a",
-    "address": {
-      "street": "Torget 33",
-      "city": "Botkyrka",
-      "zipcode": "14555"
-    },
-    "number": "+46732000771",
-    "status": 0,
-    "accountType": 0
   }
 ]

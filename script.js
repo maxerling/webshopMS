@@ -49,15 +49,14 @@ let append = (parent, el) => $(parent).append(el);
  * Fetch data from url/path
  */
 function getData() {
-  const url = "data/products.json";
+  const url = "https://hakims-webshop.herokuapp.com/product/get";
 
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => {
       productsData = data;
       storeData(data);
-      loadCategories(data);
-      categoryLinkListener();
+      loadCategories();
     })
     .catch((err) => console.log(err));
 }
@@ -87,9 +86,66 @@ function storeData(data) {
  * @param {object} data - Result of taking JSON as input and
  *  parsing it to produce a JS object
  */
-function loadCategories(data) {
-  data.map(function (product) {
-    createCategory(product.category);
+function loadCategories() {
+
+  fetch("https://hakims-webshop.herokuapp.com/category/get")
+    .then((resp) => resp.json())
+    .then((data) => {
+        createCategory(data)
+    })
+}
+/**
+ * Create element base on category name.
+ * @param {string} category . All of categories
+ */
+ function createCategory(categories) {
+  
+
+  categories.map(item => {
+    
+  let li = document.createElement("li");
+  li.setAttribute("class", "nav-item");
+
+    category = categoryFormatter(item.name);
+    let div = document.createElement("a");
+    div.setAttribute("class", "cat h4 nav-link");
+    div.id ="cat"+item.id;
+    div.innerText = category;
+
+    li.appendChild(div);
+    document.querySelector(".navbar-nav").appendChild(li);
+  })
+  categoryLinkListener()
+
+}
+/**
+ * Add category function when you press element.
+ */
+ function categoryLinkListener() {
+  document.querySelectorAll(".cat").forEach((item) => {
+    item.addEventListener("click", function (event) {
+      let target = event.target;
+      catId=target.id
+      cat = target.innerText;
+      console.log(cat.substr(3,cat.length));
+      // cat = categoryOrignalFormatter(cat);
+      products.innerHTML = "";
+      $("#sidebar").animate({ left: "-200" }, "slow");
+
+      let productsCat= []
+      productsData.map(product=>{
+        product.category.map( item => {
+          if(item.id == catId.substr(3,catId.length)) 
+          {
+            productsCat.push(product)
+          }
+        })
+
+      })
+      console.log(productsCat);
+       storeData(productsCat);
+    });
+
   });
 }
 
@@ -135,7 +191,7 @@ function createElementsForProduct(product) {
   addClassesToQuantityButton(plusBtn);
   addClassesToQuantityButton(minusBtn);
 
-  if (cat == "produkter") {
+  
     appendToDiv(
       product,
       img,
@@ -150,22 +206,7 @@ function createElementsForProduct(product) {
       div,
       valueChanger
     );
-  } else if (cat == product.category) {
-    appendToDiv(
-      product,
-      img,
-      p1,
-      p2,
-      p3,
-      p4,
-      btn,
-      quantityInput,
-      plusBtn,
-      minusBtn,
-      div,
-      valueChanger
-    );
-  }
+ 
 
   let cartArray = JSON.parse(localStorage.getItem("cart"));
   const cartProduct = cartArray.find((element) => element.id === product.id);
@@ -399,25 +440,7 @@ $(document).on("click", ".modal-cancel-button", function () {
   $("#registerModal").modal("hide");
   $("#orderModal").modal("hide");
 });
-/**
- * Create element base on category name.
- * @param {string} category . All of categories
- */
-function createCategory(category) {
-  category = categoryFormatter(category);
-  let li = document.createElement("li");
-  li.setAttribute("class", "nav-item");
 
-  if (document.getElementById(category) == null) {
-    let div = document.createElement("a");
-    div.setAttribute("class", "cat h4 nav-link");
-    div.id = category;
-    div.innerText = category;
-
-    li.appendChild(div);
-    document.querySelector(".navbar-nav").appendChild(li);
-  }
-}
 
 /**
  * Formats the text to make it:
@@ -455,21 +478,7 @@ function confirmBtn() {
     "<b>Total belopp: </b>" + orderPrice;
   localStorage.removeItem("inCartArray"); //Dubbelkolla key name
 }
-/**
- * Add category function when you press element.
- */
-function categoryLinkListener() {
-  document.querySelectorAll(".cat").forEach((item) => {
-    item.addEventListener("click", function (event) {
-      let target = event.target;
-      cat = target.innerText;
-      cat = categoryOrignalFormatter(cat);
-      products.innerHTML = "";
-      $("#sidebar").animate({ left: "-200" }, "slow");
-      storeData(productsData);
-    });
-  });
-}
+
 
 /**
  * Revert back the text to its original form state
