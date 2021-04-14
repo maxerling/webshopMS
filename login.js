@@ -9,7 +9,7 @@ let msg = "";
  * fetch all users for check login form!
  */
 function getCustomers() {
-  fetch("../../data/users.json")
+  fetch("data/users.json")
     .then((resp) => resp.json())
     .then((data) => {
       customers = data;
