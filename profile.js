@@ -33,10 +33,10 @@
   });
 })();
 /**
- * måste skickas till databas och efter det visas det!! 
+ * måste skickas till databas och efter det visas det!!
  */
-function showSuccessMessage(){
-    alert(" Hej testare hoppas att allt är ok :D")
+function showSuccessMessage() {
+  alert(" Hej testare hoppas att allt är ok :D");
 }
 
 // **************** VALIDATE form ********************************
@@ -78,26 +78,26 @@ $("#validationCustom08").focusout(function () {
 function checkValidFirstName() {
   let inputId = "#validFirstName";
   const firstname = $("#validationCustom01").val();
-  let test = document.getElementById("validationCustom01");
+  let firstName = document.getElementById("validationCustom01");
   let invalid = "#invalidFirstName";
-  let regPattern = /^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i;
+  let regPattern = /^(?=.{1,50}$)[a-zZäöåÄÖÅ]+(?:['_.\s][a-zZäöåÄÖÅ]+)*$/i;
   if (firstname == "") {
     $(inputId).hide();
     $(invalid).text("förnamn krävs");
     $(invalid).show();
-    $(test).addClass("is-invalid").removeClass("is-valid");
+    $(firstName).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (!regPattern.test(firstname)) {
     $(inputId).hide();
     $(invalid).text("Ogiltig! Endast karaktärer tack");
     $(invalid).show();
-    $(test).addClass("is-invalid").removeClass("is-valid");
+    $(firstName).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else {
     $(invalid).hide();
     $(inputId).text("Giltig");
     $(inputId).show();
-    $(test).removeClass("is-invalid").addClass("is-valid");
+    $(firstName).removeClass("is-invalid").addClass("is-valid");
     return true;
   }
 }
@@ -110,7 +110,7 @@ function checkValidLastName() {
   const lastName = $("#validationCustom02").val();
   let input = document.getElementById("validationCustom02");
   let invalidDiv = "#invalidLastName";
-  let regPattern = /^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i;
+  let regPattern = /^(?=.{1,50}$)[a-zZäöåÄÖÅ]+(?:['_.\s][a-zZäöåÄÖÅ]+)*$/i;
 
   if (lastName == "") {
     $(validDiv).hide();
@@ -130,7 +130,7 @@ function checkValidLastName() {
     $(invalidDiv).hide();
     $(validDiv).text("Giltig");
     $(validDiv).show();
-    $(test).removeClass("is-invalid").addClass("is-valid");
+    $(input).removeClass("is-invalid").addClass("is-valid");
     return true;
   }
 }
@@ -184,7 +184,9 @@ function checkPassword() {
     return false;
   } else if (!regPattern.test(password)) {
     $(validDiv).hide();
-    $(invalidDiv).text("Lösenordet ska innehålla minst 1 bokstav och 1 siffra, samt vara minst 8 tecken långt");
+    $(invalidDiv).text(
+      "Lösenordet ska innehålla minst 1 bokstav och 1 siffra, samt vara minst 8 tecken långt"
+    );
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -204,7 +206,7 @@ function checkStreet() {
   let validDiv = "#validGata";
   let invalidDiv = "#invalidGata";
   let address = $("#validationCustom06").val();
-  let regPattern = /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/;
+  let regPattern = /^[A-Za-z0-9ZäöåÄÖÅ _]*[A-Za-z0-9ZäöåÄÖÅ][A-Za-z0-9ZäöåÄÖÅ _]*$/;
   let input = document.getElementById("validationCustom06");
   if (address == "") {
     $(validDiv).hide();
@@ -238,7 +240,9 @@ function checkPhone() {
   let input = document.getElementById("validationCustom05");
   if (phoneNumber == "") {
     $(validDiv).hide();
-    $(invalidDiv).text("Telefon krävs för att leverantören kunna kontakta dig när hen är framme");
+    $(invalidDiv).text(
+      "Telefon krävs för att leverantören kunna kontakta dig när hen är framme"
+    );
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -264,7 +268,7 @@ function checkOrt() {
   let validDiv = "#validOrt";
   let address = $("#validationCustom07").val();
   let invalidDiv = "#invalidOrt";
-  let regPattern = /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/;
+  let regPattern = /^[A-Za-z0-9ZäöåÄÖÅ _]*[A-Za-z0-9ZäöåÄÖÅ][A-Za-z0-9ZäöåÄÖÅ _]*$/;
   let input = document.getElementById("validationCustom07");
   if (address == "") {
     $(validDiv).hide();
@@ -317,9 +321,9 @@ function checkPostNr() {
   }
 }
 /**
- * 
+ *
  */
-function setProfileFromLS(){
+function setProfileFromLS() {
   let data = JSON.parse(localStorage.getItem("customer"));
   let firstName = $("#validationCustom01").val(data.name.firstName);
   let lastName = $("#validationCustom02").val(data.name.lastName);
@@ -329,9 +333,10 @@ function setProfileFromLS(){
   let address = $("#validationCustom06").val(data.address.city);
   let street = $("#validationCustom07").val(data.address.street);
   let postNr = $("#validationCustom08").val(data.address.zipcode);
-  $("#welcomeText").text("Hej "+ data.name.firstName +" "+ data.name.lastName)
-  $("#welcomeEmail").text(data.email)
-
+  $("#welcomeText").text(
+    "Hej " + data.name.firstName + " " + data.name.lastName
+  );
+  $("#welcomeEmail").text(data.email);
 }
 
-setProfileFromLS()
+setProfileFromLS();
