@@ -3,6 +3,7 @@ $(document).ready(function () {
   let freeShippingThreshold = 250;
   let shippingCost = 49;
   let vat = 1.12;
+ 
   /**
    *  Fetches data as an array with JSON object from local storage
    *  Appends html-elements using function htmlGenerator that creates html.
@@ -17,7 +18,90 @@ $(document).ready(function () {
     }
     checkInputField();
   }
+  /**
+   *
+   */
 
+   $(".order-button").click(function () {
+     if(localStorage.getItem("customer") != null){
+
+      let customer = JSON.parse(localStorage.getItem("customer"));
+      console.log(customer.id);
+      createOrder(customer.id);
+      alert("tack för din beställning")
+      //window.location.href = "index.html";
+
+     
+     }else{
+       alert("Please login first!")
+     }
+   
+    
+  });
+ 
+ function createOrder(customerId){
+      let order = {
+        date: currentDate(),
+        user:{
+              "id": customerId
+        } ,
+        status: 0
+      };
+     fetch('http://localhost:8080/order/add', {
+        method: 'POST',
+        body: JSON.stringify(order),
+        headers:{
+            "Content-Type": "application/json"
+        } 
+    })
+    .then(function (res) {
+       return res.json(); })
+      .then(function(order){
+        let orderId = order.id 
+        console.log(orderId + " order id in fetch order");
+        createOrderRow(orderId)
+      })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  }
+
+  function createOrderRow(orderId) {
+    console.log("orderId in order row" + orderId);
+    let orderRowItems = [];
+    for (let i = 0; i < cartItems.length; i++) {
+      let orderRow = {
+        order: {
+          id: orderId,
+        },
+        product: {
+          id: cartItems[i].id,
+        },
+        quantity: cartItems[i].quantity,
+        status: 1,
+      };
+      orderRowItems.push(orderRow);
+    }
+    fetch("http://localhost:8080/orderRow/add/list", {
+      method: "POST",
+      body: JSON.stringify(orderRowItems),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        if(response.status == 200){
+          localStorage.removeItem("cart")
+          window.location.href = "index.html";
+        }
+       return response.json();
+      }).then((data)=>console.log(data))
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+  }
   // /**
   //  * Listener for input fields in cart that checks if value is positive.
   //  * If not it resets the old value.
@@ -234,3 +318,19 @@ $(document).ready(function () {
   getDataFromLocalStorage();
   calcPrice();
 });
+
+
+function currentDate() {
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  
+  today = yyyy + '/' + mm + '/' + dd;
+   console.log(today);
+  
+  // let today1 = Date.now()
+  // console.log(today1)
+  return today;
+  }

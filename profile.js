@@ -10,22 +10,29 @@
     form.addEventListener(
       "submit",
       (event) => {
+        event.preventDefault();
+        console.log(event.target.id);
         if (!form.checkValidity()) {
           event.preventDefault();
           event.stopPropagation();
         } else if (
           checkValidFirstName() &&
           checkValidLastName() &&
-          // checkEmail() &&
-          checkPassword() &&
+          checkEmail() &&
+          //checkPassword() &&
           checkPhone() &&
           checkStreet() &&
           checkOrt() &&
           checkPostNr()
         ) {
+          event.preventDefault();
           console.log("hej");
           form.classList.add("was-validated");
-          showSuccessMessage();
+          if(event.target.id == "profile-form"){
+            editUser();
+          }else if(event.target.id == "CreateNewAccount-form"){
+            createNewUser()
+          }
         }
       },
       false
@@ -33,11 +40,121 @@
   });
 })();
 /**
- * måste skickas till databas och efter det visas det!!
+ * 
  */
-function showSuccessMessage() {
-  alert(" Hej testare hoppas att allt är ok :D");
+ function createNewUser(){
+  let user = {
+    firstname: $("#validationCustom01").val(),
+    lastname: $("#validationCustom02").val(),
+    email: $("#validationCustom03").val(),
+    password: $("#validationCustom04").val(),
+    address: {
+      street: $("#validationCustom06").val(),
+      city: $("#validationCustom07").val(),
+      zipcode: $("#validationCustom08").val(),
+    },
+    number: $("#validationCustom05").val(),
+    status: 0,
+    accountType: 0,
+  };
+  fetch("http://localhost:8080/user/add", {
+    method: "POST",
+    body: JSON.stringify(user),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (user) {
+      console.log(user);
+      alert(user.firstname + " have been registered successfully");
+      
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
 }
+/**
+ * 
+ */
+function editUser() {
+  let localST = JSON.parse(localStorage.getItem("customer"));
+
+  let user = {
+    id: localST.id, 
+    firstname: $("#validationCustom01").val(),
+    lastname: $("#validationCustom02").val(),
+    email: "",
+    password: $("#validationCustom04").val(),
+    address: {
+      id: localST.address.id,
+      street: $("#validationCustom06").val(),
+      city: $("#validationCustom07").val(),
+      zipcode: $("#validationCustom08").val(),
+    },
+    number: $("#validationCustom05").val(),
+    status: 0,
+    accountType: 0,
+  };
+  fetch("http://localhost:8080/user/update", {
+    method: "POST",
+    body: JSON.stringify(user),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (user) {
+      console.log(user);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+/**
+ * Send request server to delete user
+ */
+function deleteUser() {
+  let localST = JSON.parse(localStorage.getItem("customer"));
+
+  let user = {
+    id: localST.id, 
+    address: {
+      id: localST.address.id, 
+    }
+  };
+  fetch("http://localhost:8080/user/delete", {
+    method: "POST",
+    body: JSON.stringify(user),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(function (res) {
+      console.log(res);
+      console.log(res.status)
+      if (res.status == 200){
+        localStorage.removeItem("customer");
+        alert("You have been deleted")
+        window.location.href = "index.html"
+      }
+      return res.text();
+    })
+    .then(function (deleteMessage) {
+      console.log(deleteMessage);// här kan vi visa en confirm!
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  
+}
+
 
 // **************** VALIDATE form ********************************
 
@@ -49,12 +166,12 @@ $("#validationCustom02").focusout(function () {
   checkValidLastName();
 });
 
-// $("#validationCustom03").focusout(function () {
-//   checkEmail();
-// });
+$("#validationCustom03").focusout(function () {
+  checkEmail();
+});
 
-$("#validationCustom04").focusout(function () {
-  checkPassword();
+let test = $(".validatePassword").focusout(function (event) {
+  return checkPassword(event.target);
 });
 
 $("#validationCustom05").focusout(function () {
@@ -169,12 +286,12 @@ function checkEmail() {
  * Check password is correct.
  * @returns true if the input is valid otherwise false.
  */
-function checkPassword() {
+function checkPassword(target) {
   let regPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-  let validDiv = "#validLösenord";
-  let invalidDiv = "#invalidLösenord";
-  let password = $("#validationCustom04").val();
-  let input = document.getElementById("validationCustom04");
+  let validDiv = target.parentNode.querySelector(".validLösenord");
+  let invalidDiv = target.parentNode.querySelector(".invalidLösenord");
+  let password = target.value;
+  let input = target;
 
   if (password == "") {
     $(validDiv).hide();
@@ -190,12 +307,29 @@ function checkPassword() {
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
+  } else if (target.id == "validationCustom041" && checkRepeatPassword()) {
+    $(validDiv).hide();
+    $(invalidDiv).text("must be same password");
+    $(invalidDiv).show();
+    $(input).addClass("is-invalid").removeClass("is-valid");
+    return false;
   } else {
     $(invalidDiv).hide();
     $(validDiv).text("Giltig");
     $(validDiv).show();
     $(input).removeClass("is-invalid").addClass("is-valid");
     return true;
+  }
+}
+/**
+ * checkRepeatPassword .
+ * @returns true if the input is valid otherwise false.
+ */
+function checkRepeatPassword() {
+  if ($("#validationCustom04").val() != $("#validationCustom041").val()) {
+    return true;
+  } else {
+    return false;
   }
 }
 /**
@@ -324,19 +458,19 @@ function checkPostNr() {
  *
  */
 function setProfileFromLS() {
-  let data = JSON.parse(localStorage.getItem("customer"));
-  let firstName = $("#validationCustom01").val(data.name.firstName);
-  let lastName = $("#validationCustom02").val(data.name.lastName);
-  let email = $("#validationCustom03").val(data.email);
-  let password = $("#validationCustom04").val(data.password);
-  let phoneNumber = $("#validationCustom05").val(data.number);
-  let address = $("#validationCustom06").val(data.address.city);
-  let street = $("#validationCustom07").val(data.address.street);
-  let postNr = $("#validationCustom08").val(data.address.zipcode);
-  $("#welcomeText").text(
-    "Hej " + data.name.firstName + " " + data.name.lastName
-  );
-  $("#welcomeEmail").text(data.email);
+  if (localStorage.getItem("customer") != null) {
+    let localST = JSON.parse(localStorage.getItem("customer"));
+    $("#validationCustom01").val(localST.firstname);
+    $("#validationCustom02").val(localST.lastname);
+    $("#validationCustom03").val(localST.email);
+    $("#validationCustom04").val(localST.password);
+    $("#validationCustom05").val(localST.number);
+    $("#validationCustom06").val(localST.address.street);
+    $("#validationCustom07").val(localST.address.city);
+    $("#validationCustom08").val(localST.address.zipcode);
+    $("#welcomeText").text("Hej " + localST.firstname + " " + localST.lastname);
+    $("#welcomeEmail").text(localST.email);
+  }
 }
 
 setProfileFromLS();

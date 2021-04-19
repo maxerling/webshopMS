@@ -9,7 +9,7 @@ let msg = "";
  * fetch all users for check login form!
  */
 function getCustomers() {
-  fetch("data/users.json")
+  fetch("http://localhost:8080/user/getUsers")
     .then((resp) => resp.json())
     .then((data) => {
       customers = data;
@@ -22,7 +22,7 @@ function getCustomers() {
  * Checks for a valid email and show error message based on result
  * @returns boolean
  */
-function checkEmail() {
+function checkEmail1() {
 
   if (emailField.value.length == 0) {
     msg = "Obligatoriskt fält!";
@@ -53,7 +53,7 @@ function checkEmail() {
  * @returns boolean
  */
 
-function checkPassword() {
+function checkPassword1() {
   if (passField.value.length == 0) {
     msg = "Obligatoriskt fält!";
     invalidMsg[1].innerHTML = msg;
@@ -93,7 +93,7 @@ $(document).on("submit", "#form1", function (e) {
     msg.style.fontSize = "1em";
   }
   
-  if (checkEmail() & checkPassword()) {
+  if (checkEmail1() & checkPassword1()) {
     
     customers.forEach((customer) => {
       if (
@@ -118,7 +118,7 @@ $(document).on("submit", "#form1", function (e) {
           localStorage.setItem("customer", JSON.stringify(customer));
           document.querySelector('#logIn').style.display="none"
           document.querySelector('#mobileLogin').style.display="none"
-          document.querySelector('#customer-name').innerText= customer.name.firstName
+          document.querySelector('#customer-name').innerText= customer.firstname
           document.querySelector('.userLoggedIn').style.display="block"
           $(".login-modal").modal("hide");
           this.classList.add("was-validated");
