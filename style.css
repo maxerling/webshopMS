@@ -4,7 +4,10 @@
   box-sizing: border-box;
 }
 body {
-  background-image: url(../images/bg--se.webp);
+  background-image: url(../images/bgBody.webp);
+}
+a {
+  text-decoration: none;
 }
 
 html {
@@ -52,6 +55,9 @@ header {
 
 #logIn:hover {
   background: #e2e2e2;
+}
+.userLoggedIn {
+  display: none;
 }
 
 #cart {
@@ -162,18 +168,21 @@ header {
 }
 
 .modal-login-button button:hover,
-.shop-again-btn button:hover {
+.shop-again-btn button:hover,
+.order-button:hover {
   transform: translateY(2px);
 }
 
 .modal-login-button button:active,
-.shop-again-btn button:active {
+.shop-again-btn button:active,
+.order-button:active {
   transform: translateY(3px);
 }
 
 .login-modal-cancel-button img,
 .register-modal-cancel-button img,
-.order-modal-cancel-button img {
+.order-modal-cancel-button img,
+.card-modal-cancel-button img {
   width: 15px;
   height: 15px;
   float: right;
@@ -181,13 +190,15 @@ header {
 
 .login-modal-cancel-button,
 .register-modal-cancel-button,
-.order-modal-cancel-button {
+.order-modal-cancel-button,
+.card-modal-cancel-button {
   padding: 15px;
 }
 
 .login-modal-cancel-button,
 .register-modal-cancel-button,
-.order-modal-cancel-button {
+.order-modal-cancel-button,
+.card-modal-cancel-button {
   border: none;
   background-color: white;
 }
@@ -195,7 +206,8 @@ header {
 
 /* CREATE ACCOUNT MODAL START */
 
-.create-new-account-button {
+.create-new-account-button,
+.order-button {
   height: 40px;
   color: white;
   width: 100%;
@@ -282,6 +294,30 @@ header {
   margin-right: 0px;
   margin-bottom: 10px;
 }
+
+#quantityInput {
+  width: 2em;
+  height: 2em;
+}
+
+.quantity-value-changer {
+  border-radius: 50%;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  background-color: #f8be00;
+  color: #fff;
+  border: 2px solid white;
+}
+
+.quantity-value-changer:hover {
+  border: 2px solid #f8be00;
+  text-align: center;
+}
+
+.quantity-value-changer:active {
+  background-color: #b48b03;
+}
 /* PRODUCT END*/
 
 /* FOOTER START*/
@@ -366,12 +402,12 @@ footer {
 }
 
 @media screen and (min-width: 768px) {
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 /* Firefox */
@@ -392,7 +428,6 @@ input[type="number"] {
     margin-left: auto;
   }
   #category {
-    width: 50%;
     margin-right: auto;
     margin-left: auto;
   }
@@ -461,3 +496,49 @@ input[type="number"] {
 }
 */
 /* CART PAGE STUFF END */
+
+/* PRODUCT CARD START*/
+.product-card-modal {
+  width: 50px;
+}
+
+.product-card-desc {
+  margin-right: 10px;
+  text-align: left;
+}
+
+.product-card-title {
+  font-size: 2em;
+  text-align: left;
+  padding-top: 1em;
+}
+
+.product-card-img {
+  margin-right: 2em;
+}
+
+.product-price {
+  font-size: 1.5em;
+  font-weight: 900;
+  color: #011e62;
+}
+
+.card {
+  padding: 1em;
+  margin-bottom: 2em;
+}
+
+#modal-cart-prodinfo p {
+  font-weight: bold;
+}
+
+#modal-cart-prodinfo span {
+  font-weight: normal;
+}
+
+#modal-cart-prodinfo img {
+  margin: 5px;
+  max-width: 90%;
+}
+
+/* PRODUCT CARD END */
