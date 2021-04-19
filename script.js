@@ -531,6 +531,13 @@ $(document).on("click", "#mobileLogin", function () {
   $(".login-modal").modal("show");
 });
 
+/*
+  PETA IN INFORAMTION TILL ORDER.HTML
+*/
+
+
+
+
 /**
  * Disables cart button if the cartArray is empty or null else it will rederict to order.html
  */

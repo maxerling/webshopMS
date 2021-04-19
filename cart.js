@@ -165,14 +165,16 @@ $(document).ready(function () {
       sum += cartItems[i].price * cartItems[i].quantity;
     }
     $("#total-price").html(sum.toFixed(2));
-    $(".products-total-price").html(sum.toFixed(2));
+    $(".products-total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
     calcVat(sum);
 
     if (sum > freeShippingThreshold) {
-      $(".total-price").html(sum.toFixed(2));
+      $(".total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
+      $(".shipping-cost").html("00:00 kr");
     } else {
       sum += shippingCost;
-      $(".total-price").html(sum.toFixed(2));
+      $(".shipping-cost").html("49:00 kr");
+      $(".total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
     }
   }
 
@@ -186,7 +188,7 @@ $(document).ready(function () {
       console.log("SUMMPA MED FRAKT");
     }
 
-    $(".vat").html(temp.toFixed(2));
+    $(".vat").html(temp.toFixed(2).toString().replace(".", ":") + " kr");
   }
 
   /**
@@ -318,6 +320,33 @@ $(document).ready(function () {
   getDataFromLocalStorage();
   calcPrice();
 });
+
+function loadCustomerInfo() {
+  $("#customer-cart-info").hide();
+  $(".person-content-title").hide();
+  $(".order-button")
+  .prop("disabled", true)
+  .text("Logga in")
+  .addClass("disabled-order-button");
+
+  if(localStorage.getItem("customer")) {
+    $(".order-button")
+    .prop("disabled", false)
+    .text("Beställ")
+    .removeClass("disabled-order-button");
+
+    $(".person-content-title").show();
+    $("#customer-cart-info").show();
+    let temp = JSON.parse(localStorage.getItem("customer"));
+    console.log(temp.firstname);
+    $("#customer-information-name").val(temp.firstname + " " + temp.lastname);
+    $("#customer-information-address").val(temp.address.street);
+    $("#customer-information-zip").val(temp.address.zipcode + ", " + temp.address.city);
+    $("#customer-information-telephone-number").val(temp.number);
+  }
+}
+
+loadCustomerInfo();
 
 
 function currentDate() {
