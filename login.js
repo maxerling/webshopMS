@@ -122,6 +122,7 @@ $(document).on("submit", "#form1", function (e) {
           document.querySelector('.userLoggedIn').style.display="block"
           $(".login-modal").modal("hide");
           this.classList.add("was-validated");
+          location.reload();
         }
       }
     });

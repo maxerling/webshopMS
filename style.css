@@ -167,6 +167,11 @@ header {
   transform: translateY(2px);
 }
 
+.disabled-order-button:hover, .disabled-order-button {
+  opacity: 0.5;
+  transform: none;
+}
+
 .modal-login-button button:active,
 .shop-again-btn button:active,
 .order-button:active {
@@ -456,6 +461,12 @@ input[type="number"] {
   .vat,
   .total-price {
     text-align: center;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 
   .customer-information {
