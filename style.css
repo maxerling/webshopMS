@@ -60,13 +60,7 @@ header {
   display: none;
 }
 
-#cart {
-  border: 0.0625rem solid #fff;
-  box-sizing: border-box;
-  border-radius: 0.3125rem;
-  outline: none;
-  box-shadow: none;
-}
+
 
 .bg-light {
   box-shadow: 0 0.0625rem 0.4375rem 0.0625rem rgba(0, 0, 0, 0.1);
@@ -333,6 +327,14 @@ footer {
 
 /* CART PAGE STUFF START */
 
+#cart {
+  border: 0.0625rem solid #fff;
+  box-sizing: border-box;
+  border-radius: 0.3125rem;
+  outline: none;
+  box-shadow: none;
+}
+
 #cartHeading {
   text-align: center;
 }
@@ -440,6 +442,7 @@ input[type="number"] {
     font-size: 0.9rem;
     padding: 10px;
   }
+  
 }
 
 .person-content-title {
