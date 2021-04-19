@@ -57,7 +57,7 @@
     status: 0,
     accountType: 0,
   };
-  fetch("http://localhost:8080/user/add", {
+  fetch("https://hakims-webshop.herokuapp.com/user/add", {
     method: "POST",
     body: JSON.stringify(user),
     headers: {
@@ -99,7 +99,7 @@ function editUser() {
     status: 0,
     accountType: 0,
   };
-  fetch("http://localhost:8080/user/update", {
+  fetch("https://hakims-webshop.herokuapp.com/user/update", {
     method: "POST",
     body: JSON.stringify(user),
     headers: {
@@ -128,7 +128,7 @@ function deleteUser() {
       id: localST.address.id, 
     }
   };
-  fetch("http://localhost:8080/user/delete", {
+  fetch("https://hakims-webshop.herokuapp.com/user/delete", {
     method: "POST",
     body: JSON.stringify(user),
     headers: {
