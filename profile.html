@@ -35,7 +35,7 @@
 
   <!-- START FORM  -->
   <div class="container rounded bg-white mt-5 mb-5">
-    <form class="row g-3 needs-validation" novalidate>
+    <form id="profile-form" class="row g-3 needs-validation" novalidate>
       <div class="row">
 
         <!-- START Image -->
@@ -63,7 +63,7 @@
               <div class="col-md-6 form-floating mt-3">
 
                 <input id="validationCustom01" type="text" class="form-control" placeholder="Förnamn" value=""
-                  maxlength="30" required>
+                  maxlength="50" required>
 
                 <label for="validationCustom01" class="ms-2">Förnamn</label>
 
@@ -77,7 +77,7 @@
               <div class="col-md-6 form-floating mt-3">
 
                 <input id="validationCustom02" type="text" class="form-control" value="" placeholder="Efternamn"
-                  maxlength="30" required>
+                  maxlength="50" required>
                 <label for="validationCustom02" class="form-lable ms-2">Efternamn</label>
                 <div id="validLastName" class="valid-feedback">
 
@@ -91,7 +91,7 @@
               <div class="col-md-12 form-floating">
 
                 <input id="validationCustom03" type="text" class="form-control" placeholder="Email" value=""
-                  maxlength="50" readonly>
+                  maxlength="100" readonly>
                 <label for="validationCustom03" class="form-lable ms-2">Email</label>
                 <!-- <div id="validEmail" class="valid-feedback">
 
@@ -102,20 +102,20 @@
               </div>
               <div class="col-md-12 mt-3 form-floating ">
 
-                <input id="validationCustom04" type="text" class="form-control" placeholder="Lösenord" value=""
-                  maxlength="50" required>
+                <input id="validationCustom04" type="text" class="form-control validatePassword" placeholder="Lösenord" value=""
+                  maxlength="100" required>
                 <label for="validationCustom04" class="form-lable ms-2">Lösenord</label>
-                <div id="validLösenord" class="valid-feedback">
+                <div id="validLösenord" class="valid-feedback validLösenord">
 
                 </div>
-                <div id="invalidLösenord" class="invalid-feedback">
+                <div id="invalidLösenord" class="invalid-feedback invalidLösenord">
 
                 </div>
               </div>
               <div class="col-md-12 mt-3 form-floating">
 
                 <input id="validationCustom05" type="tel" class="form-control" placeholder="Telefon" value=""
-                  maxlength="15" required>
+                  maxlength="20" required>
                 <label for="validationCustom05" class="form-lable ms-2">Telefon</label>
                 <div id="validPhone" class="valid-feedback">
 
@@ -127,7 +127,7 @@
               <div class="col-md-12 mt-3 form-floating">
 
                 <input id="validationCustom06" type="text" class="form-control" placeholder="Gata" value=""
-                  maxlength="100" required>
+                  maxlength="50" required>
                 <label for="validationCustom06" class="form-lable ms-2">Gata</label>
                 <div id="validGata" class="valid-feedback">
 
@@ -153,7 +153,7 @@
               <div class="col-md-6 form-floating mt-3">
 
                 <input id="validationCustom08" type="text" class="form-control" value="" placeholder="Post Nr"
-                  maxlength="10" required>
+                  maxlength="6" required>
                 <label for="validationCustom08" class="form-lable ms-2">Post nummer</label>
                 <div id="validPostNr" class="valid-feedback">
 
@@ -164,13 +164,35 @@
               </div>
             </div class="d-table-row">
             <div class="mt-4 ">
-              <button class="btn btn-danger profile-button" type="button">Radera Konto</button>
-              <button class="btn btn-primary profile-button " type="submit">Spara Profil</button>
+
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Radera konto
+              </button>
+              <button class="btn btn-primary profile-button " type="submit">Updatera Profil</button>
             </div>
           </div>
         </div>
       </div>
+<!-- Button trigger modal -->
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Radera konto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       Vill du verkligen ta bort ditt konto !!!!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Stäng</button>
+        <button onClick="deleteUser()" type="button" class="btn btn-danger">Bekräfta</button>
+      </div>
+    </div>
+  </div>
+</div>
       <!-- END PROFIL -->
 
   </div>

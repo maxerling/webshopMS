@@ -49,7 +49,7 @@ let append = (parent, el) => $(parent).append(el);
  * Fetch data from url/path
  */
 function getData() {
-  const url = "https://hakims-webshop.herokuapp.com/product/get";
+  const url = "http://localhost:8080/product/get";
 
   fetch(url)
     .then((resp) => resp.json())
@@ -88,7 +88,7 @@ function storeData(data) {
  */
 function loadCategories() {
 
-  fetch("https://hakims-webshop.herokuapp.com/category/get")
+  fetch("http://localhost:8080/category/get")
     .then((resp) => resp.json())
     .then((data) => {
         createCategory(data)
@@ -234,7 +234,6 @@ function createElementsForProduct(product) {
         quantityInput.value = 1;
         addToCart(`${product.id}`, products);
       }
-
       updateCartBtnQtn();
       disableOrEnableCartButton();
     });
@@ -401,7 +400,7 @@ function appendToDiv(
   img.src = product.image;
   p1.innerHTML = `${product.price} kr`;
   p2.innerHTML = product.title;
-  p3.innerHTML = `${product.brand} | ${product.units}`;
+  p3.innerHTML = `${product.brand} | ${product.unit}`;
   p4.innerHTML = "Tyvärr har vi inte så många produkter i lager";
   p4.style = "color:red;";
   p4.style.display = "none";
@@ -537,27 +536,31 @@ $(document).on("click", "#mobileLogin", function () {
  */
 
 function disableOrEnableCartButton() {
-  let cartArray = JSON.parse(localStorage.getItem("cart"));
-  cartArray = cartArray.filter((product) => product.quantity > 0);
-  const cartBtn = document.getElementById("cart");
-  const mobileCartBtn = document.getElementById("btnGroupDrop1");
-  if (cartArray == null || cartArray.length == 0) {
-    cartBtn.disabled = true;
-    mobileCartBtn.disabled = true;
-    cartBtn.innerHTML = `<i class="fas fa-shopping-cart"></i>
-      Kundvagn`;
-    mobileCartBtn.innerHTML = "";
-  } else {
-    cartBtn.disabled = false;
-    cartBtn.addEventListener("click", () => {
-      window.location.href = "order.html";
-    });
-
-    mobileCartBtn.disabled = false;
-    mobileCartBtn.addEventListener("click", () => {
-      window.location.href = "order.html";
-    });
+  if(localStorage.getItem("cart")!=null){
+    let cartArray = JSON.parse(localStorage.getItem("cart"));
+    cartArray = cartArray.filter((product) => product.quantity > 0);
+    const cartBtn = document.getElementById("cart");
+    const mobileCartBtn = document.getElementById("btnGroupDrop1");
+    if (cartArray == null || cartArray.length == 0) {
+      cartBtn.disabled = true;
+      mobileCartBtn.disabled = true;
+      cartBtn.innerHTML = `<i class="fas fa-shopping-cart"></i>
+        Kundvagn`;
+      mobileCartBtn.innerHTML = "";
+    } else {
+      cartBtn.disabled = false;
+      cartBtn.addEventListener("click", () => {
+        window.location.href = "order.html";
+  
+      });
+  
+      mobileCartBtn.disabled = false;
+      mobileCartBtn.addEventListener("click", () => {
+        window.location.href = "order.html";
+      });
+    }
   }
+  
 }
 function loginButton() {
   let customer = JSON.parse(localStorage.getItem("customer"));
@@ -569,7 +572,7 @@ function loginButton() {
     document.querySelector("#mobileLogin").style.display = "none";
 
     logInBtn.style.display = "none";
-    customerName.innerText = customer.name.firstName;
+    customerName.innerText = customer.firstname;
     userIcon.style.display = "block";
   }
 }
