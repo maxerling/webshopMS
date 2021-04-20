@@ -44,7 +44,8 @@ $(document).ready(function () {
         date: currentDate(),
         users:{
               "id": customerId
-        } ,
+        },
+        totalPrice: $(".total-price").val(),
         status: 0
       };
      fetch('https://hakims-webshop.herokuapp.com/order/add', {

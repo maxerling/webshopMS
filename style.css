@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  background-image: url(../images/bgBody.webp);
+  background-image: url(images/bgBody.webp);
 }
 a {
   text-decoration: none;
@@ -38,7 +38,7 @@ header {
 }
 .search-field input {
   padding: 0.5rem 0.2rem 0.5rem 2rem;
-  background: url(../images/icons/search-icon.svg) no-repeat left;
+  background: url(images/icons/search-icon.svg) no-repeat left;
   width: 100%;
   border: 1px solid #bbb;
   border-radius: 5px;

@@ -117,7 +117,7 @@ $(document).on("click", "#modal-login-button", function (e) {
           document.querySelector('.userLoggedIn').style.display="block"
           $(".login-modal").modal("hide");
           this.classList.add("was-validated");
-          location.reload();
+         
         }
       }
     });
