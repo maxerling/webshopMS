@@ -9,7 +9,7 @@ let msg = "";
  * fetch all users for check login form!
  */
 function getCustomers() {
-  fetch(`https://hakims-webshop.herokuapp.com/user/get`) // https://hakims-webshop.herokuapp.com/user/get
+  fetch(`https://hakims-webshop.herokuapp.com/user/get`)
     .then((resp) => resp.json())
     .then((data) => {
       customers = data;
