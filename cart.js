@@ -166,28 +166,27 @@ $(document).ready(function () {
     }
     $("#total-price").html(sum.toFixed(2));
     $(".products-total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
-    calcVat(sum);
-
+    
     if (sum > freeShippingThreshold) {
-      $(".total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
-      $(".shipping-cost").html("00:00 kr");
+      shippingCost = 0;
     } else {
-      sum += shippingCost;
-      $(".shipping-cost").html("49:00 kr");
-      $(".total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
+      shippingCost = 49;
+      sum += shippingCost;    
+    }
+    console.log(sum);
+
+    $(".shipping-cost").html(shippingCost.toFixed(2).toString().replace(".", ":") + " kr");
+    $(".total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
+
+    if(sum > 0) {
+      calcVat(sum);
     }
   }
 
   function calcVat(sum) {
     let temp;
-    if (sum > freeShippingThreshold) {
-      temp = sum - sum / vat;
-      console.log("SUMMA UTAN FRAKT");
-    } else {
-      temp = sum - sum / vat + shippingCost - shippingCost / vat;
-      console.log("SUMMPA MED FRAKT");
-    }
-
+    temp = sum - sum / vat;
+    console.log("SUMMA UTAN FRAKT");  
     $(".vat").html(temp.toFixed(2).toString().replace(".", ":") + " kr");
   }
 
@@ -290,6 +289,13 @@ $(document).ready(function () {
     let id = Number($(this).closest(".quantity-tr").attr("id"));
     $(this).closest(".quantity-tr").remove();
     removeFromList(id);
+
+    if(!cartItems || cartItems.length == 0) {
+      $(".order-button")
+      .prop("disabled", true)
+      .text("Kundvagnen är tom!")
+      .addClass("disabled-order-button"); 
+    }
   });
 
   /**
