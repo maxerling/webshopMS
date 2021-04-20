@@ -88,6 +88,7 @@ function emailCheck(userInput) {
 $(document).on("submit", "#form1", function (e) {
   e.preventDefault();
   getCustomers();
+  console.log("hello");
   for (msg of invalidMsg) {
     msg.style.color = "red";
     msg.style.fontSize = "1em";
@@ -122,7 +123,7 @@ $(document).on("submit", "#form1", function (e) {
           document.querySelector('.userLoggedIn').style.display="block"
           $(".login-modal").modal("hide");
           this.classList.add("was-validated");
-          location.reload();
+         
         }
       }
     });

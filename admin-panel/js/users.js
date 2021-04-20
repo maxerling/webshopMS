@@ -4,7 +4,7 @@ let customers = [];
  * call createCustomerElements method to create customers table
  */
 function getData() {
-  const url = "../../data/users.json";
+  const url = "https://hakims-webshop.herokuapp.com/user/get";
 
   fetch(url)
     .then((resp) => resp.json())
@@ -26,7 +26,7 @@ function createCustomerElements(users) {
     trTable = `
       <tr>
                 
-      <td class="cut">${user.name.firstName}</td>
+      <td class="cut">${user.firstname}</td>
       <td class="cut">${user.email}</td>
       <td class="cut">${user.address.city}</td>
       <td class="cut">${user.address.street}</td>
@@ -71,7 +71,6 @@ $(document).ready(function () {
       '<td class="cut"><input type="text" class="form-control"  name="price" id="price"></td>' +
       '<td class="cut"><input type="text" class="form-control"  name="qty" id="qty"></td>' +
       '<td class="cut"><input type="text" class="form-control"  name="units" id="units"></td>' +
-      '<td class="cut"><input type="text" class="form-control"  name="category" id="category"></td>' +
       "<td>" +
       actions +
       "</td>" +
