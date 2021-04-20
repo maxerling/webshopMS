@@ -9,7 +9,7 @@ let msg = "";
  * fetch all users for check login form!
  */
 function getCustomers() {
-  fetch(`data\\users.json`) // https://hakims-webshop.herokuapp.com/user/get
+  fetch(`https://hakims-webshop.herokuapp.com/user/get`) // https://hakims-webshop.herokuapp.com/user/get
     .then((resp) => resp.json())
     .then((data) => {
       customers = data;
@@ -86,6 +86,7 @@ function emailCheck(userInput) {
  * when a user logs in send them to their own  page.
  */
 $(document).on("click", "#modal-login-button", function (e) {
+  e.preventDefault()
   for (msg of invalidMsg) {
     msg.style.color = "red";
     msg.style.fontSize = "1em";
@@ -105,8 +106,8 @@ $(document).on("click", "#modal-login-button", function (e) {
         addClass(emailField, "is-valid");
         removeClass(passField, "is-invalid");
         addClass(passField, "is-valid");
+        console.log(customer.accountType == 1);
         if (customer.accountType == 1) {
-        
           this.classList.add("was-validated");
           location.href = "admin-panel/index.html";
         } else if (customer.accountType == 0) {
