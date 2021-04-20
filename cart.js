@@ -38,14 +38,18 @@ $(document).ready(function () {
    
     
   });
+  
+  
  
  function createOrder(customerId){
+ let total = localStorage.getItem("totalPrice");
+
       let order = {
         date: currentDate(),
         users:{
               "id": customerId
         },
-        totalPrice: $(".total-price").val(),
+        totalPrice: total,
         status: 0
       };
      fetch('https://hakims-webshop.herokuapp.com/order/add', {
@@ -165,6 +169,8 @@ $(document).ready(function () {
     for (let i = 0; i < cartItems.length; i++) {
       sum += cartItems[i].price * cartItems[i].quantity;
     }
+    
+
     $("#total-price").html(sum.toFixed(2));
     $(".products-total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
     calcVat(sum);
@@ -177,6 +183,7 @@ $(document).ready(function () {
       $(".shipping-cost").html("49:00 kr");
       $(".total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
     }
+    localStorage.setItem("totalPrice", sum);
   }
 
   function calcVat(sum) {

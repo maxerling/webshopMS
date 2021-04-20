@@ -13,7 +13,7 @@ function createOrderElements(json) {
             <td class="cut">${order.id}</td>
             <td class="cut">${order.date}</td>
             <td class="cut">${order.users!=null ? order.users.email : "----"}</td>
-            <td class="cut">${order.totalPrice}$</td>
+            <td class="cut">${order.totalPrice} KR</td>
             <td class="cut">
 
                 <div class="statusEdit">
