@@ -6,14 +6,7 @@
 *
 */
 #upload {
-    opacity: 0;
-}
-
-#upload-label {
-    position: absolute;
-    top: 50%;
-    left: 1rem;
-    transform: translateY(-50%);
+    /* opacity: 0; */
 }
 
 .image-area {

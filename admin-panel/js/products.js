@@ -9,15 +9,19 @@ function createProductElements(products) {
   products.forEach((product) => {
     trTable = `
     <tr>
-    <td class="cut">${product.id}</td>
+    <td class="cut" >${product.id}</td>
     <td class="cut">${product.title}</td>
     <td class="cut">${product.brand}</td>
     <td class="cut">${product.description}</td>
-    <td class="cut">${product.image}</td>
-    <td class="cut">${product.price}$</td>
+    <td class="cut" title=${product.image}>${product.image}</td>
+    <td class="cut">${product.price} KR</td>
     <td class="cut">${product.quantity}</td>
-    <td class="cut">${product.units}</td>
-    <td class="cut">${product.category}</td>
+    <td class="cut">${product.unit}</td>
+    <td class="cut"  colspan="2">${
+      product.category.map(item=> item.name)
+    }</td>
+    <td class="cut">${product.featured}</td>
+
     
 
     <td>
@@ -37,7 +41,7 @@ function createProductElements(products) {
 }
 
 $(document).ready(function () {
-  fetch("../../data/products.json")
+  fetch("https://hakims-webshop.herokuapp.com/product/get")
   .then((response) => response.json())
   .then((data) => createProductElements(data))
   .catch((error) => console.error(error));
