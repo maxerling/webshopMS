@@ -336,126 +336,89 @@
           </div>
         </div>
         <!-- LOG IN MODAL END-->
-    
-        <!-- START register modal -->
-        <div class="register-modal modal fade" tabindex="-1" role="dialog">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <button class="register-modal-cancel-button">
-                <img
-                  src="images/icons/cancel-icon.png"
-                  alt="Cancel button"
-                  aria-hidden="true"
-                />
-              </button>
-              <div class="modal-body px-5">
-                <div class="modal-title pb-1 d-none d-sm-block">Skapa konto!</div>
-                <div class="sm-modal-title d-block d-sm-none">Skapa konto!</div>
-                <div class="modal-subtitle pb-3">"Din närlivs - vart du vill"</div>
-                <div class="create-new-account-forms">
-                  <form class="row g-3">
-                    <div class="col-md-6">
-                      <input
-                        class="form-control"
-                        type="text"
-                        id="create-new-account-surname"
-                        name="surname"
-                        placeholder="Förnamn"
-                        maxlength="100"
-                      />
-                    </div>
-                    <div class="col-md-6">
-                      <input
-                        class="form-control"
-                        type="text"
-                        id="create-new-account-lastname"
-                        name="lastname"
-                        placeholder="Efternamn"
-                        maxlength="100"
-                      />
-                    </div>
-                    <div class="col-md-6">
-                      <input
-                        class="form-control"
-                        type="email"
-                        id="create-new-account-email"
-                        name="email"
-                        placeholder="E-mail"
-                        maxlength="100"
-                      />
-                    </div>
-                    <div class="col-md-6">
-                      <input
-                        class="form-control"
-                        type="text"
-                        id="create-new-account-number"
-                        name="number"
-                        placeholder="Telefon"
-                        maxlength="100"
-                      />
-                    </div>
-                    <div class="col-md-6">
-                      <input
-                        class="form-control"
-                        type="password"
-                        id="create-new-account-password"
-                        name="password"
-                        placeholder="Lösenord"
-                        maxlength="100"
-                      />
-                    </div>
-                    <div class="col-md-6">
-                      <input
-                        class="form-control"
-                        type="password"
-                        id="create-new-account-repeat-password"
-                        name="repeat-password"
-                        placeholder="Upprepa lösenord"
-                        maxlength="100"
-                      />
-                    </div>
-                    <div class="col-md-5">
-                      <input
-                        class="form-control"
-                        type="text"
-                        id="create-new-account-street"
-                        name="street"
-                        placeholder="Gata"
-                        maxlength="100"
-                      />
-                    </div>
-                    <div class="col-md-4">
-                      <input
-                        class="form-control"
-                        type="text"
-                        id="create-new-account-city"
-                        name="city"
-                        placeholder="Ort"
-                        maxlength="100"
-                      />
-                    </div>
-                    <div class="col-md-3">
-                      <input
-                        class="form-control"
-                        type="text"
-                        id="create-new-account-zip"
-                        name="zip"
-                        placeholder="Postnummer"
-                        maxlength="7"
-                      />
-                    </div>
-                    <div class="register-new-account pb-4 pt-2">
-                      <button class="create-new-account-button">Skapa konto</button>
-                    </div>
-                  </form>
-                </div>
+
+    <!-- START register modal -->
+  <div class="register-modal modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <button class="register-modal-cancel-button">
+          <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true" />
+        </button>
+        <div class="modal-body px-5">
+          <div class="modal-title pb-1 d-none d-sm-block">Skapa konto!</div>
+          <div class="sm-modal-title d-block d-sm-none">Skapa konto!</div>
+          <div class="modal-subtitle pb-3">"Din närlivs - vart du vill"</div>
+          <div class="create-new-account-forms">
+            <form id="CreateNewAccount-form" class="row g-3 needs-validation " novalidate>
+              <div class="col-md-6">
+                <input class="form-control" type="text" id="validationCustom01" name="surname" placeholder="Förnamn"
+                  maxlength="50" />
+                <div id="validFirstName" class=valid-feedback></div>
+                <div id="invalidFirstName" class="invalid-feedback"></div>
               </div>
-            </div>
+              <div class="col-md-6">
+                <input class="form-control" type="text" id="validationCustom02" name="lastname" placeholder="Efternamn"
+                  maxlength="50" />
+                <div id="validLastName" class="valid-feedback"></div>
+                <div id="invalidLastName" class="invalid-feedback"></div>
+              </div>
+              <div class="col-md-6">
+                <input class="form-control" type="email" id="validationCustom03" name="email" placeholder="E-mail"
+                  maxlength="100" />
+                <div id="validEmail" class="valid-feedback"></div>
+                <div id="invalidEmail" class="invalid-feedback"></div>
+              </div>
+
+              <div class="col-md-6">
+                <input class="form-control validatePassword" type="password" id="validationCustom04" name="password"
+                  placeholder="Lösenord" maxlength="100" />
+                <div id="validLösenord" class="valid-feedback  validLösenord"></div>
+                <div id="invalidLösenord" class="invalid-feedback invalidLösenord"></div>
+
+              </div>
+
+              <div class="col-md-6">
+                <input class="form-control validatePassword" type="password" id="validationCustom041"
+                  name="repeat-password" placeholder="Upprepa lösenord" maxlength="100" />
+                <div id="validLösenord" class="valid-feedback  validLösenord"></div>
+                <div id="invalidLösenord" class="invalid-feedback invalidLösenord"></div>
+              </div>
+              <div class="col-md-6">
+                <input class="form-control" type="text" id="validationCustom05" name="number" placeholder="Telefon"
+                  maxlength="20" />
+                <div id="validPhone" class="valid-feedback "></div>
+                <div id="invalidPhone" class="invalid-feedback "> </div>
+              </div>
+              <div class="col-md-5">
+                <input class="form-control" type="text" id="validationCustom06" name="street" placeholder="Gata"
+                  maxlength="50" />
+                <div id="validGata" class="valid-feedback"></div>
+                <div id="invalidGata" class="invalid-feedback"></div>
+              </div>
+              <div class="col-md-4">
+                <input class="form-control" type="text" id="validationCustom07" name="city" placeholder="Ort"
+                  maxlength="50" />
+                <div id="validOrt" class="valid-feedback"> </div>
+                <div id="invalidOrt" class="invalid-feedback"></div>
+              </div>
+              <div class="col-md-3">
+                <input class="form-control" type="text" id="validationCustom08" name="zip" placeholder="Postnummer"
+                  maxlength="6" />
+                <div id="validPostNr" class="valid-feedback"></div>
+                <div id="invalidPostNr" class="invalid-feedback"></div>
+              </div>
+              <div class="register-new-account pb-4 pt-2">
+                <button type="submit" class="create-new-account-button">Skapa konto</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-    <!-- END register modal -->
+  </div>
+  </div>
+  </div>
+  <!-- END register modal -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
@@ -464,5 +427,6 @@
     <script src="cart.js"></script>
     <script src="script.js"></script>
     <script src="login.js"></script>
+    <script src="profile.js"></script>
   </body>
 </html>
