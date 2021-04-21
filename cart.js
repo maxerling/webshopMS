@@ -4,6 +4,8 @@ $(document).ready(function () {
   let freeShippingThreshold = 250;
   let shippingCost = 49;
   let vat = 1.12;
+ 
+  
   
   /**
    *  Fetches data as an array with JSON object from local storage
@@ -293,16 +295,16 @@ $(document).ready(function () {
   });
 
   function setOrderButtonStatus() {
-    if(cartItems.length == 0 && localStorage.getItem('cart') != null) {
-      $(".order-button")
-      .prop("disabled", true)
-      .text("Kundvagnen är tom!")
-      .addClass("disabled-order-button"); 
-    } else {
+    if(cartItems.length != 0 && localStorage.getItem("customer") != null) {
       $(".order-button")
       .prop("disabled", false)
       .text("Beställ")
-      .removeClass("disabled-order-button");  
+      .removeClass("disabled-order-button"); 
+    } else {
+      $(".order-button")
+      .prop("disabled", true)
+      .text(localStorage.getItem("customer") != null ? "Kundvagnen är tom" : "Logga in")
+      .addClass("disabled-order-button"); 
     }
   }
 
@@ -329,12 +331,6 @@ $(document).ready(function () {
   $(".modal-btn-close").click(function () {
     $(".cart-modal").modal("hide");
   });
-
-  // Runs on page load.
-  getDataFromLocalStorage();
-  calcPrice();  
-  loadCustomerInfo();
-  $(window).on('load', setOrderButtonStatus);
 
 function loadCustomerInfo() {
   $("#customer-cart-info").hide();
@@ -375,4 +371,12 @@ function currentDate() {
   // console.log(today1)
   return today;
   }
+
+  // Runs on page load
+  getDataFromLocalStorage();
+  calcPrice();  
+  $(window).on('load', loadCustomerInfo); 
+  $(window).on('load', setOrderButtonStatus);
+  
+
 });
