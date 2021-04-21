@@ -421,21 +421,27 @@ function appendToDiv(
   append(products, div);
 }
 
-//FORMATE PRICE PRINT
+//Formatting units and prices based on PO request
 function unitFormatter(format) {
+  let delimiter = 0;
+
   if(typeof format === "number") {
+
     format = format.toFixed(2);
-    return format > 999 ? format = (format.slice(0, 1) + " " + format.slice(1)).replace(".", ":") + " kr" : format.toString().replace(".", ":") + " kr";
+    delimiter = format > 9999 && format < 99999 ? 2 : format > 99999 ? 3 : 1;
+    return format > 999 ? format = (format.slice(0, delimiter) + " " + format.slice(delimiter)).replace(".", ":") + " kr" : format.toString().replace(".", ":") + " kr";
+  
   } else {
-    
     let spaceIndex = format.toString().indexOf(" ");
     let value = Number(format.slice(0, spaceIndex));
     let output = value.toString();
+    
+    delimiter = value > 9999 && value < 99999 ? 2 : value > 99999 ? 3 : 1;
 
     if(value > 999) {
-      output = output.slice(0, 1) + " " + output.slice(1, spaceIndex);
+      output = output.slice(0, delimiter) + " " + output.slice(delimiter, spaceIndex);
     }
-
+    
     output += format.slice(spaceIndex);
 
     return output;
