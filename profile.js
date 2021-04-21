@@ -63,7 +63,13 @@
     },
   })
     .then(function (res) {
-      return res.json();
+      if(res.status == 200) {
+        return res.json();
+      }
+      else if(res.status == 500) {
+        alert("E-mail is already in use");
+        $(".register-modal").modal("hide");
+      }
     })
     .then(function (user) {
       user.status = true;
@@ -114,6 +120,7 @@ function editUser() {
     })
     .then(function (user) {
       console.log(user);
+      alert(user.firstname + "har blivit uppdaterat!");
     })
     .catch(function (error) {
       console.log(error);
