@@ -54,7 +54,7 @@ function checkEmail1() {
  */
 
 function checkPassword1() {
-  if (passField.value.length == 0) {
+  if (passField.value.length == 0 || !passwordCheck(passField.value)) {
     msg = "Obligatoriskt fält!";
     invalidMsg[1].innerHTML = msg;
     invalidMsg[1].style.display = "block";
@@ -78,6 +78,16 @@ function checkPassword1() {
 function emailCheck(userInput) {
   let regEx = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 
+  return userInput.match(regEx) ? true : false;
+}
+
+/**
+ * checks for valid inpud based on regex
+ * @param {string} userInput 
+ * @returns boolean
+ */
+function passwordCheck(userInput) {
+  let regEx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
   return userInput.match(regEx) ? true : false;
 }
 
