@@ -367,7 +367,8 @@ function checkStreet() {
  * @returns true if the input is valid otherwise false.
  */
 function checkPhone() {
-  let regPattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+  // let regPattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+  let regPattern = /^[0-9]{3}-[0-9]{3}\s[0-9]{2}\s[0-9]{2}$/im;
   let validDiv = "#validPhone";
   let invalidDiv = "#invalidPhone";
   let phoneNumber = $("#validationCustom05").val();
@@ -382,7 +383,7 @@ function checkPhone() {
     return false;
   } else if (!regPattern.test(phoneNumber)) {
     $(validDiv).hide();
-    $(invalidDiv).text("Ogiltigt telefon nummer");
+    $(invalidDiv).text("Fel format, (07X-XXX XX XX)");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -429,7 +430,7 @@ function checkOrt() {
  * @returns true if the input is valid otherwise false.
  */
 function checkPostNr() {
-  let regPattern = /^(s-|S-){0,1}[0-9]{3}\s?[0-9]{2}$/;
+  let regPattern = /^(s-|S-){0,1}[0-9]{3}\s[0-9]{2}$/;
   let validDiv = "#validPostNr";
   let invalidDiv = "#invalidPostNr";
   let postNr = $("#validationCustom08").val();
@@ -442,7 +443,7 @@ function checkPostNr() {
     return false;
   } else if (!regPattern.test(postNr)) {
     $(validDiv).hide();
-    $(invalidDiv).text("Ogiltigt post nummer");
+    $(invalidDiv).text("Fel format, (xxx xx)");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
