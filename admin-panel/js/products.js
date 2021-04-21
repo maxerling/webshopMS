@@ -12,7 +12,7 @@ function createProductElements(products) {
     <td class="cut" >${product.id}</td>
     <td class="cut">${product.title}</td>
     <td class="cut">${product.brand}</td>
-    <td class="cut" title=${product.description}>${product.description}</td>
+    <td class="cut" title=${product.description} alt=${product.description}>${product.description}</td>
     <td class="cut" title=${product.image}>${product.image}</td>
     <td class="cut">${product.price} KR</td>
     <td class="cut">${product.quantity}</td>
