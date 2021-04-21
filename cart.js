@@ -184,7 +184,7 @@ function confirmBtn(orderRowData) {
                     <div class="sm-add-one-product col-3 col-sm-3 col-md-3 d-block d-sm-none"><i class="fas fa-plus fa-2x mt-2 ms-2"></i></div>
                   </div>
                 </td>
-              <td>${data.price.toFixed(2)}</td>
+              <td>${unitFormatter(data.price)}</td>
               <td>
                 <button class="cart-remove-product"><i class="far fa-trash-alt" class="trash-bin-image"></i></button>
               </td>
@@ -203,7 +203,7 @@ function confirmBtn(orderRowData) {
       sum += cartItems[i].price * cartItems[i].quantity;
     }
     
-    $(".products-total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
+    $(".products-total-price").html(unitFormatter(sum));
     
     if (sum > freeShippingThreshold || sum == 0) {
       shippingCost = 0;      
@@ -214,9 +214,9 @@ function confirmBtn(orderRowData) {
 
     let tempVat = calcVat(sum);
     
-    $(".shipping-cost").html(shippingCost.toFixed(2).toString().replace(".", ":") + " kr");
-    $(".total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
-    $(".vat").html(tempVat.toFixed(2).toString().replace(".", ":") + " kr");
+    $(".shipping-cost").html(unitFormatter(shippingCost));
+    $(".total-price").html(unitFormatter(sum));
+    $(".vat").html(unitFormatter(tempVat));
     localStorage.setItem("totalPrice", sum);
   }
 

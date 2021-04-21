@@ -72,14 +72,14 @@
       }
     })
     .then(function (user) {
-      alert(user.firstname + " har registrerats som ny användare.");
-      location.reload();
       user.status = true;
       localStorage.setItem("customer", JSON.stringify(user));
       document.querySelector('#logIn').style.display="none"
       document.querySelector('#mobileLogin').style.display="none"
       document.querySelector('#customer-name').innerText= user.firstname
       document.querySelector('.userLoggedIn').style.display="block"
+      alert(user.firstname + " har registrerats som ny användare.");
+      location.reload();
     })
     .catch(function (error) {
       console.log(error);
