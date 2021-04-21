@@ -596,36 +596,3 @@ function btnEventHandler(itemID) {
     $(".product-price").text("Pris: " + item.price + " kr");
   }
 }
-
-// .create-new-account-button
-
-$(document).on('click', '.create-new-account-button', function() {
-  const firstName = $('#validationCustom01').val();
-  const lastName = $('#validationCustom02').val();
-  const email = $('#validationCustom03').val();
-  const password1 = $('#validationCustom04').val();
-  const password2 = $('#validationCustom041').val();
-  const phoneNumber = $('#validationCustom05').val();
-  const street = $('#validationCustom06').val();
-  const city = $('#validationCustom07').val();
-  const zipcode = $('#validationCustom08').val();
-
-  //if(firstName != null && LastName != null)
-  const address = {
-    street,
-    city,
-    zipcode
-  }
-
-  const user = {
-    firstName,
-    lastName,
-    email,
-    password1,
-    password2,
-    phoneNumber,
-    address,
-  }
-  console.log(user);
-})
-

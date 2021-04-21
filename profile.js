@@ -202,12 +202,14 @@ function checkValidFirstName() {
     $(inputId).hide();
     $(invalid).text("förnamn krävs");
     $(invalid).show();
+    $(inputId).text("");
     $(firstName).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (!regPattern.test(firstname)) {
     $(inputId).hide();
     $(invalid).text("Ogiltig! Endast karaktärer tack");
     $(invalid).show();
+    $(inputId).text("");
     $(firstName).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else {
@@ -232,6 +234,7 @@ function checkValidLastName() {
   if (lastName == "") {
     $(validDiv).hide();
     $(invalidDiv).text("Efternamn krävs");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
 
@@ -240,6 +243,7 @@ function checkValidLastName() {
     $(validDiv).hide();
     $(invalidDiv).css("color", "red");
     $(invalidDiv).text("Ogiltig! Endast karaktärer tack");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -265,12 +269,14 @@ function checkEmail() {
   if (email == "") {
     $(validDiv).hide();
     $(invalidDiv).text("E-post krävs");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (!regPattern.test(email)) {
     $(validDiv).hide();
     $(invalidDiv).text("Ogiltig e-postadress");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -296,6 +302,7 @@ function checkPassword(target) {
   if (password == "") {
     $(validDiv).hide();
     $(invalidDiv).text("Lösenord krävs");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -304,12 +311,14 @@ function checkPassword(target) {
     $(invalidDiv).text(
       "Lösenordet ska innehålla minst 1 bokstav och 1 siffra, samt vara minst 8 tecken långt"
     );
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (target.id == "validationCustom041" && checkRepeatPassword()) {
     $(validDiv).hide();
     $(invalidDiv).text("must be same password");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -345,12 +354,14 @@ function checkStreet() {
   if (address == "") {
     $(validDiv).hide();
     $(invalidDiv).text("Gata krävs");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (!regPattern.test(address)) {
     $(validDiv).hide();
     $(invalidDiv).text("Ogiltig gata");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -377,12 +388,14 @@ function checkPhone() {
     $(invalidDiv).text(
       "Telefon krävs för att leverantören kunna kontakta dig när hen är framme"
     );
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (!regPattern.test(phoneNumber)) {
     $(validDiv).hide();
     $(invalidDiv).text("Ogiltigt telefon nummer");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -407,12 +420,14 @@ function checkOrt() {
   if (address == "") {
     $(validDiv).hide();
     $(invalidDiv).text("Ort krävs");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (!regPattern.test(address)) {
     $(validDiv).hide();
     $(invalidDiv).text("Ogiltigt Ort");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -437,12 +452,14 @@ function checkPostNr() {
   if (postNr == "") {
     $(validDiv).hide();
     $(invalidDiv).text("Post nummer krävs");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (!regPattern.test(postNr)) {
     $(validDiv).hide();
     $(invalidDiv).text("Ogiltigt post nummer");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -472,5 +489,25 @@ function setProfileFromLS() {
     $("#welcomeEmail").text(localST.email);
   }
 }
+
+/**
+ * Listener that closes create user modal when correct data is entered.
+ */
+$(document).on("click", ".create-new-account-button", function() {
+  const validMsg = document.getElementsByClassName('valid-feedback')
+  let counter = 0;
+  console.log(validMsg[2]);
+  for(msg of validMsg) {
+    if(msg.innerHTML == "Giltig"){
+      counter++;
+    } 
+  }
+  console.log(counter);
+  if(counter === 9) {
+    $('.register-modal').modal("hide");
+  }
+  counter === 0;
+  
+})
 
 setProfileFromLS();
