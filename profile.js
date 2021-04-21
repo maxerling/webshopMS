@@ -65,12 +65,18 @@
     },
   })
     .then(function (res) {
-      return res.json();
+      if(res.status == 200) {
+        return res.json();
+      }
+      else if(res.status == 500) {
+        alert("E-mail is already in use");
+        $(".register-modal").modal("hide");
+      }
     })
     .then(function (user) {
       console.log(user);
       alert(user.firstname + " have been registered successfully");
-      
+      location.reload();
     })
     .catch(function (error) {
       console.log(error);
