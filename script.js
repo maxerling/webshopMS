@@ -398,9 +398,10 @@ function appendToDiv(
   valueChanger
 ) {
   img.src = product.image;
-  p1.innerHTML = `${product.price} kr`;
+
+  p1.innerHTML = unitFormatter(product.price);
   p2.innerHTML = product.title;
-  p3.innerHTML = `${product.brand} | ${product.unit}`;
+  p3.innerHTML = `${product.brand} | ${unitFormatter(product.unit)}`;
   p4.innerHTML = "Tyvärr har vi inte så många produkter i lager";
   p4.style = "color:red;";
   p4.style.display = "none";
@@ -418,6 +419,28 @@ function appendToDiv(
   append(div, valueChanger);
   valueChanger.style.display = "none";
   append(products, div);
+}
+
+//FORMATE PRICE PRINT
+function unitFormatter(format) {
+  if(typeof format === "number") {
+    format = format.toFixed(2);
+    return format > 999 ? format = (format.slice(0, 1) + " " + format.slice(1)).replace(".", ":") + " kr" : format.toString().replace(".", ":") + " kr";
+  } else {
+    
+    let spaceIndex = format.toString().indexOf(" ");
+    let value = Number(format.slice(0, spaceIndex));
+    let output = value.toString();
+
+    if(value > 999) {
+      output = output.slice(0, 1) + " " + output.slice(1, spaceIndex);
+    }
+
+    output += format.slice(spaceIndex);
+
+    return output;
+  }
+  
 }
 
 function updateCartBtnQtn() {
@@ -534,6 +557,7 @@ $(document).on("click", "#mobileLogin", function () {
 /*
   PETA IN INFORAMTION TILL ORDER.HTML
 */
+
 
 
 
