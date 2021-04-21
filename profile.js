@@ -91,12 +91,12 @@
  */
 function editUser() {
   let localST = JSON.parse(localStorage.getItem("customer"));
-
+  console.log($("#validationCustom05").val());
   let user = {
     id: localST.id, 
     firstname: $("#validationCustom01").val(),
     lastname: $("#validationCustom02").val(),
-    email: "",
+    email: $("#validationCustom03").val(),
     password: $("#validationCustom04").val(),
     address: {
       id: localST.address.id,
@@ -120,11 +120,14 @@ function editUser() {
     })
     .then(function (user) {
       console.log(user);
+      localStorage.setItem("customer", JSON.stringify(user));
+      location.reload();
       alert(user.firstname + "har blivit uppdaterat!");
     })
     .catch(function (error) {
       console.log(error);
     });
+    
 }
 /**
  * Send request server to delete user
