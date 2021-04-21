@@ -1,9 +1,10 @@
 $(document).ready(function () {
+
   let cartItems = [];
   let freeShippingThreshold = 250;
   let shippingCost = 49;
   let vat = 1.12;
- 
+  
   /**
    *  Fetches data as an array with JSON object from local storage
    *  Appends html-elements using function htmlGenerator that creates html.
@@ -26,7 +27,7 @@ $(document).ready(function () {
      if(localStorage.getItem("customer") != null){
 
       let customer = JSON.parse(localStorage.getItem("customer"));
-      console.log(customer.id);
+    
       createOrder(customer.id);
       alert("tack för din beställning")
       //window.location.href = "index.html";
@@ -40,7 +41,6 @@ $(document).ready(function () {
   });
   
   
- 
  function createOrder(customerId){
  let total = localStorage.getItem("totalPrice");
 
@@ -170,33 +170,25 @@ $(document).ready(function () {
       sum += cartItems[i].price * cartItems[i].quantity;
     }
     
-
-    $("#total-price").html(sum.toFixed(2));
     $(".products-total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
-    calcVat(sum);
-
-    if (sum > freeShippingThreshold) {
-      $(".total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
-      $(".shipping-cost").html("00:00 kr");
+    
+    if (sum > freeShippingThreshold || sum == 0) {
+      shippingCost = 0;      
     } else {
-      sum += shippingCost;
-      $(".shipping-cost").html("49:00 kr");
-      $(".total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
+      shippingCost = 49;
+      sum += shippingCost;    
     }
+
+    let tempVat = calcVat(sum);
+    
+    $(".shipping-cost").html(shippingCost.toFixed(2).toString().replace(".", ":") + " kr");
+    $(".total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
+    $(".vat").html(tempVat.toFixed(2).toString().replace(".", ":") + " kr");
     localStorage.setItem("totalPrice", sum);
   }
 
   function calcVat(sum) {
-    let temp;
-    if (sum > freeShippingThreshold) {
-      temp = sum - sum / vat;
-      console.log("SUMMA UTAN FRAKT");
-    } else {
-      temp = sum - sum / vat + shippingCost - shippingCost / vat;
-      console.log("SUMMPA MED FRAKT");
-    }
-
-    $(".vat").html(temp.toFixed(2).toString().replace(".", ":") + " kr");
+    return sum == 0 ? 0 : sum - sum / vat; 
   }
 
   /**
@@ -269,8 +261,7 @@ $(document).ready(function () {
   $(document).on("click", ".fa-plus", function () {
     let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
-    q++;
-    console.log(q);
+    q++;    
     setNewQuantity(id, q);
     $(this).closest(".quantity-td").find("input").val(q);
   });
@@ -298,7 +289,22 @@ $(document).ready(function () {
     let id = Number($(this).closest(".quantity-tr").attr("id"));
     $(this).closest(".quantity-tr").remove();
     removeFromList(id);
+    setOrderButtonStatus();
   });
+
+  function setOrderButtonStatus() {
+    if(cartItems.length == 0 && localStorage.getItem('cart') != null) {
+      $(".order-button")
+      .prop("disabled", true)
+      .text("Kundvagnen är tom!")
+      .addClass("disabled-order-button"); 
+    } else {
+      $(".order-button")
+      .prop("disabled", false)
+      .text("Beställ")
+      .removeClass("disabled-order-button");  
+    }
+  }
 
   /**
    * Listeners that displays and closes modal window of specific product
@@ -326,8 +332,9 @@ $(document).ready(function () {
 
   // Runs on page load.
   getDataFromLocalStorage();
-  calcPrice();
-});
+  calcPrice();  
+  loadCustomerInfo();
+  $(window).on('load', setOrderButtonStatus);
 
 function loadCustomerInfo() {
   $("#customer-cart-info").hide();
@@ -354,9 +361,6 @@ function loadCustomerInfo() {
   }
 }
 
-loadCustomerInfo();
-
-
 function currentDate() {
 
   var today = new Date();
@@ -371,3 +375,4 @@ function currentDate() {
   // console.log(today1)
   return today;
   }
+});
