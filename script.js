@@ -482,25 +482,6 @@ function categoryFormatter(category) {
 
   return category;
 }
-/**
- * Added function to show order modal, remove ls, show info in order modal
- */
-function confirmBtn() {
-  $("#orderModal").modal("show");
-
-  let orderNum;
-  let orderDate = new Date().toISOString().replaceAll("T", ", Kl: ");
-  let orderPrice;
-
-  document.getElementById("p-order").innerHTML =
-    "<b>Order nummer: </b>" + orderNum;
-  document.getElementById("p-date").innerHTML =
-    "<b>Beställningsdatum: </b>" + orderDate.substring(0, 21);
-  document.getElementById("p-sum").innerHTML =
-    "<b>Total belopp: </b>" + orderPrice;
-  localStorage.removeItem("inCartArray"); //Dubbelkolla key name
-}
-
 
 /**
  * Revert back the text to its original form state
