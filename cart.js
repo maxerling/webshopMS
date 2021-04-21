@@ -378,5 +378,4 @@ function currentDate() {
   $(window).on('load', loadCustomerInfo); 
   $(window).on('load', setOrderButtonStatus);
   
-
 });
