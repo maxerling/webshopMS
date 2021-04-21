@@ -165,7 +165,6 @@ $(document).ready(function () {
       sum += cartItems[i].price * cartItems[i].quantity;
     }
     
-    $("#total-price").html(sum.toFixed(2));
     $(".products-total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
     
     if (sum > freeShippingThreshold || sum == 0) {
