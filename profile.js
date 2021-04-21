@@ -120,6 +120,7 @@ function editUser() {
     })
     .then(function (user) {
       console.log(user);
+      alert(user.firstname + "har blivit uppdaterat!");
     })
     .catch(function (error) {
       console.log(error);
