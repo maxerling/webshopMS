@@ -26,11 +26,7 @@ $(document).ready(function () {
      if(localStorage.getItem("customer") != null){
 
       let customer = JSON.parse(localStorage.getItem("customer"));
-      console.log(customer.id);
       createOrder(customer.id);
-      alert("tack för din beställning")
-      //window.location.href = "index.html";
-
      
      }else{
        alert("Please login first!")
@@ -38,8 +34,26 @@ $(document).ready(function () {
    
     
   });
-  
-  
+
+  /**
+ * Added function to show order modal, remove ls, show info in order modal
+ */
+function confirmBtn(orderRowData) {
+  $("#orderModal").modal("show");
+
+  let date = new Date();
+  let orderDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().replaceAll("T", ", Kl: ");
+  let orderPrice = localStorage.getItem("totalPrice").replace(".", ":") + " kr";
+  let orderNum = orderRowData[0].order.id;
+
+  document.getElementById("p-order").innerHTML =
+    "<b>Order nummer: </b>" + orderNum;
+  document.getElementById("p-date").innerHTML =
+    "<b>Beställningsdatum: </b>" + orderDate.substring(0, 21);
+  document.getElementById("p-sum").innerHTML =
+    "<b>Total belopp: </b>" + orderPrice;
+  localStorage.removeItem("cart");
+}
  
  function createOrder(customerId){
  let total = localStorage.getItem("totalPrice");
@@ -63,7 +77,6 @@ $(document).ready(function () {
        return res.json(); })
       .then(function(order){
         let orderId = order.id 
-        console.log(orderId + " order id in fetch order");
         createOrderRow(orderId)
       })
     .catch(function (error) {
@@ -73,7 +86,6 @@ $(document).ready(function () {
   }
 
   function createOrderRow(orderId) {
-    console.log("orderId in order row" + orderId);
     let orderRowItems = [];
     for (let i = 0; i < cartItems.length; i++) {
       let orderRow = {
@@ -97,11 +109,13 @@ $(document).ready(function () {
     })
       .then(function (response) {
         if(response.status == 200){
-          localStorage.removeItem("cart")
-          window.location.href = "index.html";
+          return response.json();
+        } else if(response.status == 500 || response.status == 404){
+          alert("nånting gick fel!");
         }
-       return response.json();
-      }).then((data)=>console.log(data))
+      }).then((data)=>{
+        confirmBtn(data);
+      })
       .catch(function (error) {
         console.log(error);
       });
