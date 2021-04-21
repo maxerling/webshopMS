@@ -67,7 +67,7 @@
 }
 
 /*  Medium devices (tablets, 768px and up) */
-@media (min-width: 769px) {
+@media (min-width: 888px) {
   #products{
     margin-left: 2px;
     margin-bottom: 10px;

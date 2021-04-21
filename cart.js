@@ -1,9 +1,9 @@
-
 $(document).ready(function () {
   let cartItems = [];
   let freeShippingThreshold = 250;
   let shippingCost = 49;
   let vat = 1.12;
+ 
   /**
    *  Fetches data as an array with JSON object from local storage
    *  Appends html-elements using function htmlGenerator that creates html.
@@ -18,7 +18,95 @@ $(document).ready(function () {
     }
     checkInputField();
   }
+  /**
+   *
+   */
 
+   $(".order-button").click(function () {
+     if(localStorage.getItem("customer") != null){
+
+      let customer = JSON.parse(localStorage.getItem("customer"));
+      console.log(customer.id);
+      createOrder(customer.id);
+      alert("tack för din beställning")
+      //window.location.href = "index.html";
+
+     
+     }else{
+       alert("Please login first!")
+     }
+   
+    
+  });
+  
+  
+ 
+ function createOrder(customerId){
+ let total = localStorage.getItem("totalPrice");
+
+      let order = {
+        date: currentDate(),
+        users:{
+              "id": customerId
+        },
+        totalPrice: total,
+        status: 0
+      };
+     fetch('https://hakims-webshop.herokuapp.com/order/add', {
+        method: 'POST',
+        body: JSON.stringify(order),
+        headers:{
+            "Content-Type": "application/json"
+        } 
+    })
+    .then(function (res) {
+       return res.json(); })
+      .then(function(order){
+        let orderId = order.id 
+        console.log(orderId + " order id in fetch order");
+        createOrderRow(orderId)
+      })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  }
+
+  function createOrderRow(orderId) {
+    console.log("orderId in order row" + orderId);
+    let orderRowItems = [];
+    for (let i = 0; i < cartItems.length; i++) {
+      let orderRow = {
+        order: {
+          id: orderId,
+        },
+        product: {
+          id: cartItems[i].id,
+        },
+        quantity: cartItems[i].quantity,
+        status: 1,
+      };
+      orderRowItems.push(orderRow);
+    }
+    fetch("https://hakims-webshop.herokuapp.com/orderRow/add/list", {
+      method: "POST",
+      body: JSON.stringify(orderRowItems),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        if(response.status == 200){
+          localStorage.removeItem("cart")
+          window.location.href = "index.html";
+        }
+       return response.json();
+      }).then((data)=>console.log(data))
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+  }
   // /**
   //  * Listener for input fields in cart that checks if value is positive.
   //  * If not it resets the old value.
@@ -34,9 +122,6 @@ $(document).ready(function () {
         setNewQuantity(id, newValue);
         $(this).closest(".quantity-td").find("input").val(newValue);
       }
-      // if (Number($(this).val()) === 0) {
-      //   $(this).val(tempProd.quantity);
-      // }
     });
   }
 
@@ -48,7 +133,7 @@ $(document).ready(function () {
   function htmlGenerator(data) {
     return `
   <tr class="quantity-tr" id="${data.id}">
-              <td><img class="d-sm-block d-none" src="${
+              <td><img class="d-sm-block d-none cart-image" src="${
                 data.image
               }" alt="" style="width: 60px;"></td>
               <td class = "td-title">${data.title}</td>
@@ -84,30 +169,35 @@ $(document).ready(function () {
     for (let i = 0; i < cartItems.length; i++) {
       sum += cartItems[i].price * cartItems[i].quantity;
     }
+    
+
     $("#total-price").html(sum.toFixed(2));
-    $(".products-total-price").html(sum.toFixed(2));
+    $(".products-total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
     calcVat(sum);
-  
-    if(sum > freeShippingThreshold) {
-      $(".total-price").html(sum.toFixed(2));
+
+    if (sum > freeShippingThreshold) {
+      $(".total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
+      $(".shipping-cost").html("00:00 kr");
     } else {
       sum += shippingCost;
-      $(".total-price").html(sum.toFixed(2));
+      $(".shipping-cost").html("49:00 kr");
+      $(".total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
     }
+    localStorage.setItem("totalPrice", sum);
   }
 
-function calcVat(sum) {
-  let temp;
-  if(sum > freeShippingThreshold) {
-    temp = (sum) - (sum / vat);
-    console.log("SUMMA UTAN FRAKT");
-  } else {
-    temp = (sum) - (sum / vat) + (shippingCost) - (shippingCost / vat);
-    console.log("SUMMPA MED FRAKT");
-  }
+  function calcVat(sum) {
+    let temp;
+    if (sum > freeShippingThreshold) {
+      temp = sum - sum / vat;
+      console.log("SUMMA UTAN FRAKT");
+    } else {
+      temp = sum - sum / vat + shippingCost - shippingCost / vat;
+      console.log("SUMMPA MED FRAKT");
+    }
 
-  $(".vat").html(temp.toFixed(2));
-}
+    $(".vat").html(temp.toFixed(2).toString().replace(".", ":") + " kr");
+  }
 
   /**
    * Function that takes an id and new quantity and sets that element to the new quantity.
@@ -148,6 +238,30 @@ function calcVat(sum) {
   }
 
   /**
+   * Function that gets data from from localstorage
+   * and displays it in modal window when users clicks on a product.
+   * Uses a for-loop to confirm correct product.
+   * @param {number} id gets correct id of product and compares to products in i cart.
+   */
+  function getDataForModalFromLS(id) {
+    let data;
+    for (let i = 0; i < cartItems.length; i++) {
+      if (cartItems[i].id == id) {
+        data = cartItems[i];
+      }
+    }
+
+    $("#modal-left-space").html(
+      `<img id="modal-prod-img" src="${data.image}" alt="Product image">`
+    );
+    $("#prod-title").text(`${data.title}`);
+    $("#prod-descr").text(`${data.description}`);
+    $("#prod-brand").text(`${data.brand}`);
+    $("#prod-units").text(`${data.units}`);
+    $("#prod-price").text(`${data.price.toFixed(2)} SEK`);
+  }
+
+  /**
    * Listener for plus sign button on each item in the cart.
    * Finds id for product and updates elements quantity.
    * Calls function setNewQuantity().
@@ -171,7 +285,6 @@ function calcVat(sum) {
     let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
     if (q === 1) return;
-
     q--;
     setNewQuantity(id, q);
     $(this).closest(".quantity-td").find("input").val(q);
@@ -187,7 +300,74 @@ function calcVat(sum) {
     removeFromList(id);
   });
 
+  /**
+   * Listeners that displays and closes modal window of specific product
+   * when user clicks image or title of product.
+   */
+  $(document).on("click", ".td-title", function () {
+    if (window.innerWidth < 576) {
+      let id = Number($(this).closest(".quantity-tr").attr("id"));
+      getDataForModalFromLS(id);
+      $(".cart-modal").modal("show");
+    }
+  });
+
+  $(document).on("click", ".cart-image", function () {
+    if (window.innerWidth >= 576) {
+      let id = Number($(this).closest(".quantity-tr").attr("id"));
+      getDataForModalFromLS(id);
+      $(".cart-modal").modal("show");
+    }
+  });
+
+  $(".modal-btn-close").click(function () {
+    $(".cart-modal").modal("hide");
+  });
+
   // Runs on page load.
   getDataFromLocalStorage();
   calcPrice();
 });
+
+function loadCustomerInfo() {
+  $("#customer-cart-info").hide();
+  $(".person-content-title").hide();
+  $(".order-button")
+  .prop("disabled", true)
+  .text("Logga in")
+  .addClass("disabled-order-button");
+
+  if(localStorage.getItem("customer")) {
+    $(".order-button")
+    .prop("disabled", false)
+    .text("Beställ")
+    .removeClass("disabled-order-button");
+
+    $(".person-content-title").show();
+    $("#customer-cart-info").show();
+    let temp = JSON.parse(localStorage.getItem("customer"));
+    console.log(temp.firstname);
+    $("#customer-information-name").val(temp.firstname + " " + temp.lastname);
+    $("#customer-information-address").val(temp.address.street);
+    $("#customer-information-zip").val(temp.address.zipcode + ", " + temp.address.city);
+    $("#customer-information-telephone-number").val(temp.number);
+  }
+}
+
+loadCustomerInfo();
+
+
+function currentDate() {
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  
+  today = yyyy + '/' + mm + '/' + dd;
+   console.log(today);
+  
+  // let today1 = Date.now()
+  // console.log(today1)
+  return today;
+  }

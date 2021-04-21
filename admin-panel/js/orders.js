@@ -10,10 +10,10 @@ function createOrderElements(json) {
   json.forEach((order) => {
     trTable = `
         <tr>
-            <td class="cut">${order.ordernumber}</td>
+            <td class="cut">${order.id}</td>
             <td class="cut">${order.date}</td>
-            <td class="cut">${order.customerid}</td>
-            <td class="cut">${order.totalPrice}$</td>
+            <td class="cut">${order.users!=null ? order.users.email : "----"}</td>
+            <td class="cut">${order.totalPrice} KR</td>
             <td class="cut">
 
                 <div class="statusEdit">
@@ -65,6 +65,7 @@ function createOrderElements(json) {
  * @param {product-id} id For compare order row with database to show order line item.
  */
 function createModal(id) {
+  
   let trModal = "";
   let output = "";
   invoiceList.forEach((item) => {
@@ -100,7 +101,7 @@ function createModal(id) {
 
 $(document).ready(function () {
   // fetch order and call render function
-  fetch("../../data/orders.json")
+  fetch("https://hakims-webshop.herokuapp.com/order/get")
     .then((response) => response.json())
     .then((data) => createOrderElements(data))
     .catch((error) => console.error(error));

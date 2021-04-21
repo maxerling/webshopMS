@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "street": "Torget 333",
+    "city": "Botkyrka",
+    "zipcode": "14555"
+  },
+  {
+    "id": 2,
+    "street": "Sandvägen 11",
+    "city": "Stockholm",
+    "zipcode": "12346"
+  },
+  {
+    "id": 3,
+    "street": "Stjärnvägen 20",
+    "city": "Göteborg",
+    "zipcode": "12345"
+  },
+  {
+    "id": 4,
+    "street": "Torget 33",
+    "city": "Botkyrka",
+    "zipcode": "14555"
+  },
+  {
+    "id": 5,
+    "street": "Torget 36",
+    "city": "Botkyrka1",
+    "zipcode": "14558"
+  },
+  {
+    "id": 6,
+    "street": "Torget 35",
+    "city": "Botkyrka2",
+    "zipcode": "14557"
+  },
+  {
+    "id": 7,
+    "street": "Torget 34",
+    "city": "Botkyrka3",
+    "zipcode": "14556"
+  }
+]

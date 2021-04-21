@@ -4,10 +4,10 @@
   box-sizing: border-box;
 }
 body {
-  background-image: url(../images/bgBody.webp);
+  background-image: url(images/bgBody.webp);
 }
-a{
-text-decoration: none;
+a {
+  text-decoration: none;
 }
 
 html {
@@ -38,7 +38,7 @@ header {
 }
 .search-field input {
   padding: 0.5rem 0.2rem 0.5rem 2rem;
-  background: url(../images/icons/search-icon.svg) no-repeat left;
+  background: url(images/icons/search-icon.svg) no-repeat left;
   width: 100%;
   border: 1px solid #bbb;
   border-radius: 5px;
@@ -56,17 +56,11 @@ header {
 #logIn:hover {
   background: #e2e2e2;
 }
-.userLoggedIn{
+.userLoggedIn {
   display: none;
 }
 
-#cart {
-  border: 0.0625rem solid #fff;
-  box-sizing: border-box;
-  border-radius: 0.3125rem;
-  outline: none;
-  box-shadow: none;
-}
+
 
 .bg-light {
   box-shadow: 0 0.0625rem 0.4375rem 0.0625rem rgba(0, 0, 0, 0.1);
@@ -171,6 +165,11 @@ header {
 .shop-again-btn button:hover,
 .order-button:hover {
   transform: translateY(2px);
+}
+
+.disabled-order-button:hover, .disabled-order-button {
+  opacity: 0.5;
+  transform: none;
 }
 
 .modal-login-button button:active,
@@ -333,6 +332,14 @@ footer {
 
 /* CART PAGE STUFF START */
 
+#cart {
+  border: 0.0625rem solid #fff;
+  box-sizing: border-box;
+  border-radius: 0.3125rem;
+  outline: none;
+  box-shadow: none;
+}
+
 #cartHeading {
   text-align: center;
 }
@@ -421,14 +428,13 @@ input[type="number"] {
   border-radius: 0;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 768px) {
   .shopping-cart {
     width: 50%;
     margin-right: auto;
     margin-left: auto;
   }
   #category {
-    width: 50%;
     margin-right: auto;
     margin-left: auto;
   }
@@ -441,6 +447,7 @@ input[type="number"] {
     font-size: 0.9rem;
     padding: 10px;
   }
+  
 }
 
 .person-content-title {
@@ -454,6 +461,12 @@ input[type="number"] {
   .vat,
   .total-price {
     text-align: center;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 
   .customer-information {
@@ -500,7 +513,7 @@ input[type="number"] {
 
 /* PRODUCT CARD START*/
 .product-card-modal {
-  width: 50px
+  width: 50px;
 }
 
 .product-card-desc {
@@ -527,6 +540,19 @@ input[type="number"] {
 .card {
   padding: 1em;
   margin-bottom: 2em;
+}
+
+#modal-cart-prodinfo p {
+  font-weight: bold;
+}
+
+#modal-cart-prodinfo span {
+  font-weight: normal;
+}
+
+#modal-cart-prodinfo img {
+  margin: 5px;
+  max-width: 90%;
 }
 
 /* PRODUCT CARD END */

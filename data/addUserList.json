@@ -1,12 +1,28 @@
 [
   {
-    "id": 1,
-    "firstname": "Britt",
+    "firstname": "test1",
     "lastname": "Hansson",
     "email": "Sincere@april.biz",
     "password": "123456test",
     "address": {
-      "id": 2
+      "street": "Torget 332",
+      "city": "Botkyrka",
+      "zipcode": "14555"
+    },
+    "number": "+46732883455",
+    "status": 0,
+    "accountType": 0
+  },
+
+  {
+    "firstname": "Britt",
+    "lastname": "Hansson",
+    "email": "test@april.biz",
+    "password": "123456test",
+    "address": {
+      "street": "Sandvägen 11",
+      "city": "Stockholm",
+      "zipcode": "12346"
     },
     "number": "+46732883455",
     "status": 0,
@@ -19,7 +35,9 @@
     "email": "hans.erik@gmail.com",
     "password": "123456test",
     "address": {
-      "id": 3
+      "street": "Stjärnvägen 20",
+      "city": "Göteborg",
+      "zipcode": "12345"
     },
     "number": "+46769582323",
     "status": 1,
@@ -33,7 +51,9 @@
     "email": "Inga.Månsson@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 2
+      "street": "Torget 33",
+      "city": "Botkyrka",
+      "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 0,
@@ -46,7 +66,9 @@
     "email": "Ellen.Berggren@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 3
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 0,
@@ -59,7 +81,9 @@
     "email": "Ebba.Berggren@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 4
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 0,
@@ -72,7 +96,9 @@
     "email": "Lovisa.Nyberg@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 1
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 0,
@@ -85,7 +111,9 @@
     "email": "Matilda.Johnsson@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 2
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 0,
@@ -98,7 +126,9 @@
     "email": "Lovisa.Johnsson@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 2
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 0,
@@ -111,7 +141,9 @@
     "email": "Ann.Holmberg@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 2
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 0,
@@ -124,7 +156,9 @@
     "email": "Ann.Wallin@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 6
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 0,
@@ -137,7 +171,9 @@
     "email": "Camilla.Björk@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 7
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 0,
@@ -150,7 +186,9 @@
     "email": "Therese.Lundqvist@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 7
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 0,
@@ -163,7 +201,9 @@
     "email": "Matilda.Nyström@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 6
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 0,
@@ -176,7 +216,9 @@
     "email": "kjell.company@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 3
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 0,
@@ -189,7 +231,9 @@
     "email": "Birgitta.Olsson@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 4
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 0,
@@ -202,7 +246,9 @@
     "email": "Kristina.Larsson@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 4
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 0,
@@ -215,7 +261,9 @@
     "email": "Eva.Eriksson@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 6
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 1,
@@ -228,7 +276,9 @@
     "email": "Elisabeth.Nilsson@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 5
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 1,
@@ -241,7 +291,9 @@
     "email": "Karlsson.Margareta@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 7
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 1,
@@ -254,7 +306,9 @@
     "email": "Johansson.Anna@outlook.com",
     "password": "123456test",
     "address": {
-      "id": 2
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000770",
     "status": 0,
@@ -267,7 +321,9 @@
     "email": "Maria.Andersson@livs.com",
     "password": "123456test",
     "address": {
-      "id": 2
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732000880",
     "status": 1,
@@ -281,7 +337,9 @@
     "email": "Hakim@livs.com",
     "password": "123456hakim",
     "address": {
-      "id": 1
+        "street": "Torget 33",
+        "city": "Botkyrka",
+        "zipcode": "14555"
     },
     "number": "+46732883455",
     "status": 0,

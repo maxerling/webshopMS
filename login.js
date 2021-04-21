@@ -1,5 +1,5 @@
 /*Global variable for save customer to array list*/
-let customers = [];
+let customers = getCustomers();
 const form = document.getElementById("form");
 const emailField = document.getElementById("input-username");
 const passField = document.getElementById("input-password");
@@ -9,7 +9,7 @@ let msg = "";
  * fetch all users for check login form!
  */
 function getCustomers() {
-  fetch("../../data/users.json")
+  fetch(`https://hakims-webshop.herokuapp.com/user/get`) // https://hakims-webshop.herokuapp.com/user/get
     .then((resp) => resp.json())
     .then((data) => {
       customers = data;
@@ -22,7 +22,7 @@ function getCustomers() {
  * Checks for a valid email and show error message based on result
  * @returns boolean
  */
-function checkEmail() {
+function checkEmail1() {
 
   if (emailField.value.length == 0) {
     msg = "Obligatoriskt fält!";
@@ -53,7 +53,7 @@ function checkEmail() {
  * @returns boolean
  */
 
-function checkPassword() {
+function checkPassword1() {
   if (passField.value.length == 0) {
     msg = "Obligatoriskt fält!";
     invalidMsg[1].innerHTML = msg;
@@ -76,7 +76,7 @@ function checkPassword() {
  * @returns boolean
  */
 function emailCheck(userInput) {
-  let regEx = /[0-9?A-z0-9?]+(\.)?[0-9?A-z0-9?]+@[A-z]+\.[A-z]{3}.?[A-z]{0,3}$/;
+  let regEx = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 
   return userInput.match(regEx) ? true : false;
 }
@@ -85,16 +85,13 @@ function emailCheck(userInput) {
  * Function on login button to check customer and admin account and
  * when a user logs in send them to their own  page.
  */
-$(document).on("submit", "#form1", function (e) {
-  e.preventDefault();
-  getCustomers();
+$(document).on("click", "#modal-login-button", function (e) {
+  e.preventDefault()
   for (msg of invalidMsg) {
     msg.style.color = "red";
     msg.style.fontSize = "1em";
   }
-  
-  if (checkEmail() & checkPassword()) {
-    
+  if (checkEmail1() && checkPassword1()) {
     customers.forEach((customer) => {
       if (
         emailField.value == customer.email &&
@@ -109,26 +106,25 @@ $(document).on("submit", "#form1", function (e) {
         addClass(emailField, "is-valid");
         removeClass(passField, "is-invalid");
         addClass(passField, "is-valid");
+        console.log(customer.accountType == 1);
         if (customer.accountType == 1) {
-        
           this.classList.add("was-validated");
-          location.href = "/admin-panel/index.html";
+          location.href = "admin-panel/index.html";
         } else if (customer.accountType == 0) {
-         
           localStorage.setItem("customer", JSON.stringify(customer));
           document.querySelector('#logIn').style.display="none"
           document.querySelector('#mobileLogin').style.display="none"
-          document.querySelector('#customer-name').innerText= customer.name.firstName
+          document.querySelector('#customer-name').innerText= customer.firstname
           document.querySelector('.userLoggedIn').style.display="block"
           $(".login-modal").modal("hide");
           this.classList.add("was-validated");
+         
         }
       }
     });
   } else {
-    console.log("unsucessful");
     e.stopPropagation();
-    console.log("Felaktig e-post eller lösenord!");
+    e.preventDefault();
     msg = "Felaktig e-post eller lösenord!";
     invalidMsg[0].innerHTML = msg;
     invalidMsg[1].innerHTML = msg;

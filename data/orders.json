@@ -1,83 +1,51 @@
 [
   {
     "id": 1,
-    "ordernumber": 4432,
+    "order_number": 4432,
     "date": "2014-03-12",
-    "customerid": 1,
-    "status": "Utskriven",
-    "totalPrice": 1400,
-    "products": [
-      {
-        "price": 500,
-        "productid": 1,
-        "qunatity": 2
-      },
-      {
-        "price": 400,
-        "productid": 2,
-        "qunatity": 1
-      }
-    ]
-   
+    "user_id": 1,
+    "status": 1
   },
   {
     "id": 2,
-    "ordernumber": 5322,
+    "order_number": 5322,
     "date": "2018-01-01",
-    "customerid": 2,
-    "status": "Skickad",
-    "totalPrice": 1500,
-    "products": [
-      {
-        "price": 500,
-        "productid": 4,
-        "qunatity": 2
-      },
-      {
-        "price": 500,
-        "productid": 2,
-        "qunatity": 1
-      }
-    ]
+    "user_id": 2,
+    "status": 2
   },
   {
     "id": 3,
-    "ordernumber": 1123,
+    "order_number": 1123,
     "date": "2020-05-30",
-    "customerid": 3,
-    "status": "-",
-    "totalPrice": 2000,
-    "products": [
-      {
-        "price": 500,
-        "productid": 4,
-        "qunatity": 3
-      },
-      {
-        "price": 500,
-        "productid": 5,
-        "qunatity": 1
-      }
-    ]
+    "user_id": 3,
+    "status": 1
   },
   {
     "id": 4,
-    "ordernumber": 2020,
+    "order_number": 2020,
     "date": "2020-02-20",
-    "customerid": 3,
-    "status": "Levererad",
-    "totalPrice": 3000,
-    "products": [
-      {
-        "price": 500,
-        "productid": 1,
-        "qunatity": 2
-      },
-      {
-        "price": 500,
-        "productid": 5,
-        "qunatity": 1
-      }
-    ]
+    "user_id": 3,
+    "status": 2
+  },
+  {
+    "id": 5,
+    "order_number": 2125,
+    "date": "2020-02-20",
+    "user_id": 11,
+    "status": 3
+  },
+  {
+    "id": 6,
+    "order_number": 2026,
+    "date": "2020-02-20",
+    "user_id": 15,
+    "status": 3
+  },
+  {
+    "id": 7,
+    "order_number": 2029,
+    "date": "2020-02-20",
+    "user_id": 10,
+    "status": 3
   }
 ]
