@@ -11,7 +11,6 @@
       "submit",
       (event) => {
         event.preventDefault();
-        console.log(event.target.id);
         if (!form.checkValidity()) {
           event.preventDefault();
           event.stopPropagation();
@@ -26,7 +25,6 @@
           checkPostNr()
         ) {
           event.preventDefault();
-          console.log("hej");
           form.classList.add("was-validated");
           if(event.target.id == "profile-form"){
             editUser();
@@ -68,8 +66,13 @@
       return res.json();
     })
     .then(function (user) {
-      console.log(user);
-      alert(user.firstname + " have been registered successfully");
+      alert(user.firstname + " har registrerats som ny användare.");
+      user.status = true;
+      localStorage.setItem("customer", JSON.stringify(user));
+      document.querySelector('#logIn').style.display="none"
+      document.querySelector('#mobileLogin').style.display="none"
+      document.querySelector('#customer-name').innerText= user.firstname
+      document.querySelector('.userLoggedIn').style.display="block"
       
     })
     .catch(function (error) {
@@ -136,8 +139,6 @@ function deleteUser() {
     },
   })
     .then(function (res) {
-      console.log(res);
-      console.log(res.status)
       if (res.status == 200){
         localStorage.removeItem("customer");
         alert("You have been deleted")
@@ -496,13 +497,11 @@ function setProfileFromLS() {
 $(document).on("click", ".create-new-account-button", function() {
   const validMsg = document.getElementsByClassName('valid-feedback')
   let counter = 0;
-  console.log(validMsg[2]);
   for(msg of validMsg) {
     if(msg.innerHTML == "Giltig"){
       counter++;
     } 
   }
-  console.log(counter);
   if(counter === 9) {
     $('.register-modal').modal("hide");
   }
