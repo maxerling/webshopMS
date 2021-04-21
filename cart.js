@@ -1,9 +1,10 @@
 $(document).ready(function () {
+
   let cartItems = [];
   let freeShippingThreshold = 250;
   let shippingCost = 49;
   let vat = 1.12;
- 
+  
   /**
    *  Fetches data as an array with JSON object from local storage
    *  Appends html-elements using function htmlGenerator that creates html.
@@ -26,7 +27,7 @@ $(document).ready(function () {
      if(localStorage.getItem("customer") != null){
 
       let customer = JSON.parse(localStorage.getItem("customer"));
-      console.log(customer.id);
+    
       createOrder(customer.id);
       alert("tack för din beställning")
       //window.location.href = "index.html";
@@ -40,7 +41,6 @@ $(document).ready(function () {
   });
   
   
- 
  function createOrder(customerId){
  let total = localStorage.getItem("totalPrice");
 
@@ -289,14 +289,22 @@ $(document).ready(function () {
     let id = Number($(this).closest(".quantity-tr").attr("id"));
     $(this).closest(".quantity-tr").remove();
     removeFromList(id);
+    setOrderButtonStatus();
+  });
 
-    if(!cartItems || cartItems.length == 0) {
+  function setOrderButtonStatus() {
+    if(cartItems.length == 0 && localStorage.getItem('cart') != null) {
       $(".order-button")
       .prop("disabled", true)
       .text("Kundvagnen är tom!")
       .addClass("disabled-order-button"); 
+    } else {
+      $(".order-button")
+      .prop("disabled", false)
+      .text("Beställ")
+      .removeClass("disabled-order-button");  
     }
-  });
+  }
 
   /**
    * Listeners that displays and closes modal window of specific product
@@ -324,8 +332,9 @@ $(document).ready(function () {
 
   // Runs on page load.
   getDataFromLocalStorage();
-  calcPrice();
-});
+  calcPrice();  
+  loadCustomerInfo();
+  $(window).on('load', setOrderButtonStatus);
 
 function loadCustomerInfo() {
   $("#customer-cart-info").hide();
@@ -352,9 +361,6 @@ function loadCustomerInfo() {
   }
 }
 
-loadCustomerInfo();
-
-
 function currentDate() {
 
   var today = new Date();
@@ -369,3 +375,4 @@ function currentDate() {
   // console.log(today1)
   return today;
   }
+});
