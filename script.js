@@ -49,7 +49,7 @@ let append = (parent, el) => $(parent).append(el);
  * Fetch data from url/path
  */
 function getData() {
-  const url = "http://localhost:8080/product/get";
+  const url = "https://hakims-webshop.herokuapp.com/product/get";
 
   fetch(url)
     .then((resp) => resp.json())
@@ -88,7 +88,7 @@ function storeData(data) {
  */
 function loadCategories() {
 
-  fetch("http://localhost:8080/category/get")
+  fetch("https://hakims-webshop.herokuapp.com/category/get")
     .then((resp) => resp.json())
     .then((data) => {
         createCategory(data)

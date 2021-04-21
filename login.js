@@ -1,5 +1,5 @@
 /*Global variable for save customer to array list*/
-let customers = [];
+let customers = getCustomers();
 const form = document.getElementById("form");
 const emailField = document.getElementById("input-username");
 const passField = document.getElementById("input-password");
@@ -9,7 +9,7 @@ let msg = "";
  * fetch all users for check login form!
  */
 function getCustomers() {
-  fetch("http://localhost:8080/user/getUsers")
+  fetch(`https://hakims-webshop.herokuapp.com/user/get`) // https://hakims-webshop.herokuapp.com/user/get
     .then((resp) => resp.json())
     .then((data) => {
       customers = data;
@@ -85,16 +85,13 @@ function emailCheck(userInput) {
  * Function on login button to check customer and admin account and
  * when a user logs in send them to their own  page.
  */
-$(document).on("submit", "#form1", function (e) {
-  e.preventDefault();
-  getCustomers();
+$(document).on("click", "#modal-login-button", function (e) {
+  e.preventDefault()
   for (msg of invalidMsg) {
     msg.style.color = "red";
     msg.style.fontSize = "1em";
   }
-  
-  if (checkEmail1() & checkPassword1()) {
-    
+  if (checkEmail1() && checkPassword1()) {
     customers.forEach((customer) => {
       if (
         emailField.value == customer.email &&
@@ -109,12 +106,11 @@ $(document).on("submit", "#form1", function (e) {
         addClass(emailField, "is-valid");
         removeClass(passField, "is-invalid");
         addClass(passField, "is-valid");
+        console.log(customer.accountType == 1);
         if (customer.accountType == 1) {
-        
           this.classList.add("was-validated");
           location.href = "admin-panel/index.html";
         } else if (customer.accountType == 0) {
-         
           localStorage.setItem("customer", JSON.stringify(customer));
           document.querySelector('#logIn').style.display="none"
           document.querySelector('#mobileLogin').style.display="none"
@@ -122,14 +118,13 @@ $(document).on("submit", "#form1", function (e) {
           document.querySelector('.userLoggedIn').style.display="block"
           $(".login-modal").modal("hide");
           this.classList.add("was-validated");
-          location.reload();
+         
         }
       }
     });
   } else {
-    console.log("unsucessful");
     e.stopPropagation();
-    console.log("Felaktig e-post eller lösenord!");
+    e.preventDefault();
     msg = "Felaktig e-post eller lösenord!";
     invalidMsg[0].innerHTML = msg;
     invalidMsg[1].innerHTML = msg;

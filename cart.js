@@ -38,16 +38,21 @@ $(document).ready(function () {
    
     
   });
+  
+  
  
  function createOrder(customerId){
+ let total = localStorage.getItem("totalPrice");
+
       let order = {
         date: currentDate(),
-        user:{
+        users:{
               "id": customerId
-        } ,
+        },
+        totalPrice: total,
         status: 0
       };
-     fetch('http://localhost:8080/order/add', {
+     fetch('https://hakims-webshop.herokuapp.com/order/add', {
         method: 'POST',
         body: JSON.stringify(order),
         headers:{
@@ -83,7 +88,7 @@ $(document).ready(function () {
       };
       orderRowItems.push(orderRow);
     }
-    fetch("http://localhost:8080/orderRow/add/list", {
+    fetch("https://hakims-webshop.herokuapp.com/orderRow/add/list", {
       method: "POST",
       body: JSON.stringify(orderRowItems),
       headers: {
@@ -179,6 +184,7 @@ $(document).ready(function () {
     $(".shipping-cost").html(shippingCost.toFixed(2).toString().replace(".", ":") + " kr");
     $(".total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
     $(".vat").html(tempVat.toFixed(2).toString().replace(".", ":") + " kr");
+    localStorage.setItem("totalPrice", sum);
   }
 
   function calcVat(sum) {

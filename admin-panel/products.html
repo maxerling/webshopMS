@@ -47,7 +47,7 @@
         <table class="table table-bordered" id="myTable">
           <thead>
             <tr>
-              <th onclick="sortTable(0)">ID</th>
+              <th onclick="sortTable(0)" scope="row">ID</th>
               <th onclick="sortTable(1)">Title</th>
               <th onclick="sortTable(2)">Brand</th>
               <th onclick="sortTable(3)">Description</th>
@@ -55,7 +55,8 @@
               <th onclick="numericSortTable(5)">Price</th>
               <th onclick="numericSortTable(6)">Quantity</th>
               <th onclick="numericSortTable(7)">Units</th>
-              <th onclick="sortTable(8)">Category</th>
+              <th onclick="sortTable(8)" colspan="2">Category</th>
+              <th onclick="sortTable(9)">Featured</th>
               <th>Actions</th>
             </tr>
           </thead>
