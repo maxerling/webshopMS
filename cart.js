@@ -132,14 +132,30 @@ function confirmBtn(orderRowData) {
     $(".amount-changed").on("keyup change", function () {
       let newValue = Number(this.value.match(/^\d+$/));
       let id = Number($(this).closest(".quantity-tr").attr("id"));
+      let isQuantityEnough = (checkQuantity(id) >= newValue);
       let tempProd = cartItems.filter((item) => {
         return item.id == id;
       })[0];
-      if (newValue && Number(newValue) > 0) {
+
+      if (newValue && Number(newValue) > 0 && isQuantityEnough) {
         setNewQuantity(id, newValue);
         $(this).closest(".quantity-td").find("input").val(newValue);
       }
+      else{
+        setNewQuantity(id, checkQuantity(id));
+        $(this).closest(".quantity-td").find("input").val(checkQuantity(id));
+      }
     });
+  }
+
+  function checkQuantity(id){
+    let products = JSON.parse(localStorage.getItem("allProducts"));
+    console.log(products);
+    for(p of products){
+      if(p.id == id){
+        return p.quantity;
+      }
+    }
   }
 
   /**
@@ -278,9 +294,12 @@ function confirmBtn(orderRowData) {
   $(document).on("click", ".fa-plus", function () {
     let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
-    q++;    
-    setNewQuantity(id, q);
-    $(this).closest(".quantity-td").find("input").val(q);
+    q++; 
+    let isQuantityEnough = checkQuantity(id) >= q;  
+    if(isQuantityEnough){
+      setNewQuantity(id, q);
+      $(this).closest(".quantity-td").find("input").val(q);
+    } 
   });
 
   /**
