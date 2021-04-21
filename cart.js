@@ -164,29 +164,29 @@ $(document).ready(function () {
     for (let i = 0; i < cartItems.length; i++) {
       sum += cartItems[i].price * cartItems[i].quantity;
     }
+    
     $("#total-price").html(sum.toFixed(2));
     $(".products-total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
     
-    if (sum > freeShippingThreshold) {
+    if (sum > freeShippingThreshold || sum == 0) {
       shippingCost = 0;
+      $(".vat").html('0:00 kr');
     } else {
       shippingCost = 49;
       sum += shippingCost;    
     }
-    console.log(sum);
-
-    $(".shipping-cost").html(shippingCost.toFixed(2).toString().replace(".", ":") + " kr");
-    $(".total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
 
     if(sum > 0) {
       calcVat(sum);
     }
+    
+    $(".shipping-cost").html(shippingCost.toFixed(2).toString().replace(".", ":") + " kr");
+    $(".total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
   }
 
   function calcVat(sum) {
     let temp;
     temp = sum - sum / vat;
-    console.log("SUMMA UTAN FRAKT");  
     $(".vat").html(temp.toFixed(2).toString().replace(".", ":") + " kr");
   }
 
@@ -260,8 +260,7 @@ $(document).ready(function () {
   $(document).on("click", ".fa-plus", function () {
     let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
-    q++;
-    console.log(q);
+    q++;    
     setNewQuantity(id, q);
     $(this).closest(".quantity-td").find("input").val(q);
   });
