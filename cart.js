@@ -169,25 +169,21 @@ $(document).ready(function () {
     $(".products-total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
     
     if (sum > freeShippingThreshold || sum == 0) {
-      shippingCost = 0;
-      $(".vat").html('0:00 kr');
+      shippingCost = 0;      
     } else {
       shippingCost = 49;
       sum += shippingCost;    
     }
 
-    if(sum > 0) {
-      calcVat(sum);
-    }
+    let tempVat = calcVat(sum);
     
     $(".shipping-cost").html(shippingCost.toFixed(2).toString().replace(".", ":") + " kr");
     $(".total-price").html(sum.toFixed(2).toString().replace(".", ":") + " kr");
+    $(".vat").html(tempVat.toFixed(2).toString().replace(".", ":") + " kr");
   }
 
   function calcVat(sum) {
-    let temp;
-    temp = sum - sum / vat;
-    $(".vat").html(temp.toFixed(2).toString().replace(".", ":") + " kr");
+    return sum == 0 ? 0 : sum - sum / vat; 
   }
 
   /**
