@@ -11,7 +11,6 @@
       "submit",
       (event) => {
         event.preventDefault();
-        console.log(event.target.id);
         if (!form.checkValidity()) {
           event.preventDefault();
           event.stopPropagation();
@@ -26,7 +25,6 @@
           checkPostNr()
         ) {
           event.preventDefault();
-          console.log("hej");
           form.classList.add("was-validated");
           if(event.target.id == "profile-form"){
             editUser();
@@ -65,12 +63,23 @@
     },
   })
     .then(function (res) {
-      return res.json();
+      if(res.status == 200) {
+        return res.json();
+      }
+      else if(res.status == 500) {
+        alert("E-mail is already in use");
+        $(".register-modal").modal("hide");
+      }
     })
     .then(function (user) {
-      console.log(user);
-      alert(user.firstname + " have been registered successfully");
-      
+      user.status = true;
+      localStorage.setItem("customer", JSON.stringify(user));
+      document.querySelector('#logIn').style.display="none"
+      document.querySelector('#mobileLogin').style.display="none"
+      document.querySelector('#customer-name').innerText= user.firstname
+      document.querySelector('.userLoggedIn').style.display="block"
+      alert(user.firstname + " har registrerats som ny användare.");
+      location.reload();
     })
     .catch(function (error) {
       console.log(error);
@@ -82,12 +91,12 @@
  */
 function editUser() {
   let localST = JSON.parse(localStorage.getItem("customer"));
-
+  console.log($("#validationCustom05").val());
   let user = {
     id: localST.id, 
     firstname: $("#validationCustom01").val(),
     lastname: $("#validationCustom02").val(),
-    email: "",
+    email: $("#validationCustom03").val(),
     password: $("#validationCustom04").val(),
     address: {
       id: localST.address.id,
@@ -111,10 +120,14 @@ function editUser() {
     })
     .then(function (user) {
       console.log(user);
+      localStorage.setItem("customer", JSON.stringify(user));
+      location.reload();
+      alert(user.firstname + "har blivit uppdaterat!");
     })
     .catch(function (error) {
       console.log(error);
     });
+    
 }
 /**
  * Send request server to delete user
@@ -136,8 +149,6 @@ function deleteUser() {
     },
   })
     .then(function (res) {
-      console.log(res);
-      console.log(res.status)
       if (res.status == 200){
         localStorage.removeItem("customer");
         alert("You have been deleted")
@@ -202,12 +213,14 @@ function checkValidFirstName() {
     $(inputId).hide();
     $(invalid).text("förnamn krävs");
     $(invalid).show();
+    $(inputId).text("");
     $(firstName).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (!regPattern.test(firstname)) {
     $(inputId).hide();
     $(invalid).text("Ogiltig! Endast karaktärer tack");
     $(invalid).show();
+    $(inputId).text("");
     $(firstName).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else {
@@ -232,6 +245,7 @@ function checkValidLastName() {
   if (lastName == "") {
     $(validDiv).hide();
     $(invalidDiv).text("Efternamn krävs");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
 
@@ -240,6 +254,7 @@ function checkValidLastName() {
     $(validDiv).hide();
     $(invalidDiv).css("color", "red");
     $(invalidDiv).text("Ogiltig! Endast karaktärer tack");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -265,12 +280,14 @@ function checkEmail() {
   if (email == "") {
     $(validDiv).hide();
     $(invalidDiv).text("E-post krävs");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (!regPattern.test(email)) {
     $(validDiv).hide();
     $(invalidDiv).text("Ogiltig e-postadress");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -296,6 +313,7 @@ function checkPassword(target) {
   if (password == "") {
     $(validDiv).hide();
     $(invalidDiv).text("Lösenord krävs");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -304,12 +322,14 @@ function checkPassword(target) {
     $(invalidDiv).text(
       "Lösenordet ska innehålla minst 1 bokstav och 1 siffra, samt vara minst 8 tecken långt"
     );
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (target.id == "validationCustom041" && checkRepeatPassword()) {
     $(validDiv).hide();
     $(invalidDiv).text("must be same password");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -345,12 +365,14 @@ function checkStreet() {
   if (address == "") {
     $(validDiv).hide();
     $(invalidDiv).text("Gata krävs");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (!regPattern.test(address)) {
     $(validDiv).hide();
     $(invalidDiv).text("Ogiltig gata");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -367,7 +389,8 @@ function checkStreet() {
  * @returns true if the input is valid otherwise false.
  */
 function checkPhone() {
-  let regPattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+  // let regPattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+  let regPattern = /^[0-9]{3}-[0-9]{3}\s[0-9]{2}\s[0-9]{2}$/im;
   let validDiv = "#validPhone";
   let invalidDiv = "#invalidPhone";
   let phoneNumber = $("#validationCustom05").val();
@@ -377,12 +400,13 @@ function checkPhone() {
     $(invalidDiv).text(
       "Telefon krävs för att leverantören kunna kontakta dig när hen är framme"
     );
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (!regPattern.test(phoneNumber)) {
     $(validDiv).hide();
-    $(invalidDiv).text("Ogiltigt telefon nummer");
+    $(invalidDiv).text("Fel format, (07X-XXX XX XX)");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -407,12 +431,14 @@ function checkOrt() {
   if (address == "") {
     $(validDiv).hide();
     $(invalidDiv).text("Ort krävs");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (!regPattern.test(address)) {
     $(validDiv).hide();
     $(invalidDiv).text("Ogiltigt Ort");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -429,7 +455,7 @@ function checkOrt() {
  * @returns true if the input is valid otherwise false.
  */
 function checkPostNr() {
-  let regPattern = /^(s-|S-){0,1}[0-9]{3}\s?[0-9]{2}$/;
+  let regPattern = /^(s-|S-){0,1}[0-9]{3}\s[0-9]{2}$/;
   let validDiv = "#validPostNr";
   let invalidDiv = "#invalidPostNr";
   let postNr = $("#validationCustom08").val();
@@ -437,12 +463,13 @@ function checkPostNr() {
   if (postNr == "") {
     $(validDiv).hide();
     $(invalidDiv).text("Post nummer krävs");
+    $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (!regPattern.test(postNr)) {
     $(validDiv).hide();
-    $(invalidDiv).text("Ogiltigt post nummer");
+    $(invalidDiv).text("Fel format, (xxx xx)");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -472,5 +499,23 @@ function setProfileFromLS() {
     $("#welcomeEmail").text(localST.email);
   }
 }
+
+/**
+ * Listener that closes create user modal when correct data is entered.
+ */
+$(document).on("click", ".create-new-account-button", function() {
+  const validMsg = document.getElementsByClassName('valid-feedback')
+  let counter = 0;
+  for(msg of validMsg) {
+    if(msg.innerHTML == "Giltig"){
+      counter++;
+    } 
+  }
+  if(counter === 9) {
+    $('.register-modal').modal("hide");
+  }
+  counter === 0;
+  
+})
 
 setProfileFromLS();
