@@ -31,6 +31,10 @@ header {
   width: 30%;
   height: 100%;
 }
+/* #search-box{
+  position: relative;
+  width: 42%;
+} */
 
 .search-field {
   display: none;
@@ -43,6 +47,25 @@ header {
   border: 1px solid #bbb;
   border-radius: 5px;
 }
+/* #search-list{
+  display: none;
+  width: 75%;
+  position: absolute;
+  top:40px;
+  left:40px;
+  background:white;
+  box-shadow: 0 5px 0 6px rgba(0, 0, 0, 0.1)
+}
+.product-search{
+  height: 60px;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.product-search img{
+  width:50px;
+  height:50px;
+} */
 
 #logIn {
   background-color: #fff;

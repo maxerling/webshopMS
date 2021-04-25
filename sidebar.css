@@ -34,6 +34,10 @@
   display: none;
 }
 
+.msg-header{
+  display: none;
+}
+
 .sidebar-close {
   display: block;
 }
@@ -63,6 +67,10 @@
 
   .navbar-icon {
     display: inline-block;
+  }
+
+  .msg-header{
+    display: block;
   }
 }
 
