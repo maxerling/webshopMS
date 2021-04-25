@@ -87,65 +87,57 @@ function storeData(data) {
  *  parsing it to produce a JS object
  */
 function loadCategories() {
-
   fetch("https://hakims-webshop.herokuapp.com/category/get")
     .then((resp) => resp.json())
     .then((data) => {
-        createCategory(data)
-    })
+      createCategory(data);
+    });
 }
 /**
  * Create element base on category name.
  * @param {string} category . All of categories
  */
- function createCategory(categories) {
-  
-
-  categories.map(item => {
-    
-  let li = document.createElement("li");
-  li.setAttribute("class", "nav-item");
+function createCategory(categories) {
+  categories.map((item) => {
+    let li = document.createElement("li");
+    li.setAttribute("class", "nav-item");
 
     category = categoryFormatter(item.name);
     let div = document.createElement("a");
     div.setAttribute("class", "cat h4 nav-link");
-    div.id ="cat"+item.id;
+    div.id = "cat" + item.id;
     div.innerText = category;
 
     li.appendChild(div);
     document.querySelector(".navbar-nav").appendChild(li);
-  })
-  categoryLinkListener()
-
+  });
+  categoryLinkListener();
 }
 /**
  * Add category function when you press element.
  */
- function categoryLinkListener() {
+function categoryLinkListener() {
   document.querySelectorAll(".cat").forEach((item) => {
     item.addEventListener("click", function (event) {
       let target = event.target;
-      catId=target.id
+      catId = target.id;
       cat = target.innerText;
-      console.log(cat.substr(3,cat.length));
+      console.log(cat.substr(3, cat.length));
       // cat = categoryOrignalFormatter(cat);
       products.innerHTML = "";
       $("#sidebar").animate({ left: "-200" }, "slow");
 
-      let productsCat= []
-      productsData.map(product=>{
-        product.category.map( item => {
-          if(item.id == catId.substr(3,catId.length)) 
-          {
-            productsCat.push(product)
+      let productsCat = [];
+      productsData.map((product) => {
+        product.category.map((item) => {
+          if (item.id == catId.substr(3, catId.length)) {
+            productsCat.push(product);
           }
-        })
-
-      })
+        });
+      });
       console.log(productsCat);
-       storeData(productsCat);
+      storeData(productsCat);
     });
-
   });
 }
 
@@ -191,22 +183,20 @@ function createElementsForProduct(product) {
   addClassesToQuantityButton(plusBtn);
   addClassesToQuantityButton(minusBtn);
 
-  
-    appendToDiv(
-      product,
-      img,
-      p1,
-      p2,
-      p3,
-      p4,
-      btn,
-      quantityInput,
-      plusBtn,
-      minusBtn,
-      div,
-      valueChanger
-    );
- 
+  appendToDiv(
+    product,
+    img,
+    p1,
+    p2,
+    p3,
+    p4,
+    btn,
+    quantityInput,
+    plusBtn,
+    minusBtn,
+    div,
+    valueChanger
+  );
 
   let cartArray = JSON.parse(localStorage.getItem("cart"));
   const cartProduct = cartArray.find((element) => element.id === product.id);
@@ -425,21 +415,27 @@ function appendToDiv(
 function unitFormatter(format) {
   let delimiter = 0;
 
-  if(typeof format === "number") {
+  if (typeof format === "number") {
     delimiter = format % 1000;
     format = format.toFixed(2);
-    return format > 999 ? format = (format.slice(0, delimiter) + " " + format.slice(delimiter)).replace(".", ":") + " kr" : format.toString().replace(".", ":") + " kr";
-  
+    return format > 999
+      ? (format =
+          (format.slice(0, delimiter) + " " + format.slice(delimiter)).replace(
+            ".",
+            ":"
+          ) + " kr")
+      : format.toString().replace(".", ":") + " kr";
   } else {
     let spaceIndex = format.toString().indexOf(" ");
     let value = Number(format.slice(0, spaceIndex));
     let output = value.toString();
-  
+
     delimiter = value % 1000;
-    if(value > 999) {
-      output = output.slice(0, delimiter) + " " + output.slice(delimiter, spaceIndex);
+    if (value > 999) {
+      output =
+        output.slice(0, delimiter) + " " + output.slice(delimiter, spaceIndex);
     }
-    
+
     output += format.slice(spaceIndex);
     return output;
   }
@@ -464,7 +460,6 @@ $(document).on("click", ".modal-cancel-button", function () {
   $("#registerModal").modal("hide");
   $("#orderModal").modal("hide");
 });
-
 
 /**
  * Formats the text to make it:
@@ -541,16 +536,12 @@ $(document).on("click", "#mobileLogin", function () {
   PETA IN INFORAMTION TILL ORDER.HTML
 */
 
-
-
-
-
 /**
  * Disables cart button if the cartArray is empty or null else it will rederict to order.html
  */
 
 function disableOrEnableCartButton() {
-  if(localStorage.getItem("cart")!=null){
+  if (localStorage.getItem("cart") != null) {
     let cartArray = JSON.parse(localStorage.getItem("cart"));
     cartArray = cartArray.filter((product) => product.quantity > 0);
     const cartBtn = document.getElementById("cart");
@@ -565,16 +556,13 @@ function disableOrEnableCartButton() {
       cartBtn.disabled = false;
       cartBtn.addEventListener("click", () => {
         window.location.href = "order.html";
-  
       });
-  
       mobileCartBtn.disabled = false;
       mobileCartBtn.addEventListener("click", () => {
         window.location.href = "order.html";
       });
     }
   }
-  
 }
 function loginButton() {
   let customer = JSON.parse(localStorage.getItem("customer"));

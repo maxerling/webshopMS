@@ -27,7 +27,7 @@
           event.preventDefault();
           form.classList.add("was-validated");
           if(event.target.id == "profile-form"){
-            editUser();
+            $("#confirmationModal").modal("show");
           }else if(event.target.id == "CreateNewAccount-form"){
             createNewUser()
           }
@@ -122,7 +122,7 @@ function editUser() {
       console.log(user);
       localStorage.setItem("customer", JSON.stringify(user));
       location.reload();
-      alert(user.firstname + "har blivit uppdaterat!");
+      alert(user.firstname + " har blivit uppdaterat!");
     })
     .catch(function (error) {
       console.log(error);

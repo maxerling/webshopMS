@@ -385,6 +385,7 @@ footer {
 }
 
 .customer-information {
+  display: none;
   color: black;
 }
 
