@@ -104,8 +104,10 @@ $(document).ready(function () {
   });
 
   $(document).on("click", ".order-modal-cancel-button", function () {
-    $(".order-modal").modal("hide");
+    location.href = "index.html";
   });
+  $('#orderModal').modal({backdrop: 'static', keyboard: false})  
+
 
   $(document).on("click", ".card-modal-cancel-button", function () {
     $(".card-modal").modal("hide");
