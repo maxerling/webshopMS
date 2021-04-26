@@ -291,7 +291,7 @@ function createOrderRow(orderId) {
         id: cartItems[i].id,
       },
       quantity: cartItems[i].quantity,
-      status: 1,
+      status: 0,
     };
     orderRowItems.push(orderRow);
   }
