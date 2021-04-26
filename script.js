@@ -122,7 +122,11 @@ function categoryLinkListener() {
       let target = event.target;
       catId = target.id;
       cat = target.innerText;
-      console.log(cat.substr(3, cat.length));
+      if(cat == "DAGENS HAKIMS DEAL"){
+        cat = "Populär";
+        catId = "cat1";
+      }
+      
       // cat = categoryOrignalFormatter(cat);
       products.innerHTML = "";
       $("#sidebar").animate({ left: "-200" }, "slow");
@@ -135,7 +139,6 @@ function categoryLinkListener() {
           }
         });
       });
-      console.log(productsCat);
       storeData(productsCat);
     });
   });
