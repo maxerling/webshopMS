@@ -50,12 +50,6 @@ function createOrderElements(json) {
             
         </tr>
         `;
-    let modalData = {};
-    modalData.id = order.id;
-    modalData.products = order.products;
-    modalData.totalPrice = order.totalPrice;
-    invoiceList.push(modalData);
-
     output += trTable;
   });
   tbody.innerHTML = output;
@@ -65,18 +59,20 @@ function createOrderElements(json) {
  * @param {product-id} id For compare order row with database to show order line item.
  */
 function createModal(id) {
-  
+  fetch(`https://hakims-webshop.herokuapp.com/orderRow/get/byOrderID/${id}`)
+  .then((response) => response.json())
+  .then((orderRow) =>{
   let trModal = "";
   let output = "";
-  invoiceList.forEach((item) => {
-    if (item.id == id) {
-      item.products.forEach((product) => {
+  orderRow.forEach((item) => {
+   
+     
         trModal = `
                 <tr>
-                    <td>${product.productid}</td>
-                    <td>${product.qunatity}</td>
-                    <td>${product.price}$</td>
-                    <td>${product.price * product.qunatity}</td>
+                    <td>${item.product.title}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.product.price} KR</td>
+                    <td>${item.product.price * item.quantity} KR</td>
                     <td>
                         <a class="add" title="Add" data-toggle="tooltip"
                         ><i class="material-icons">&#xE03B;</i></a
@@ -94,9 +90,12 @@ function createModal(id) {
       });
 
       document.getElementById("modal-tbody").innerHTML = output;
-      document.getElementById("totalPrice").innerText = item.totalPrice;
-    }
-  });
+      document.getElementById("totalPrice").innerText = orderRow[0].order.totalPrice;
+ 
+  
+
+  }).catch((error) => console.error(error));
+  
 }
 
 $(document).ready(function () {

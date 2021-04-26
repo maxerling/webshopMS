@@ -21,32 +21,30 @@
     />
   </head>
   <body class="container">
-    <h1>VIP products</h1>
 
-    <table class="table table-hover">
+    <header class="m-3">
+      <h2>VIP products</h2>
+    </header>
+    
+
+    <table class="table table-hover table-bordered">
       <thead>
         <tr>
-          <th scope="row">ID</th>
+          <th>ID</th>
           <th>Title</th>
-          <th >Brand</th>
-          <th >Description</th>
-          <th >Price</th>
-          <th >Quantity</th>
-          <th >Units</th>
-          <th  colspan="2">Category</th>
+          <th>Brand</th>
+          <th>Price</th>
+          <th>Qty</th>
+          <th>Units</th>
+          <th>Category</th>
         </tr>
       </thead>
       <tbody>
-        
-      </tbody id="VIP-products-table">
+        <!-- här kommer att fyllas från product.js -->
+      </tbody>
     </table>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button
-        class="btn btn-primary btn-hover"
-        style="border-radius: 10px; justify-content: end"
-      >
-        Skicka rabbat
-      </button>
+      <button class="btn btn-primary btn-hover">Skicka rabbat</button>
     </div>
 
     <script
@@ -57,5 +55,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/sidebars.js"></script>
     <script src="js/Tables.js"></script>
+    <script src="js/products.js"></script>
   </body>
 </html>

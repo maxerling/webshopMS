@@ -64,13 +64,13 @@ $(document).ready(function () {
     var index = $("table tbody tr:last-child").index();
     var row =
       "<tr>" +
-      '<td class="cut"><input type="text" class="form-control"  name="title" id="name"></td>' +
-      '<td class="cut"><input type="text" class="form-control"  name="brand" id="brand"></td>' +
-      '<td class="cut"><input type="text" class="form-control"  name="description" id="description"></td>' +
-      '<td class="cut"><input type="text" class="form-control"  name="image" id="image"></td>' +
-      '<td class="cut"><input type="text" class="form-control"  name="price" id="price"></td>' +
-      '<td class="cut"><input type="text" class="form-control"  name="qty" id="qty"></td>' +
-      '<td class="cut"><input type="text" class="form-control"  name="units" id="units"></td>' +
+      '<td><input type="text" class="form-control"  name="title" id="name"></td>' +
+      '<td><input type="text" class="form-control"  name="brand" id="brand"></td>' +
+      '<td><input type="text" class="form-control"  name="description" id="description"></td>' +
+      '<td><input type="text" class="form-control"  name="image" id="image"></td>' +
+      '<td><input type="text" class="form-control"  name="price" id="price"></td>' +
+      '<td><input type="text" class="form-control"  name="qty" id="qty"></td>' +
+      '<td><input type="text" class="form-control"  name="units" id="units"></td>' +
       "<td>" +
       actions +
       "</td>" +
