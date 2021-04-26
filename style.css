@@ -559,11 +559,24 @@ input[type="number"] {
   font-size: 1.5em;
   font-weight: 900;
   color: #011e62;
+  
 }
 
 .card {
   padding: 1em;
   margin-bottom: 2em;
+}
+
+.product-jmf-price {
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #011e62; 
+}
+
+.product-warehouse-quantity {
+  font-size: 0.9em;
+  padding-top: 10px;
+  font-weight: 500; 
 }
 
 #modal-cart-prodinfo p {

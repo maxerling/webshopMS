@@ -425,6 +425,13 @@ function unitFormatter(format) {
   }
 }
 
+function getJmfPrice(price, unit) {
+    const spaceIndex = unit.toString().indexOf(" ");
+    const unitValue = Number(unit.slice(0, spaceIndex));
+    const outUnit = unit.slice(spaceIndex + 1) == "g" ? "kg" : "l";
+    return (price / unitValue * 1000).toFixed(2).replace('.', ':') + " kr/" + outUnit;
+}
+
 function updateCartBtnQtn() {
   let cartArray = JSON.parse(localStorage.getItem("cart"));
   const btn = document.getElementById("cart");
@@ -571,7 +578,9 @@ function btnEventHandler(itemID) {
     $(".product-card-desc").text(item.description);
     $(".product-card-img").attr("src", item.image);
     $(".card-modal").modal("show");
-    $(".product-specs").text(`${item.brand} | ${item.units}`);
-    $(".product-price").text("Pris: " + item.price + " kr");
+    $(".product-specs").text(`${item.brand} | ${unitFormatter(item.unit)}`);
+    $(".product-price").text("Pris: " + unitFormatter(item.price));
+    $(".product-jmf-price").text("Jämförpris: " + getJmfPrice(item.price, item.unit));
+    $(".product-warehouse-quantity").text("Antal kvar: " + (item.quantity > 100 ? "100+" : item.quantity) + " st");
   }
 }
