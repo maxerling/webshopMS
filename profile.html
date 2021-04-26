@@ -165,22 +165,22 @@
             </div class="d-table-row">
             <div class="mt-4 ">
 
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
                 Radera konto
               </button>
-              <button class="btn btn-primary profile-button " type="submit">Updatera Profil</button>
+              <button class="btn btn-primary profile-button "  type="submit">Uppdatera Profil</button>
             </div>
           </div>
         </div>
       </div>
-<!-- Button trigger modal -->
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<!--  DELETE Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Radera konto</h5>
+        <h5 class="modal-title" id="deleteModalLabel">Radera konto</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -189,6 +189,25 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Stäng</button>
         <button onClick="deleteUser()" type="button" class="btn btn-danger">Bekräfta</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmationModalLabel">Uppdatera konto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="confirmationModal-body" class="modal-body">
+       Vill du ändra ditt konto !!!!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Stäng</button>
+        <button onClick="editUser()" type="button" class="btn btn-danger">Bekräfta</button>
       </div>
     </div>
   </div>

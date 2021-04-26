@@ -33,14 +33,16 @@
   <body>
      <!-- START header -->
      <header class="navbar sticky-top navbar-light bg-light">
-      <span class="navbar-icon">
+      <!-- <span class="navbar-icon">
         <i class="fas fa-bars"></i>
-      </span>
+      </span> -->
       <a id="logo" href="index.html"
-        ><img id="logoImg" src="./images/logo/Hakims-logo.png" alt="logo"
+        ><img id="logoImg" src="images/logo/Hakims-logo.png" alt="logo"
       /></a>
+
+      <h2 class="msg-header">*Tack för att du valde oss*</h2>
       <!-- START Search input -->
-      <span id="search" class="fas fa-search"> </span>
+      <!-- <span id="search" class="fas fa-search"> </span>
       <div class="search-field">
         <input
           type="text"
@@ -52,7 +54,7 @@
           autocorrect="off"
           maxlength="30"
         />
-      </div>
+      </div> -->
 
       <!-- END Search input -->
       <div class="userLoggedIn dropdown">
@@ -71,9 +73,9 @@
           aria-labelledby="dropdownUser1"
         >
           
-          <li><a class="dropdown-item" href="profile.html">Profile</a></li><!-- måste skickas info till profil -->
+          <li><a class="dropdown-item" href="profile.html">Profile</a></li>
           <li><hr class="dropdown-divider" /></li>
-          <li><a id="signOut" class="dropdown-item" href="index.html">Sign out</a></li> <!-- måste raderas info av lokal storage -->
+          <li><a id="signOut" class="dropdown-item" href="index.html">Sign out</a></li>
           
         </ul>
       </div>
@@ -102,14 +104,14 @@
         ></button>
         <div class="btn-group" role="group">
 
-            <button
+            <a
+            href="index.html"
             id="btnGroupDrop1"
             type="button"
-            class="btn btn-warning dropdown-toggle fas fa-shopping-cart"
-            data-toggle="dropdown"
+            class="btn btn-warning  fas fa-shopping-cart"
             aria-haspopup="true"
             aria-expanded="false"
-          ></button>
+          ></a>
     
           <!-- If we choose to add dropdown meny, use code below
           <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -144,7 +146,7 @@
           </tbody>
         </table>
 
-        <div class="row">
+        <div class="row ">
           <div class="col-md-6 customer-information">
             <div class="person-content-title text-center mb-3">
               Dina uppgifter
@@ -453,8 +455,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="cart.js"></script>
-    <script src="script.js"></script>
-    <script src="login.js"></script>
+    <script src="login-test.js"></script>
     <script src="profile.js"></script>
   </body>
 </html>
