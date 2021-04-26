@@ -122,7 +122,11 @@ function categoryLinkListener() {
       let target = event.target;
       catId = target.id;
       cat = target.innerText;
-      console.log(cat.substr(3, cat.length));
+      if(cat == "DAGENS HAKIMS DEAL"){
+        cat = "Populär";
+        catId = "cat1";
+      }
+      
       // cat = categoryOrignalFormatter(cat);
       products.innerHTML = "";
       $("#sidebar").animate({ left: "-200" }, "slow");
@@ -135,7 +139,6 @@ function categoryLinkListener() {
           }
         });
       });
-      console.log(productsCat);
       storeData(productsCat);
     });
   });
@@ -413,32 +416,20 @@ function appendToDiv(
 
 //Formatting units and prices based on PO request
 function unitFormatter(format) {
-  let delimiter = 0;
-
   if (typeof format === "number") {
-    delimiter = format % 1000;
-    format = format.toFixed(2);
-    return format > 999
-      ? (format =
-          (format.slice(0, delimiter) + " " + format.slice(delimiter)).replace(
-            ".",
-            ":"
-          ) + " kr")
-      : format.toString().replace(".", ":") + " kr";
+    return format.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ").replace('.', ':') + ' kr';
   } else {
-    let spaceIndex = format.toString().indexOf(" ");
-    let value = Number(format.slice(0, spaceIndex));
-    let output = value.toString();
-
-    delimiter = value % 1000;
-    if (value > 999) {
-      output =
-        output.slice(0, delimiter) + " " + output.slice(delimiter, spaceIndex);
-    }
-
-    output += format.slice(spaceIndex);
-    return output;
+    const spaceIndex = format.toString().indexOf(" ");
+    const value = Number(format.slice(0, spaceIndex));
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + format.slice(spaceIndex);
   }
+}
+
+function getJmfPrice(price, unit) {
+    const spaceIndex = unit.toString().indexOf(" ");
+    const unitValue = Number(unit.slice(0, spaceIndex));
+    const outUnit = unit.slice(spaceIndex + 1) == "g" ? "kg" : "l";
+    return (price / unitValue * 1000).toFixed(2).replace('.', ':') + " kr/" + outUnit;
 }
 
 function updateCartBtnQtn() {
@@ -587,7 +578,9 @@ function btnEventHandler(itemID) {
     $(".product-card-desc").text(item.description);
     $(".product-card-img").attr("src", item.image);
     $(".card-modal").modal("show");
-    $(".product-specs").text(`${item.brand} | ${item.units}`);
-    $(".product-price").text("Pris: " + item.price + " kr");
+    $(".product-specs").text(`${item.brand} | ${unitFormatter(item.unit)}`);
+    $(".product-price").text("Pris: " + unitFormatter(item.price));
+    $(".product-jmf-price").text("Jämförpris: " + getJmfPrice(item.price, item.unit));
+    $(".product-warehouse-quantity").text("Antal kvar: " + (item.quantity > 100 ? "100+" : item.quantity) + " st");
   }
 }

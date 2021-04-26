@@ -1,49 +1,55 @@
 /*Global variable for save customer to array list*/
-let customers = getCustomers();
 const form = document.getElementById("form");
 const emailField = document.getElementById("input-username");
 const passField = document.getElementById("input-password");
 const invalidMsg = document.getElementsByClassName("invalid-feedback");
 let msg = "";
-/**
- * fetch all users for check login form!
- */
-function getCustomers() {
-  fetch(`https://hakims-webshop.herokuapp.com/user/get`)
-    .then((resp) => resp.json())
-    .then((data) => {
-      customers = data;
-    })
-    .catch((err) => console.log(err));
-}
+$(document).ready(function () {
+  loginButton();
+  $(document).on("click", "#signOut", function () {
+    localStorage.removeItem("customer");
+  });
+});
 
+function loginButton() {
+  let customer = JSON.parse(localStorage.getItem("customer"));
+  const logInBtn = document.getElementById("logIn");
+  const userIcon = document.querySelector(".userLoggedIn");
+  const customerName = document.querySelector("#customer-name ");
+
+  if (customer != null) {
+    document.querySelector("#mobileLogin").style.display = "none";
+
+    logInBtn.style.display = "none";
+    customerName.innerText = customer.firstname;
+    userIcon.style.display = "block";
+  }
+}
 
 /**
  * Checks for a valid email and show error message based on result
  * @returns boolean
  */
 function checkEmail1() {
-
+  let regPattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
   if (emailField.value.length == 0) {
     msg = "Obligatoriskt fält!";
     invalidMsg[0].innerHTML = msg;
     invalidMsg[0].style.display = "block";
-    addClass(emailField, "is-invalid");
+    emailField.classList.add("is-invalid");
     return false;
-  } else if (!emailCheck(emailField.value)) {
+  } else if (!regPattern.test(emailField.value)) {
     msg = "Giltig e-post krävs!";
     invalidMsg[0].innerHTML = msg;
     invalidMsg[0].style.display = "block";
-    addClass(emailField, "is-invalid");
+    emailField.classList.add("is-invalid");
     return false;
-  } else if (emailCheck(emailField.value)) {
+  } else {
     msg = "";
-
     invalidMsg[0].innerHTML = msg;
     invalidMsg[0].style.display = "none";
-    removeClass(emailField, "is-invalid");
-    addClass(emailField, "is-valid");
-
+    emailField.classList.remove("is-invalid");
+    emailField.classList.add("is-valid");
     return true;
   }
 }
@@ -54,103 +60,96 @@ function checkEmail1() {
  */
 
 function checkPassword1() {
-  if (passField.value.length == 0 || !passwordCheck(passField.value)) {
+  if (passField.value.length == 0) {
     msg = "Obligatoriskt fält!";
     invalidMsg[1].innerHTML = msg;
     invalidMsg[1].style.display = "block";
-    addClass(passField, "is-invalid");
+    passField.classList.add("is-invalid");
     return false;
   } else {
     msg = "";
     invalidMsg[1].innerHTML = msg;
     invalidMsg[1].style.display = "none";
-    removeClass(passField, "is-invalid");
-    addClass(passField, "is-valid");
+    passField.classList.remove("is-invalid");
+    passField.classList.add("is-valid");
     return true;
   }
 }
 
-/**
- * checks for valid input based on regex
- * @param {string} userInput
- * @returns boolean
- */
-function emailCheck(userInput) {
-  let regEx = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-
-  return userInput.match(regEx) ? true : false;
-}
-
-/**
- * checks for valid inpud based on regex
- * @param {string} userInput 
- * @returns boolean
- */
-function passwordCheck(userInput) {
-  let regEx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-  return userInput.match(regEx) ? true : false;
-}
-
-/**
- * Function on login button to check customer and admin account and
- * when a user logs in send them to their own  page.
- */
 $(document).on("click", "#modal-login-button", function (e) {
-  e.preventDefault()
-  for (msg of invalidMsg) {
-    msg.style.color = "red";
-    msg.style.fontSize = "1em";
-  }
-  if (checkEmail1() && checkPassword1()) {
-    customers.forEach((customer) => {
-      if (
-        emailField.value == customer.email &&
-        passField.value == customer.password
-      ) {
-        msg = "";
-        invalidMsg[1].innerHTML = msg;
-        invalidMsg[0].innerHTML = msg;
-        invalidMsg[0].style.display = "none";
-        invalidMsg[1].style.display = "none";
-        removeClass(emailField, "is-invalid");
-        addClass(emailField, "is-valid");
-        removeClass(passField, "is-invalid");
-        addClass(passField, "is-valid");
-        console.log(customer.accountType == 1);
-        if (customer.accountType == 1) {
-          this.classList.add("was-validated");
-          location.href = "admin-panel/index.html";
-        } else if (customer.accountType == 0) {
-          localStorage.setItem("customer", JSON.stringify(customer));
-          document.querySelector('#logIn').style.display="none"
-          document.querySelector('#mobileLogin').style.display="none"
-          document.querySelector('#customer-name').innerText= customer.firstname
-          document.querySelector('.userLoggedIn').style.display="block"
-          $(".login-modal").modal("hide");
-          this.classList.add("was-validated");
-          if(location.href == "http://127.0.0.1:5501/order.html" ){
-              loadCustomerInfo()
-          }
-        }
+  // let result =''
+  e.preventDefault();
 
-      }
-    });
+  if (checkEmail1() && checkPassword1()) {
+    let user = {
+      email: emailField.value,
+      password: passField.value,
+    };
+    fetch(`https://hakims-webshop.herokuapp.com/user/authentication`, {
+      method: "POST",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status == 200) {
+          return res.json();
+        } else if (res.status == 400) {
+          return res.text();
+        }
+      })
+      .then((result) => {
+        if (result != "Incorrect USER or PASSWORD") {
+          msg = "";
+          invalidMsg[1].innerHTML = msg;
+          invalidMsg[0].innerHTML = msg;
+          invalidMsg[0].style.display = "none";
+          invalidMsg[1].style.display = "none";
+          emailField.classList.remove("is-invalid");
+          emailField.classList.add("is-valid");
+          passField.classList.remove("is-invalid");
+          passField.classList.add("is-valid");
+          if (result.accountType == 1) {
+            this.classList.add("was-validated");
+            location.href = "admin-panel/index.html";
+          } else if (result.accountType == 0) {
+            localStorage.setItem("customer", JSON.stringify(result));
+            document.querySelector("#logIn").style.display = "none";
+            document.querySelector("#mobileLogin").style.display = "none";
+            document.querySelector("#customer-name").innerText =
+              result.firstname;
+            document.querySelector(".userLoggedIn").style.display = "block";
+            $(".login-modal").modal("hide");
+            this.classList.add("was-validated");
+            if (location.href == "http://127.0.0.1:5501/order.html") {
+              loadCustomerInfo();
+            }
+          }
+        } else {
+          e.stopPropagation();
+          msg = "Felaktig e-post eller lösenord!";
+          invalidMsg[0].innerHTML = msg;
+          invalidMsg[1].innerHTML = msg;
+          invalidMsg[0].style.display = "block";
+          invalidMsg[1].style.display = "block";
+          emailField.classList.remove("is-valid");
+          passField.classList.remove("is-valid");
+          emailField.classList.add("is-invalid");
+          passField.classList.add("is-invalid");
+        }
+      })
+      .catch((err) => console.log(err));
   } else {
     e.stopPropagation();
-    e.preventDefault();
     msg = "Felaktig e-post eller lösenord!";
     invalidMsg[0].innerHTML = msg;
     invalidMsg[1].innerHTML = msg;
     invalidMsg[0].style.display = "block";
     invalidMsg[1].style.display = "block";
-    removeClass(emailField, "is-valid");
-    removeClass(passField, "is-valid");
-    addClass(emailField, "is-invalid");
-    addClass(passField, "is-invalid");
+    emailField.classList.remove("is-valid");
+    passField.classList.remove("is-valid");
+    emailField.classList.add("is-invalid");
+    passField.classList.add("is-invalid");
   }
-});
-
-$(document).on("click","#signOut",function(){
-  localStorage.removeItem("customer")
-
 });
