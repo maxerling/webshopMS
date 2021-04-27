@@ -122,7 +122,8 @@ $(document).on("click", "#modal-login-button", function (e) {
             document.querySelector(".userLoggedIn").style.display = "block";
             $(".login-modal").modal("hide");
             this.classList.add("was-validated");
-            if (location.href == "http://127.0.0.1:5501/order.html") {
+            if (location.href == "http://127.0.0.1:5501/order.html"
+             || location.href == "https://maxerling.github.io/webshopMS/order.html") {
               loadCustomerInfo();
             }
           }
