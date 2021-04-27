@@ -297,26 +297,32 @@ function checkInputField() {
     let allProducts = JSON.parse(localStorage.getItem("allProducts"));
     let newValue = Number(this.value.match(/^\d+$/));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
-    let isStock = checkQuantity(id);
+    let inStock = checkQuantity(id);
     let item = allProducts.find((item) => item.id == id);
     
     if(newValue == 0){
       setNewQuantity(id, 1);
       $(this).closest(".quantity-td").find("input").val(1);
+      newValue = 1;
+      $(this).closest('tr').find('.cart-table-item-total').html(unitFormatter(item.price * newValue))
     } 
-    else if(newValue <= 99 && isStock >= newValue) {
+    else if(newValue <= 99 && inStock >= newValue) {
       setNewQuantity(id, newValue);
       $(this).closest(".quantity-td").find("input").val(newValue);
-    } 
-    else if(isStock <= 99){
-      setNewQuantity(id, isStock);
-      $(this).closest(".quantity-td").find("input").val(isStock);
       $(this).closest('tr').find('.cart-table-item-total').html(unitFormatter(item.price * newValue))
-      alert("Aktuella lagersaldot för denna produkt är: " + isStock);
+    } 
+    else if(inStock <= 99){
+      setNewQuantity(id, inStock);
+      $(this).closest(".quantity-td").find("input").val(inStock);
+      newValue = inStock;
+      $(this).closest('tr').find('.cart-table-item-total').html(unitFormatter(item.price * newValue))
+      alert("Aktuella lagersaldot för denna produkt är: " + inStock);
     }
     else{
       setNewQuantity(id, checkQuantity(id));
+      newValue = 99;
       $(this).closest(".quantity-td").find("input").val(99);
+      $(this).closest('tr').find('.cart-table-item-total').html(unitFormatter(item.price * newValue))
       alert("Högsta kvantitet man kan beställa online är 99.\nFör större kvantitet kontakta butiken.");
     }
   });
