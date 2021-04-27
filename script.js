@@ -162,7 +162,7 @@ function createElementsForProduct(product) {
   addClass(img, "mb-4");
   addClass(img, "product-hover");
   $(img).click(() => {
-    btnEventHandler(`${product.id}`, products);
+    loadProductCard(`${product.id}`, products);
   });
   const p1 = createNode("p");
   const p2 = createNode("p");
@@ -569,8 +569,13 @@ function loginButton() {
     userIcon.style.display = "block";
   }
 }
-/** Function that shows bigger product card with info when clicking product image. */
-function btnEventHandler(itemID) {
+
+/**
+ * Displays it in modal window when users clicks on a product.
+ * Uses a for-loop to confirm correct product.
+ * @param {number} itemID gets correct id of product and compares to products in i cart.
+ */
+function loadProductCard(itemID) {
   let allProducts = JSON.parse(localStorage.getItem("allProducts"));
   let item = allProducts.find((item) => item.id == itemID);
   if (item != undefined) {

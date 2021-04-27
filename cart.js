@@ -69,7 +69,7 @@ $(document).ready(function () {
   $(document).on("click", ".td-title", function () {
     if (window.innerWidth < 576) {
       let id = Number($(this).closest(".quantity-tr").attr("id"));      
-      btnEventHandler(id);
+      loadProductCard(id);
       $(".product-card").modal("show");
     }
   });
@@ -78,7 +78,7 @@ $(document).ready(function () {
     
     if (window.innerWidth >= 576) {
       let id = Number($(this).closest(".quantity-tr").attr("id"));      
-      btnEventHandler(id);
+      loadProductCard(id);
       $(".product-card").modal("show");
     }
     
@@ -428,33 +428,6 @@ function removeFromList(id) {
   calcPrice();
 }
 
-/**
- * Function that gets data from from localstorage
- * and displays it in modal window when users clicks on a product.
- * Uses a for-loop to confirm correct product.
- * @param {number} id gets correct id of product and compares to products in i cart.
- */
-function getDataForModalFromLS(id) {
-  let data;
-  for (let i = 0; i < cartItems.length; i++) {
-    if (cartItems[i].id == id) {
-      data = cartItems[i];
-    }
-  }
-
-  $("#modal-left-space").html(
-    `<img id="modal-prod-img" src="${data.image}" alt="Product image">`
-  );
-  $("#prod-title").text(`${data.title}`);
-  $("#prod-descr").text(`${data.description}`);
-  $("#prod-brand").text(`${data.brand}`);
-  $("#prod-units").text(`${data.units}`);
-  $("#prod-price").text(`${data.price.toFixed(2)} SEK`);
-}
-
-/**
- * 
- */
 function setOrderButtonStatus() {
   if (cartItems.length != 0 ) {
     $(".order-button")
