@@ -31,8 +31,8 @@
   </head>
 
   <body>
-     <!-- START header -->
-     <header class="navbar sticky-top navbar-light bg-light">
+    <!-- START header -->
+    <header class="navbar sticky-top navbar-light bg-light">
       <!-- <span class="navbar-icon">
         <i class="fas fa-bars"></i>
       </span> -->
@@ -65,54 +65,52 @@
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-        <i class="fas fa-user me-2"></i>
+          <i class="fas fa-user me-2"></i>
           <strong id="customer-name"></strong>
         </a>
         <ul
           class="dropdown-menu dropdown-menu-dark text-small shadow"
           aria-labelledby="dropdownUser1"
         >
-          
           <li><a class="dropdown-item" href="profile.html">Profile</a></li>
           <li><hr class="dropdown-divider" /></li>
-          <li><a id="signOut" class="dropdown-item" href="index.html">Sign out</a></li>
-          
+          <li>
+            <a id="signOut" class="dropdown-item" href="index.html">Sign out</a>
+          </li>
         </ul>
       </div>
-        <div class="btn2">
-       
-            <button id="logIn" class="btn btn-secondary btn-lg" type="button">
-              <i class="fa fa-sign-in" aria-hidden="true"></i>
-              Logga in
-            </button>
-            <a class="btn btn-warning btn-lg ms-2" href="index.html" type="button">       
-              <i class="fas fa-shopping-cart"></i>
-              Fortsätt handla
-            </a>
-        </div>
+      <div class="btn2">
+        <button id="logIn" class="btn btn-secondary btn-lg" type="button">
+          <i class="fa fa-sign-in" aria-hidden="true"></i>
+          Logga in
+        </button>
+        <a class="btn btn-warning btn-lg ms-2" href="index.html" type="button">
+          <i class="fas fa-shopping-cart"></i>
+          Fortsätt handla
+        </a>
+      </div>
 
-        <div
+      <div
         class="btn-group btn-sm"
         role="group"
         aria-label="Button group with nested dropdown"
         id="mobile-cart-login"
-        >
+      >
         <button
           class="btn btn-secondary fa fa-sign-in"
           aria-hidden="true"
-          id= "mobileLogin"
+          id="mobileLogin"
         ></button>
         <div class="btn-group" role="group">
-
-            <a
+          <a
             href="index.html"
             id="btnGroupDrop1"
             type="button"
-            class="btn btn-warning  fas fa-shopping-cart"
+            class="btn btn-warning fas fa-shopping-cart"
             aria-haspopup="true"
             aria-expanded="false"
           ></a>
-    
+
           <!-- If we choose to add dropdown meny, use code below
           <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
             <a class="dropdown-item" href="#">Dropdown link</a>
@@ -146,7 +144,7 @@
           </tbody>
         </table>
 
-        <div class="row ">
+        <div class="row">
           <div class="col-md-6 customer-information">
             <div class="person-content-title text-center mb-3">
               Dina uppgifter
@@ -197,9 +195,7 @@
             <table class="pricing-table table">
               <tbody>
                 <tr>
-                  <td class="products-total-price-title py-3 px-0">
-                    Varor:
-                  </td>
+                  <td class="products-total-price-title py-3 px-0">Varor:</td>
                   <td class="products-total-price py-3"></td>
                 </tr>
                 <tr>
@@ -252,37 +248,108 @@
         </div>
       </div>
       <!-- END PRODUCT INFORMATION MODAL -->
+
+      <!-- START PRODUCT CARD MODAL from index.html-->
+      <div
+        class="card-modal modal fade product-card"
+        tabindex="-1"
+        role="dialog"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-lg"
+          role="document"
+        >
+          <div class="modal-content">
+            <button class="card-modal-cancel-button">
+              <img
+                src="images/icons/cancel-icon.png"
+                alt="Cancel button"
+                aria-hidden="true"
+              />
+            </button>
+            <div class="modal-body">
+              <div class="container">
+                <div class="card">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div>
+                        <img src="" alt="" class="product-card-img img-fluid" />
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <h2
+                        class="sm-modal-title d-block d-sm-block product-card-title"
+                      ></h2>
+                      <div>
+                        <b>
+                          <p class="product-specs text-left"></p>
+                        </b>
+                      </div>
+                      <hr />
+                      <div class="product-card-desc"></div>
+                      <hr />
+                      <div class="product-price"></div>
+                      <div class="product-jmf-price"></div>
+                      <div class="product-warehouse-quantity"></div>
+                      <div class="btn-test"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END PRODUCT CARD MODAL -->
     </div>
 
     <!-- Displays products end-->
 
-  <!-- ORDER CONFIRMATION MODAL START-->
-  <div class="order-modal modal fade" id="orderModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <button class="order-modal-cancel-button">
-          <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true">
-        </button>
-        <div class="modal-body">
-
-          <div class="modal-title d-none d-sm-block order-modal-title">Tack för din beställning!</div>
-          <div class="sm-modal-title d-block d-sm-none">Tack för din beställning!</div>
-          <div class="order-modal-subtitle">Din beställning är mottagen och behandlas.
-            Du kommer att motta ett mejl med beställningsinformation!
-          </div>
-          <div>
-            <p class="order-modal-p" id="p-order"></p>
-            <p class="order-modal-p" id="p-date"></p>
-            <p class="order-modal-p" id="p-sum"></p>
-          </div>
-          <div class="shop-again-btn">
-            <button id="shop-again-btn" onclick="window.location.href='index.html'">Handla igen</button>
+    <!-- ORDER CONFIRMATION MODAL START-->
+    <div
+      class="order-modal modal fade"
+      id="orderModal"
+      tabindex="-1"
+      role="dialog"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <button class="order-modal-cancel-button">
+            <img
+              src="images/icons/cancel-icon.png"
+              alt="Cancel button"
+              aria-hidden="true"
+            />
+          </button>
+          <div class="modal-body">
+            <div class="modal-title d-none d-sm-block order-modal-title">
+              Tack för din beställning!
+            </div>
+            <div class="sm-modal-title d-block d-sm-none">
+              Tack för din beställning!
+            </div>
+            <div class="order-modal-subtitle">
+              Din beställning är mottagen och behandlas. Du kommer att motta ett
+              mejl med beställningsinformation!
+            </div>
+            <div>
+              <p class="order-modal-p" id="p-order"></p>
+              <p class="order-modal-p" id="p-date"></p>
+              <p class="order-modal-p" id="p-sum"></p>
+            </div>
+            <div class="shop-again-btn">
+              <button
+                id="shop-again-btn"
+                onclick="window.location.href='index.html'"
+              >
+                Handla igen
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- ORDER CONFIRMATION MODAL END-->
+    <!-- ORDER CONFIRMATION MODAL END-->
 
     <!-- Footer -->
     <section class="">
@@ -309,153 +376,227 @@
         </div>
       </footer>
     </section>
-        <!-- LOG IN MODAL START-->
-        <div class="login-modal modal fade" tabindex="-1" role="dialog">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <button class="login-modal-cancel-button">
-                <img
-                  src="images/icons/cancel-icon.png"
-                  alt="Cancel button"
-                  aria-hidden="true"
-                />
-              </button>
-              <div class="modal-body">
-                <div class="modal-title d-none d-sm-block">Välkommen!</div>
-                <div class="sm-modal-title d-block d-sm-none">Välkommen!</div>
-                <div class="modal-subtitle pb-2">
-                  Logga in för att få ut mer av din vardag!
-                </div>
-                <form id="form1" class="needs-validation" novalidate>
-                  <div class="modal-input-username mx-auto pt-2">
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="input-username"
-                    placeholder="E-mail"
-                    maxlength="100"
-                    required
-                  />
-                 
-                  <div class="invalid-feedback">
-                  </div>
-                </div>
-                <div class="modal-input-password mx-auto">
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="input-password"
-                    placeholder="Lösenord"
-                    maxlength="100"
-                  required/>
-                  
-                  <div class="invalid-feedback">
-                  </div>
-                </div>
-                <div class="modal-login-button">
-                  <button type="submit" id="modal-login-button">Logga in</button>
-                </div>
-                </form>
-    
-                <div class="register-new-user">
-                  <label for="register-new-user-button">Ny hos Hakim livs?</label>
-                  <button class="register-new-user-button">Skapa konto</button>
-                </div>
-              </div>
+    <!-- LOG IN MODAL START-->
+    <div class="login-modal modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <button class="login-modal-cancel-button">
+            <img
+              src="images/icons/cancel-icon.png"
+              alt="Cancel button"
+              aria-hidden="true"
+            />
+          </button>
+          <div class="modal-body">
+            <div class="modal-title d-none d-sm-block">Välkommen!</div>
+            <div class="sm-modal-title d-block d-sm-none">Välkommen!</div>
+            <div class="modal-subtitle pb-2">
+              Logga in för att få ut mer av din vardag!
             </div>
-          </div>
-        </div>
-        <!-- LOG IN MODAL END-->
+            <form id="form1" class="needs-validation" novalidate>
+              <div class="modal-input-username mx-auto pt-2">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="input-username"
+                  placeholder="E-mail"
+                  maxlength="100"
+                  required
+                />
 
-    <!-- START register modal -->
-  <div class="register-modal modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <button class="register-modal-cancel-button">
-          <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true" />
-        </button>
-        <div class="modal-body px-5">
-          <div class="modal-title pb-1 d-none d-sm-block">Skapa konto!</div>
-          <div class="sm-modal-title d-block d-sm-none">Skapa konto!</div>
-          <div class="modal-subtitle pb-3">"Din närlivs - vart du vill"</div>
-          <div class="create-new-account-forms">
-            <form id="CreateNewAccount-form" class="row g-3 needs-validation " novalidate>
-              <div class="col-md-6">
-                <input class="form-control" type="text" id="validationCustom01" name="surname" placeholder="Förnamn"
-                  maxlength="50" />
-                <div id="validFirstName" class=valid-feedback></div>
-                <div id="invalidFirstName" class="invalid-feedback"></div>
+                <div class="invalid-feedback"></div>
               </div>
-              <div class="col-md-6">
-                <input class="form-control" type="text" id="validationCustom02" name="lastname" placeholder="Efternamn"
-                  maxlength="50" />
-                <div id="validLastName" class="valid-feedback"></div>
-                <div id="invalidLastName" class="invalid-feedback"></div>
-              </div>
-              <div class="col-md-6">
-                <input class="form-control" type="email" id="validationCustom03" name="email" placeholder="E-mail"
-                  maxlength="100" />
-                <div id="validEmail" class="valid-feedback"></div>
-                <div id="invalidEmail" class="invalid-feedback"></div>
-              </div>
+              <div class="modal-input-password mx-auto">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="input-password"
+                  placeholder="Lösenord"
+                  maxlength="100"
+                  required
+                />
 
-              <div class="col-md-6">
-                <input class="form-control validatePassword" type="password" id="validationCustom04" name="password"
-                  placeholder="Lösenord" maxlength="100" />
-                <div id="validLösenord" class="valid-feedback  validLösenord"></div>
-                <div id="invalidLösenord" class="invalid-feedback invalidLösenord"></div>
-
+                <div class="invalid-feedback"></div>
               </div>
-
-              <div class="col-md-6">
-                <input class="form-control validatePassword" type="password" id="validationCustom041"
-                  name="repeat-password" placeholder="Upprepa lösenord" maxlength="100" />
-                <div id="validLösenord" class="valid-feedback  validLösenord"></div>
-                <div id="invalidLösenord" class="invalid-feedback invalidLösenord"></div>
-              </div>
-              <div class="col-md-6">
-                <input class="form-control" type="text" id="validationCustom05" name="number" placeholder="Telefon"
-                  maxlength="20" />
-                <div id="validPhone" class="valid-feedback "></div>
-                <div id="invalidPhone" class="invalid-feedback "> </div>
-              </div>
-              <div class="col-md-5">
-                <input class="form-control" type="text" id="validationCustom06" name="street" placeholder="Gata"
-                  maxlength="50" />
-                <div id="validGata" class="valid-feedback"></div>
-                <div id="invalidGata" class="invalid-feedback"></div>
-              </div>
-              <div class="col-md-4">
-                <input class="form-control" type="text" id="validationCustom07" name="city" placeholder="Ort"
-                  maxlength="50" />
-                <div id="validOrt" class="valid-feedback"> </div>
-                <div id="invalidOrt" class="invalid-feedback"></div>
-              </div>
-              <div class="col-md-3">
-                <input class="form-control" type="text" id="validationCustom08" name="zip" placeholder="Postnummer"
-                  maxlength="6" />
-                <div id="validPostNr" class="valid-feedback"></div>
-                <div id="invalidPostNr" class="invalid-feedback"></div>
-              </div>
-              <div class="register-new-account pb-4 pt-2">
-                <button type="submit" class="create-new-account-button">Skapa konto</button>
+              <div class="modal-login-button">
+                <button type="submit" id="modal-login-button">Logga in</button>
               </div>
             </form>
+
+            <div class="register-new-user">
+              <label for="register-new-user-button">Ny hos Hakim livs?</label>
+              <button class="register-new-user-button">Skapa konto</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  </div>
-  </div>
-  <!-- END register modal -->
+    <!-- LOG IN MODAL END-->
+
+    <!-- START register modal -->
+    <div class="register-modal modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <button class="register-modal-cancel-button">
+            <img
+              src="images/icons/cancel-icon.png"
+              alt="Cancel button"
+              aria-hidden="true"
+            />
+          </button>
+          <div class="modal-body px-5">
+            <div class="modal-title pb-1 d-none d-sm-block">Skapa konto!</div>
+            <div class="sm-modal-title d-block d-sm-none">Skapa konto!</div>
+            <div class="modal-subtitle pb-3">"Din närlivs - vart du vill"</div>
+            <div class="create-new-account-forms">
+              <form
+                id="CreateNewAccount-form"
+                class="row g-3 needs-validation"
+                novalidate
+              >
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="validationCustom01"
+                    name="surname"
+                    placeholder="Förnamn"
+                    maxlength="50"
+                  />
+                  <div id="validFirstName" class="valid-feedback"></div>
+                  <div id="invalidFirstName" class="invalid-feedback"></div>
+                </div>
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="validationCustom02"
+                    name="lastname"
+                    placeholder="Efternamn"
+                    maxlength="50"
+                  />
+                  <div id="validLastName" class="valid-feedback"></div>
+                  <div id="invalidLastName" class="invalid-feedback"></div>
+                </div>
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="email"
+                    id="validationCustom03"
+                    name="email"
+                    placeholder="E-mail"
+                    maxlength="100"
+                  />
+                  <div id="validEmail" class="valid-feedback"></div>
+                  <div id="invalidEmail" class="invalid-feedback"></div>
+                </div>
+
+                <div class="col-md-6">
+                  <input
+                    class="form-control validatePassword"
+                    type="password"
+                    id="validationCustom04"
+                    name="password"
+                    placeholder="Lösenord"
+                    maxlength="100"
+                  />
+                  <div
+                    id="validLösenord"
+                    class="valid-feedback validLösenord"
+                  ></div>
+                  <div
+                    id="invalidLösenord"
+                    class="invalid-feedback invalidLösenord"
+                  ></div>
+                </div>
+
+                <div class="col-md-6">
+                  <input
+                    class="form-control validatePassword"
+                    type="password"
+                    id="validationCustom041"
+                    name="repeat-password"
+                    placeholder="Upprepa lösenord"
+                    maxlength="100"
+                  />
+                  <div
+                    id="validLösenord"
+                    class="valid-feedback validLösenord"
+                  ></div>
+                  <div
+                    id="invalidLösenord"
+                    class="invalid-feedback invalidLösenord"
+                  ></div>
+                </div>
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="validationCustom05"
+                    name="number"
+                    placeholder="Telefon"
+                    maxlength="20"
+                  />
+                  <div id="validPhone" class="valid-feedback"></div>
+                  <div id="invalidPhone" class="invalid-feedback"></div>
+                </div>
+                <div class="col-md-5">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="validationCustom06"
+                    name="street"
+                    placeholder="Gata"
+                    maxlength="50"
+                  />
+                  <div id="validGata" class="valid-feedback"></div>
+                  <div id="invalidGata" class="invalid-feedback"></div>
+                </div>
+                <div class="col-md-4">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="validationCustom07"
+                    name="city"
+                    placeholder="Ort"
+                    maxlength="50"
+                  />
+                  <div id="validOrt" class="valid-feedback"></div>
+                  <div id="invalidOrt" class="invalid-feedback"></div>
+                </div>
+                <div class="col-md-3">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="validationCustom08"
+                    name="zip"
+                    placeholder="Postnummer"
+                    maxlength="6"
+                  />
+                  <div id="validPostNr" class="valid-feedback"></div>
+                  <div id="invalidPostNr" class="invalid-feedback"></div>
+                </div>
+                <div class="register-new-account pb-4 pt-2">
+                  <button type="submit" class="create-new-account-button">
+                    Skapa konto
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- END register modal -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
       crossorigin="anonymous"
     ></script>
+    <script src="script.js"></script>
     <script src="cart.js"></script>
-    <script src="login-test.js"></script>
+    <script src="login.js"></script>
     <script src="profile.js"></script>
   </body>
 </html>
