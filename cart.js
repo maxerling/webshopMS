@@ -68,22 +68,25 @@ $(document).ready(function () {
    */
   $(document).on("click", ".td-title", function () {
     if (window.innerWidth < 576) {
-      let id = Number($(this).closest(".quantity-tr").attr("id"));
-      getDataForModalFromLS(id);
-      $(".cart-modal").modal("show");
+      let id = Number($(this).closest(".quantity-tr").attr("id"));      
+      btnEventHandler(id);
+      $(".product-card").modal("show");
     }
   });
 
   $(document).on("click", ".cart-image", function () {
+    
     if (window.innerWidth >= 576) {
-      let id = Number($(this).closest(".quantity-tr").attr("id"));
-      getDataForModalFromLS(id);
-      $(".cart-modal").modal("show");
+      let id = Number($(this).closest(".quantity-tr").attr("id"));      
+      btnEventHandler(id);
+      $(".product-card").modal("show");
     }
+    
+
   });
 
   $(".modal-btn-close").click(function () {
-    $(".cart-modal").modal("hide");
+    $(".product-card").modal("hide");
   });
 
   $(document).on("click", "#logIn", function () {
@@ -107,11 +110,6 @@ $(document).ready(function () {
     location.href = "index.html";
   });
   $('#orderModal').modal({backdrop: 'static', keyboard: false})  
-
-
-  $(document).on("click", ".card-modal-cancel-button", function () {
-    $(".card-modal").modal("hide");
-  });
 
   // MODAL SKAPA KONTO BUTTON
   $(document).on("click", ".register-new-user-button", function () {
@@ -370,12 +368,8 @@ function calcPrice() {
 
   if (sum > freeShippingThreshold || sum == 0) {
     shippingCost = 0;
-      shippingCost = 0;      
-    shippingCost = 0;
   } else {
     shippingCost = 49;
-    sum += shippingCost;
-      sum += shippingCost;    
     sum += shippingCost;
   }
 
@@ -393,8 +387,6 @@ function calcPrice() {
  * @returns 
  */
 function calcVat(sum) {
-  return sum == 0 ? 0 : sum - sum / vat;
-    return sum == 0 ? 0 : sum - sum / vat; 
   return sum == 0 ? 0 : sum - sum / vat;
 }
 
