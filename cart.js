@@ -26,13 +26,16 @@ $(document).ready(function () {
    * Calls function setNewQuantity().
    */
   $(document).on("click", ".fa-plus", function () {
-    let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
+    let allProducts = JSON.parse(localStorage.getItem("allProducts"));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
+    let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
+    let item = allProducts.find((item) => item.id == id);
     q++;
     let isQuantityEnough = checkQuantity(id) >= q;
     if (isQuantityEnough) {
       setNewQuantity(id, q);
       $(this).closest(".quantity-td").find("input").val(q);
+      $(this).closest('tr').find('.cart-table-item-total').html(unitFormatter(item.price * q));
     }
   });
 
@@ -43,12 +46,15 @@ $(document).ready(function () {
    * else calls function setNewQuantity().
    */
   $(document).on("click", ".fa-minus", function () {
-    let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
+    let allProducts = JSON.parse(localStorage.getItem("allProducts"));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
+    let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
+    let item = allProducts.find((item) => item.id == id);
     if (q === 1) return;
     q--;
     setNewQuantity(id, q);
     $(this).closest(".quantity-td").find("input").val(q);
+    $(this).closest('tr').find('.cart-table-item-total').html(unitFormatter(item.price * q));
   });
 
   /**
@@ -288,19 +294,19 @@ function createOrderRow(orderId) {
 //  */
 function checkInputField() {
   $(".amount-changed").on("keyup change", function () {
+    let allProducts = JSON.parse(localStorage.getItem("allProducts"));
     let newValue = Number(this.value.match(/^\d+$/));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
     let isQuantityEnough = checkQuantity(id) >= newValue;
-    let tempProd = cartItems.filter((item) => {
-      return item.id == id;
-    })[0];
+    let item = allProducts.find((item) => item.id == id);
 
     if (newValue && Number(newValue) > 0 && isQuantityEnough) {
       setNewQuantity(id, newValue);
       $(this).closest(".quantity-td").find("input").val(newValue);
+      $(this).closest('tr').find('.cart-table-item-total').html(unitFormatter(item.price * newValue))
     } else {
       setNewQuantity(id, checkQuantity(id));
-      $(this).closest(".quantity-td").find("input").val(checkQuantity(id));
+      $(this).closest(".quantity-td").find("input").val(checkQuantity(id));      
     }
   });
 }
@@ -346,6 +352,7 @@ function htmlGenerator(data) {
                   </div>
                 </td>
               <td>${unitFormatter(data.price)}</td>
+              <td class="cart-table-item-total">${unitFormatter(data.price * data.quantity)}</td>
               <td>
                 <button class="cart-remove-product"><i class="far fa-trash-alt" class="trash-bin-image"></i></button>
               </td>
