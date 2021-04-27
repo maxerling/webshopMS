@@ -162,7 +162,7 @@ function createElementsForProduct(product) {
   addClass(img, "mb-4");
   addClass(img, "product-hover");
   $(img).click(() => {
-    btnEventHandler(`${product.id}`, products);
+    loadProductCard(`${product.id}`, products);
   });
   const p1 = createNode("p");
   const p2 = createNode("p");
@@ -306,6 +306,25 @@ function createElementsForProduct(product) {
         "Tyvärr har vi inte så många produkter i lager"
       );
       p4.style.display = "inline-block";
+    }
+  });
+
+  quantityInput.addEventListener("focusout", (e) => {
+    let inputValue = e.target.value;
+
+    if (inputValue == "") {
+      cartArray = JSON.parse(localStorage.getItem("cart"));
+      cartArray.forEach((cartItem, i) => {
+        if (cartItem.id === product.id) {
+          cartItem.quantity = 0;
+          cartArray.splice(i, 1);
+          valueChanger.style.display = "none";
+          btn.style.display = "inline-block";
+        }
+      });
+      localStorage.setItem("cart", JSON.stringify(cartArray));
+      updateCartBtnQtn();
+      disableOrEnableCartButton();
     }
   });
 }
@@ -569,8 +588,13 @@ function loginButton() {
     userIcon.style.display = "block";
   }
 }
-/** Function that shows bigger product card with info when clicking product image. */
-function btnEventHandler(itemID) {
+
+/**
+ * Displays it in modal window when users clicks on a product.
+ * Uses a for-loop to confirm correct product.
+ * @param {number} itemID gets correct id of product and compares to products in i cart.
+ */
+function loadProductCard(itemID) {
   let allProducts = JSON.parse(localStorage.getItem("allProducts"));
   let item = allProducts.find((item) => item.id == itemID);
   if (item != undefined) {
