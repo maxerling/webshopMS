@@ -135,7 +135,8 @@
               <th scope="col"></th>
               <th scope="col">Artikel</th>
               <th scope="col" class="text-center">Kvantitet</th>
-              <th scope="col">Pris</th>
+              <th scope="col">Pris/st</th>
+              <th scope="col" class="cart-table-item-total">Totalpris</th>
               <th scope=""></th>
             </tr>
           </thead>
@@ -490,7 +491,18 @@
                   <div id="validEmail" class="valid-feedback"></div>
                   <div id="invalidEmail" class="invalid-feedback"></div>
                 </div>
-
+                <div class="col-md-6">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="validationCustom05"
+                    name="number"
+                    placeholder="Telefon"
+                    maxlength="20"
+                  />
+                  <div id="validPhone" class="valid-feedback"></div>
+                  <div id="invalidPhone" class="invalid-feedback"></div>
+                </div>
                 <div class="col-md-6">
                   <input
                     class="form-control validatePassword"
@@ -528,19 +540,7 @@
                     class="invalid-feedback invalidLösenord"
                   ></div>
                 </div>
-                <div class="col-md-6">
-                  <input
-                    class="form-control"
-                    type="text"
-                    id="validationCustom05"
-                    name="number"
-                    placeholder="Telefon"
-                    maxlength="20"
-                  />
-                  <div id="validPhone" class="valid-feedback"></div>
-                  <div id="invalidPhone" class="invalid-feedback"></div>
-                </div>
-                <div class="col-md-5">
+                <div class="col-md-12">
                   <input
                     class="form-control"
                     type="text"
@@ -552,19 +552,7 @@
                   <div id="validGata" class="valid-feedback"></div>
                   <div id="invalidGata" class="invalid-feedback"></div>
                 </div>
-                <div class="col-md-4">
-                  <input
-                    class="form-control"
-                    type="text"
-                    id="validationCustom07"
-                    name="city"
-                    placeholder="Ort"
-                    maxlength="50"
-                  />
-                  <div id="validOrt" class="valid-feedback"></div>
-                  <div id="invalidOrt" class="invalid-feedback"></div>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-5">
                   <input
                     class="form-control"
                     type="text"
@@ -575,6 +563,18 @@
                   />
                   <div id="validPostNr" class="valid-feedback"></div>
                   <div id="invalidPostNr" class="invalid-feedback"></div>
+                </div>
+                <div class="col-md-7">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="validationCustom07"
+                    name="city"
+                    placeholder="Ort"
+                    maxlength="50"
+                  />
+                  <div id="validOrt" class="valid-feedback"></div>
+                  <div id="invalidOrt" class="invalid-feedback"></div>
                 </div>
                 <div class="register-new-account pb-4 pt-2">
                   <button type="submit" class="create-new-account-button">
