@@ -305,6 +305,25 @@ function createElementsForProduct(product) {
       p4.style.display = "inline-block";
     }
   });
+
+  quantityInput.addEventListener("focusout", (e) => {
+    let inputValue = e.target.value;
+
+    if (inputValue == "") {
+      cartArray = JSON.parse(localStorage.getItem("cart"));
+      cartArray.forEach((cartItem, i) => {
+        if (cartItem.id === product.id) {
+          cartItem.quantity = 0;
+          cartArray.splice(i, 1);
+          valueChanger.style.display = "none";
+          btn.style.display = "inline-block";
+        }
+      });
+      localStorage.setItem("cart", JSON.stringify(cartArray));
+      updateCartBtnQtn();
+      disableOrEnableCartButton();
+    }
+  });
 }
 
 /**
