@@ -1,4 +1,4 @@
-let customers = [];
+
 /**
  * fetch all users from the database JSON object! 
  * call createCustomerElements method to create customers table
@@ -9,8 +9,11 @@ function getData() {
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => {
-      customers = data;
-      createCustomerElements(data);
+      if(document.querySelector("h2").innerText == "VIP-Customers"){
+        createVIPCustomerElements(data)
+      }else{
+        createCustomerElements(data);
+      }
     })
     .catch((err) => console.log(err));
 }
@@ -23,15 +26,15 @@ function createCustomerElements(users) {
   let tbody = document.querySelector("tbody");
   let trTable = "";
   users.forEach((user) => {
-    trTable = `
-      <tr>
-                
-      <td class="cut">${user.firstname}</td>
-      <td class="cut">${user.email}</td>
+    if (user.accountType == 0){
+      trTable = `
+      <tr> 
+      <td class="cut">${user.firstname} ${user.lastname}</td>
+      <td class="cut" title="${user.email}">${user.email}</td>
       <td class="cut">${user.address.city}</td>
       <td class="cut">${user.address.street}</td>
       <td class="cut">${user.address.zipcode}</td>
-      <td class="cut">${user.number}</td>
+      <td class="cut" title="${user.number}">${user.number}</td>
       <td class="cut">${user.status}</td>
       
   
@@ -49,9 +52,40 @@ function createCustomerElements(users) {
     </tr>
           `;
     output += trTable;
+    }
+    
   });
     tbody.innerHTML = output;
 }
+
+/**
+ * create elements based on customer data
+ * @param {object} users all of customers info
+ */
+ function createVIPCustomerElements(users) {
+  let output = "";
+  let tbody = document.querySelector("tbody");
+  let trTable = "";
+  users.forEach((user) => {
+    if (user.accountType == 0 && user.status){
+      trTable = `
+      <tr> 
+      <td class="cut">${user.id}</td>
+      <td class="cut">${user.firstname} ${user.lastname}</td>
+      <td class="cut" title="${user.email}">${user.email}</td>
+      <td class="cut">${user.address.city}</td>
+      <td class="cut">${user.address.street}</td>
+      <td class="cut">${user.address.zipcode}</td>
+      <td class="cut" title="${user.number}">${user.number}</td>
+    </tr>
+          `;
+    output += trTable;
+    }
+    
+  });
+    tbody.innerHTML = output;
+}
+
 
 $(document).ready(function () {
   getData();
@@ -64,13 +98,13 @@ $(document).ready(function () {
     var index = $("table tbody tr:last-child").index();
     var row =
       "<tr>" +
-      '<td class="cut"><input type="text" class="form-control"  name="title" id="name"></td>' +
-      '<td class="cut"><input type="text" class="form-control"  name="brand" id="brand"></td>' +
-      '<td class="cut"><input type="text" class="form-control"  name="description" id="description"></td>' +
-      '<td class="cut"><input type="text" class="form-control"  name="image" id="image"></td>' +
-      '<td class="cut"><input type="text" class="form-control"  name="price" id="price"></td>' +
-      '<td class="cut"><input type="text" class="form-control"  name="qty" id="qty"></td>' +
-      '<td class="cut"><input type="text" class="form-control"  name="units" id="units"></td>' +
+      '<td><input type="text" class="form-control"  name="title" id="name"></td>' +
+      '<td><input type="text" class="form-control"  name="brand" id="brand"></td>' +
+      '<td><input type="text" class="form-control"  name="description" id="description"></td>' +
+      '<td><input type="text" class="form-control"  name="image" id="image"></td>' +
+      '<td><input type="text" class="form-control"  name="price" id="price"></td>' +
+      '<td><input type="text" class="form-control"  name="qty" id="qty"></td>' +
+      '<td><input type="text" class="form-control"  name="units" id="units"></td>' +
       "<td>" +
       actions +
       "</td>" +
@@ -95,6 +129,7 @@ $(document).ready(function () {
         $(this).removeClass("error");
       }
     });
+
     $(this).parents("tr").find(".error").first().focus();
     if (!empty) {
       input.each(function () {
@@ -104,6 +139,7 @@ $(document).ready(function () {
       $(".add-new").removeAttr("disabled");
     }
   });
+  
   // Edit row on edit button click
   $(document).on("click", ".edit", function () {
     $(this)
@@ -119,6 +155,7 @@ $(document).ready(function () {
     $(this).parents("tr").find(".add, .edit").toggle();
     $(".add-new").attr("disabled", "disabled");
   });
+  
   // Delete row on delete button click
   $(document).on("click", ".delete", function () {
     $(this).parents("tr").remove();

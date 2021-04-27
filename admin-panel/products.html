@@ -22,28 +22,26 @@
       <div class="table-title">
         <div class="row">
           <div class="col-sm-8">
-            <h2>Products <b>Details</b></h2>
+            <h2>All products</h2>
           </div>
           <div class="col-sm-4">
             <a href="add&edit-product.html" type="button" class="btn btn-info add-new">
-              <i class="fa fa-plus"></i> Add New
+              <i class="fa fa-plus"></i> Add New Product
             </a>
           </div>
         </div>
       </div>
-      <table class="table table-bordered" id="myTable">
+      <table class="table table-hover table-bordered" id="myTable">
         <thead>
           <tr>
-            <th onclick="sortTable(0)" scope="row">ID</th>
+            <th onclick="sortTable(0)">ID</th>
             <th onclick="sortTable(1)">Title</th>
             <th onclick="sortTable(2)">Brand</th>
-            <th onclick="sortTable(3)">Description</th>
-            <th onclick="sortTable(4)">Image</th>
-            <th onclick="numericSortTable(5)">Price</th>
-            <th onclick="numericSortTable(6)">Quantity</th>
-            <th onclick="numericSortTable(7)">Units</th>
-            <th onclick="sortTable(8)" colspan="2">Category</th>
-            <th onclick="sortTable(9)">Featured</th>
+            <th onclick="numericSortTable(3)">Price</th>
+            <th onclick="numericSortTable(4)">Quantity</th>
+            <th onclick="numericSortTable(5)">Units</th>
+            <th onclick="sortTable(6)" colspan="2">Category</th>
+            <th onclick="sortTable(7)">Featured</th>
             <th>Actions</th>
           </tr>
         </thead>
