@@ -293,6 +293,7 @@ header {
 /* ORDER CONFIRMATION MODAL END */
 
 /* PRODUCT START*/
+
 .product {
   background-color: #fff;
   margin-left: 0px;
@@ -513,6 +514,10 @@ input[type="number"] {
   .customer-info {
     padding-bottom: 20px;
   }
+
+  .cart-table-item-total {
+    display: none;
+  }
 }
 
 /* cart customer information readonly inputs */
@@ -565,6 +570,7 @@ input[type="number"] {
 .card {
   padding: 1em;
   margin-bottom: 2em;
+  border: none !important;
 }
 
 .product-jmf-price {
