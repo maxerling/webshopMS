@@ -26,14 +26,18 @@ $(document).ready(function () {
    * Calls function setNewQuantity().
    */
   $(document).on("click", ".fa-plus", function () {
-    let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
+    let allProducts = JSON.parse(localStorage.getItem("allProducts"));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
+    let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
+    let item = allProducts.find((item) => item.id == id);
     q++;
     let isQuantityEnough = checkQuantity(id) >= q;
     if (isQuantityEnough) {
       setNewQuantity(id, q);
       $(this).closest(".quantity-td").find("input").val(q);
     }
+    $(this).closest('tr').find('.cart-table-item-total').html(unitFormatter(data.price * data.quantity));
+
   });
 
   /**
@@ -346,6 +350,7 @@ function htmlGenerator(data) {
                   </div>
                 </td>
               <td>${unitFormatter(data.price)}</td>
+              <td class="cart-table-item-total">${unitFormatter(data.price * data.quantity)}</td>
               <td>
                 <button class="cart-remove-product"><i class="far fa-trash-alt" class="trash-bin-image"></i></button>
               </td>
