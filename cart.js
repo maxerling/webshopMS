@@ -152,7 +152,6 @@ function loadCustomerInfo() {
       .removeClass("disabled-order-button");
 
     let temp = JSON.parse(localStorage.getItem("customer"));
-    console.log(temp.firstname);
     $("#customer-information-name").val(temp.firstname + " " + temp.lastname);
     $("#customer-information-address").val(temp.address.street);
     $("#customer-information-zip").val(
@@ -203,7 +202,8 @@ function confirmBtn(orderRowData) {
   localStorage.removeItem("totalPrice");
 }
 /**
- * 
+ * Creates and order that is sent to the database which 
+ * responds with an object with information about status
  * @param {*} customerId 
  */
 function createOrder(customerId) {
@@ -225,7 +225,6 @@ function createOrder(customerId) {
     },
   })
     .then(function (res) {
-      console.log(res);
       if(res.status == 200){
         return res.json();
       }else{
@@ -238,7 +237,9 @@ function createOrder(customerId) {
         let orderId = result.id;
         createOrderRow(orderId);
       }else{
-        alert(result)
+        localStorage.removeItem("customer");
+        alert("Denna profil har blivit borttagen.\nVänligen skapa nytt konto för att beställa.");
+        location.reload();
       }
       
     })
@@ -247,7 +248,7 @@ function createOrder(customerId) {
     });
 }
 /**
- * 
+ * Creates orderRows in database for all items customer have in local storage
  * @param {*} orderId 
  */
 function createOrderRow(orderId) {
@@ -328,8 +329,8 @@ function checkInputField() {
   });
 }
 /**
- * 
- * @param {*} id 
+ * Checks what the current quantity status if for a specific product
+ * @param {*} id of the product that is to be checked
  * @returns 
  */
 function checkQuantity(id) {
@@ -405,7 +406,7 @@ function calcPrice() {
 }
 
 /**
- * 
+ * Calculates VAT for total amount on order
  * @param {*} sum 
  * @returns 
  */
@@ -451,6 +452,10 @@ function removeFromList(id) {
   calcPrice();
 }
 
+/**
+ * Checks if the cart is empty and then disabled the cart button
+ * otherwise enables it
+ */
 function setOrderButtonStatus() {
   if (cartItems.length != 0 ) {
     $(".order-button")
@@ -469,7 +474,7 @@ function setOrderButtonStatus() {
 }
 
 /**
- * 
+ * Return current date as format 2021-04-25
  */
 function currentDate() {
   var today = new Date();
@@ -478,9 +483,5 @@ function currentDate() {
   var yyyy = today.getFullYear();
 
   today = yyyy + "/" + mm + "/" + dd;
-  console.log(today);
-
-  // let today1 = Date.now()
-  // console.log(today1)
   return today;
 }
