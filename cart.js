@@ -225,7 +225,6 @@ function createOrder(customerId) {
     },
   })
     .then(function (res) {
-      console.log(res);
       if(res.status == 200){
         return res.json();
       }else{
@@ -478,9 +477,5 @@ function currentDate() {
   var yyyy = today.getFullYear();
 
   today = yyyy + "/" + mm + "/" + dd;
-  console.log(today);
-
-  // let today1 = Date.now()
-  // console.log(today1)
   return today;
 }
