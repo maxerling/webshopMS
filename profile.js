@@ -91,7 +91,6 @@
  */
 function editUser() {
   let localST = JSON.parse(localStorage.getItem("customer"));
-  console.log($("#validationCustom05").val());
   let user = {
     id: localST.id, 
     firstname: $("#validationCustom01").val(),
@@ -116,13 +115,24 @@ function editUser() {
     },
   })
     .then(function (res) {
-      return res.json();
+      if(res.status == 200){
+        return res.json();
+      }
+      else{
+        return "user not exists";
+      }
     })
     .then(function (user) {
-      console.log(user);
+      if(user == "user not exists"){
+        localStorage.removeItem("customer");
+        location.href = "index.html";
+        alert("Profilen har blivit borttagen eller något annat fel har inträffat.")
+      }
+      else{
       localStorage.setItem("customer", JSON.stringify(user));
       location.reload();
       alert(user.firstname + " har blivit uppdaterat!");
+      }
     })
     .catch(function (error) {
       console.log(error);
@@ -482,10 +492,10 @@ function checkPostNr() {
   }
 }
 /**
- *
+ * Writes information about the customer to the page from localstorage
  */
 function setProfileFromLS() {
-  if (localStorage.getItem("customer") != null) {
+  if (localStorage.getItem("customer") != null && localStorage.getItem("customer") != "undefined") {
     let localST = JSON.parse(localStorage.getItem("customer"));
     $("#validationCustom01").val(localST.firstname);
     $("#validationCustom02").val(localST.lastname);
