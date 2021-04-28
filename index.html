@@ -47,7 +47,6 @@
           value=""
           class="search-field-input"
           autocomplete="off"
-          autocorrect="off"
           maxlength="30"
         />
       </div>
@@ -187,7 +186,7 @@
             </form>
 
             <div class="register-new-user">
-              <label for="register-new-user-button">Ny hos Hakim livs?</label>
+              <label>Ny hos Hakim livs?</label>
               <button class="register-new-user-button">Skapa konto</button>
             </div>
           </div>
@@ -274,14 +273,8 @@
                     placeholder="Lösenord"
                     maxlength="100"
                   />
-                  <div
-                    id="validLösenord"
-                    class="valid-feedback validLösenord"
-                  ></div>
-                  <div
-                    id="invalidLösenord"
-                    class="invalid-feedback invalidLösenord"
-                  ></div>
+                  <div class="valid-feedback validLösenord"></div>
+                  <div class="invalid-feedback invalidLösenord"></div>
                 </div>
 
                 <div class="col-md-6">
@@ -293,14 +286,8 @@
                     placeholder="Upprepa lösenord"
                     maxlength="100"
                   />
-                  <div
-                    id="validLösenord"
-                    class="valid-feedback validLösenord"
-                  ></div>
-                  <div
-                    id="invalidLösenord"
-                    class="invalid-feedback invalidLösenord"
-                  ></div>
+                  <div class="valid-feedback validLösenord"></div>
+                  <div class="invalid-feedback invalidLösenord"></div>
                 </div>
                 <div class="col-md-12">
                   <input
@@ -368,17 +355,17 @@
                 <div class="row">
                   <div class="col-lg-6">
                     <div>
-                      <img src="" alt="" class="product-card-img img-fluid" />
+                      <img src="-" alt="" class="product-card-img img-fluid" />
                     </div>
                   </div>
                   <div class="col-lg-6">
                     <h2
                       class="sm-modal-title d-block d-sm-block product-card-title"
-                    ></h2>
+                    >
+                      -
+                    </h2>
                     <div>
-                      <b>
-                        <p class="product-specs text-left"></p>
-                      </b>
+                      <p class="product-specs text-left">d</p>
                     </div>
                     <hr />
                     <div class="product-card-desc"></div>
@@ -401,14 +388,16 @@
     <div class="container">
       <div class="row mt-2">
         <nav id="sidebar">
-          <ul class="navbar-nav">
-            <div class="d-flex">
-              <p class="h2">Kategorier</p>
-              <span
+          <div class="d-flex">
+            <ul class="navbar-nav">
+              <li>
+                <p class="h2">Kategorier</p>
+              </li>
+              <!--<span
                 class="close-sidebar fas fa-window-close fa-lg ms-4 mt-2"
-              ></span>
-            </div>
-          </ul>
+              ></span>-->
+            </ul>
+          </div>
         </nav>
 
         <main class="col-12 col-lg-9">
