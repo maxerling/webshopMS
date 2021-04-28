@@ -448,7 +448,7 @@ function getJmfPrice(price, unit) {
     const spaceIndex = unit.toString().indexOf(" ");
     const unitValue = Number(unit.slice(0, spaceIndex));
     const outUnit = unit.slice(spaceIndex + 1) == "g" ? "kg" : "l";
-    return (price / unitValue * 1000).toFixed(2).replace('.', ':') + " kr/" + outUnit;
+    return unitFormatter(price / unitValue * 1000).replace('.', ':') + "/" + outUnit;
 }
 
 function updateCartBtnQtn() {
