@@ -49,9 +49,9 @@
     address: {
       street: $("#validationCustom06").val(),
       city: $("#validationCustom07").val(),
-      zipcode: $("#validationCustom08").val(),
+      zipcode: formatZipcodeForDb($("#validationCustom08").val()),
     },
-    number: $("#validationCustom05").val(),
+    number: formatPhoneNumberForDb($("#validationCustom05").val()),
     status: 0,
     accountType: 0,
   };
@@ -91,7 +91,6 @@
  */
 function editUser() {
   let localST = JSON.parse(localStorage.getItem("customer"));
-  console.log($("#validationCustom05").val());
   let user = {
     id: localST.id, 
     firstname: $("#validationCustom01").val(),
@@ -102,9 +101,9 @@ function editUser() {
       id: localST.address.id,
       street: $("#validationCustom06").val(),
       city: $("#validationCustom07").val(),
-      zipcode: $("#validationCustom08").val(),
+      zipcode: formatZipcodeForDb($("#validationCustom08").val()),
     },
-    number: $("#validationCustom05").val(),
+    number: formatPhoneNumberForDb($("#validationCustom05").val()),
     status: 0,
     accountType: 0,
   };
@@ -116,13 +115,24 @@ function editUser() {
     },
   })
     .then(function (res) {
-      return res.json();
+      if(res.status == 200){
+        return res.json();
+      }
+      else{
+        return "user not exists";
+      }
     })
     .then(function (user) {
-      console.log(user);
+      if(user == "user not exists"){
+        localStorage.removeItem("customer");
+        location.href = "index.html";
+        alert("Profilen har blivit borttagen eller något annat fel har inträffat.")
+      }
+      else{
       localStorage.setItem("customer", JSON.stringify(user));
       location.reload();
       alert(user.firstname + " har blivit uppdaterat!");
+      }
     })
     .catch(function (error) {
       console.log(error);
@@ -209,7 +219,7 @@ function checkValidFirstName() {
   let firstName = document.getElementById("validationCustom01");
   let invalid = "#invalidFirstName";
   let regPattern = /^(?=.{1,50}$)[a-zZäöåÄÖÅ]+(?:['_.\s][a-zZäöåÄÖÅ]+)*$/i;
-  if (firstname == "") {
+  if (firstname.trim() == "") {
     $(inputId).hide();
     $(invalid).text("förnamn krävs");
     $(invalid).show();
@@ -242,7 +252,7 @@ function checkValidLastName() {
   let invalidDiv = "#invalidLastName";
   let regPattern = /^(?=.{1,50}$)[a-zZäöåÄÖÅ]+(?:['_.\s][a-zZäöåÄÖÅ]+)*$/i;
 
-  if (lastName == "") {
+  if (lastName.trim() == "") {
     $(validDiv).hide();
     $(invalidDiv).text("Efternamn krävs");
     $(validDiv).text("");
@@ -304,7 +314,8 @@ function checkEmail() {
  * @returns true if the input is valid otherwise false.
  */
 function checkPassword(target) {
-  let regPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  // let regPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  let regPattern = /^[^åäö]{6 ,100}$/;
   let validDiv = target.parentNode.querySelector(".validLösenord");
   let invalidDiv = target.parentNode.querySelector(".invalidLösenord");
   let password = target.value;
@@ -360,9 +371,9 @@ function checkStreet() {
   let validDiv = "#validGata";
   let invalidDiv = "#invalidGata";
   let address = $("#validationCustom06").val();
-  let regPattern = /^[A-Za-z0-9ZäöåÄÖÅ _]*[A-Za-z0-9ZäöåÄÖÅ][A-Za-z0-9ZäöåÄÖÅ _]*$/;
+  let regPattern = /^[A-Za-z0-9ZäöåÄÖÅ ]*$/;  
   let input = document.getElementById("validationCustom06");
-  if (address == "") {
+  if (address.trim() == "") {
     $(validDiv).hide();
     $(invalidDiv).text("Gata krävs");
     $(validDiv).text("");
@@ -389,8 +400,7 @@ function checkStreet() {
  * @returns true if the input is valid otherwise false.
  */
 function checkPhone() {
-  // let regPattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-  let regPattern = /^[0-9]{3}-[0-9]{3}\s[0-9]{2}\s[0-9]{2}$/im;
+  let regPattern = /(^07([\s-]*\d[\s-]*){8})$|^(\+46([\s-]*\d[\s-]*){9})$|^(0046([\s-]*\d[\s-]*){9})$/
   let validDiv = "#validPhone";
   let invalidDiv = "#invalidPhone";
   let phoneNumber = $("#validationCustom05").val();
@@ -406,7 +416,7 @@ function checkPhone() {
     return false;
   } else if (!regPattern.test(phoneNumber)) {
     $(validDiv).hide();
-    $(invalidDiv).text("Fel format, (07X-XXX XX XX)");
+    $(invalidDiv).text("Ogiltigt telefonnummer");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -414,7 +424,8 @@ function checkPhone() {
     $(invalidDiv).hide();
     $(validDiv).text("Giltig");
     $(validDiv).show();
-    $(input).removeClass("is-invalid").addClass("is-valid");
+    $(input).removeClass("is-invalid").addClass("is-valid");  
+    $(input).val(formatPhoneNumberForDb(phoneNumber));
     return true;
   }
 }
@@ -426,7 +437,7 @@ function checkOrt() {
   let validDiv = "#validOrt";
   let address = $("#validationCustom07").val();
   let invalidDiv = "#invalidOrt";
-  let regPattern = /^[A-Za-z0-9ZäöåÄÖÅ _]*[A-Za-z0-9ZäöåÄÖÅ][A-Za-z0-9ZäöåÄÖÅ _]*$/;
+  let regPattern = /^[A-Za-zåäöÅÄÖ]*$/;
   let input = document.getElementById("validationCustom07");
   if (address == "") {
     $(validDiv).hide();
@@ -455,7 +466,7 @@ function checkOrt() {
  * @returns true if the input is valid otherwise false.
  */
 function checkPostNr() {
-  let regPattern = /^(s-|S-){0,1}[0-9]{3}\s[0-9]{2}$/;
+  let regPattern = /^([\s]*\d[\s]*){5}$/;
   let validDiv = "#validPostNr";
   let invalidDiv = "#invalidPostNr";
   let postNr = $("#validationCustom08").val();
@@ -478,14 +489,15 @@ function checkPostNr() {
     $(validDiv).text("Giltig");
     $(validDiv).show();
     $(input).removeClass("is-invalid").addClass("is-valid");
+    $(input).val(formatZipcodeForDb(postNr));
     return true;
   }
 }
 /**
- *
+ * Writes information about the customer to the page from localstorage
  */
 function setProfileFromLS() {
-  if (localStorage.getItem("customer") != null) {
+  if (localStorage.getItem("customer") != null && localStorage.getItem("customer") != "undefined") {
     let localST = JSON.parse(localStorage.getItem("customer"));
     $("#validationCustom01").val(localST.firstname);
     $("#validationCustom02").val(localST.lastname);
@@ -515,7 +527,27 @@ $(document).on("click", ".create-new-account-button", function() {
     $('.register-modal').modal("hide");
   }
   counter === 0;
-  
 })
+
+// Formats incoming phonenumber to proper format as specified by PO.
+function formatPhoneNumberForDb(phoneNumber) {
+  let output = phoneNumber
+    .trim()
+    .replace(/-/g, '')
+    .replace(/\s/g, '')
+    .replace('+46', '0')
+    .replace(/^(0046)/, '0');
+
+  return `${output.slice(0, 3)}-${output.slice(3, 6)} ${output.slice(6, 8)} ${output.slice(8)}`;
+}
+
+// Formats incoming zipcode to proper format as specified by PO.
+function formatZipcodeForDb(zipcode) {
+  let output = zipcode
+    .trim()
+    .replace(/\s/g, '');
+
+    return `${output.slice(0,3)} ${output.slice(3)}`;
+}
 
 setProfileFromLS();
