@@ -245,7 +245,23 @@ header {
   font-weight: 900;
   color: #011e62;
 }
-  
+
+@media screen and (max-width: 375px) {
+  .create-new-account-forms input {
+    height: 20px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .create-new-account-forms input::-webkit-input-placeholder {
+    font-size: 0.6rem;
+  }
+
+  .register-moda-body {
+    height: 1000px;
+  }
+
+}
 
 .create-new-account-button:hover {
   transform: translateY(2px);
