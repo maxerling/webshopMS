@@ -37,6 +37,7 @@
         ><img id="logoImg" src="./images/logo/Hakims-logo.png" alt="logo"
       /></a>
       <!-- START Search input -->
+      <!-- <div id="search-box"> -->
       <span id="search" class="fas fa-search"> </span>
       <div class="search-field">
         <input
@@ -47,29 +48,63 @@
           class="search-field-input"
           autocomplete="off"
           autocorrect="off"
-          maxlength="10"
+          maxlength="30"
         />
       </div>
+      <!-- <div id="search-list"> -->
+      <!-- <div class="border product product-search px-5">
+          <div class="">
+            <img src="https://picsum.photos/50">
+            <h5 class="d-inline-block ps-2">title</h5>
+          </div>
+          <button class="btn btn-primary btn-search-product p-1 px-3">BUY</button>
+        </div>
+       -->
+
+      <!-- </div>
+    </div> -->
 
       <!-- END Search input -->
-
+      <div class="userLoggedIn dropdown">
+        <a
+          href="#"
+          class="d-flex align-items-center text-decoration-none text-dark dropdown-toggle"
+          id="dropdownUser1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="fas fa-user me-2"></i>
+          <strong id="customer-name"></strong>
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-dark text-small shadow"
+          aria-labelledby="dropdownUser1"
+        >
+          <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+          <!-- måste skickas info till profil -->
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
+          <li>
+            <a id="signOut" class="dropdown-item" href="index.html">Sign out</a>
+          </li>
+          <!-- måste raderas info av lokal storage -->
+        </ul>
+      </div>
       <div class="btn2">
         <button id="logIn" class="btn btn-secondary btn-lg" type="button">
           <i class="fa fa-sign-in" aria-hidden="true"></i>
           Logga in
         </button>
-
-        <button id="cart" class="btn btn-warning btn-lg" type="button">
+        <button
+          id="cart"
+          class="btn btn-warning btn-lg ms-2"
+          type="button"
+          disabled
+        >
           <i class="fas fa-shopping-cart"></i>
           Kundvagn
         </button>
-
-                  <!--Ta bort sen-->
-          <button id="cart" class="btn btn-dark btn-lg" onclick="confirmBtn()" type="button">
-            Confirmation(Ta bort sen)
-          </button>
-                    <!--Ta bort sen-->
-
       </div>
 
       <div
@@ -81,7 +116,7 @@
         <button
           class="btn btn-secondary fa fa-sign-in"
           aria-hidden="true"
-          id= "mobileLogin"
+          id="mobileLogin"
         ></button>
         <div class="btn-group" role="group">
           <button
@@ -91,13 +126,15 @@
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
+            disabled
           ></button>
+
+          <!-- If we choose to add dropdown meny, use code below
           <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
             <a class="dropdown-item" href="#">Dropdown link</a>
             <a class="dropdown-item" href="#">Dropdown link</a>
-          </div>
+          </div> -->
         </div>
-        <!-- <button class="btn btn-primary fas fa-shopping-cart fa-2x"></button> -->
       </div>
     </header>
     <!-- END header -->
@@ -119,27 +156,36 @@
             <div class="modal-subtitle pb-2">
               Logga in för att få ut mer av din vardag!
             </div>
-            <div class="modal-input-username mx-auto pt-2">
-              <input
-                type="text"
-                class="form-control"
-                id="input-username"
-                placeholder="E-mail"
-                maxlength="100"
-              />
-            </div>
-            <div class="modal-input-password mx-auto">
-              <input
-                type="password"
-                class="form-control"
-                id="input-password"
-                placeholder="Lösenord"
-                maxlength="100"
-              />
-            </div>
-            <div class="modal-login-button">
-              <button id="modal-login-button">Logga in</button>
-            </div>
+            <form id="form1">
+              <div class="modal-input-username mx-auto pt-2">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="input-username"
+                  placeholder="E-mail"
+                  maxlength="100"
+                  required
+                />
+
+                <div class="invalid-feedback"></div>
+              </div>
+              <div class="modal-input-password mx-auto">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="input-password"
+                  placeholder="Lösenord"
+                  maxlength="100"
+                  required
+                />
+
+                <div class="invalid-feedback"></div>
+              </div>
+              <div class="modal-login-button">
+                <button type="submit" id="modal-login-button">Logga in</button>
+              </div>
+            </form>
+
             <div class="register-new-user">
               <label for="register-new-user-button">Ny hos Hakim livs?</label>
               <button class="register-new-user-button">Skapa konto</button>
@@ -166,99 +212,136 @@
             <div class="sm-modal-title d-block d-sm-none">Skapa konto!</div>
             <div class="modal-subtitle pb-3">"Din närlivs - vart du vill"</div>
             <div class="create-new-account-forms">
-              <form class="row g-3">
+              <form
+                id="CreateNewAccount-form"
+                class="row g-3 needs-validation"
+                novalidate
+              >
                 <div class="col-md-6">
                   <input
                     class="form-control"
                     type="text"
-                    id="create-new-account-surname"
+                    id="validationCustom01"
                     name="surname"
                     placeholder="Förnamn"
-                    maxlength="100"
+                    maxlength="50"
                   />
+                  <div id="validFirstName" class="valid-feedback"></div>
+                  <div id="invalidFirstName" class="invalid-feedback"></div>
                 </div>
                 <div class="col-md-6">
                   <input
                     class="form-control"
                     type="text"
-                    id="create-new-account-lastname"
+                    id="validationCustom02"
                     name="lastname"
                     placeholder="Efternamn"
-                    maxlength="100"
+                    maxlength="50"
                   />
+                  <div id="validLastName" class="valid-feedback"></div>
+                  <div id="invalidLastName" class="invalid-feedback"></div>
                 </div>
                 <div class="col-md-6">
                   <input
                     class="form-control"
                     type="email"
-                    id="create-new-account-email"
+                    id="validationCustom03"
                     name="email"
                     placeholder="E-mail"
                     maxlength="100"
                   />
+                  <div id="validEmail" class="valid-feedback"></div>
+                  <div id="invalidEmail" class="invalid-feedback"></div>
                 </div>
                 <div class="col-md-6">
                   <input
                     class="form-control"
                     type="text"
-                    id="create-new-account-number"
+                    id="validationCustom05"
                     name="number"
                     placeholder="Telefon"
-                    maxlength="100"
+                    maxlength="20"
                   />
+                  <div id="validPhone" class="valid-feedback"></div>
+                  <div id="invalidPhone" class="invalid-feedback"></div>
                 </div>
                 <div class="col-md-6">
                   <input
-                    class="form-control"
+                    class="form-control validatePassword"
                     type="password"
-                    id="create-new-account-password"
+                    id="validationCustom04"
                     name="password"
                     placeholder="Lösenord"
                     maxlength="100"
                   />
+                  <div
+                    id="validLösenord"
+                    class="valid-feedback validLösenord"
+                  ></div>
+                  <div
+                    id="invalidLösenord"
+                    class="invalid-feedback invalidLösenord"
+                  ></div>
                 </div>
+
                 <div class="col-md-6">
                   <input
-                    class="form-control"
+                    class="form-control validatePassword"
                     type="password"
-                    id="create-new-account-repeat-password"
+                    id="validationCustom041"
                     name="repeat-password"
                     placeholder="Upprepa lösenord"
                     maxlength="100"
                   />
+                  <div
+                    id="validLösenord"
+                    class="valid-feedback validLösenord"
+                  ></div>
+                  <div
+                    id="invalidLösenord"
+                    class="invalid-feedback invalidLösenord"
+                  ></div>
+                </div>
+                <div class="col-md-12">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="validationCustom06"
+                    name="street"
+                    placeholder="Gata"
+                    maxlength="50"
+                  />
+                  <div id="validGata" class="valid-feedback"></div>
+                  <div id="invalidGata" class="invalid-feedback"></div>
                 </div>
                 <div class="col-md-5">
                   <input
                     class="form-control"
                     type="text"
-                    id="create-new-account-street"
-                    name="street"
-                    placeholder="Gata"
-                    maxlength="100"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <input
-                    class="form-control"
-                    type="text"
-                    id="create-new-account-city"
-                    name="city"
-                    placeholder="Ort"
-                    maxlength="100"
-                  />
-                </div>
-                <div class="col-md-3">
-                  <input
-                    class="form-control"
-                    type="text"
-                    id="create-new-account-zip"
+                    id="validationCustom08"
                     name="zip"
                     placeholder="Postnummer"
-                    maxlength="7"
+                    maxlength="6"
                   />
+                  <div id="validPostNr" class="valid-feedback"></div>
+                  <div id="invalidPostNr" class="invalid-feedback"></div>
+                </div>
+                <div class="col-md-7">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="validationCustom07"
+                    name="city"
+                    placeholder="Ort"
+                    maxlength="50"
+                  />
+                  <div id="validOrt" class="valid-feedback"></div>
+                  <div id="invalidOrt" class="invalid-feedback"></div>
                 </div>
                 <div class="register-new-account pb-4 pt-2">
-                  <button class="create-new-account-button">Skapa konto</button>
+                  <button type="submit" class="create-new-account-button">
+                    Skapa konto
+                  </button>
                 </div>
               </form>
             </div>
@@ -266,38 +349,53 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
-<!-- END register modal -->
+    <!-- END register modal -->
 
-<!-- ORDER CONFIRMATION MODAL START-->
-<div class="order-modal modal fade" id="orderModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <button class="order-modal-cancel-button">
-        <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true">
-      </button>
-      <div class="modal-body">
-
-        <div class="modal-title d-none d-sm-block order-modal-title">Tack för din beställning!</div>
-        <div class="sm-modal-title d-block d-sm-none">Tack för din beställning!</div>
-        <div class="order-modal-subtitle">Din beställning är mottagen och behandlas. 
-          Du kommer att motta ett mejl med beställningsinformation!
-        </div>
-        <div>
-          <p class="order-modal-p" id="p-order"></p>
-          <p class="order-modal-p" id="p-date"></p>
-          <p class="order-modal-p" id="p-sum"></p>
-        </div>
-        <div class="shop-again-btn">
-          <button id ="shop-again-btn" onclick="window.location.href='index.html'">Handla igen</button>
+    <!-- START PRODUCT CARD MODAL -->
+    <div class="card-modal modal fade product-card" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <button class="card-modal-cancel-button">
+            <img
+              src="images/icons/cancel-icon.png"
+              alt="Cancel button"
+              aria-hidden="true"
+            />
+          </button>
+          <div class="modal-body">
+            <div class="container">
+              <div class="card">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div>
+                      <img src="" alt="" class="product-card-img img-fluid" />
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <h2
+                      class="sm-modal-title d-block d-sm-block product-card-title"
+                    ></h2>
+                    <div>
+                      <b>
+                        <p class="product-specs text-left"></p>
+                      </b>
+                    </div>
+                    <hr />
+                    <div class="product-card-desc"></div>
+                    <hr />
+                    <div class="product-price"></div>
+                    <div class="product-jmf-price"></div>
+                    <div class="product-warehouse-quantity"></div>
+                    <div class="btn-test"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-<!-- ORDER CONFIRMATION MODAL END-->
-
+    <!-- END PRODUCT CARD MODAL -->
 
     <!--START main -->
     <div class="container">
@@ -318,8 +416,8 @@
             class="hero-image d-flex justify-content-center align-items-center"
           >
             <div class="hero-text">
-              <a class="text-decoration-none" href="index.html">
-                <h3 id="hero-text" class="">DAGENS HAKIMS DEAL</h3>
+              <a class="text-decoration-none">
+                <h3 id="hero-text" class="cat">DAGENS HAKIMS DEAL</h3>
               </a>
             </div>
           </div>
@@ -364,5 +462,8 @@
     <script src="script.js"></script>
     <script src="ham-menu.js"></script>
     <script src="addToCart.js"></script>
+    <script src="login.js"></script>
+    <script src="profile.js"></script>
+    <!-- <script src="search.js"></script> -->
   </body>
 </html>

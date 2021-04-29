@@ -1,12 +1,15 @@
 /* START Sidebar stylesheets*/
 #sidebar {
   display: none;
-  position: absolute;
-  z-index: 900;
+  position: fixed;
+  z-index: 200;
   width: 184px;
-  height: auto;
-  background-color: #ebebeb; /*#f7f7f7*/
+  top: 54px;
+  padding-top: 12px;
+  min-height: 1000px;
+  background-color: #eeeeee;
 }
+
 .cat {
   cursor: pointer;
 }
@@ -28,6 +31,10 @@
 /* END Sidebar stylesheets*/
 
 .btn2{
+  display: none;
+}
+
+.msg-header{
   display: none;
 }
 
@@ -55,15 +62,20 @@
 @media (min-width: 576px) {
   #sidebar {
     width: 200px;
+    top: 70px;
   }
 
   .navbar-icon {
     display: inline-block;
   }
+
+  .msg-header{
+    display: block;
+  }
 }
 
 /*  Medium devices (tablets, 768px and up) */
-@media (min-width: 769px) {
+@media (min-width: 888px) {
   #products{
     margin-left: 2px;
     margin-bottom: 10px;
@@ -72,15 +84,16 @@
     display: none;
   }
   .btn2{
-    display: inline-block;
+    display:flex;
   }
   #sidebar {
     display: block;
     height:100%;
-    position: fixed;
     width: 200px;
     left: unset !important;
+    top: unset;
     z-index: 0;
+    background:none;
   }
   .close-sidebar {
     display: none !important;
@@ -103,12 +116,12 @@
   .search-field {
     display: block;
   }
-  
+
 }
 
 /*  Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
- 
+
 }
 
 /* X-Large devices (large desktops, 1200px and up) */
