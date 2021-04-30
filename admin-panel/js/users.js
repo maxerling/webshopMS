@@ -91,9 +91,12 @@ $(document).ready(function () {
   getData();
 
   $('[data-toggle="tooltip"]').tooltip();
-  var actions = $("table td:last-child").html();
-  // Append table with add row form on add new button click
+  
+  
+  /**************************************Listeners for CRUD operations comment away************************************ 
+   // Append table with add row form on add new button click
   $(".add-new").click(function () {
+    var actions = $("table td:last-child").html();
     $(this).attr("disabled", "disabled");
     var index = $("table tbody tr:last-child").index();
     var row =
@@ -161,6 +164,7 @@ $(document).ready(function () {
     $(this).parents("tr").remove();
     $(".add-new").removeAttr("disabled");
   });
+  *************************************************************************************************/
 });
 
 

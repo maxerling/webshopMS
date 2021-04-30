@@ -22,7 +22,7 @@
     <input
       type="text"
       id="myInput"
-      onkeyup="searchFunction()"
+      onkeyup="searchFunction(2)"
       placeholder="Search for names.."
     />
     <div  id="table"  class="container">
@@ -32,14 +32,14 @@
                     <div class="col-sm-8"><h2>Orders <b>Details</b></h2></div>
                 </div>
             </div>
-            <table class="table table-bordered table-hover" id="tableOrders">
+            <table class="table table-bordered table-hover" id="myTable">
                 <thead>
                     <tr>
-                        <th>OrderNr</th>
-                        <th>Date</th>
-                        <th>Customer Id</th>
-                        <th>Total Price</th>
-                        <th>Status</th>
+                        <th  onclick="numericSortTable(0)">OrderNr</th>
+                        <th onclick="sortTable(1)">Date</th>
+                        <th onclick="sortTable(2)">Customer email</th>
+                        <th onclick="numericSortTable(3)">Total Price</th>
+                        <th onclick="sortTable(4)">Status</th>
                         <th>action</th>
                     </tr>
                 </thead>
@@ -61,8 +61,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <button type="button" class="btn btn-info add-new float-end">
-                <i class="fa fa-plus"></i> Add New
+            <button type="button" class="btn btn-info add-new float-end disabled">
+                <i class="fa fa-plus"></i> Add new order-row
               </button>
             <table class="table table-bordered" id="myTable2">
                 <thead>
@@ -83,7 +83,7 @@
         <div class="modal-footer">
           <span>Total price : </span><span id="totalPrice"> </span>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Print</button>
+          <button type="button" class="btn btn-primary printme">Print</button>
         </div>
       </div>
     </div>
