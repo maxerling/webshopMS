@@ -197,7 +197,10 @@
 
     <!-- START register modal -->
     <div class="register-modal modal fade" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+      <div
+        class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        role="document"
+      >
         <div class="modal-content">
           <button class="register-modal-cancel-button">
             <img
@@ -224,6 +227,7 @@
                     name="surname"
                     placeholder="Förnamn"
                     maxlength="50"
+                    onpaste="return false;"
                   />
                   <div id="validFirstName" class="valid-feedback"></div>
                   <div id="invalidFirstName" class="invalid-feedback"></div>
@@ -236,6 +240,7 @@
                     name="lastname"
                     placeholder="Efternamn"
                     maxlength="50"
+                    onpaste="return false;"
                   />
                   <div id="validLastName" class="valid-feedback"></div>
                   <div id="invalidLastName" class="invalid-feedback"></div>
@@ -248,6 +253,7 @@
                     name="email"
                     placeholder="E-mail"
                     maxlength="100"
+                    onpaste="return false;"
                   />
                   <div id="validEmail" class="valid-feedback"></div>
                   <div id="invalidEmail" class="invalid-feedback"></div>
@@ -260,6 +266,7 @@
                     name="number"
                     placeholder="Telefon"
                     maxlength="20"
+                    onpaste="return false;"
                   />
                   <div id="validPhone" class="valid-feedback"></div>
                   <div id="invalidPhone" class="invalid-feedback"></div>
@@ -272,6 +279,7 @@
                     name="password"
                     placeholder="Lösenord"
                     maxlength="100"
+                    onpaste="return false;"
                   />
                   <div class="valid-feedback validLösenord"></div>
                   <div class="invalid-feedback invalidLösenord"></div>
@@ -285,6 +293,7 @@
                     name="repeat-password"
                     placeholder="Upprepa lösenord"
                     maxlength="100"
+                    onpaste="return false;"
                   />
                   <div class="valid-feedback validLösenord"></div>
                   <div class="invalid-feedback invalidLösenord"></div>
@@ -297,6 +306,7 @@
                     name="street"
                     placeholder="Gata"
                     maxlength="50"
+                    onpaste="return false;"
                   />
                   <div id="validGata" class="valid-feedback"></div>
                   <div id="invalidGata" class="invalid-feedback"></div>
@@ -309,6 +319,7 @@
                     name="zip"
                     placeholder="Postnummer"
                     maxlength="6"
+                    onpaste="return false;"
                   />
                   <div id="validPostNr" class="valid-feedback"></div>
                   <div id="invalidPostNr" class="invalid-feedback"></div>
@@ -321,6 +332,7 @@
                     name="city"
                     placeholder="Ort"
                     maxlength="50"
+                    onpaste="return false;"
                   />
                   <div id="validOrt" class="valid-feedback"></div>
                   <div id="invalidOrt" class="invalid-feedback"></div>
