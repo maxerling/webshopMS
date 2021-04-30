@@ -26,10 +26,10 @@
         ) {
           event.preventDefault();
           form.classList.add("was-validated");
-          if(event.target.id == "profile-form"){
+          if (event.target.id == "profile-form") {
             $("#confirmationModal").modal("show");
-          }else if(event.target.id == "CreateNewAccount-form"){
-            createNewUser()
+          } else if (event.target.id == "CreateNewAccount-form") {
+            createNewUser();
           }
         }
       },
@@ -38,9 +38,9 @@
   });
 })();
 /**
- * 
+ *
  */
- function createNewUser(){
+function createNewUser() {
   let user = {
     firstname: $("#validationCustom01").val(),
     lastname: $("#validationCustom02").val(),
@@ -63,10 +63,9 @@
     },
   })
     .then(function (res) {
-      if(res.status == 200) {
+      if (res.status == 200) {
         return res.json();
-      }
-      else if(res.status == 500) {
+      } else if (res.status == 500) {
         alert("E-mail is already in use");
         $(".register-modal").modal("hide");
       }
@@ -74,25 +73,24 @@
     .then(function (user) {
       user.status = true;
       localStorage.setItem("customer", JSON.stringify(user));
-      document.querySelector('#logIn').style.display="none"
-      document.querySelector('#mobileLogin').style.display="none"
-      document.querySelector('#customer-name').innerText= user.firstname
-      document.querySelector('.userLoggedIn').style.display="block"
+      document.querySelector("#logIn").style.display = "none";
+      document.querySelector("#mobileLogin").style.display = "none";
+      document.querySelector("#customer-name").innerText = user.firstname;
+      document.querySelector(".userLoggedIn").style.display = "block";
       alert(user.firstname + " har registrerats som ny användare.");
       location.reload();
     })
     .catch(function (error) {
       console.log(error);
     });
-
 }
 /**
- * 
+ *
  */
 function editUser() {
   let localST = JSON.parse(localStorage.getItem("customer"));
   let user = {
-    id: localST.id, 
+    id: localST.id,
     firstname: $("#validationCustom01").val(),
     lastname: $("#validationCustom02").val(),
     email: $("#validationCustom03").val(),
@@ -115,29 +113,28 @@ function editUser() {
     },
   })
     .then(function (res) {
-      if(res.status == 200){
+      if (res.status == 200) {
         return res.json();
-      }
-      else{
+      } else {
         return "user not exists";
       }
     })
     .then(function (user) {
-      if(user == "user not exists"){
+      if (user == "user not exists") {
         localStorage.removeItem("customer");
         location.href = "index.html";
-        alert("Profilen har blivit borttagen eller något annat fel har inträffat.")
-      }
-      else{
-      localStorage.setItem("customer", JSON.stringify(user));
-      location.reload();
-      alert(user.firstname + " har blivit uppdaterat!");
+        alert(
+          "Profilen har blivit borttagen eller något annat fel har inträffat."
+        );
+      } else {
+        localStorage.setItem("customer", JSON.stringify(user));
+        location.reload();
+        alert(user.firstname + " har blivit uppdaterat!");
       }
     })
     .catch(function (error) {
       console.log(error);
     });
-    
 }
 /**
  * Send request server to delete user
@@ -146,10 +143,10 @@ function deleteUser() {
   let localST = JSON.parse(localStorage.getItem("customer"));
 
   let user = {
-    id: localST.id, 
+    id: localST.id,
     address: {
-      id: localST.address.id, 
-    }
+      id: localST.address.id,
+    },
   };
   fetch("https://hakims-webshop.herokuapp.com/user/delete", {
     method: "POST",
@@ -159,23 +156,20 @@ function deleteUser() {
     },
   })
     .then(function (res) {
-      if (res.status == 200){
+      if (res.status == 200) {
         localStorage.removeItem("customer");
-        alert("You have been deleted")
-        window.location.href = "index.html"
+        alert("You have been deleted");
+        window.location.href = "index.html";
       }
       return res.text();
     })
     .then(function (deleteMessage) {
-      console.log(deleteMessage);// här kan vi visa en confirm!
+      console.log(deleteMessage); // här kan vi visa en confirm!
     })
     .catch(function (error) {
       console.log(error);
     });
-
-  
 }
-
 
 // **************** VALIDATE form ********************************
 
@@ -315,10 +309,11 @@ function checkEmail() {
  */
 function checkPassword(target) {
   // let regPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-  let regPattern = /^[^åäö]{6 ,100}$/;
+  let regPattern = /^[^åäöÅÄÖ]{6,100}$/;
   let validDiv = target.parentNode.querySelector(".validLösenord");
   let invalidDiv = target.parentNode.querySelector(".invalidLösenord");
   let password = target.value;
+  console.log(password);
   let input = target;
 
   if (password == "") {
@@ -331,7 +326,7 @@ function checkPassword(target) {
   } else if (!regPattern.test(password)) {
     $(validDiv).hide();
     $(invalidDiv).text(
-      "Lösenordet ska innehålla minst 1 bokstav och 1 siffra, samt vara minst 8 tecken långt"
+      "Lösenordet ska innehålla minst 6 tecken och får inte innehålla Å,Ä,Ö."
     );
     $(validDiv).text("");
     $(invalidDiv).show();
@@ -371,7 +366,7 @@ function checkStreet() {
   let validDiv = "#validGata";
   let invalidDiv = "#invalidGata";
   let address = $("#validationCustom06").val();
-  let regPattern = /^[A-Za-z0-9ZäöåÄÖÅ ]*$/;  
+  let regPattern = /^[A-Za-z0-9ZäöåÄÖÅ ]*$/;
   let input = document.getElementById("validationCustom06");
   if (address.trim() == "") {
     $(validDiv).hide();
@@ -400,7 +395,7 @@ function checkStreet() {
  * @returns true if the input is valid otherwise false.
  */
 function checkPhone() {
-  let regPattern = /(^07([\s-]*\d[\s-]*){8})$|^(\+46([\s-]*\d[\s-]*){9})$|^(0046([\s-]*\d[\s-]*){9})$/
+  let regPattern = /(^07([\s-]*\d[\s-]*){8})$|^(\+46([\s-]*\d[\s-]*){9})$|^(0046([\s-]*\d[\s-]*){9})$/;
   let validDiv = "#validPhone";
   let invalidDiv = "#invalidPhone";
   let phoneNumber = $("#validationCustom05").val();
@@ -424,7 +419,7 @@ function checkPhone() {
     $(invalidDiv).hide();
     $(validDiv).text("Giltig");
     $(validDiv).show();
-    $(input).removeClass("is-invalid").addClass("is-valid");  
+    $(input).removeClass("is-invalid").addClass("is-valid");
     $(input).val(formatPhoneNumberForDb(phoneNumber));
     return true;
   }
@@ -497,7 +492,10 @@ function checkPostNr() {
  * Writes information about the customer to the page from localstorage
  */
 function setProfileFromLS() {
-  if (localStorage.getItem("customer") != null && localStorage.getItem("customer") != "undefined") {
+  if (
+    localStorage.getItem("customer") != null &&
+    localStorage.getItem("customer") != "undefined"
+  ) {
     let localST = JSON.parse(localStorage.getItem("customer"));
     $("#validationCustom01").val(localST.firstname);
     $("#validationCustom02").val(localST.lastname);
@@ -515,39 +513,40 @@ function setProfileFromLS() {
 /**
  * Listener that closes create user modal when correct data is entered.
  */
-$(document).on("click", ".create-new-account-button", function() {
-  const validMsg = document.getElementsByClassName('valid-feedback')
+$(document).on("click", ".create-new-account-button", function () {
+  const validMsg = document.getElementsByClassName("valid-feedback");
   let counter = 0;
-  for(msg of validMsg) {
-    if(msg.innerHTML == "Giltig"){
+  for (msg of validMsg) {
+    if (msg.innerHTML == "Giltig") {
       counter++;
-    } 
+    }
   }
-  if(counter === 9) {
-    $('.register-modal').modal("hide");
+  if (counter === 9) {
+    $(".register-modal").modal("hide");
   }
   counter === 0;
-})
+});
 
 // Formats incoming phonenumber to proper format as specified by PO.
 function formatPhoneNumberForDb(phoneNumber) {
   let output = phoneNumber
     .trim()
-    .replace(/-/g, '')
-    .replace(/\s/g, '')
-    .replace('+46', '0')
-    .replace(/^(0046)/, '0');
+    .replace(/-/g, "")
+    .replace(/\s/g, "")
+    .replace("+46", "0")
+    .replace(/^(0046)/, "0");
 
-  return `${output.slice(0, 3)}-${output.slice(3, 6)} ${output.slice(6, 8)} ${output.slice(8)}`;
+  return `${output.slice(0, 3)}-${output.slice(3, 6)} ${output.slice(
+    6,
+    8
+  )} ${output.slice(8)}`;
 }
 
 // Formats incoming zipcode to proper format as specified by PO.
 function formatZipcodeForDb(zipcode) {
-  let output = zipcode
-    .trim()
-    .replace(/\s/g, '');
+  let output = zipcode.trim().replace(/\s/g, "");
 
-    return `${output.slice(0,3)} ${output.slice(3)}`;
+  return `${output.slice(0, 3)} ${output.slice(3)}`;
 }
 
 setProfileFromLS();
