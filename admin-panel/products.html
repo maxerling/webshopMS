@@ -17,7 +17,7 @@
 
 <body class="overflow-auto">
   <div class="container" id="table">
-    <input type="text" id="myInput" onkeyup="searchFunction()" placeholder="Search for names.." />
+    <input type="text" id="myInput" onkeyup="searchFunction(1)" placeholder="Search for names.." />
     <div class="table-wrapper">
       <div class="table-title">
         <div class="row">
@@ -34,7 +34,7 @@
       <table class="table table-hover table-bordered" id="myTable">
         <thead>
           <tr>
-            <th onclick="sortTable(0)">ID</th>
+            <th onclick="numericSortTable(0)">ID</th>
             <th onclick="sortTable(1)">Title</th>
             <th onclick="sortTable(2)">Brand</th>
             <th onclick="numericSortTable(3)">Price</th>

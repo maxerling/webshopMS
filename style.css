@@ -318,7 +318,7 @@ header {
   margin-bottom: 10px;
 }
 
-#quantityInput {
+.quantityInput {
   width: 2em;
   height: 2em;
 }

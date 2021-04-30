@@ -177,7 +177,8 @@ function createElementsForProduct(product) {
   addClass(btn, "btn-primary");
   addClass(btn, "btn");
   quantityInput.type = "tel";
-  quantityInput.id = "quantityInput";
+  // quantityInput.id = "quantityInput";
+  addClass(quantityInput, "quantityInput")
   quantityInput.min = 0;
   quantityInput.setAttribute("pattern", "[0-9]+");
   addClass(quantityInput, "text-center");
