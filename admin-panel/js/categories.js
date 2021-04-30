@@ -45,6 +45,8 @@ function getData() {
 $(document).ready(function () {
   getData();
 
+  /********************* Listeners for CRUD operations comment away */
+  /* *********************************************************************************************** 
   $('[data-toggle="tooltip"]').tooltip();
   var actions = $("table td:last-child").html();
   // Append table with add row form on add new button click
@@ -111,4 +113,5 @@ $(document).ready(function () {
     $(this).parents("tr").remove();
     $(".add-new").removeAttr("disabled");
   });
+  ************************************************************************************************  */
 });

@@ -99,6 +99,10 @@ function createModal(id) {
 }
 
 $(document).ready(function () {
+  $(".printme").click(function(){
+    print();
+  })
+
   // fetch order and call render function
   fetch("https://hakims-webshop.herokuapp.com/order/get")
     .then((response) => response.json())
@@ -107,6 +111,8 @@ $(document).ready(function () {
 
   $('[data-toggle="tooltip"]').tooltip();
 
+
+  /* *****************************Listeners for CRUD operations comment away******************************************* 
   // Append table with add row form on add new button click
   //console.log(actions);
   $(".add-new").click(function () {
@@ -193,4 +199,5 @@ $(document).ready(function () {
     $(this).parents("tr").remove();
     $(".add-new").removeAttr("disabled");
   });
+  ********************************************************************************* */
 });

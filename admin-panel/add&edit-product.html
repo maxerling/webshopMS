@@ -21,15 +21,15 @@
 
             <div class="form-group mt-3 ">
                 <label for="" class="control-label">Title</label>
-                <input type="text" class="form-control">
+                <input id="input1" type="text" class="form-control">
             </div>
             <div class="form-group mt-3">
                 <label for="" class="control-label">Brand</label>
-                <input type="text" class="form-control">
+                <input id="input2" type="text" class="form-control">
             </div>
             <div class="form-group mt-3 mb-5">
                 <label for="" class="control-label">Description</label>
-                <textarea class="form-control"></textarea>
+                <textarea id="input3" class="form-control"></textarea>
             </div>
 
             <!-- Uploaded image area-->
@@ -39,43 +39,69 @@
             </div>
 
             <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-
                 <input id="upload" type="text"  class="form-control border-0">
-                <button onClick="renderImage()" class="btn btn-primary">Kolla bilden</button>
-
-                <!-- <div class="input-group-append">
-                    <label for="upload" class="btn btn-light m-0 rounded-pill px-4">
-                        <i class="fa fa-cloud-upload mr-2 text-muted"></i>
-                        <small class="text-uppercase font-weight-bold text-muted">Välj fil</small></label>
-                </div> -->
-
+                <button id="upload-btn" class="btn btn-primary btn-radius btn-haver">Kolla bilden</button>
             </div>
 
-            <div class="form-group mt-3">
-                <label for="" class="control-label">Price</label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="form-group mt-3">
-                <label for="" class="control-label">Quantity</label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="form-group mt-3">
-                <label for="" class="control-label">Units</label>
-                <input type="text" class="form-control" name="">
-            </div>
-            <div class="form-group mt-3">
-                <label for="" class="control-label">Category</label>
-                <select class="form-control" name="" id="category">
+            <div class="d-flex">
+                <div class="form-group mt-3 col">
+                    <label for="" class="control-label">Price</label>
+                    <input id="input4" type="text" class="form-control">
+                </div>
 
-                    <option>Skafferi</option>
-                    <option>Snack-godis</option>
-                    <option>Hem-stad</option>
+                <div class="form-group mt-3 col ms-2">
+                    <label for="" class="control-label">Quantity</label>
+                    <input id="input5" type="text" class="form-control">
+                </div>
+            </div>
+            
+            <div class="d-flex">
+                <div class="form-group mt-3 col">
+                    <label for="" class="control-label">Units</label>
+                    <input id="input6" type="text" class="form-control" name="">
+                </div>
+               
+
+                <div class="form-group mt-3 col ms-2 ">
+                    <label for="" class="control-label">Featured</label>
+                    <div class="form-control ">
+                        <input type="radio" id="true" name="featured" value="1" >
+                        <label for="male">True</label>
+                        <input type="radio" id="false" name="featured" value="0" class="ms-4" checked>
+                        <label for="female">False</label>
+                    </div>
+                </div>
+
+           </div>
+
+           <div class="d-flex">
+            <div class="form-group mt-3 col">
+                <label for="" class="control-label">Category 1</label> 
+                <select id="input7" class="form-control category" value="">
+
                 </select>
 
             </div>
-            <div class="form-group mt-3 float-end w-75 m-auto">
-                <button type="reset" class="btn btn-warning  w-25">Radera form</button>
-                <button type="submit" class="btn btn-success w-25">Bekräfta form</button>
+            <div class="form-group mt-3 col ms-2">
+                <label for="" class="control-label">Category 2</label>
+                <select id="input8" class="form-control category"  >
+                    <option value="">Optional</option>
+                </select>
+
+            </div>
+            <div class="form-group mt-3 col ms-2">
+                <label for="" class="control-label">Category 3</label>
+                <select id="input9" class="form-control category" disabled>
+                    <option value="">Optional</option>
+                </select>
+
+            </div>
+           </div>
+           
+           
+            <div class="form-group mt-3 w-100 d-flex justify-content-center">
+                <button type="reset" class="btn btn-warning ">Radera form</button>
+                <button id="submit-form" type="submit" class="btn btn-success ms-2">Bekräfta form</button>
             </div>
         </form>
         <!-- END FORM  -->
