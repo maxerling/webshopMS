@@ -177,7 +177,8 @@ function createElementsForProduct(product) {
   addClass(btn, "btn-primary");
   addClass(btn, "btn");
   quantityInput.type = "tel";
-  quantityInput.id = "quantityInput";
+  // quantityInput.id = "quantityInput";
+  addClass(quantityInput, "quantityInput")
   quantityInput.min = 0;
   quantityInput.setAttribute("pattern", "[0-9]+");
   addClass(quantityInput, "text-center");
@@ -201,8 +202,6 @@ function createElementsForProduct(product) {
     valueChanger
   );
 
-  let cartArray = JSON.parse(localStorage.getItem("cart"));
-  const cartProduct = cartArray.find((element) => element.id === product.id);
   if (product.quantity == 0) {
     $(btn).attr("disabled", "disabled");
     $(btn).html("Slut i lager");
@@ -212,6 +211,10 @@ function createElementsForProduct(product) {
     removeClass(img, "product-hover");
   } else {
     $(btn).click(() => {
+      let cartArray = JSON.parse(localStorage.getItem("cart"));
+      const cartProduct = cartArray.find(
+        (element) => element.id === product.id
+      );
       valueChanger.style.display = "block";
       btn.style.display = "none";
 

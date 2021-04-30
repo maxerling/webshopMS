@@ -12,8 +12,32 @@ $(document).ready(function () {
 
 // Delete row on delete button click
 $(document).on("click", ".delete", function () {
-  $(this).parents("tr").remove();
-  $(".add-new").removeAttr("disabled");
+
+  let result = confirm("Are you sure to delete?")
+  if (result) {
+    let id = $(this).closest("tr").find(">:first-child").text();
+    console.log(id); 
+    $(this).parents("tr").remove();
+    $(".add-new").removeAttr("disabled");
+    // DELETE FROM DB
+    fetch(`https://hakims-webshop.herokuapp.com/product/delete/${id}`, {
+      method: "POST"
+    })
+      .then(function (res) {
+        console.log(res);
+        if (res.status == 200) {
+          return res.text();
+        } else {
+          alert("Något gick fel/n Forsök igen!");
+        }
+      })
+      .then(function (result) {
+        alert(result);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 });
 });
 
@@ -39,7 +63,7 @@ function createProductElements(products) {
     }</td>
     <td class="cut">${product.featured}</td>
     <td>
-      <a href="add&edit-product.html" class="edit" title="Edit" data-toggle="tooltip"
+      <a href="add&edit-product.html?id=${product.id}" class="edit" title="Edit" data-toggle="tooltip"
         ><i class="material-icons">&#xE254;</i></a
       >
       <a class="delete" title="Delete" data-toggle="tooltip"
@@ -77,5 +101,7 @@ function createVIPProductElements(products) {
   });
   tbody.innerHTML = output;
 }
+
+
 
 
