@@ -248,14 +248,19 @@ header {
 
 @media screen and (max-width: 375px) {
   .create-new-account-forms input {
-    height: 20px;
+    height: 35px;
   }
 }
 
 @media screen and (max-width: 375px) {
   .create-new-account-forms input::-webkit-input-placeholder {
-    font-size: 0.6rem;
+    font-size: 1rem;
   }
+
+  .register-moda-body {
+    height: 1000px;
+  }
+
 }
 
 .create-new-account-button:hover {

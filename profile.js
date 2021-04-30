@@ -26,10 +26,10 @@
         ) {
           event.preventDefault();
           form.classList.add("was-validated");
-          if(event.target.id == "profile-form"){
+          if (event.target.id == "profile-form") {
             $("#confirmationModal").modal("show");
-          }else if(event.target.id == "CreateNewAccount-form"){
-            createNewUser()
+          } else if (event.target.id == "CreateNewAccount-form") {
+            createNewUser();
           }
         }
       },
@@ -38,9 +38,9 @@
   });
 })();
 /**
- * 
+ *
  */
- function createNewUser(){
+function createNewUser() {
   let user = {
     firstname: $("#validationCustom01").val(),
     lastname: $("#validationCustom02").val(),
@@ -49,9 +49,9 @@
     address: {
       street: $("#validationCustom06").val(),
       city: $("#validationCustom07").val(),
-      zipcode: $("#validationCustom08").val(),
+      zipcode: formatZipcodeForDb($("#validationCustom08").val()),
     },
-    number: $("#validationCustom05").val(),
+    number: formatPhoneNumberForDb($("#validationCustom05").val()),
     status: 0,
     accountType: 0,
   };
@@ -63,10 +63,9 @@
     },
   })
     .then(function (res) {
-      if(res.status == 200) {
+      if (res.status == 200) {
         return res.json();
-      }
-      else if(res.status == 500) {
+      } else if (res.status == 500) {
         alert("E-mail is already in use");
         $(".register-modal").modal("hide");
       }
@@ -74,26 +73,24 @@
     .then(function (user) {
       user.status = true;
       localStorage.setItem("customer", JSON.stringify(user));
-      document.querySelector('#logIn').style.display="none"
-      document.querySelector('#mobileLogin').style.display="none"
-      document.querySelector('#customer-name').innerText= user.firstname
-      document.querySelector('.userLoggedIn').style.display="block"
+      document.querySelector("#logIn").style.display = "none";
+      document.querySelector("#mobileLogin").style.display = "none";
+      document.querySelector("#customer-name").innerText = user.firstname;
+      document.querySelector(".userLoggedIn").style.display = "block";
       alert(user.firstname + " har registrerats som ny användare.");
       location.reload();
     })
     .catch(function (error) {
       console.log(error);
     });
-
 }
 /**
- * 
+ *
  */
 function editUser() {
   let localST = JSON.parse(localStorage.getItem("customer"));
-  console.log($("#validationCustom05").val());
   let user = {
-    id: localST.id, 
+    id: localST.id,
     firstname: $("#validationCustom01").val(),
     lastname: $("#validationCustom02").val(),
     email: $("#validationCustom03").val(),
@@ -102,9 +99,9 @@ function editUser() {
       id: localST.address.id,
       street: $("#validationCustom06").val(),
       city: $("#validationCustom07").val(),
-      zipcode: $("#validationCustom08").val(),
+      zipcode: formatZipcodeForDb($("#validationCustom08").val()),
     },
-    number: $("#validationCustom05").val(),
+    number: formatPhoneNumberForDb($("#validationCustom05").val()),
     status: 0,
     accountType: 0,
   };
@@ -116,18 +113,28 @@ function editUser() {
     },
   })
     .then(function (res) {
-      return res.json();
+      if (res.status == 200) {
+        return res.json();
+      } else {
+        return "user not exists";
+      }
     })
     .then(function (user) {
-      console.log(user);
-      localStorage.setItem("customer", JSON.stringify(user));
-      location.reload();
-      alert(user.firstname + " har blivit uppdaterat!");
+      if (user == "user not exists") {
+        localStorage.removeItem("customer");
+        location.href = "index.html";
+        alert(
+          "Profilen har blivit borttagen eller något annat fel har inträffat."
+        );
+      } else {
+        localStorage.setItem("customer", JSON.stringify(user));
+        location.reload();
+        alert(user.firstname + " har blivit uppdaterat!");
+      }
     })
     .catch(function (error) {
       console.log(error);
     });
-    
 }
 /**
  * Send request server to delete user
@@ -136,10 +143,10 @@ function deleteUser() {
   let localST = JSON.parse(localStorage.getItem("customer"));
 
   let user = {
-    id: localST.id, 
+    id: localST.id,
     address: {
-      id: localST.address.id, 
-    }
+      id: localST.address.id,
+    },
   };
   fetch("https://hakims-webshop.herokuapp.com/user/delete", {
     method: "POST",
@@ -149,23 +156,20 @@ function deleteUser() {
     },
   })
     .then(function (res) {
-      if (res.status == 200){
+      if (res.status == 200) {
         localStorage.removeItem("customer");
-        alert("You have been deleted")
-        window.location.href = "index.html"
+        alert("You have been deleted");
+        window.location.href = "index.html";
       }
       return res.text();
     })
     .then(function (deleteMessage) {
-      console.log(deleteMessage);// här kan vi visa en confirm!
+      console.log(deleteMessage); // här kan vi visa en confirm!
     })
     .catch(function (error) {
       console.log(error);
     });
-
-  
 }
-
 
 // **************** VALIDATE form ********************************
 
@@ -209,7 +213,7 @@ function checkValidFirstName() {
   let firstName = document.getElementById("validationCustom01");
   let invalid = "#invalidFirstName";
   let regPattern = /^(?=.{1,50}$)[a-zZäöåÄÖÅ]+(?:['_.\s][a-zZäöåÄÖÅ]+)*$/i;
-  if (firstname == "") {
+  if (firstname.trim() == "") {
     $(inputId).hide();
     $(invalid).text("förnamn krävs");
     $(invalid).show();
@@ -242,7 +246,7 @@ function checkValidLastName() {
   let invalidDiv = "#invalidLastName";
   let regPattern = /^(?=.{1,50}$)[a-zZäöåÄÖÅ]+(?:['_.\s][a-zZäöåÄÖÅ]+)*$/i;
 
-  if (lastName == "") {
+  if (lastName.trim() == "") {
     $(validDiv).hide();
     $(invalidDiv).text("Efternamn krävs");
     $(validDiv).text("");
@@ -304,10 +308,12 @@ function checkEmail() {
  * @returns true if the input is valid otherwise false.
  */
 function checkPassword(target) {
-  let regPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  // let regPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  let regPattern = /^[^åäöÅÄÖ]{6,100}$/;
   let validDiv = target.parentNode.querySelector(".validLösenord");
   let invalidDiv = target.parentNode.querySelector(".invalidLösenord");
   let password = target.value;
+  console.log(password);
   let input = target;
 
   if (password == "") {
@@ -320,7 +326,7 @@ function checkPassword(target) {
   } else if (!regPattern.test(password)) {
     $(validDiv).hide();
     $(invalidDiv).text(
-      "Lösenordet ska innehålla minst 1 bokstav och 1 siffra, samt vara minst 8 tecken långt"
+      "Lösenordet ska innehålla minst 6 tecken och får inte innehålla Å,Ä,Ö."
     );
     $(validDiv).text("");
     $(invalidDiv).show();
@@ -360,9 +366,9 @@ function checkStreet() {
   let validDiv = "#validGata";
   let invalidDiv = "#invalidGata";
   let address = $("#validationCustom06").val();
-  let regPattern = /^[A-Za-z0-9ZäöåÄÖÅ _]*[A-Za-z0-9ZäöåÄÖÅ][A-Za-z0-9ZäöåÄÖÅ _]*$/;
+  let regPattern = /^[A-Za-z0-9ZäöåÄÖÅ ]*$/;
   let input = document.getElementById("validationCustom06");
-  if (address == "") {
+  if (address.trim() == "") {
     $(validDiv).hide();
     $(invalidDiv).text("Gata krävs");
     $(validDiv).text("");
@@ -389,8 +395,7 @@ function checkStreet() {
  * @returns true if the input is valid otherwise false.
  */
 function checkPhone() {
-  // let regPattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-  let regPattern = /^[0-9]{3}-[0-9]{3}\s[0-9]{2}\s[0-9]{2}$/im;
+  let regPattern = /(^07([\s-]*\d[\s-]*){8})$|^(\+46([\s-]*\d[\s-]*){9})$|^(0046([\s-]*\d[\s-]*){9})$/;
   let validDiv = "#validPhone";
   let invalidDiv = "#invalidPhone";
   let phoneNumber = $("#validationCustom05").val();
@@ -406,7 +411,7 @@ function checkPhone() {
     return false;
   } else if (!regPattern.test(phoneNumber)) {
     $(validDiv).hide();
-    $(invalidDiv).text("Fel format, (07X-XXX XX XX)");
+    $(invalidDiv).text("Ogiltigt telefonnummer");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
@@ -415,6 +420,7 @@ function checkPhone() {
     $(validDiv).text("Giltig");
     $(validDiv).show();
     $(input).removeClass("is-invalid").addClass("is-valid");
+    $(input).val(formatPhoneNumberForDb(phoneNumber));
     return true;
   }
 }
@@ -426,7 +432,7 @@ function checkOrt() {
   let validDiv = "#validOrt";
   let address = $("#validationCustom07").val();
   let invalidDiv = "#invalidOrt";
-  let regPattern = /^[A-Za-z0-9ZäöåÄÖÅ _]*[A-Za-z0-9ZäöåÄÖÅ][A-Za-z0-9ZäöåÄÖÅ _]*$/;
+  let regPattern = /^[A-Za-zåäöÅÄÖ]*$/;
   let input = document.getElementById("validationCustom07");
   if (address == "") {
     $(validDiv).hide();
@@ -455,7 +461,7 @@ function checkOrt() {
  * @returns true if the input is valid otherwise false.
  */
 function checkPostNr() {
-  let regPattern = /^(s-|S-){0,1}[0-9]{3}\s[0-9]{2}$/;
+  let regPattern = /^([\s]*\d[\s]*){5}$/;
   let validDiv = "#validPostNr";
   let invalidDiv = "#invalidPostNr";
   let postNr = $("#validationCustom08").val();
@@ -478,14 +484,18 @@ function checkPostNr() {
     $(validDiv).text("Giltig");
     $(validDiv).show();
     $(input).removeClass("is-invalid").addClass("is-valid");
+    $(input).val(formatZipcodeForDb(postNr));
     return true;
   }
 }
 /**
- *
+ * Writes information about the customer to the page from localstorage
  */
 function setProfileFromLS() {
-  if (localStorage.getItem("customer") != null) {
+  if (
+    localStorage.getItem("customer") != null &&
+    localStorage.getItem("customer") != "undefined"
+  ) {
     let localST = JSON.parse(localStorage.getItem("customer"));
     $("#validationCustom01").val(localST.firstname);
     $("#validationCustom02").val(localST.lastname);
@@ -503,19 +513,40 @@ function setProfileFromLS() {
 /**
  * Listener that closes create user modal when correct data is entered.
  */
-$(document).on("click", ".create-new-account-button", function() {
-  const validMsg = document.getElementsByClassName('valid-feedback')
+$(document).on("click", ".create-new-account-button", function () {
+  const validMsg = document.getElementsByClassName("valid-feedback");
   let counter = 0;
-  for(msg of validMsg) {
-    if(msg.innerHTML == "Giltig"){
+  for (msg of validMsg) {
+    if (msg.innerHTML == "Giltig") {
       counter++;
-    } 
+    }
   }
-  if(counter === 9) {
-    $('.register-modal').modal("hide");
+  if (counter === 9) {
+    $(".register-modal").modal("hide");
   }
   counter === 0;
-  
-})
+});
+
+// Formats incoming phonenumber to proper format as specified by PO.
+function formatPhoneNumberForDb(phoneNumber) {
+  let output = phoneNumber
+    .trim()
+    .replace(/-/g, "")
+    .replace(/\s/g, "")
+    .replace("+46", "0")
+    .replace(/^(0046)/, "0");
+
+  return `${output.slice(0, 3)}-${output.slice(3, 6)} ${output.slice(
+    6,
+    8
+  )} ${output.slice(8)}`;
+}
+
+// Formats incoming zipcode to proper format as specified by PO.
+function formatZipcodeForDb(zipcode) {
+  let output = zipcode.trim().replace(/\s/g, "");
+
+  return `${output.slice(0, 3)} ${output.slice(3)}`;
+}
 
 setProfileFromLS();
