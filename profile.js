@@ -65,8 +65,8 @@ function createNewUser() {
     .then(function (res) {
       if (res.status == 200) {
         return res.json();
-      } else if (res.status == 500) {
-        alert("E-mail is already in use");
+      } else{
+        alert("Mailadressen används redan");
         $(".register-modal").modal("hide");
       }
     })

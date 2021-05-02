@@ -4,10 +4,20 @@
   position: fixed;
   z-index: 200;
   width: 184px;
-  top: 54px;
-  padding-top: 12px;
-  min-height: 1000px;
+  top: 7%;
+  height: 93%;
   background-color: #eeeeee;
+  padding: 0;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+#sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#sidebar {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
 }
 
 .cat {
@@ -88,12 +98,12 @@
   }
   #sidebar {
     display: block;
-    height:100%;
     width: 200px;
     left: unset !important;
     top: unset;
     z-index: 0;
     background:none;
+    height: 90%;
   }
   .close-sidebar {
     display: none !important;

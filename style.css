@@ -350,12 +350,11 @@ header {
 
 /* FOOTER START*/
 footer {
-  z-index: 300;
   position: relative;
 }
 .footer-bg {
-  background-color: #26272b;
-  color: #737373;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #252525;
 }
 /* FOOTER END*/
 
