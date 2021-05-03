@@ -201,6 +201,7 @@ function createElementsForProduct(product) {
   addClass(p4, "qyt-error");
   const btn = createNode("button");
   const quantityInput = createNode("input");
+  quantityInput.setAttribute("onpaste", "return false;")
   addClass(quantityInput, "");
   const plusBtn = createNode("button");
   const minusBtn = createNode("button");
@@ -372,6 +373,8 @@ function minusButton(e, product) {
     disableOrEnableCartButton();
   }
 }
+
+
 /**
  *
  * @param {*} e
