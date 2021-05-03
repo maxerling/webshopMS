@@ -222,7 +222,7 @@ function checkValidFirstName() {
     return false;
   } else if (!regPattern.test(firstname)) {
     $(inputId).hide();
-    $(invalid).text("Ogiltig! Endast karaktärer tack");
+    $(invalid).text("Ogiltig! Ange endast bokstäver");
     $(invalid).show();
     $(inputId).text("");
     $(firstName).addClass("is-invalid").removeClass("is-valid");
@@ -366,18 +366,19 @@ function checkStreet() {
   let validDiv = "#validGata";
   let invalidDiv = "#invalidGata";
   let address = $("#validationCustom06").val();
-  let regPattern = /^[A-Za-z0-9ZäöåÄÖÅ ]*$/;
+  // let regPattern = /^[A-Za-z0-9ZäöåÄÖÅ ]*$/;
+  let regPattern = /^(?=.*[0-9])(?=.*[a-zA-ZåäöÅÄÖ])(?=.*[\s])[0-9a-zA-ZåäöÅÄÖ\s]+$/
   let input = document.getElementById("validationCustom06");
   if (address.trim() == "") {
     $(validDiv).hide();
-    $(invalidDiv).text("Gata krävs");
+    $(invalidDiv).text("Adress krävs");
     $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (!regPattern.test(address)) {
     $(validDiv).hide();
-    $(invalidDiv).text("Ogiltig gata");
+    $(invalidDiv).text("Ogiltig adress");
     $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
@@ -468,20 +469,20 @@ function checkPostNr() {
   let input = document.getElementById("validationCustom08");
   if (postNr == "") {
     $(validDiv).hide();
-    $(invalidDiv).text("Post nummer krävs");
+    $(invalidDiv).text("Postnummer krävs");
     $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (!regPattern.test(postNr)) {
     $(validDiv).hide();
-    $(invalidDiv).text("Fel format, (xxx xx)");
+    $(invalidDiv).text("Ogiltigt postnummer");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else {
     $(invalidDiv).hide();
-    $(validDiv).text("Giltig");
+    $(validDiv).text("Giltigt");
     $(validDiv).show();
     $(input).removeClass("is-invalid").addClass("is-valid");
     $(input).val(formatZipcodeForDb(postNr));
