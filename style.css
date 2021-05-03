@@ -31,41 +31,14 @@ header {
   width: 30%;
   height: 100%;
 }
-/* #search-box{
-  position: relative;
-  width: 42%;
-} */
+ 
 
-.search-field {
-  display: none;
-  width: 40%;
-}
-.search-field input {
-  padding: 0.5rem 0.2rem 0.5rem 2rem;
-  background: url(images/icons/search-icon.svg) no-repeat left;
-  width: 100%;
-  border: 1px solid #bbb;
-  border-radius: 5px;
-}
-/* #search-list{
-  display: none;
-  width: 75%;
-  position: absolute;
-  top:40px;
-  left:40px;
-  background:white;
-  box-shadow: 0 5px 0 6px rgba(0, 0, 0, 0.1)
-}
-.product-search{
-  height: 60px;
-  display:flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.product-search img{
-  width:50px;
-  height:50px;
-} */
+.mask{
+  position: fixed;
+  background-color: rgba(0, 0, 0, .3);
+  z-index: 800;
+ }
+ 
 
 #logIn {
   background-color: #fff;
@@ -324,8 +297,8 @@ header {
 }
 
 .quantityInput {
-  width: 2em;
-  height: 2em;
+  width: 2rem;
+  height: 2rem;
 }
 
 .quantity-value-changer {
@@ -459,7 +432,7 @@ input[type="number"] {
 
 @media screen and (min-width: 768px) {
   .shopping-cart {
-    width: 50%;
+    width: 70%;
     margin-right: auto;
     margin-left: auto;
   }
