@@ -37,31 +37,31 @@
         ><img id="logoImg" src="./images/logo/Hakims-logo.png" alt="logo"
       /></a>
       <!-- START Search input -->
-      <!-- <div id="search-box"> -->
       <span id="search" class="fas fa-search"> </span>
-      <div class="search-field">
-        <input
-          type="text"
-          placeholder="Sök..."
-          name="query"
-          value=""
-          class="search-field-input"
-          autocomplete="off"
-          maxlength="30"
-        />
-      </div>
-      <!-- <div id="search-list"> -->
-      <!-- <div class="border product product-search px-5">
-          <div class="">
-            <img src="https://picsum.photos/50">
-            <h5 class="d-inline-block ps-2">title</h5>
-          </div>
-          <button class="btn btn-primary btn-search-product p-1 px-3">BUY</button>
+      <div id="search-box">
+        <div class="search-field">
+          <input
+            type="text"
+            placeholder="Sök..."
+            name="query"
+            value=""
+            class="search-field-input"
+            autocomplete="off"
+            maxlength="30"
+          />
         </div>
-       -->
-
-      <!-- </div>
-    </div> -->
+        <div id="search-list">
+          <div class="border product product-search px-5">
+            <div class="">
+              <img src="https://picsum.photos/50" />
+              <h5 class="d-inline-block ps-2">title</h5>
+            </div>
+            <button class="btn btn-primary btn-search-product p-1 px-3">
+              BUY
+            </button>
+          </div>
+        </div>
+      </div>
 
       <!-- END Search input -->
       <div class="userLoggedIn dropdown">
@@ -400,19 +400,17 @@
     <!-- END PRODUCT CARD MODAL -->
 
     <!--START main -->
+    <div class="mask"></div>
     <div class="container">
-      <div class="row mt-2">
-        <nav id="sidebar">
-          <div class="d-flex">
-            <ul class="navbar-nav">
-              <li>
-                <p class="h2">Kategorier</p>
-              </li>
-              <!--<span
-                class="close-sidebar fas fa-window-close fa-lg ms-4 mt-2"
-              ></span>-->
-            </ul>
+      <div class="row mt-2 d-flex">
+        <nav id="sidebar" class="overflow-auto">
+          <div class="d-flex sticky-top bg-light top-0 p-2">
+            <h3 class="h2">Kategorier</h3>
+            <span
+              class="close-sidebar fas fa-window-close fa-lg ms-4 mt-2"
+            ></span>
           </div>
+          <ul class="navbar-nav ps-3"></ul>
         </nav>
 
         <main class="col-12 col-lg-9">
@@ -430,32 +428,35 @@
 
             <div id="products" class="row"></div>
           </div>
+
+          <!--START footer  -->
+          <footer class="footer-bg text-start pt-4 z-index-2">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-12 col-md-12 mb-4 mb-md-0 ps-4">
+                  <h6 class="text-uppercase">Kontaktuppgifter</h6>
+                  <p>
+                    Hakim Livs HB <br />
+                    Telefon: 08-123456 <br />
+                    Epost: hakim@hakims.se <br />
+                    Adress: Vägen 3 <br />
+                    167 45 Bromma <br />
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="text-center p-3"
+              style="background-color: rgba(0, 0, 0, 0.2)"
+            >
+              © 2021 Copyright: Hakims Livs
+            </div>
+          </footer>
+          <!--END footer  -->
         </main>
       </div>
     </div>
     <!--END main -->
-
-    <!--START footer  -->
-    <footer class="footer-bg text-start pt-4 z-index-2">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-12 col-md-12 mb-4 mb-md-0 ps-4">
-            <h6 class="text-uppercase text-white">Kontaktuppgifter</h6>
-            <p>
-              Hakim Livs HB <br />
-              Telefon: 08-123456 <br />
-              Epost: hakim@hakims.se <br />
-              Adress: Vägen 3 <br />
-              167 45 Bromma <br />
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-        © 2021 Copyright: Hakims Livs
-      </div>
-    </footer>
-    <!--END footer  -->
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
@@ -468,6 +469,6 @@
     <script src="addToCart.js"></script>
     <script src="login.js"></script>
     <script src="profile.js"></script>
-    <!-- <script src="search.js"></script> -->
+    <script src="search.js"></script>
   </body>
 </html>
