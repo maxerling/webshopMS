@@ -664,6 +664,7 @@ function loginButton() {
  */
 function loadProductCard(itemID) {
   let allProducts = JSON.parse(localStorage.getItem("allProducts"));
+
   let item = allProducts.find((item) => item.id == itemID);
   if (item != undefined) {
     $(".product-card-title").text(item.title);

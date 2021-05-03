@@ -39,8 +39,7 @@
 
     <!-- tables -->
   </head>
-  <body >
-
+  <body>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
       <symbol id="bootstrap" viewBox="0 0 118 94">
         <title>Bootstrap</title>
@@ -152,7 +151,6 @@
     <div
       id="sidebar"
       class="h-100 d-flex flex-column p-3 text-white bg-secondary"
-      
     >
       <a
         href="index.html"
@@ -161,13 +159,21 @@
         <!-- <svg class="bi me-2" width="40" height="32">
           <use xlink:href="#bootstrap" />
         </svg> -->
-        <img src="/images/logo/Hakims-logo.png" alt="logo" style="width: 250px; margin-left: 10px;" >
+        <img
+          src="/images/logo/Hakims-logo.png"
+          alt="logo"
+          style="width: 250px; margin-left: 10px"
+        />
         <!-- <span class="fs-4">Admin Panel</span> -->
       </a>
       <hr />
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="../index.html" class="nav-link  text-white"  onclick="activeClass(event)">
+          <a
+            href="../index.html"
+            class="nav-link text-white"
+            onclick="activeClass(event)"
+          >
             <svg class="bi me-2" width="16" height="16">
               <use xlink:href="#home" />
             </svg>
@@ -175,7 +181,12 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="dashboard.html" class="nav-link active text-white" target="frame" onclick="activeClass(event)">
+          <a
+            href="dashboard.html"
+            class="nav-link active text-white"
+            target="frame"
+            onclick="activeClass(event)"
+          >
             <svg class="bi me-2" width="16" height="16">
               <use xlink:href="#toggles2" />
             </svg>
@@ -183,7 +194,12 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="VIP-products.html" class="nav-link  text-white" target="frame" onclick="activeClass(event)">
+          <a
+            href="VIP-products.html"
+            class="nav-link text-white"
+            target="frame"
+            onclick="activeClass(event)"
+          >
             <svg class="bi me-2" width="16" height="16">
               <use xlink:href="#geo-fill" />
             </svg>
@@ -191,7 +207,12 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="VIP-customers.html" class="nav-link  text-white" target="frame" onclick="activeClass(event)">
+          <a
+            href="VIP-customers.html"
+            class="nav-link text-white"
+            target="frame"
+            onclick="activeClass(event)"
+          >
             <svg class="bi me-2" width="16" height="16">
               <use xlink:href="#people-circle" />
             </svg>
@@ -199,7 +220,12 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="users.html" class="nav-link text-white" target="frame" onclick="activeClass(event)">
+          <a
+            href="users.html"
+            class="nav-link text-white"
+            target="frame"
+            onclick="activeClass(event)"
+          >
             <svg class="bi me-2" width="16" height="16">
               <use xlink:href="#people-circle" />
             </svg>
@@ -207,7 +233,12 @@
           </a>
         </li>
         <li>
-          <a href="orders.html" class="nav-link text-white" target="frame" onclick="activeClass(event)">
+          <a
+            href="orders.html"
+            class="nav-link text-white"
+            target="frame"
+            onclick="activeClass(event)"
+          >
             <svg class="bi me-2" width="16" height="16">
               <use xlink:href="#gear-fill" />
             </svg>
@@ -215,7 +246,12 @@
           </a>
         </li>
         <li>
-          <a href="products.html" class="nav-link text-white" target="frame" onclick="activeClass(event)">
+          <a
+            href="products.html"
+            class="nav-link text-white"
+            target="frame"
+            onclick="activeClass(event)"
+          >
             <svg class="bi me-2" width="16" height="16">
               <use xlink:href="#table" />
             </svg>
@@ -223,14 +259,18 @@
           </a>
         </li>
         <li>
-          <a href="categories.html" class="nav-link text-white" target="frame" onclick="activeClass(event)">
+          <a
+            href="categories.html"
+            class="nav-link text-white"
+            target="frame"
+            onclick="activeClass(event)"
+          >
             <svg class="bi me-2" width="16" height="16">
               <use xlink:href="#table" />
             </svg>
             Categories
           </a>
         </li>
-        
       </ul>
       <hr />
       <div class="dropdown">
@@ -254,16 +294,16 @@
           class="dropdown-menu dropdown-menu-dark text-small shadow"
           aria-labelledby="dropdownUser1"
         >
-          
-          <li><a class="dropdown-item" href="../profile.html">Profile</a></li><!-- måste skickas info till profil -->
+          <li><a class="dropdown-item" href="../profile.html">Profile</a></li>
+          <!-- måste skickas info till profil -->
           <li><hr class="dropdown-divider" /></li>
-          <li><a class="dropdown-item" href="../index.html">Sign out</a></li> <!-- måste raderas info av lokal storage -->
-          
+          <li><a class="dropdown-item" href="../index.html">Sign out</a></li>
+          <!-- måste raderas info av lokal storage -->
         </ul>
       </div>
     </div>
 
-    <iframe id="frame" frameborder="0" src="dashboard.html" name="frame"> </iframe>
+    <iframe id="frame" src="dashboard.html" name="frame"> </iframe>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
