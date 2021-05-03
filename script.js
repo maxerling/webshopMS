@@ -8,7 +8,7 @@ window.addEventListener("load", function () {
   updateCartBtnQtn();
 });
 
-/** Global variable */
+/** Global variables */
 let cat = "produkter";
 let products = document.getElementById("products");
 let productsData = [];
@@ -80,7 +80,24 @@ function storeData(data) {
   cat = categoryOrignalFormatter(cat);
   data.forEach((product) => createElementsForProduct(product));
   setNumberProduct()
+  asdf()
 }
+
+function asdf() {
+  $(".quantityInput").on("keyup change", function() {
+    let data = fetch("https://hakims-webshop.herokuapp.com/product/get")
+    .then((resp) => resp.json())
+    .catch((err) => console.log(err));
+
+    console.log(typeof data);
+    let id = Number($(this).closest(".product").prop("id"));
+    //let item = data.find((item) => item.id == id);
+
+    
+  })
+}
+
+
 /**
  * Map data to createCategory function.
  * @param {object} data - Result of taking JSON as input and
