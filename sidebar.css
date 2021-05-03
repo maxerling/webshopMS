@@ -4,10 +4,20 @@
   position: fixed;
   z-index: 200;
   width: 184px;
-  top: 54px;
-  padding-top: 12px;
-  min-height: 1000px;
+  top: 7%;
+  height: 93%;
   background-color: #eeeeee;
+  padding: 0;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+#sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#sidebar {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
 }
 
 .cat {
@@ -53,6 +63,70 @@
   opacity: 1;
 }
 
+/* SEARCH STYLES*/
+
+
+#search-box{
+  display: none;
+  position: relative;
+  width: 83%;
+}
+.product-search{
+  padding: 0 10px 0 10px ;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  height:60px;
+}
+
+.product-search img{
+  width:30px;
+  height:30px;
+}
+.product-search input{
+  font-size:9pt;
+}
+.title-product{
+  font-size: 9pt;
+}
+.minus-plus {
+  width: 20px !important;
+  height: 20px !important;
+  margin: 0 !important;
+  line-height: 16px;
+}
+.quantityInput-search {
+  width: 20px !important;
+  height: 20px !important;
+}
+.value-changer-search {
+  display: none;
+ }
+
+ .qyt-error{
+  display: none;
+ }
+
+.search-field input {
+ padding: 0.5rem 0.2rem 0.5rem 2rem;
+ background: url(images/icons/search-icon.svg) no-repeat left;
+ width: 100%;
+ border: 1px solid #bbb;
+ border-radius: 5px;
+}
+#search-list{
+ display: none;
+ width: 94%;
+ position: absolute;
+ top:40px;
+ left: 0;
+ background:white;
+ box-shadow: 0 6px 7px 2px rgb(0 0 0 / 10%);
+}
+
+
+/*----------------------------------------------------------------*/
+
 
 
 /*  X-Small devices (portrait phones, less than 576px)
@@ -62,7 +136,8 @@
 @media (min-width: 576px) {
   #sidebar {
     width: 200px;
-    top: 70px;
+    top: 63px;
+    height: 87%;
   }
 
   .navbar-icon {
@@ -75,7 +150,7 @@
 }
 
 /*  Medium devices (tablets, 768px and up) */
-@media (min-width: 888px) {
+@media (min-width: 887px) {
   #products{
     margin-left: 2px;
     margin-bottom: 10px;
@@ -88,12 +163,12 @@
   }
   #sidebar {
     display: block;
-    height:100%;
     width: 200px;
     left: unset !important;
     top: unset;
     z-index: 0;
     background:none;
+    height: 90%;
   }
   .close-sidebar {
     display: none !important;
@@ -113,9 +188,24 @@
   #search {
     display: none;
   }
-  .search-field {
+  #search-box{
     display: block;
+    width:42%;
   }
+  #search-list{
+    left:31px;
+  }
+  .product-search{
+    padding: 0 40px 0 40px ;
+    height:73px;
+   }
+   .product-search img{
+    width:50px;
+    height:50px;
+   } 
+   .title-product{
+    font-size: 11pt;
+   }
 
 }
 

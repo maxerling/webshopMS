@@ -9,26 +9,17 @@ $(document).ready(function () {
   });
 
   $("#search").click(function () {
-    $(this).css("display", "none");
-    $("#logo").css("display", "none");
-    
-    $(".search-field").css("display", "block");
+    $(this).hide();
+    $("#logo").hide();
+    $("#mobile-cart-login").hide()
+    $("#search-box").show();
     $(".search-field-input").focus();
   });
 
-
-  var x = window.matchMedia("(max-width: 769px)");
-  $(".search-field").focusout(function () {
-    if (x.matches) {
-      // If media query matches
-      $(this).css("display", "none");
-      $("#logo").css("display", "block");
-      $("#search").css("display", "inline-block");
-    } else {
-      $("#search").css("display", "none");
-      $("#logo").css("display", "block");
-    }
+  $("#search-list button").click(function (e) {
+    e.preventDefault() 
   });
+  
 });
 
 
