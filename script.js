@@ -60,6 +60,36 @@ function getData() {
     })
     .catch((err) => console.log(err));
 }
+
+/**
+ * fetch products form REST-API
+ * @returns returns json
+ */
+
+async function loadProducts() {
+  const url = "https://hakims-webshop.herokuapp.com/product/get";
+  const resp = await fetch(url);
+  return resp.json();
+}
+
+/**
+ * waits for fetching all products
+ * 
+ * @returns returns objects within an array
+ */
+async function fetchDataWithArray() {
+  array = [];
+
+  try {
+    array = await loadProducts();
+  } catch (e) {
+    console.log("error");
+    console.log(e);
+  }
+
+  return array;
+}
+
 /**
  * Storing data from fetch, promise into array
  * @param {object} data - Result of taking JSON as input and
@@ -79,7 +109,7 @@ function storeData(data) {
   document.getElementById("category").innerText = cat;
   cat = categoryOrignalFormatter(cat);
   data.forEach((product) => createElementsForProduct(product));
-  setNumberProduct()
+  setNumberProduct();
 }
 /**
  * Map data to createCategory function.
@@ -122,11 +152,11 @@ function categoryLinkListener() {
       let target = event.target;
       catId = target.id;
       cat = target.innerText;
-      if(cat == "DAGENS HAKIMS DEAL"){
+      if (cat == "DAGENS HAKIMS DEAL") {
         cat = "Populär";
         catId = "cat1";
       }
-      
+
       // cat = categoryOrignalFormatter(cat);
       products.innerHTML = "";
       $("#sidebar").animate({ left: "-200" }, "slow");
@@ -168,9 +198,10 @@ function createElementsForProduct(product) {
   const p2 = createNode("p");
   const p3 = createNode("p");
   const p4 = createNode("p");
-  addClass(p4, "qyt-error")
+  addClass(p4, "qyt-error");
   const btn = createNode("button");
   const quantityInput = createNode("input");
+  quantityInput.setAttribute("onpaste", "return false;")
   addClass(quantityInput, "");
   const plusBtn = createNode("button");
   const minusBtn = createNode("button");
@@ -179,8 +210,8 @@ function createElementsForProduct(product) {
   addClass(btn, "btn");
   addClass(btn, "btn-product");
   quantityInput.type = "tel";
-  quantityInput.id = "number"+ product.id;
-  addClass(quantityInput, "quantityInput")
+  quantityInput.id = "number" + product.id;
+  addClass(quantityInput, "quantityInput");
   quantityInput.min = 0;
   quantityInput.setAttribute("pattern", "[0-9]+");
   addClass(quantityInput, "text-center");
@@ -211,19 +242,19 @@ function createElementsForProduct(product) {
     $(p2).attr("style", "color:gray;");
     $(p3).attr("style", "color:gray;");
     removeClass(img, "product-hover");
-  }else{
+  } else {
     $(btn).click(() => {
       valueChanger.style.display = "block";
       btn.style.display = "none";
-      
+
       quantityInput.value = 1;
       addToCart(`${product.id}`, products);
-      
-      let idSearchProduct = '#ns' + product.id
-      let btnSearchProduct= '#ps' + product.id + ' .btn-search-product'
-      $(idSearchProduct ).val(quantityInput.value)
-      $(idSearchProduct).parent().show()
-      $(btnSearchProduct).hide()
+
+      let idSearchProduct = "#ns" + product.id;
+      let btnSearchProduct = "#ps" + product.id + " .btn-search-product";
+      $(idSearchProduct).val(quantityInput.value);
+      $(idSearchProduct).parent().show();
+      $(btnSearchProduct).hide();
 
       updateCartBtnQtn();
       disableOrEnableCartButton();
@@ -252,8 +283,8 @@ function createElementsForProduct(product) {
           }
         });
 
-        let idNmberSearchProduct = '#ns' + product.id
-        $(idNmberSearchProduct).val(inputValue)
+        let idNmberSearchProduct = "#ns" + product.id;
+        $(idNmberSearchProduct).val(inputValue);
 
         addProductIfDontExist(cartArray, product.id, inputValue);
         updateCartBtnQtn();
@@ -268,34 +299,34 @@ function createElementsForProduct(product) {
   });
 
   quantityInput.addEventListener("focusout", (e) => {
-     focusOutNumber(e,product.id)
+    focusOutNumber(e, product.id);
   });
 
-//################ number product Card#####################
+  //################ number product Card#####################
   plusBtn.addEventListener("click", (e) => {
     plusButton(e, product);
 
-    let idNmberSearchProduct = '#ns' + product.id
-    $(idNmberSearchProduct).val(quantityInput.value)
+    let idNmberSearchProduct = "#ns" + product.id;
+    $(idNmberSearchProduct).val(quantityInput.value);
   });
 
   minusBtn.addEventListener("click", (e) => {
     minusButton(e, product);
-    let idNmberSearchProduct = '#ns' + product.id
-    $(idNmberSearchProduct).val(quantityInput.value)
+    let idNmberSearchProduct = "#ns" + product.id;
+    $(idNmberSearchProduct).val(quantityInput.value);
   });
 
   // setNumberProduct()
 }
 /**
- * 
- * @param {*} e 
- * @param {*} product 
+ *
+ * @param {*} e
+ * @param {*} product
  */
-function plusButton(e, product){
+function plusButton(e, product) {
   let cartArray = JSON.parse(localStorage.getItem("cart"));
   let field = e.target.parentNode.querySelector("input[type=tel]");
-  let p4 = e.target.parentNode.parentNode.querySelector(".qyt-error")
+  let p4 = e.target.parentNode.parentNode.querySelector(".qyt-error");
 
   if (Number(field.value) + 1 <= product.quantity) {
     p4.style.display = "none";
@@ -310,44 +341,46 @@ function plusButton(e, product){
     addProductIfDontExist(cartArray, product.id, field.value);
     updateCartBtnQtn();
     disableOrEnableCartButton();
- }
+  }
 }
 /**
- * 
- * @param {*} e 
- * @param {*} product 
+ *
+ * @param {*} e
+ * @param {*} product
  */
-function minusButton(e, product){
- let field = e.target.parentNode.querySelector("input[type=tel]");
- let p4 = e.target.parentNode.parentNode.querySelector(".qyt-error")
-   if (Number(field.value) - 1 >= 0) {
-     if (Number(field.value) - 1 <= product.quantity) {
-       p4.style.display = "none";
-       field.setCustomValidity("");
-     }
+function minusButton(e, product) {
+  let field = e.target.parentNode.querySelector("input[type=tel]");
+  let p4 = e.target.parentNode.parentNode.querySelector(".qyt-error");
+  if (Number(field.value) - 1 >= 0) {
+    if (Number(field.value) - 1 <= product.quantity) {
+      p4.style.display = "none";
+      field.setCustomValidity("");
+    }
 
-     field.value = Number(field.value) - 1;
-     cartArray = JSON.parse(localStorage.getItem("cart"));
-     cartArray.forEach((cartItem, i) => {
-       if (cartItem.id === product.id) {
-         cartItem.quantity = Number(field.value);
-         if (cartItem.quantity == 0) {
-           cartArray.splice(i, 1);
-         }
-       }
-     });
+    field.value = Number(field.value) - 1;
+    cartArray = JSON.parse(localStorage.getItem("cart"));
+    cartArray.forEach((cartItem, i) => {
+      if (cartItem.id === product.id) {
+        cartItem.quantity = Number(field.value);
+        if (cartItem.quantity == 0) {
+          cartArray.splice(i, 1);
+        }
+      }
+    });
 
-     localStorage.setItem("cart", JSON.stringify(cartArray));
-     updateCartBtnQtn();
-     disableOrEnableCartButton();
-   }
+    localStorage.setItem("cart", JSON.stringify(cartArray));
+    updateCartBtnQtn();
+    disableOrEnableCartButton();
+  }
 }
+
+
 /**
- * 
- * @param {*} e 
- * @param {*} id 
+ *
+ * @param {*} e
+ * @param {*} id
  */
-function focusOutNumber(e,id){
+function focusOutNumber(e, id) {
   // let cartArray = JSON.parse(localStorage.getItem("cart"))
   let inputValue = e.target.value;
   if (inputValue == "") {
@@ -355,24 +388,22 @@ function focusOutNumber(e,id){
       if (cartItem.id === id) {
         cartItem.quantity = 0;
         cartArray.splice(i, 1);
-        
-        let idNumberProduct= '#number' + id
-        let btnProduct = '#' + id + ' .btn-product'
-        $(idNumberProduct).parent().hide()
-        $(btnProduct).show()
 
-        
-        let idSearchProduct = '#ns' + id
-        let btnSearchProduct= '#ps' + id + ' .btn-search-product'
-        $(idSearchProduct).parent().hide()
-        $(btnSearchProduct).show()
+        let idNumberProduct = "#number" + id;
+        let btnProduct = "#" + id + " .btn-product";
+        $(idNumberProduct).parent().hide();
+        $(btnProduct).show();
+
+        let idSearchProduct = "#ns" + id;
+        let btnSearchProduct = "#ps" + id + " .btn-search-product";
+        $(idSearchProduct).parent().hide();
+        $(btnSearchProduct).show();
       }
     });
     localStorage.setItem("cart", JSON.stringify(cartArray));
     updateCartBtnQtn();
     disableOrEnableCartButton();
   }
-
 }
 //################### End number product Card #################
 
@@ -385,7 +416,7 @@ function focusOutNumber(e,id){
  */
 function addProductIfDontExist(cartArray, productid, inputValue) {
   if (!findMatch(cartArray, productid)) {
-    let allProducts = JSON.parse(localStorage.getItem("allProducts"));
+    let allProducts = fetchDataWithArray();
     let productThatWillBeAdded = allProducts.find(
       (ele) => ele.id === productid
     );
@@ -398,10 +429,10 @@ function addProductIfDontExist(cartArray, productid, inputValue) {
 }
 
 /**
- * 
- * @param {*} cartArray 
- * @param {*} productid 
- * @returns 
+ *
+ * @param {*} cartArray
+ * @param {*} productid
+ * @returns
  */
 function findMatch(cartArray, productid) {
   let i,
@@ -418,8 +449,8 @@ function findMatch(cartArray, productid) {
 }
 
 /**
- * 
- * @param {*} btn 
+ *
+ * @param {*} btn
  */
 function addClassesToQuantityButton(btn) {
   addClass(btn, "m-2");
@@ -482,34 +513,45 @@ function appendToDiv(
 
 /**
  * Formatting units and prices based on PO request
- * @param {*} format 
- * @returns 
+ * @param {*} format
+ * @returns
  */
 function unitFormatter(format) {
   if (typeof format === "number") {
-    return format.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ").replace('.', ':') + ' kr';
+    return (
+      format
+        .toFixed(2)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+        .replace(".", ":") + " kr"
+    );
   } else {
     const spaceIndex = format.toString().indexOf(" ");
     const value = Number(format.slice(0, spaceIndex));
-    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + format.slice(spaceIndex);
+    return (
+      value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") +
+      format.slice(spaceIndex)
+    );
   }
 }
 
 /**
- * 
- * @param {*} price 
- * @param {*} unit 
- * @returns 
+ *
+ * @param {*} price
+ * @param {*} unit
+ * @returns
  */
 function getJmfPrice(price, unit) {
-    const spaceIndex = unit.toString().indexOf(" ");
-    const unitValue = Number(unit.slice(0, spaceIndex));
-    const outUnit = unit.slice(spaceIndex + 1) == "g" ? "kg" : "l";
-    return (price / unitValue * 1000).toFixed(2).replace('.', ':') + " kr/" + outUnit;
+  const spaceIndex = unit.toString().indexOf(" ");
+  const unitValue = Number(unit.slice(0, spaceIndex));
+  const outUnit = unit.slice(spaceIndex + 1) == "g" ? "kg" : "l";
+  return (
+    ((price / unitValue) * 1000).toFixed(2).replace(".", ":") + " kr/" + outUnit
+  );
 }
 
 /**
- * 
+ *
  */
 function updateCartBtnQtn() {
   let cartArray = JSON.parse(localStorage.getItem("cart"));
@@ -612,7 +654,7 @@ $(document).on("click", "#mobileLogin", function () {
  */
 
 /**
- * 
+ *
  */
 function disableOrEnableCartButton() {
   if (localStorage.getItem("cart") != null) {
@@ -640,7 +682,7 @@ function disableOrEnableCartButton() {
 }
 
 /**
- * 
+ *
  */
 function loginButton() {
   let customer = JSON.parse(localStorage.getItem("customer"));
@@ -662,9 +704,12 @@ function loginButton() {
  * Uses a for-loop to confirm correct product.
  * @param {number} itemID gets correct id of product and compares to products in i cart.
  */
-function loadProductCard(itemID) {
-  let allProducts = JSON.parse(localStorage.getItem("allProducts"));
+async function loadProductCard(itemID) {
+  let allProducts = await fetchDataWithArray();
+  console.log(allProducts);
+
   let item = allProducts.find((item) => item.id == itemID);
+  console.log(item);
   if (item != undefined) {
     $(".product-card-title").text(item.title);
     $(".product-card-desc").text(item.description);
@@ -672,28 +717,32 @@ function loadProductCard(itemID) {
     $(".card-modal").modal("show");
     $(".product-specs").text(`${item.brand} | ${unitFormatter(item.unit)}`);
     $(".product-price").text("Pris: " + unitFormatter(item.price));
-    $(".product-jmf-price").text("Jämförpris: " + getJmfPrice(item.price, item.unit));
-    $(".product-warehouse-quantity").text("Antal kvar: " + (item.quantity > 100 ? "100+" : item.quantity) + " st");
+    $(".product-jmf-price").text(
+      "Jämförpris: " + getJmfPrice(item.price, item.unit)
+    );
+    $(".product-warehouse-quantity").text(
+      "Antal kvar: " + (item.quantity > 100 ? "100+" : item.quantity) + " st"
+    );
   }
 }
 
 /**
- * 
+ *
  */
-function setNumberProduct(){
-      let cartArray=[]
-      if(JSON.parse(localStorage.getItem("cart"))==null){
-          $('.value-changer').hide()
-      }else{
-        cartArray = JSON.parse(localStorage.getItem("cart"));
-        cartArray.map(item => {
-              let id = '#number' + item.id
-              let btn = '#' + item.id + ' .btn-product'
-              if( $(id) != undefined ){
-                  $(id).val(item.quantity)
-                  $(btn).hide()
-                  $(id).parent().show()
-              }
-          })
-        }
+function setNumberProduct() {
+  let cartArray = [];
+  if (JSON.parse(localStorage.getItem("cart")) == null) {
+    $(".value-changer").hide();
+  } else {
+    cartArray = JSON.parse(localStorage.getItem("cart"));
+    cartArray.map((item) => {
+      let id = "#number" + item.id;
+      let btn = "#" + item.id + " .btn-product";
+      if ($(id) != undefined) {
+        $(id).val(item.quantity);
+        $(btn).hide();
+        $(id).parent().show();
+      }
+    });
+  }
 }
