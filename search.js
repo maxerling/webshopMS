@@ -1,13 +1,15 @@
-let allProducts = JSON.parse(localStorage.getItem("allProducts"));
-let pTemp=[];
-$(document).ready(function () {
-  $(".search-field-input").keyup(function (e) {
+var allProducts = [];
+
+let pTemp = [];
+$(document).ready(async function () {
+  allProducts = await fetchDataWithArray();
+  $(".search-field-input").keyup(async function (e) {
     valueSearch = e.target.value.toUpperCase();
     let searchList = $("#search-list");
     searchList.html("").hide();
     if (valueSearch) {
       pTemp = allProducts.filter((item) => {
-        if (item.title.toUpperCase().indexOf(valueSearch) > -1 ) {
+        if (item.title.toUpperCase().indexOf(valueSearch) > -1) {
           return item;
         }
       });
@@ -31,57 +33,51 @@ $(document).ready(function () {
         </div>
       
         `;
-      searchList.append(productSearch);
-      })
+        searchList.append(productSearch);
+      });
 
       searchList.slideDown();
-      setNumberProductForSearch()
+      setNumberProductForSearch();
       BuyBtn();
-      minusSearchBtn()
-      plusSearchBtn()
+      minusSearchBtn();
+      plusSearchBtn();
       $(".quantityInput-search").blur((e) => {
-          let id= e.target.id.substr(2, e.target.id.length);
-          focusOutNumber2(e,id)
-      })
-      $(".quantityInput-search").keyup((e) =>{        
-        let id= e.target.id.substr(2, e.target.id.length);
-        console.log(id);
-        setNumberToSearch(e,id)
-       })
-      
+        let id = e.target.id.substr(2, e.target.id.length);
+        focusOutNumber2(e, id);
+      });
+      $(".quantityInput-search").keyup((e) => {
+        let id = e.target.id.substr(2, e.target.id.length);
+        setNumberToSearch(e, id);
+      });
     }
   });
 
   var x = window.matchMedia("(max-width: 888px)");
 
-  $("#search-box input").on("focus",function(e) {
-        $('.mask').css({"width": "100%", "height": "100%"});
+  $("#search-box input").on("focus", function (e) {
+    $(".mask").css({ width: "100%", height: "100%" });
 
-        $('.mask').click(function () {
-            $('.mask').css({"width": "0", "height": "0"});
-            $("#search-list").slideUp(500);
+    $(".mask").click(function () {
+      $(".mask").css({ width: "0", height: "0" });
+      $("#search-list").slideUp(500);
 
-            if (x.matches) {
-              // If media query matches
-              console.log("mobile");
-              $("#search-box").hide();
-              $("#logo").show();
-              $("#search").show();
-              $("#mobile-cart-login").show();
-            } else {
-              $("#search").hide();
-              $("#logo").show();
-              $("#search-box").show();
-            }
-        });
-
-        
-    
-  })
+      if (x.matches) {
+        // If media query matches
+        $("#search-box").hide();
+        $("#logo").show();
+        $("#search").show();
+        $("#mobile-cart-login").show();
+      } else {
+        $("#search").hide();
+        $("#logo").show();
+        $("#search-box").show();
+      }
+    });
+  });
 });
 
 /**
- * 
+ *
  */
 function valueChanger() {
   $(btn, ".btn-search-product").click(() => {
@@ -91,7 +87,7 @@ function valueChanger() {
 }
 
 /**
- * 
+ *
  */
 function BuyBtn() {
   $(".btn-search-product").click((e) => {
@@ -120,99 +116,98 @@ function BuyBtn() {
 }
 
 /**
- * 
+ *
  */
 function minusSearchBtn() {
   $(".minus").click((e) => {
     let input = e.target.parentElement.querySelector("input");
     let id = input.id.substr(2, input.id.length);
-    let p = allProducts.filter(item => item.id == id) 
+    let p = allProducts.filter((item) => item.id == id);
     minusButton(e, p[0]);
-    let idNmberProduct = '#number' + p[0].id
-    $(idNmberProduct).val(input.value)
+    let idNmberProduct = "#number" + p[0].id;
+    $(idNmberProduct).val(input.value);
   });
 }
 
 /**
- * 
+ *
  */
 function plusSearchBtn() {
   $(".plus").click((e) => {
     let input = e.target.parentElement.querySelector("input");
     let id = input.id.substr(2, input.id.length);
-    let p = allProducts.filter(item => item.id == id) 
+    let p = allProducts.filter((item) => item.id == id);
     plusButton(e, p[0]);
-    let idNmberProduct = '#number' + p[0].id
-    $(idNmberProduct).val(input.value)
+    let idNmberProduct = "#number" + p[0].id;
+    $(idNmberProduct).val(input.value);
   });
 }
 
 /**
- * 
+ *
  */
-function setNumberProductForSearch(){
-        let cartArray=[]
-        
-        if(JSON.parse(localStorage.getItem("cart"))==null){
-            $('.value-changer-search').hide()
-        }else{
-          cartArray = JSON.parse(localStorage.getItem("cart"));
-          //cartArray = cartArray.filter((product) => product.quantity > 0)
-        }
-          cartArray.map(item => {
-                let id = '#ns' + item.id
-                let btn= '#ps' + item.id + ' .btn-search-product'
-                if( $(id) != undefined ){
-                    $(id).val(item.quantity)
-                    $(btn).hide()
-                    $(id).parent().show()
-                }
-            })
+function setNumberProductForSearch() {
+  let cartArray = [];
 
+  if (JSON.parse(localStorage.getItem("cart")) == null) {
+    $(".value-changer-search").hide();
+  } else {
+    cartArray = JSON.parse(localStorage.getItem("cart"));
+    //cartArray = cartArray.filter((product) => product.quantity > 0)
+  }
+  cartArray.map((item) => {
+    let id = "#ns" + item.id;
+    let btn = "#ps" + item.id + " .btn-search-product";
+    if ($(id) != undefined) {
+      $(id).val(item.quantity);
+      $(btn).hide();
+      $(id).parent().show();
+    }
+  });
 }
 /**
- * 
- * @param {*} e 
- * @param {*} id 
+ *
+ * @param {*} e
+ * @param {*} id
  */
-function focusOutNumber2(e,id){
-   let cartArray = JSON.parse(localStorage.getItem("cart"))
+function focusOutNumber2(e, id) {
+  let cartArray = JSON.parse(localStorage.getItem("cart"));
   let inputValue = e.target.value;
   if (inputValue == "") {
     cartArray.forEach((cartItem, i) => {
       if (cartItem.id == id) {
         cartItem.quantity = 0;
-        cartArray.splice(i, 1);      
-        let idNumberProduct= '#number' + id
-        let btnProduct = '#' + id + ' .btn-product'
-        $(idNumberProduct).parent().hide()
-        $(btnProduct).show()
+        cartArray.splice(i, 1);
+        let idNumberProduct = "#number" + id;
+        let btnProduct = "#" + id + " .btn-product";
+        $(idNumberProduct).parent().hide();
+        $(btnProduct).show();
 
-        let idSearchProduct = '#ns' + id
-        let btnSearchProduct= '#ps' + id + ' .btn-search-product'
-        $(idSearchProduct).parent().hide()
-        $(btnSearchProduct).show()
+        let idSearchProduct = "#ns" + id;
+        let btnSearchProduct = "#ps" + id + " .btn-search-product";
+        $(idSearchProduct).parent().hide();
+        $(btnSearchProduct).show();
       }
     });
     localStorage.setItem("cart", JSON.stringify(cartArray));
     updateCartBtnQtn();
     disableOrEnableCartButton();
   }
-
 }
 
 /**
- * 
- * @param {*} e 
- * @param {*} id 
+ *
+ * @param {*} e
+ * @param {*} id
  */
-function setNumberToSearch(e,id){
+function setNumberToSearch(e, id) {
   e.target.value = e.target.value.replace(/[^0-9]+/, "");
   let inputValue = e.target.value;
-  let cartArray = JSON.parse(localStorage.getItem("cart"))
-  let product = allProducts.filter(item=>item.id==id)
+  let cartArray = JSON.parse(localStorage.getItem("cart"));
+  let product = allProducts.filter((item) => item.id == id);
   if (Number(inputValue) >= 0 && Number(inputValue <= product[0].quantity)) {
-    e.target.parentNode.parentNode.querySelector(".qyt-error").style.display = "none";
+    e.target.parentNode.parentNode.querySelector(".qyt-error").style.display =
+      "none";
     e.target.setCustomValidity("");
     setTimeout(() => {
       cartArray.forEach((cartItem, i) => {
@@ -221,7 +216,9 @@ function setNumberToSearch(e,id){
             cartItem.quantity = 0;
             cartArray.splice(i, 1);
             e.target.parentNode.style.display = "none";
-            e.target.parentNod.parentNod.querySelector(".btn-search-product").style.display = "inline-block";
+            e.target.parentNod.parentNod.querySelector(
+              ".btn-search-product"
+            ).style.display = "inline-block";
           } else {
             if (inputValue != "") {
               cartItem.quantity = Number(inputValue);
@@ -230,15 +227,16 @@ function setNumberToSearch(e,id){
         }
       });
 
-      let idNmberSearchProduct = '#number' + product[0].id
-      $(idNmberSearchProduct).val(inputValue)
+      let idNmberSearchProduct = "#number" + product[0].id;
+      $(idNmberSearchProduct).val(inputValue);
 
       addProductIfDontExist(cartArray, product[0].id, inputValue);
       updateCartBtnQtn();
       disableOrEnableCartButton();
     }, 1000);
   } else {
-    e.target.parentNode.parentNode.querySelector(".qyt-error").style.display = "block";
-    e.target.value= "1"
+    e.target.parentNode.parentNode.querySelector(".qyt-error").style.display =
+      "block";
+    e.target.value = "1";
   }
 }

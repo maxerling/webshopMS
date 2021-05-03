@@ -7,7 +7,6 @@
  */
 function addToCart(productId) {
   let cartArray = JSON.parse(localStorage.getItem("cart"));
-  let allProducts = JSON.parse(localStorage.getItem("allProducts"));
   let item = allProducts.find((item) => item.id == productId);
   let cartIndex = cartArray.findIndex((e) => e.id == productId);
 

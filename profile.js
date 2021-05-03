@@ -65,7 +65,7 @@ function createNewUser() {
     .then(function (res) {
       if (res.status == 200) {
         return res.json();
-      } else{
+      } else {
         alert("Mailadressen används redan");
         $(".register-modal").modal("hide");
       }
@@ -313,7 +313,6 @@ function checkPassword(target) {
   let validDiv = target.parentNode.querySelector(".validLösenord");
   let invalidDiv = target.parentNode.querySelector(".invalidLösenord");
   let password = target.value;
-  console.log(password);
   let input = target;
 
   if (password == "") {
@@ -367,7 +366,7 @@ function checkStreet() {
   let invalidDiv = "#invalidGata";
   let address = $("#validationCustom06").val();
   // let regPattern = /^[A-Za-z0-9ZäöåÄÖÅ ]*$/;
-  let regPattern = /^(?=.*[0-9])(?=.*[a-zA-ZåäöÅÄÖ])(?=.*[\s])[0-9a-zA-ZåäöÅÄÖ\s]+$/
+  let regPattern = /^(?=.*[0-9])(?=.*[a-zA-ZåäöÅÄÖ])(?=.*[\s])[0-9a-zA-ZåäöÅÄÖ\s]+$/;
   let input = document.getElementById("validationCustom06");
   if (address.trim() == "") {
     $(validDiv).hide();

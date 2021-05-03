@@ -1,5 +1,12 @@
-$(document).ready(function () {
+/** Global variable */
+let cat = "produkter";
+let products = document.getElementById("products");
+let productsData = [];
+var allProducts = [];
+
+$(document).ready(async function () {
   getData();
+  allProducts = await fetchDataWithArray();
 });
 
 window.addEventListener("load", function () {
@@ -7,11 +14,6 @@ window.addEventListener("load", function () {
   disableOrEnableCartButton();
   updateCartBtnQtn();
 });
-
-/** Global variable */
-let cat = "produkter";
-let products = document.getElementById("products");
-let productsData = [];
 
 /**
  * Creating element
@@ -74,7 +76,7 @@ async function loadProducts() {
 
 /**
  * waits for fetching all products
- * 
+ *
  * @returns returns objects within an array
  */
 async function fetchDataWithArray() {
@@ -103,7 +105,6 @@ function storeData(data) {
     cartArray = JSON.parse(localStorage.getItem("cart"));
   }
 
-  localStorage.setItem("allProducts", JSON.stringify(productsData));
   localStorage.setItem("cart", JSON.stringify(cartArray));
   cat = categoryFormatter(cat);
   document.getElementById("category").innerText = cat;
@@ -201,7 +202,7 @@ function createElementsForProduct(product) {
   addClass(p4, "qyt-error");
   const btn = createNode("button");
   const quantityInput = createNode("input");
-  quantityInput.setAttribute("onpaste", "return false;")
+  quantityInput.setAttribute("onpaste", "return false;");
   addClass(quantityInput, "");
   const plusBtn = createNode("button");
   const minusBtn = createNode("button");
@@ -374,7 +375,6 @@ function minusButton(e, product) {
   }
 }
 
-
 /**
  *
  * @param {*} e
@@ -416,7 +416,6 @@ function focusOutNumber(e, id) {
  */
 function addProductIfDontExist(cartArray, productid, inputValue) {
   if (!findMatch(cartArray, productid)) {
-    let allProducts = fetchDataWithArray();
     let productThatWillBeAdded = allProducts.find(
       (ele) => ele.id === productid
     );
@@ -705,11 +704,7 @@ function loginButton() {
  * @param {number} itemID gets correct id of product and compares to products in i cart.
  */
 async function loadProductCard(itemID) {
-  let allProducts = await fetchDataWithArray();
-  console.log(allProducts);
-
   let item = allProducts.find((item) => item.id == itemID);
-  console.log(item);
   if (item != undefined) {
     $(".product-card-title").text(item.title);
     $(".product-card-desc").text(item.description);
