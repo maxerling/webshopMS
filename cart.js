@@ -182,22 +182,40 @@ function getDataFromLocalStorage() {
  * @param {*} orderRowData Added function to show order modal, remove ls, show info in order modal
  */
 function confirmBtn(orderRowData) {
-  $("#orderModal").modal("show");
 
-  let date = new Date();
-  let orderDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-    .toISOString()
-    .replaceAll("T", ", Kl: ");
-  let orderPrice = localStorage.getItem("totalPrice").replace(".", ":") + " kr";
-  let orderNum = orderRowData[0].order.id;
 
-  document.getElementById("p-order").innerHTML =
-    "<b>Order nummer: </b>" + orderNum;
-  document.getElementById("p-date").innerHTML =
-    "<b>Beställningsdatum: </b>" + orderDate.substring(0, 21);
-  document.getElementById("p-sum").innerHTML =
-    "<b>Total belopp: </b>" + orderPrice;
-  localStorage.removeItem("totalPrice");
+  if(JSON.parse(localStorage.getItem("cart")).length == orderRowData.length){
+    
+    $("#orderModal").modal("show");
+
+    let date = new Date();
+    let orderDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+      .toISOString()
+      .replaceAll("T", ", Kl: ");
+    let orderPrice = localStorage.getItem("totalPrice").replace(".", ":") + " kr";
+    let orderNum = orderRowData[0].order.id;
+
+    document.getElementById("p-order").innerHTML =
+      "<b>Order nummer: </b>" + orderNum;
+    document.getElementById("p-date").innerHTML =
+      "<b>Beställningsdatum: </b>" + orderDate.substring(0, 21);
+    document.getElementById("p-sum").innerHTML =
+      "<b>Total belopp: </b>" + orderPrice;
+    localStorage.removeItem("totalPrice");
+  }
+  else{
+    let cartArray = JSON.parse(localStorage.getItem("cart"))
+    for(let i = 0; i < orderRowData.length; i++){
+      for(let j = 0; j < cartArray.length; j++){
+        if(orderRowData[i].product.id == cartArray[j].id){
+          alert("Denna produkt finns ej i lager: " + cartArray[j].title);
+        }
+      }
+    }
+    localStorage.removeItem("cart");
+    location.href = "index.html";
+  }
+  localStorage.removeItem("cart");
 }
 /**
  * Creates and order that is sent to the database which
@@ -273,14 +291,20 @@ function createOrderRow(orderId) {
   })
     .then(function (response) {
       if (response.status == 200) {
-        localStorage.removeItem("cart");
+        // localStorage.removeItem("cart");
         return response.json();
-      } else {
-        alert("nånting gick fel!");
+      }
+      else{
+        return response.text();
       }
     })
     .then((data) => {
-      confirmBtn(data);
+      if(data == "Lagersaldona var mindre i lager än i beställningen"){
+        alert(data);
+      }
+      else{
+        confirmBtn(data);
+      }
     })
     .catch(function (error) {
       console.log(error);
