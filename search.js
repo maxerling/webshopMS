@@ -1,13 +1,22 @@
-let allProducts = JSON.parse(localStorage.getItem("allProducts"));
+
 let pTemp=[];
 $(document).ready(function () {
+  // fetch("https://hakims-webshop.herokuapp.com/product/get")
+  // .then((resp) => resp.json())
+  // .then((data) => {
+  //   allProducts = data;
+  // })
+  // .catch((err) => console.log(err));
+
   $(".search-field-input").keyup(function (e) {
+
     valueSearch = e.target.value.toUpperCase();
     let searchList = $("#search-list");
     searchList.html("").hide();
+
     if (valueSearch) {
       pTemp = allProducts.filter((item) => {
-        if (item.title.toUpperCase().indexOf(valueSearch) > -1 ) {
+        if (item.title.toUpperCase().indexOf(valueSearch) > -1 || item.brand.toUpperCase().indexOf(valueSearch) > -1 ) {
           return item;
         }
       });
@@ -21,8 +30,12 @@ $(document).ready(function () {
            </div>
    
            <p class="qyt-error" style="color: red; font-size:9pt;">Ej i lager</p>
-           <button class="btn btn-primary btn-search-product p-1 px-3">Köp</button>
 
+           ${ item.quantity == 0 
+            ?` <button class="btn btn-primary btn-search-product p-1 px-3" disabled>Slut i lager</button>`
+             :`<button class="btn btn-primary btn-search-product p-1 px-3">Köp</button>`
+          }
+           
            <div class="value-changer value-changer-search ">
                 <button class="quantity-value-changer minus-plus minus">-</button>
                 <input type="tel" id="ns${item.id}" min="0" pattern="[0-9]+" class="text-center quantityInput quantityInput-search">
@@ -33,23 +46,33 @@ $(document).ready(function () {
         `;
       searchList.append(productSearch);
       })
-
-      searchList.slideDown();
-      setNumberProductForSearch()
-      BuyBtn();
-      minusSearchBtn()
-      plusSearchBtn()
-      $(".quantityInput-search").blur((e) => {
+      if(e.keyCode == 13){
+        $('.mask').css({"width": "0", "height": "0"});
+        $("#search-list").slideUp(500);
+        $("#products").html("")
+        storeData(pTemp)
+      }else{
+        searchList.slideDown();
+        setNumberProductForSearch()
+        BuyBtn();
+        minusSearchBtn()
+        plusSearchBtn()
+        $(".quantityInput-search").blur((e) => {
+            let id= e.target.id.substr(2, e.target.id.length);
+            focusOutNumber2(e,id)
+        })
+        $(".quantityInput-search").keyup((e) =>{  
+             
           let id= e.target.id.substr(2, e.target.id.length);
-          focusOutNumber2(e,id)
-      })
-      $(".quantityInput-search").keyup((e) =>{        
-        let id= e.target.id.substr(2, e.target.id.length);
-        console.log(id);
-        setNumberToSearch(e,id)
-       })
+          console.log(id);
+          setNumberToSearch(e,id)
+         })
+      } 
+      
       
     }
+
+   
   });
 
   var x = window.matchMedia("(max-width: 888px)");
@@ -239,6 +262,6 @@ function setNumberToSearch(e,id){
     }, 1000);
   } else {
     e.target.parentNode.parentNode.querySelector(".qyt-error").style.display = "block";
-    e.target.value= "1"
+  //  e.target.value= "1"
   }
 }
