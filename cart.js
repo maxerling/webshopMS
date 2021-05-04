@@ -181,6 +181,8 @@ function getDataFromLocalStorage() {
  * @param {*} orderRowData Added function to show order modal, remove ls, show info in order modal
  */
 function confirmBtn(orderRowData) {
+
+
   if(JSON.parse(localStorage.getItem("cart")).length == orderRowData.length){
     
     $("#orderModal").modal("show");
@@ -201,17 +203,19 @@ function confirmBtn(orderRowData) {
     localStorage.removeItem("totalPrice");
   }
   else{
+    let message = `Order ${orderRowData[0].order.id} är mottagen men dessa varor fanns ej i lager:`;
     let cartArray = JSON.parse(localStorage.getItem("cart"))
     for(let i = 0; i < orderRowData.length; i++){
       for(let j = 0; j < cartArray.length; j++){
         if(orderRowData[i].product.id == cartArray[j].id){
-          alert("Denna produkt finns ej i lager: " + cartArray[j].title);
+          // alert("Denna produkt finns ej i lager: " + cartArray[j].title);
+          message += `\n${cartArray[j].title}`;
         }
       }
     }
     localStorage.removeItem("totalPrice");
-    localStorage.removeItem("cart");
     location.href = "index.html";
+    alert(message);
   }
   localStorage.removeItem("cart");
 }
@@ -289,6 +293,7 @@ function createOrderRow(orderId) {
   })
     .then(function (response) {
       if (response.status == 200) {
+        // localStorage.removeItem("cart");
         return response.json();
       }
       else{
