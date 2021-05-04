@@ -81,7 +81,6 @@ function numericSortTable(n) {
     switchcount = 0;
   dir = "asc";
   table = document.getElementById("myTable");
-  console.log(table);
   switching = true;
   /*Make a loop that will continue until
 		no switching has been done:*/
