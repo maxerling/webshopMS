@@ -26,7 +26,6 @@ $(document).ready(function () {
    * Calls function setNewQuantity().
    */
   $(document).on("click", ".fa-plus", function () {
-    let allProducts = JSON.parse(localStorage.getItem("allProducts"));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
     let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
     let item = allProducts.find((item) => item.id == id);
@@ -46,7 +45,6 @@ $(document).ready(function () {
    * else calls function setNewQuantity().
    */
   $(document).on("click", ".fa-minus", function () {
-    let allProducts = JSON.parse(localStorage.getItem("allProducts"));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
     let q = Number($(this).closest(".quantity-td").find("input").attr("value"));
     let item = allProducts.find((item) => item.id == id);
@@ -317,7 +315,6 @@ function createOrderRow(orderId) {
 //  */
 function checkInputField() {
   $(".amount-changed").on("keyup change", function () {
-    let allProducts = JSON.parse(localStorage.getItem("allProducts"));
     let newValue = Number(this.value.match(/^\d+$/));
     let id = Number($(this).closest(".quantity-tr").attr("id"));
     let inStock = checkQuantity(id);
@@ -356,8 +353,7 @@ function checkInputField() {
  * @returns 
  */
 function checkQuantity(id) {
-  let products = JSON.parse(localStorage.getItem("allProducts"));
-  for (p of products) {
+  for (p of allProducts) {
     if (p.id == id) {
       return p.quantity;
     }
