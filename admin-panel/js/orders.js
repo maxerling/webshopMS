@@ -77,7 +77,7 @@ function createModal(id) {
                 <tr>
                     <td>${item.product.title}</td>
                     <td>${item.quantity}</td>
-                    <td>${item.product.price} KR</td>
+                    <td>${item.productPriceWhenOrdering} KR</td>
                     <td>${item.productPriceWhenOrdering * item.quantity} KR</td>
                     <td>
                         <a class="add" title="Add" data-toggle="tooltip"

@@ -267,6 +267,7 @@ function createElementsForProduct(product) {
         "Tyvärr har vi inte så många produkter i lager"
       );
       p4.style.display = "inline-block";
+      e.target.value = 1
     }
   });
 
@@ -705,10 +706,11 @@ function loginButton() {
   }
 }
 
+/**
+ * 
+ */
 function setNumberProduct(){
-
   let cartArray=[]
-  console.log(JSON.parse(localStorage.getItem("cart")));
   if(JSON.parse(localStorage.getItem("cart"))==null){
       $('.value-changer').hide()
   }else{

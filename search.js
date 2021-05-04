@@ -13,6 +13,13 @@ $(document).ready(function () {
           return item;
         }
       });
+      if(pTemp.length == 0 || pTemp == null){
+        let p=`
+        <h5 class="empty-error p-3 text-align-center " style="color: red;">Det finns inga produkter som matchar texten. Vänligen försök igen</h5>
+        `
+        searchList.append(p);
+      }
+      
       pTemp.length = 5;
       pTemp.map((item) => {
         let productSearch = `
@@ -234,7 +241,7 @@ function setNumberToSearch(e,id){
             cartItem.quantity = 0;
             cartArray.splice(i, 1);
             e.target.parentNode.style.display = "none";
-            e.target.parentNod.parentNod.querySelector(".btn-search-product").style.display = "inline-block";
+            e.target.parentNode.parentNode.querySelector(".btn-search-product").style.display = "inline-block";
           } else {
             if (inputValue != "") {
               cartItem.quantity = Number(inputValue);
@@ -252,5 +259,6 @@ function setNumberToSearch(e,id){
     }, 1000);
   } else {
     e.target.parentNode.parentNode.querySelector(".qyt-error").style.display = "block";
+    e.target.value = 1
   }
 }
