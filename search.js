@@ -41,7 +41,7 @@ $(document).ready(function () {
       })
       if(e.keyCode == 13){
         $('.mask').css({"width": "0", "height": "0"});
-        $("#search-list").slideUp(500);
+        $("#search-list").html("").slideUp(500);
         $("#products").html("")
         storeData(pTemp)
       }else{
