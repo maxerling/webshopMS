@@ -80,6 +80,8 @@ function storeData(data) {
   document.getElementById("category").innerText = cat;
   cat = categoryOrignalFormatter(cat);
   data.forEach((product) => createElementsForProduct(product));
+  setNumberProduct()
+
 }
 /**
  * Map data to createCategory function.
@@ -701,4 +703,25 @@ function loginButton() {
       "Antal kvar: " + (item.quantity > 100 ? "100+" : item.quantity) + " st"
     );
   }
+}
+
+function setNumberProduct(){
+
+  let cartArray=[]
+  console.log(JSON.parse(localStorage.getItem("cart")));
+  if(JSON.parse(localStorage.getItem("cart"))==null){
+      $('.value-changer').hide()
+  }else{
+    cartArray = JSON.parse(localStorage.getItem("cart"));
+    //cartArray = cartArray.filter((product) => product.quantity > 0)
+    cartArray.map(item => {
+          let id = '#number' + item.id
+          let btn = '#' + item.id + ' .btn-product'
+          if( $(id) != undefined ){
+              $(id).val(item.quantity)
+              $(btn).hide()
+              $(id).parent().show()
+          }
+      })
+    }
 }
