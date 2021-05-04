@@ -16,7 +16,6 @@ $(document).on("click", ".delete", function () {
   let result = confirm("Are you sure to delete?")
   if (result) {
     let id = $(this).closest("tr").find(">:first-child").text();
-    console.log(id); 
     $(this).parents("tr").remove();
     $(".add-new").removeAttr("disabled");
     // DELETE FROM DB
@@ -24,7 +23,6 @@ $(document).on("click", ".delete", function () {
       method: "POST"
     })
       .then(function (res) {
-        console.log(res);
         if (res.status == 200) {
           return res.text();
         } else {
@@ -58,17 +56,14 @@ function createProductElements(products) {
     <td class="cut">${product.price} KR</td>
     <td class="cut">${product.quantity}</td>
     <td class="cut">${product.unit}</td>
-    <td class="cut"  colspan="2">${
-      product.category.map(item=> item.name)
-    }</td>
+    <td class="cut"  colspan="2">${product.category.map(item=> item.name)}</td>
     <td class="cut">${product.featured}</td>
     <td>
       <a href="add&edit-product.html?id=${product.id}" class="edit" title="Edit" data-toggle="tooltip"
         ><i class="material-icons">&#xE254;</i></a
       >
       <a class="delete" title="Delete" data-toggle="tooltip"
-        ><i class="material-icons">&#xE872;</i></a
-      >
+        ><i class="material-icons">&#xE872;</i></a>
     </td>
   </tr>
         `;

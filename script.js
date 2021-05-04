@@ -293,9 +293,6 @@ function createElementsForProduct(product) {
  * @param {*} product
  */
 function plusButton(e, product) {
- 
-  console.log(product.quantity)
-
   let cartArray = JSON.parse(localStorage.getItem("cart"));
   let field = e.target.parentNode.querySelector("input[type=tel]");
   let p4 = e.target.parentNode.parentNode.querySelector(".qyt-error");

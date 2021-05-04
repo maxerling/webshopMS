@@ -1,13 +1,6 @@
 
 let pTemp=[];
 $(document).ready(function () {
-  // fetch("https://hakims-webshop.herokuapp.com/product/get")
-  // .then((resp) => resp.json())
-  // .then((data) => {
-  //   allProducts = data;
-  // })
-  // .catch((err) => console.log(err));
-
   $(".search-field-input").keyup(function (e) {
 
     valueSearch = e.target.value.toUpperCase();
@@ -61,10 +54,8 @@ $(document).ready(function () {
             let id= e.target.id.substr(2, e.target.id.length);
             focusOutNumber2(e,id)
         })
-        $(".quantityInput-search").keyup((e) =>{  
-             
+        $(".quantityInput-search").keyup((e) =>{   
           let id= e.target.id.substr(2, e.target.id.length);
-          console.log(id);
           setNumberToSearch(e,id)
          })
       } 
@@ -86,7 +77,6 @@ $(document).ready(function () {
 
             if (x.matches) {
               // If media query matches
-              console.log("mobile");
               $("#search-box").hide();
               $("#logo").show();
               $("#search").show();
@@ -262,6 +252,5 @@ function setNumberToSearch(e,id){
     }, 1000);
   } else {
     e.target.parentNode.parentNode.querySelector(".qyt-error").style.display = "block";
-  //  e.target.value= "1"
   }
 }

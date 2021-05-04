@@ -1,11 +1,9 @@
 $("#upload-btn").click(function (e) {
   e.preventDefault();
   var input1 = $("#upload").val();
-  console.log(input1);
   $("#imageResult").attr("src", input1);
 });
 
-///category
 $(document).ready(function () {
 
   fetch("https://hakims-webshop.herokuapp.com/category/get")
@@ -39,7 +37,7 @@ $(document).ready(function () {
     })
 
     if(location.href.split("?id=")[1] != null){
-      let id = location.href.split("?id=")[1]
+      let id = parseInt(location.href.split("?id=")[1]);
       getProductById(id)
       editAndCreateProduct(id)
     
@@ -47,66 +45,78 @@ $(document).ready(function () {
       editAndCreateProduct(null)
     }
 
-    function editAndCreateProduct(id){
-       
-            $("form").submit(function (e) {
-                e.preventDefault();
-                let product = {};
-                let cat = [];
-
-                if ($("#input8").val() != "") {
-                    if ($("#input9").val() != "") {
-                      cat = [
-                        {
-                          id: $("#input7").val(),
-                        },
-                        {
-                          id: $("#input8").val(),
-                        },
-                        {
-                          id: $("#input9").val(),
-                        },
-                      ];
-                    } else {
-                      cat = [
-                        {
-                          id: $("#input7").val(),
-                        },
-                        {
-                          id: $("#input8").val(),
-                        },
-                      ];
-                    }
-                  } else {
-                    cat = [
-                      {
-                        id: $("#input7").val(),
-                      },
-                    ];
-                  }
-                  
-
-                  product = {
-                    title: $("#input1").val(),
-                    brand: $("#input2").val(),
-                    description: $("#input3").val(),
-                    image: $("#upload").val(),
-                    price: $("#input4").val(),
-                    quantity: $("#input5").val(),
-                    unit: $("#input6").val(),
-                    featured: parseInt($("input[name=featured]:checked").val()),
-                    category : cat
-                  };
-
-                if(id != null){
-                   product.id = id;
-                }
-                      sendProductToDB(product , "https://hakims-webshop.herokuapp.com/product/add")
-              });
-    }
+    
    
 });
+/**
+ * 
+ * @param {*} id 
+ */
+function editAndCreateProduct(id){
+       
+  $("form").submit(function (e) {
+      e.preventDefault();
+      let product = {};
+      let cat = [];
+      let cat1= parseInt( $("#input7").val())
+      let cat2= parseInt( $("#input8").val())
+      let cat3= parseInt( $("#input9").val())
 
+
+      if (cat2 != 0) {
+          if (cat3 != 0) {
+            cat = [
+              {
+                id: cat1,
+              },
+              {
+                id: cat2,
+              },
+              {
+                id: cat3,
+              },
+            ];
+          } else {
+            cat = [
+              {
+                id: cat1,
+              },
+              {
+                id: cat2,
+              },
+            ];
+          }
+      } else {
+          cat = [
+            {
+              id: cat1,
+            },
+          ];
+      }
+        
+
+        product = {
+          title: $("#input1").val(),
+          brand: $("#input2").val(),
+          description: $("#input3").val(),
+          image: $("#upload").val(),
+          price: $("#input4").val(),
+          quantity: $("#input5").val(),
+          unit: $("#input6").val(),
+          featured: parseInt($("input[name=featured]:checked").val()),
+          category : cat
+        };
+
+      if(id != null){
+         product.id = id;
+      }
+            sendProductToDB(product , "https://hakims-webshop.herokuapp.com/product/add")
+    });
+}
+/**
+ * 
+ * @param {*} id 
+ */
 let  getProductById = (id) =>{
     fetch(`https://hakims-webshop.herokuapp.com/product/get/${id}`)
     .then((resp) => resp.json())
@@ -116,10 +126,11 @@ let  getProductById = (id) =>{
     .catch((err) => console.log(err));
 }
 
-
+/**
+ * 
+ * @param {*} data 
+ */
 function setProductInForm(data){
-    console.log(data);
-
      $("#input1").val(data.title)
      $("#input2").val(data.brand)
      $("#input3").val(data.description)
@@ -148,8 +159,12 @@ if(data.category.length == 1){
       
 }
 
+/**
+ * 
+ * @param {*} product 
+ * @param {*} url 
+ */
 function sendProductToDB(product , url){
-
     fetch(url, {
         method: "POST",
         body: JSON.stringify(product),
@@ -158,7 +173,6 @@ function sendProductToDB(product , url){
         },
       })
         .then(function (res) {
-          console.log(res);
           if (res.status == 200) {
             return res.json();
           } else {
@@ -166,7 +180,7 @@ function sendProductToDB(product , url){
           }
         })
         .then(function (product) {
-          console.log(product);
+          alert(product.title + "har blivit add/edit till lager" )
         })
         .catch(function (error) {
           console.log(error);

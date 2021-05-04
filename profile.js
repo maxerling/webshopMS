@@ -313,7 +313,6 @@ function checkPassword(target) {
   let validDiv = target.parentNode.querySelector(".validLösenord");
   let invalidDiv = target.parentNode.querySelector(".invalidLösenord");
   let password = target.value;
-  console.log(password);
   let input = target;
 
   if (password == "") {

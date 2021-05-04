@@ -64,6 +64,12 @@ function createModal(id) {
   .then((orderRow) =>{
   let trModal = "";
   let output = "";
+  let shippingCost = "";
+  $(".invoice-info").html(`
+    <span class=""> ON.: ${orderRow[0].order.id}</span>
+    <span class="ps-3"> Date: ${orderRow[0].order.date}</span>
+  
+  `)
   orderRow.forEach((item) => {
    
      
@@ -84,10 +90,20 @@ function createModal(id) {
                         ><i class="material-icons">&#xE872;</i></a
                         >
                     </td>
+                    </tr>
                     `;
-
         output += trModal;
       });
+      shippingCost = `
+      <tr>
+        <td colspan="3">shippingCost</td>
+        <td colspan="1">49 kr</td>
+      </tr>
+      `
+      if(orderRow[0].order.totalPrice < 250){
+        output += shippingCost
+
+      }
 
       document.getElementById("modal-tbody").innerHTML = output;
       document.getElementById("totalPrice").innerText = orderRow[0].order.totalPrice;
