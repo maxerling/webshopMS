@@ -181,8 +181,6 @@ function getDataFromLocalStorage() {
  * @param {*} orderRowData Added function to show order modal, remove ls, show info in order modal
  */
 function confirmBtn(orderRowData) {
-
-
   if(JSON.parse(localStorage.getItem("cart")).length == orderRowData.length){
     
     $("#orderModal").modal("show");
@@ -211,6 +209,7 @@ function confirmBtn(orderRowData) {
         }
       }
     }
+    localStorage.removeItem("totalPrice");
     localStorage.removeItem("cart");
     location.href = "index.html";
   }
@@ -290,7 +289,6 @@ function createOrderRow(orderId) {
   })
     .then(function (response) {
       if (response.status == 200) {
-        // localStorage.removeItem("cart");
         return response.json();
       }
       else{

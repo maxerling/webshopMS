@@ -180,7 +180,7 @@ function sendProductToDB(product , url){
           }
         })
         .then(function (product) {
-          alert(product.title + "har blivit add/edit till lager" )
+          alert(product.title + " har blivit add/edit i lager" )
         })
         .catch(function (error) {
           console.log(error);

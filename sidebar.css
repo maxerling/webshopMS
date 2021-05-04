@@ -90,14 +90,14 @@ scrollbar-width: none;  /* Firefox */
   font-size: 9pt;
 }
 .minus-plus {
-  width: 20px !important;
-  height: 20px !important;
-  margin: 0 !important;
+  width: 20px;
+  height: 20px;
+  margin: 0;
   line-height: 16px;
 }
 .quantityInput-search {
-  width: 20px !important;
-  height: 20px !important;
+  width: 20px ;
+  height: 20px;
 }
 .value-changer-search {
   display: none;
@@ -115,6 +115,7 @@ scrollbar-width: none;  /* Firefox */
  border-radius: 5px;
 }
 #search-list{
+ z-index: 500;
  display: none;
  width: 94%;
  position: absolute;
@@ -206,7 +207,15 @@ scrollbar-width: none;  /* Firefox */
    .title-product{
     font-size: 11pt;
    }
+  .minus-plus{
+    width: 40px ;
+    height: 40px;
 
+}
+.quantityInput-search {
+  width: 40px ;
+  height: 40px;
+}
 }
 
 /*  Large devices (desktops, 992px and up) */
