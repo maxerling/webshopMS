@@ -96,7 +96,7 @@ function createModal(id) {
       });
       shippingCost = `
       <tr>
-        <td colspan="3">shippingCost</td>
+        <td colspan="3">Frakt</td>
         <td colspan="1">49 kr</td>
       </tr>
       `
