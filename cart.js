@@ -208,7 +208,6 @@ function confirmBtn(orderRowData) {
     for(let i = 0; i < orderRowData.length; i++){
       for(let j = 0; j < cartArray.length; j++){
         if(orderRowData[i].product.id == cartArray[j].id){
-          // alert("Denna produkt finns ej i lager: " + cartArray[j].title);
           message += `\n${cartArray[j].title}`;
         }
       }
@@ -293,7 +292,6 @@ function createOrderRow(orderId) {
   })
     .then(function (response) {
       if (response.status == 200) {
-        // localStorage.removeItem("cart");
         return response.json();
       }
       else{
