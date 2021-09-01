@@ -81,7 +81,6 @@ function numericSortTable(n) {
     switchcount = 0;
   dir = "asc";
   table = document.getElementById("myTable");
-  console.log(table);
   switching = true;
   /*Make a loop that will continue until
 		no switching has been done:*/
@@ -136,7 +135,7 @@ function numericSortTable(n) {
  * Find the name by input
  * @param {*}
  */
-function searchFunction() {
+function searchFunction(n) {
   // Declare variables
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInput");
@@ -145,7 +144,7 @@ function searchFunction() {
   tr = table.getElementsByTagName("tr");
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
+    td = tr[i].getElementsByTagName("td")[n];
     if (td) {
       txtValue = td.textContent || td.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {

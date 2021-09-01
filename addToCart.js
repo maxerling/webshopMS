@@ -7,8 +7,6 @@
  */
 function addToCart(productId) {
   let cartArray = JSON.parse(localStorage.getItem("cart"));
-  let allProducts = JSON.parse(localStorage.getItem("allProducts"));
-  console.log(cartArray);
   let item = allProducts.find((item) => item.id == productId);
   let cartIndex = cartArray.findIndex((e) => e.id == productId);
 
@@ -18,6 +16,9 @@ function addToCart(productId) {
     let itemIndex = allProducts.findIndex((e) => e.id == productId);
     let selectedPrd = {
       id: allProducts[itemIndex].id,
+      brand: allProducts[itemIndex].brand,
+      featured: allProducts[itemIndex].featured,
+      description: allProducts[itemIndex].description,
       title: allProducts[itemIndex].title,
       image: allProducts[itemIndex].image,
       price: allProducts[itemIndex].price,
@@ -27,7 +28,6 @@ function addToCart(productId) {
     };
     cartArray.push(selectedPrd);
   }
-
   localStorage.setItem("cart", JSON.stringify(cartArray));
-  cartButton();
+  disableOrEnableCartButton();
 }

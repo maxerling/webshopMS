@@ -10,10 +10,10 @@ function createOrderElements(json) {
   json.forEach((order) => {
     trTable = `
         <tr>
-            <td class="cut">${order.ordernumber}</td>
+            <td class="cut">${order.id}</td>
             <td class="cut">${order.date}</td>
-            <td class="cut">${order.customerid}</td>
-            <td class="cut">${order.totalPrice}$</td>
+            <td class="cut">${order.users!=null ? order.users.email : "----"}</td>
+            <td class="cut">${order.totalPrice} KR</td>
             <td class="cut">
 
                 <div class="statusEdit">
@@ -50,12 +50,6 @@ function createOrderElements(json) {
             
         </tr>
         `;
-    let modalData = {};
-    modalData.id = order.id;
-    modalData.products = order.products;
-    modalData.totalPrice = order.totalPrice;
-    invoiceList.push(modalData);
-
     output += trTable;
   });
   tbody.innerHTML = output;
@@ -65,17 +59,26 @@ function createOrderElements(json) {
  * @param {product-id} id For compare order row with database to show order line item.
  */
 function createModal(id) {
+  fetch(`https://hakims-webshop.herokuapp.com/orderRow/get/byOrderID/${id}`)
+  .then((response) => response.json())
+  .then((orderRow) =>{
   let trModal = "";
   let output = "";
-  invoiceList.forEach((item) => {
-    if (item.id == id) {
-      item.products.forEach((product) => {
+  let shippingCost = "";
+  $(".invoice-info").html(`
+    <span class=""> ON.: ${orderRow[0].order.id}</span>
+    <span class="ps-3"> Date: ${orderRow[0].order.date}</span>
+  
+  `)
+  orderRow.forEach((item) => {
+   
+     
         trModal = `
                 <tr>
-                    <td>${product.productid}</td>
-                    <td>${product.qunatity}</td>
-                    <td>${product.price}$</td>
-                    <td>${product.price * product.qunatity}</td>
+                    <td>${item.product.title}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.productPriceWhenOrdering} KR</td>
+                    <td>${item.productPriceWhenOrdering * item.quantity} KR</td>
                     <td>
                         <a class="add" title="Add" data-toggle="tooltip"
                         ><i class="material-icons">&#xE03B;</i></a
@@ -87,26 +90,45 @@ function createModal(id) {
                         ><i class="material-icons">&#xE872;</i></a
                         >
                     </td>
+                    </tr>
                     `;
-
         output += trModal;
       });
+      shippingCost = `
+      <tr>
+        <td colspan="3">Frakt</td>
+        <td colspan="1">49 kr</td>
+      </tr>
+      `
+      if(orderRow[0].order.totalPrice < 250){
+        output += shippingCost
+
+      }
 
       document.getElementById("modal-tbody").innerHTML = output;
-      document.getElementById("totalPrice").innerText = item.totalPrice;
-    }
-  });
+      document.getElementById("totalPrice").innerText = orderRow[0].order.totalPrice;
+ 
+  
+
+  }).catch((error) => console.error(error));
+  
 }
 
 $(document).ready(function () {
+  $(".printme").click(function(){
+    print();
+  })
+
   // fetch order and call render function
-  fetch("../../data/orders.json")
+  fetch("https://hakims-webshop.herokuapp.com/order/get")
     .then((response) => response.json())
     .then((data) => createOrderElements(data))
     .catch((error) => console.error(error));
 
   $('[data-toggle="tooltip"]').tooltip();
 
+
+  /* *****************************Listeners for CRUD operations comment away******************************************* 
   // Append table with add row form on add new button click
   //console.log(actions);
   $(".add-new").click(function () {
@@ -193,4 +215,5 @@ $(document).ready(function () {
     $(this).parents("tr").remove();
     $(".add-new").removeAttr("disabled");
   });
+  ********************************************************************************* */
 });

@@ -1,17 +1,35 @@
-$(document).ready(function () {
-  getData();
-});
-
-window.addEventListener("load", function () {
-  cartButton();
-  updateCartBtn();
-});
-
-/** Global variable */
+/* ********************** Global variable ************************* */
 let cat = "produkter";
 let products = document.getElementById("products");
-let productsData = [];
+let allProducts = [];
+/********************************************************* */
 
+
+/* ************************************************************** */
+$(document).ready(function () {
+  const url = "https://hakims-webshop.herokuapp.com/product/get";
+  fetch(url)
+    .then((resp) => resp.json())
+    .then((data) => {
+      allProducts = data
+      storeData(data);
+      loadCategories();
+    })
+    .catch((err) => console.log(err));
+});
+/* ************************************************************** */
+
+
+/* ************************************************************** */
+window.addEventListener("load", function () {
+  loginButton();
+  disableOrEnableCartButton();
+  updateCartBtnQtn();
+});
+/* ************************************************************** */
+
+
+/* ****************************FUNCTIONS********************************** */
 /**
  * Creating element
  *
@@ -44,22 +62,7 @@ let removeClass = (element, className) => $(element).removeClass(className);
  * @returns
  */
 let append = (parent, el) => $(parent).append(el);
-/**
- * Fetch data from url/path
- */
-function getData() {
-  const url = "data/products.json";
 
-  fetch(url)
-    .then((resp) => resp.json())
-    .then((data) => {
-      productsData = data;
-      storeData(data);
-      loadCategories(data);
-      categoryLinkListener();
-    })
-    .catch((err) => console.log(err));
-}
 /**
  * Storing data from fetch, promise into array
  * @param {object} data - Result of taking JSON as input and
@@ -72,26 +75,76 @@ function storeData(data) {
   } else {
     cartArray = JSON.parse(localStorage.getItem("cart"));
   }
-
-  localStorage.setItem("allProducts", JSON.stringify(productsData));
   localStorage.setItem("cart", JSON.stringify(cartArray));
   cat = categoryFormatter(cat);
   document.getElementById("category").innerText = cat;
   cat = categoryOrignalFormatter(cat);
   data.forEach((product) => createElementsForProduct(product));
-}
+  setNumberProduct()
 
+}
 /**
  * Map data to createCategory function.
  * @param {object} data - Result of taking JSON as input and
  *  parsing it to produce a JS object
  */
-function loadCategories(data) {
-  data.map(function (product) {
-    createCategory(product.category);
+function loadCategories() {
+  fetch("https://hakims-webshop.herokuapp.com/category/get")
+    .then((resp) => resp.json())
+    .then((data) => {
+      createCategory(data);
+    });
+}
+/**
+ * Create element base on category name.
+ * @param {string} category . All of categories
+ */
+function createCategory(categories) {
+  categories.map((item) => {
+    let li = document.createElement("li");
+    li.setAttribute("class", "nav-item");
+
+    category = categoryFormatter(item.name);
+    let div = document.createElement("a");
+    div.setAttribute("class", "cat h4 nav-link");
+    div.id = "cat" + item.id;
+    div.innerText = category;
+
+    li.appendChild(div);
+    document.querySelector(".navbar-nav").appendChild(li);
+  });
+  categoryLinkListener();
+}
+/**
+ * Add category function when you press element.
+ */
+function categoryLinkListener() {
+  document.querySelectorAll(".cat").forEach((item) => {
+    item.addEventListener("click", function (event) {
+      let target = event.target;
+      catId = target.id;
+      cat = target.innerText;
+      if (cat == "DAGENS HAKIMS DEAL") {
+        cat = "Populär";
+        catId = "cat1";
+      }
+
+      // cat = categoryOrignalFormatter(cat);
+      products.innerHTML = "";
+      $("#sidebar").animate({ left: "-200" }, "slow");
+
+      let productsCat = [];
+      allProducts.map((product) => {
+        product.category.map((item) => {
+          if (item.id == catId.substr(3, catId.length)) {
+            productsCat.push(product);
+          }
+        });
+      });
+      storeData(productsCat);
+    });
   });
 }
-
 /**
  * Create elements based on product data (object data)
  * @param {object} product - object of array of objects
@@ -105,42 +158,54 @@ function createElementsForProduct(product) {
   addClass(div, "border");
   addClass(div, "text-center");
   addClass(div, "product");
+  div.id = product.id;
 
   const img = createNode("img");
   addClass(img, "mb-4");
   addClass(img, "product-hover");
+  $(img).click(() => {
+    loadProductCard(`${product.id}`);
+  });
   const p1 = createNode("p");
   const p2 = createNode("p");
   const p3 = createNode("p");
+  const p4 = createNode("p");
+  addClass(p4, "qyt-error");
   const btn = createNode("button");
+  const quantityInput = createNode("input");
+  quantityInput.setAttribute("onpaste", "return false;")
+  addClass(quantityInput, "");
+  const plusBtn = createNode("button");
+  const minusBtn = createNode("button");
+  const valueChanger = createNode("div");
   addClass(btn, "btn-primary");
   addClass(btn, "btn");
+  addClass(btn, "btn-product");
+  quantityInput.type = "tel";
+  quantityInput.id = "number" + product.id;
+  addClass(quantityInput, "quantityInput");
+  quantityInput.min = 0;
+  quantityInput.setAttribute("pattern", "[0-9]+");
+  addClass(quantityInput, "text-center");
+  plusBtn.innerHTML = "+";
+  minusBtn.innerHTML = "-";
+  addClassesToQuantityButton(plusBtn);
+  addClassesToQuantityButton(minusBtn);
 
-  if (cat == "produkter") {
-    img.src = product.image;
-    p1.innerHTML = `${product.price} kr`;
-    p2.innerHTML = product.title;
-    p3.innerHTML = `${product.brand} | ${product.units}`;
-    btn.innerHTML = "Köp";
-    append(div, img);
-    append(div, p1);
-    append(div, p2);
-    append(div, p3);
-    append(div, btn);
-    append(products, div);
-  } else if (cat == product.category) {
-    img.src = product.image;
-    p1.innerHTML = `${product.price} kr`;
-    p2.innerHTML = product.title;
-    p3.innerHTML = `${product.brand} | ${product.units}`;
-    btn.innerHTML = "Köp";
-    append(div, img);
-    append(div, p1);
-    append(div, p2);
-    append(div, p3);
-    append(div, btn);
-    append(products, div);
-  }
+  appendToDiv(
+    product,
+    img,
+    p1,
+    p2,
+    p3,
+    p4,
+    btn,
+    quantityInput,
+    plusBtn,
+    minusBtn,
+    div,
+    valueChanger
+  );
 
   if (product.quantity == 0) {
     $(btn).attr("disabled", "disabled");
@@ -151,48 +216,346 @@ function createElementsForProduct(product) {
     removeClass(img, "product-hover");
   } else {
     $(btn).click(() => {
-      addToCart(`${product.id}`, products);
-      updateCartBtn();
+      valueChanger.style.display = "block";
+      btn.style.display = "none";
+
+      quantityInput.value = 1;
+      addToCart(`${product.id}`);
+
+      let idSearchProduct = "#ns" + product.id;
+      let btnSearchProduct = "#ps" + product.id + " .btn-search-product";
+      $(idSearchProduct).val(quantityInput.value);
+      $(idSearchProduct).parent().show();
+      $(btnSearchProduct).hide();
+
+      updateCartBtnQtn();
+      disableOrEnableCartButton();
     });
   }
-}
+  quantityInput.addEventListener("input", (e) => {
+    e.target.value = e.target.value.replace(/[^0-9]+/, "");
+    let inputValue = e.target.value;
+    if (Number(inputValue) >= 0 && Number(inputValue <= product.quantity)) {
+      p4.style.display = "none";
+      quantityInput.setCustomValidity("");
+      setTimeout(() => {
+        cartArray = JSON.parse(localStorage.getItem("cart"));
+        cartArray.forEach((cartItem, i) => {
+          if (cartItem.id === product.id) {
+            if ((inputValue == "0") & (inputValue != "")) {
+              cartItem.quantity = 0;
+              cartArray.splice(i, 1);
+              valueChanger.style.display = "none";
+              btn.style.display = "inline-block";
+            } else {
+              if (inputValue != "") {
+                cartItem.quantity = Number(inputValue);
+              }
+            }
+          }
+        });
 
-function updateCartBtn() {
-  let cartArray = JSON.parse(localStorage.getItem("cart"));
-  const btn = document.getElementById("cart");
-  if (cartArray != null && cartArray.length > 0) {
-    let sum = 0;
-    for (let i = 0; i < cartArray.length; i++) {
-      sum += 1 * cartArray[i].quantity;
+        let idNmberSearchProduct = "#ns" + product.id;
+        $(idNmberSearchProduct).val(inputValue);
+
+        addProductIfDontExist(cartArray, product.id, inputValue);
+        updateCartBtnQtn();
+        disableOrEnableCartButton();
+      }, 500);
+    } else {
+      quantityInput.setCustomValidity(
+        "Tyvärr har vi inte så många produkter i lager"
+      );
+      p4.style.display = "inline-block";
+      e.target.value = 1
     }
+  });
 
-    btn.innerHTML = `<i class="fas fa-shopping-cart"></i> Antal produkter: ${sum}`;
+  quantityInput.addEventListener("focusout", (e) => {
+    focusOutNumber(e, product.id);
+  });
+
+  //################ number product Card#####################
+  plusBtn.addEventListener("click", (e) => {
+    plusButton(e, product);
+    let idNmberSearchProduct = "#ns" + product.id;
+    $(idNmberSearchProduct).val(quantityInput.value);
+  });
+
+  minusBtn.addEventListener("click", (e) => {
+    minusButton(e, product);
+    let idNmberSearchProduct = "#ns" + product.id;
+    $(idNmberSearchProduct).val(quantityInput.value);
+  });
+
+  
+}
+/**
+ *
+ * @param {*} e
+ * @param {*} product
+ */
+function plusButton(e, product) {
+  let cartArray = JSON.parse(localStorage.getItem("cart"));
+  let field = e.target.parentNode.querySelector("input[type=tel]");
+  let p4 = e.target.parentNode.parentNode.querySelector(".qyt-error");
+  if (Number(field.value) + 1 <= product.quantity) {
+    p4.style.display = "none";
+    field.value = Number(field.value) + 1;
+    cartArray.forEach((cartItem) => {
+      if (cartItem.id === product.id) {
+        cartItem.quantity = Number(field.value);
+      }
+    });
+
+    addProductIfDontExist(cartArray, product.id, field.value);
+    updateCartBtnQtn();
+    disableOrEnableCartButton();
   }
 }
+/**
+ *
+ * @param {*} e
+ * @param {*} product
+ */
+function minusButton(e, product) {
+  let field = e.target.parentNode.querySelector("input[type=tel]");
+  let p4 = e.target.parentNode.parentNode.querySelector(".qyt-error");
+  if (Number(field.value) - 1 >= 0) {
+    if (Number(field.value) - 1 <= product.quantity) {
+      p4.style.display = "none";
+      field.setCustomValidity("");
+    }
+
+    field.value = Number(field.value) - 1;
+    cartArray = JSON.parse(localStorage.getItem("cart"));
+    cartArray.forEach((cartItem, i) => {
+      if (cartItem.id === product.id) {
+        cartItem.quantity = Number(field.value);
+        if (cartItem.quantity == 0) {
+          cartArray.splice(i, 1);
+        }
+      }
+    });
+
+    localStorage.setItem("cart", JSON.stringify(cartArray));
+    updateCartBtnQtn();
+    disableOrEnableCartButton();
+  }
+}
+
+
+/**
+ *
+ * @param {*} e
+ * @param {*} id
+ */
+function focusOutNumber(e, id) {
+  // let cartArray = JSON.parse(localStorage.getItem("cart"))
+  let inputValue = e.target.value;
+  if (inputValue == "") {
+    cartArray.forEach((cartItem, i) => {
+      if (cartItem.id === id) {
+        cartItem.quantity = 0;
+        cartArray.splice(i, 1);
+
+        let idNumberProduct = "#number" + id;
+        let btnProduct = "#" + id + " .btn-product";
+        $(idNumberProduct).parent().hide();
+        $(btnProduct).show();
+
+        let idSearchProduct = "#ns" + id;
+        let btnSearchProduct = "#ps" + id + " .btn-search-product";
+        $(idSearchProduct).parent().hide();
+        $(btnSearchProduct).show();
+      }
+    });
+    localStorage.setItem("cart", JSON.stringify(cartArray));
+    updateCartBtnQtn();
+    disableOrEnableCartButton();
+  }
+}
+//################### End number product Card #################
+
+/**
+ * Checks if product exist in cart by comparing with AllProducts array.
+ *
+ * @param {array} cartArray
+ * @param {number} productid
+ * @param {string} inputValue - value from input[type="tel"]
+ */
+ function addProductIfDontExist(cartArray, productid, inputValue) {
+
+  if (!findMatch(cartArray, productid)) {
+    let productThatWillBeAdded;
+    for (let i = 0; i < allProducts.length; i++){
+      if(allProducts[i].id == productid){
+        productThatWillBeAdded= {
+          id: allProducts[i].id,
+          brand: allProducts[i].brand,
+          featured: allProducts[i].featured,
+          description: allProducts[i].description,
+          title: allProducts[i].title,
+          image: allProducts[i].image,
+          price: allProducts[i].price,
+          units: allProducts[i].units,
+          category: allProducts[i].category,
+        };
+      }
+    }
+
+    productThatWillBeAdded.quantity = Number(inputValue);
+    cartArray.push(productThatWillBeAdded);
+  }
+  cartArray = cartArray.filter((item) => item.quantity > 0);
+
+  localStorage.setItem("cart", JSON.stringify(cartArray));
+}
+/**
+ *
+ * @param {*} cartArray
+ * @param {*} productid
+ * @returns
+ */
+function findMatch(cartArray, productid) {
+  let i,
+    match = false;
+
+  for (i = 0; i < cartArray.length; i++) {
+    if (cartArray[i].id == productid) {
+      match = true;
+      break;
+    }
+  }
+
+  return match;
+}
+
+/**
+ *
+ * @param {*} btn
+ */
+function addClassesToQuantityButton(btn) {
+  addClass(btn, "m-2");
+  addClass(btn, "quantity-value-changer");
+}
+
+/**
+ * Add all the elements to a "main" div
+ * @param {object} product
+ * @param {element} img
+ * @param {element} p1
+ * @param {element} p2
+ * @param {element} p3
+ * @param {element} p4
+ * @param {element} btn
+ * @param {element} quantityInput
+ * @param {element} plusBtn
+ * @param {element} minusBtn
+ * @param {element} div
+ * @param {element} div
+ */
+
+function appendToDiv(
+  product,
+  img,
+  p1,
+  p2,
+  p3,
+  p4,
+  btn,
+  quantityInput,
+  plusBtn,
+  minusBtn,
+  div,
+  valueChanger
+) {
+  img.src = product.image;
+
+  p1.innerHTML = unitFormatter(product.price);
+  p2.innerHTML = product.title;
+  p3.innerHTML = `${product.brand} | ${unitFormatter(product.unit)}`;
+  p4.innerHTML = "Tyvärr har vi inte så många produkter i lager";
+  p4.style = "color:red;";
+  p4.style.display = "none";
+  btn.innerHTML = "Köp";
+  addClass(valueChanger, "value-changer");
+  append(div, img);
+  append(div, p1);
+  append(div, p2);
+  append(div, p3);
+  append(div, p4);
+  append(div, btn);
+  append(valueChanger, minusBtn);
+  append(valueChanger, quantityInput);
+  append(valueChanger, plusBtn);
+  append(div, valueChanger);
+  valueChanger.style.display = "none";
+  append(products, div);
+}
+
+/**
+ * Formatting units and prices based on PO request
+ * @param {*} format
+ * @returns
+ */
+function unitFormatter(format) {
+  if (typeof format === "number") {
+    return (
+      format
+        .toFixed(2)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+        .replace(".", ":") + " kr"
+    );
+  } else {
+    const spaceIndex = format.toString().indexOf(" ");
+    const value = Number(format.slice(0, spaceIndex));
+    return (
+      value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") +
+      format.slice(spaceIndex)
+    );
+  }
+}
+
+/**
+ *
+ * @param {*} price
+ * @param {*} unit
+ * @returns
+ */
+function getJmfPrice(price, unit) {
+  const spaceIndex = unit.toString().indexOf(" ");
+  const unitValue = Number(unit.slice(0, spaceIndex));
+  const outUnit = unit.slice(spaceIndex + 1) == "g" ? "kg" : "l";
+  return unitFormatter((price / unitValue) * 1000) + '/' + outUnit;
+}
+
+/**
+ *
+ */
+function updateCartBtnQtn() {
+  if(location.href == "http://127.0.0.1:5501/index.html" || location.href == "https://maxerling.github.io/webshopMS/index.html"){
+    let cartArray = JSON.parse(localStorage.getItem("cart"));
+    const btn = document.getElementById("cart");
+    const mobileCartBtn = document.getElementById("btnGroupDrop1");
+    if (cartArray != null && cartArray.length > 0) {
+      let sum = 0;
+      for (let i = 0; i < cartArray.length; i++) {
+        sum += 1 * cartArray[i].quantity;
+      }
+  
+      btn.innerHTML = `<i class="fas fa-shopping-cart"></i> Antal produkter: ${sum}`;
+      mobileCartBtn.innerHTML = `${sum}`;
+    }
+  }
+}
+
 $(document).on("click", ".modal-cancel-button", function () {
   $("#loginModal").modal("hide");
   $("#registerModal").modal("hide");
   $("#orderModal").modal("hide");
 });
-/**
- * Create element base on category name.
- * @param {string} category . All of categories
- */
-function createCategory(category) {
-  category = categoryFormatter(category);
-  let li = document.createElement("li");
-  li.setAttribute("class", "nav-item");
-
-  if (document.getElementById(category) == null) {
-    let div = document.createElement("a");
-    div.setAttribute("class", "cat h4 nav-link");
-    div.id = category;
-    div.innerText = category;
-
-    li.appendChild(div);
-    document.querySelector(".navbar-nav").appendChild(li);
-  }
-}
 
 /**
  * Formats the text to make it:
@@ -212,39 +575,6 @@ function categoryFormatter(category) {
 
   return category;
 }
-/**
- * Added function to show order modal, remove ls, show info in order modal
- */
-function confirmBtn() {
-  $("#orderModal").modal("show");
-
-  let orderNum;
-  let orderDate = new Date().toISOString().replaceAll("T", ", Kl: ");
-  let orderPrice;
-
-  document.getElementById("p-order").innerHTML =
-    "<b>Order nummer: </b>" + orderNum;
-  document.getElementById("p-date").innerHTML =
-    "<b>Beställningsdatum: </b>" + orderDate.substring(0, 21);
-  document.getElementById("p-sum").innerHTML =
-    "<b>Total belopp: </b>" + orderPrice;
-  localStorage.removeItem("inCartArray"); //Dubbelkolla key name
-}
-/**
- * Add category function when you press element.
- */
-function categoryLinkListener() {
-  document.querySelectorAll(".cat").forEach((item) => {
-    item.addEventListener("click", function (event) {
-      let target = event.target;
-      cat = target.innerText;
-      cat = categoryOrignalFormatter(cat);
-      products.innerHTML = "";
-      $("#sidebar").animate({ left: "-200" }, "slow");
-      storeData(productsData);
-    });
-  });
-}
 
 /**
  * Revert back the text to its original form state
@@ -263,16 +593,6 @@ function categoryOrignalFormatter(category) {
 
   return category;
 }
-
-/*function checkCartStatus() {
-  const list = JSON.parse(localStorage.getItem("cart"));
-  if (list.length === 0) {
-    $("#cart").attr("disabled", "disabled");
-    $("cart-btn-link").attr("disabled", "disabled");
-  }
-}
-
-checkCartStatus();*/
 
 $(document).on("click", "#logIn", function () {
   $(".login-modal").modal("show");
@@ -295,6 +615,10 @@ $(document).on("click", ".order-modal-cancel-button", function () {
   $(".order-modal").modal("hide");
 });
 
+$(document).on("click", ".card-modal-cancel-button", function () {
+  $(".card-modal").modal("hide");
+});
+
 // MODAL SKAPA KONTO BUTTON
 $(document).on("click", ".register-new-user-button", function () {
   $(".login-modal").modal("hide");
@@ -304,72 +628,102 @@ $(document).on("click", "#mobileLogin", function () {
   $(".login-modal").modal("show");
 });
 
-/*Global variable for save customer to array list*/
-let customers = [];
-/**
- * fetch all users for check login form!
- */
-function getCustomers() {
-  fetch("../../data/users.json")
-    .then((resp) => resp.json())
-    .then((data) => {
-      customers = data;
-    })
-    .catch((err) => console.log(err));
-}
-/**
- * Function on login button to check customer and admin account and
- * when a user logs in send them to their own  page.
- */
-$(document).on("click", "#modal-login-button", function () {
-  getCustomers();
-
-  var username = $("#input-username").val();
-  var password = $("#input-password").val();
-
-  console.log(username);
-  console.log(password);
-  customers.forEach((customer) => {
-    if (customer.email == username && customer.password == password) {
-      if (customer.accountType == 1) {
-        alert(
-          "Hello " +
-            customer.name.firstName +
-            " " +
-            customer.name.lastName +
-            " ---> you are admin"
-        );
-        location.href = "/admin-panel/index.html";
-      } else if (customer.accountType == 0) {
-        alert(
-          "Hello " +
-            customer.name.firstName +
-            " " +
-            customer.name.lastName +
-            " ---> you are customer"
-        );
-        localStorage.setItem("customer", JSON.stringify(customer));
-        location.href = "profile.html";
-      }
-    }
-  });
-
-  // alert("Please enter correct email and password")
-});
+/*
+  PETA IN INFORAMTION TILL ORDER.HTML
+*/
 
 /**
  * Disables cart button if the cartArray is empty or null else it will rederict to order.html
  */
 
-function cartButton() {
-  let cartArray = JSON.parse(localStorage.getItem("cart"));
-  const cartBtn = document.getElementById("cart");
-  if (cartArray == null || cartArray.length == 0) {
-    cartBtn.disabled = true;
-  } else {
-    cartBtn.disabled = false;
-    cartBtn.addEventListener("click", () => {
+/**
+ *
+ */
+function disableOrEnableCartButton() {
+  if (localStorage.getItem("cart") != null && location.href == "http://127.0.0.1:5501/index.html" || 
+  location.href == "https://maxerling.github.io/webshopMS/index.html") {
+    let cartArray = JSON.parse(localStorage.getItem("cart"));
+    cartArray = cartArray.filter((product) => product.quantity > 0);
+    const cartBtn = document.getElementById("cart");
+    const mobileCartBtn = document.getElementById("btnGroupDrop1");
+    if (cartArray == null || cartArray.length == 0) {
+      cartBtn.disabled = true;
+      mobileCartBtn.disabled = true;
+      cartBtn.innerHTML = `<i class="fas fa-shopping-cart"></i>
+        Kundvagn`;
+      mobileCartBtn.innerHTML = "";
+    } else {
+      cartBtn.disabled = false;
+      cartBtn.addEventListener("click", () => {
+        window.location.href = "order.html";
+      });
+      mobileCartBtn.disabled = false;
+      mobileCartBtn.addEventListener("click", () => {
       window.location.href = "order.html";
-    });
+      });
+    }
   }
+}
+
+/**
+ *
+ */
+function loginButton() {
+  let customer = JSON.parse(localStorage.getItem("customer"));
+  const logInBtn = document.getElementById("logIn");
+  const userIcon = document.querySelector(".userLoggedIn");
+  const customerName = document.querySelector("#customer-name ");
+
+  if (customer != null) {
+    document.querySelector("#mobileLogin").style.display = "none";
+
+    logInBtn.style.display = "none";
+    customerName.innerText = customer.firstname;
+    userIcon.style.display = "block";
+  }
+}
+
+/**
+ * Displays it in modal window when users clicks on a product.
+ * Uses a for-loop to confirm correct product.
+ * @param {number} itemID gets correct id of product and compares to products in i cart.
+ */
+ function loadProductCard(itemID) {
+  let item = allProducts.find((item) => item.id == itemID);
+  if (item != undefined) {
+    $(".product-card-title").text(item.title);
+    $(".product-card-desc").text(item.description);
+    $(".product-card-img").attr("src", item.image);
+    $(".card-modal").modal("show");
+    $(".product-specs").text(`${item.brand} | ${unitFormatter(item.unit)}`);
+    $(".product-price").text("Pris: " + unitFormatter(item.price));
+    $(".product-jmf-price").text(
+      "Jämförpris: " + getJmfPrice(item.price, item.unit)
+    );
+    $(".product-warehouse-quantity").text(
+      "Antal kvar: " + (item.quantity > 100 ? "100+" : item.quantity) + " st"
+    );
+  }
+}
+
+/**
+ * 
+ */
+function setNumberProduct(){
+  let cartArray=[]
+  if(JSON.parse(localStorage.getItem("cart"))==null){
+      $('.value-changer').hide()
+  }else{
+    cartArray = JSON.parse(localStorage.getItem("cart"));
+    //cartArray = cartArray.filter((product) => product.quantity > 0)
+    cartArray.map(item => {
+          let id = '#number' + item.id
+          let btn = '#' + item.id + ' .btn-product'
+          if( $(id) != undefined ){
+              $(id).val(item.quantity)
+              $(btn).hide()
+              $(id).parent().show()
+          }
+      })
+    }
 }
