@@ -25,7 +25,7 @@
           checkPostNr()
         ) {
           event.preventDefault();
-          form.classList.add("was-validated");
+          // form.classList.add("was-validated"); // Kommenterade bort denna för att behålla vissa felformateringar när man skapar kontot
           if (event.target.id == "profile-form") {
             $("#confirmationModal").modal("show");
           } else if (event.target.id == "CreateNewAccount-form") {
@@ -41,6 +41,9 @@
  *
  */
 function createNewUser() {
+  if (checkRepeatPassword()) {
+    return;
+  }
   let user = {
     firstname: $("#validationCustom01").val(),
     lastname: $("#validationCustom02").val(),
@@ -156,7 +159,7 @@ function deleteUser() {
     .then(function (res) {
       if (res.status == 200) {
         localStorage.removeItem("customer");
-        alert("You have been deleted");
+        alert("Du har blivit borttagen från databasen");
         window.location.href = "index.html";
       }
       return res.text();
