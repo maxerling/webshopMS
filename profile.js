@@ -65,7 +65,7 @@ function createNewUser() {
     .then(function (res) {
       if (res.status == 200) {
         return res.json();
-      } else{
+      } else {
         alert("Mailadressen används redan");
         $(".register-modal").modal("hide");
       }
@@ -123,13 +123,11 @@ function editUser() {
       if (user == "user not exists") {
         localStorage.removeItem("customer");
         location.href = "index.html";
-        alert(
-          "Profilen har blivit borttagen eller något annat fel har inträffat."
-        );
+        alert("Profilen har blivit borttagen eller något annat fel har inträffat.");
       } else {
         localStorage.setItem("customer", JSON.stringify(user));
         location.reload();
-        alert(user.firstname + " har blivit uppdaterat!");
+        alert(user.firstname + " har blivit uppdaterad!");
       }
     })
     .catch(function (error) {
@@ -215,7 +213,7 @@ function checkValidFirstName() {
   let regPattern = /^(?=.{1,50}$)[a-zZäöåÄÖÅ]+(?:['_.\s][a-zZäöåÄÖÅ]+)*$/i;
   if (firstname.trim() == "") {
     $(inputId).hide();
-    $(invalid).text("förnamn krävs");
+    $(invalid).text("Förnamn krävs");
     $(invalid).show();
     $(inputId).text("");
     $(firstName).addClass("is-invalid").removeClass("is-valid");
@@ -324,16 +322,14 @@ function checkPassword(target) {
     return false;
   } else if (!regPattern.test(password)) {
     $(validDiv).hide();
-    $(invalidDiv).text(
-      "Lösenordet ska innehålla minst 6 tecken och får inte innehålla Å,Ä,Ö."
-    );
+    $(invalidDiv).text("Lösenordet ska innehålla minst 6 tecken och får inte innehålla Å,Ä,Ö.");
     $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
     return false;
   } else if (target.id == "validationCustom041" && checkRepeatPassword()) {
     $(validDiv).hide();
-    $(invalidDiv).text("must be same password");
+    $(invalidDiv).text("Måste vara samma lösenord");
     $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
@@ -366,7 +362,7 @@ function checkStreet() {
   let invalidDiv = "#invalidGata";
   let address = $("#validationCustom06").val();
   // let regPattern = /^[A-Za-z0-9ZäöåÄÖÅ ]*$/;
-  let regPattern = /^(?=.*[0-9])(?=.*[a-zA-ZåäöÅÄÖ])(?=.*[\s])[0-9a-zA-ZåäöÅÄÖ\s]+$/
+  let regPattern = /^(?=.*[0-9])(?=.*[a-zA-ZåäöÅÄÖ])(?=.*[\s])[0-9a-zA-ZåäöÅÄÖ\s]+$/;
   let input = document.getElementById("validationCustom06");
   if (address.trim() == "") {
     $(validDiv).hide();
@@ -395,16 +391,15 @@ function checkStreet() {
  * @returns true if the input is valid otherwise false.
  */
 function checkPhone() {
-  let regPattern = /(^07([\s-]*\d[\s-]*){8})$|^(\+46([\s-]*\d[\s-]*){9})$|^(0046([\s-]*\d[\s-]*){9})$/;
+  let regPattern =
+    /(^07([\s-]*\d[\s-]*){8})$|^(\+46([\s-]*\d[\s-]*){9})$|^(0046([\s-]*\d[\s-]*){9})$/;
   let validDiv = "#validPhone";
   let invalidDiv = "#invalidPhone";
   let phoneNumber = $("#validationCustom05").val();
   let input = document.getElementById("validationCustom05");
   if (phoneNumber == "") {
     $(validDiv).hide();
-    $(invalidDiv).text(
-      "Telefon krävs för att leverantören kunna kontakta dig när hen är framme"
-    );
+    $(invalidDiv).text("Telefon krävs för att leverantören kunna kontakta dig när hen är framme");
     $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
@@ -492,10 +487,7 @@ function checkPostNr() {
  * Writes information about the customer to the page from localstorage
  */
 function setProfileFromLS() {
-  if (
-    localStorage.getItem("customer") != null &&
-    localStorage.getItem("customer") != "undefined"
-  ) {
+  if (localStorage.getItem("customer") != null && localStorage.getItem("customer") != "undefined") {
     let localST = JSON.parse(localStorage.getItem("customer"));
     $("#validationCustom01").val(localST.firstname);
     $("#validationCustom02").val(localST.lastname);
@@ -536,10 +528,7 @@ function formatPhoneNumberForDb(phoneNumber) {
     .replace("+46", "0")
     .replace(/^(0046)/, "0");
 
-  return `${output.slice(0, 3)}-${output.slice(3, 6)} ${output.slice(
-    6,
-    8
-  )} ${output.slice(8)}`;
+  return `${output.slice(0, 3)}-${output.slice(3, 6)} ${output.slice(6, 8)} ${output.slice(8)}`;
 }
 
 // Formats incoming zipcode to proper format as specified by PO.
