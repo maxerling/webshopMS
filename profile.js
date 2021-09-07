@@ -128,8 +128,11 @@ function editUser() {
       zipcode: formatZipcodeForDb($("#validationCustom08").val()),
     },
     number: formatPhoneNumberForDb($("#validationCustom05").val()),
+    active: true,
+    notLocked: true,
+    role: "ROLE_USER",
+    authorities: ["user:read"],
   };
-  console.log(user);
   fetch("https://hakims-webshop.herokuapp.com/user/update", {
     method: "POST",
     body: JSON.stringify(user),
@@ -139,7 +142,7 @@ function editUser() {
     },
   })
     .then(function (res) {
-      console.log(res.json());
+      console.log(res);
       if (res.status == 200) {
         return res.json();
       } else {
