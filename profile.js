@@ -25,7 +25,7 @@
           checkPostNr()
         ) {
           event.preventDefault();
-          form.classList.add("was-validated");
+          // form.classList.add("was-validated"); // Kommenterade bort denna för att behålla vissa felformateringar när man skapar kontot
           if (event.target.id == "profile-form") {
             $("#confirmationModal").modal("show");
           } else if (event.target.id == "CreateNewAccount-form") {
@@ -41,6 +41,9 @@
  * Function that is used when creating a new profile.
  */
 function createNewUser() {
+  if (checkRepeatPassword()) {
+    return;
+  }
   let user = {
     username: $("#validationCustom03").val(),
     firstName: $("#validationCustom01").val(),
@@ -180,7 +183,7 @@ function deleteUser() {
     .then(function (res) {
       if (res.status == 200) {
         localStorage.removeItem("customer");
-        alert("You have been deleted");
+        alert("Du har blivit borttagen från databasen");
         window.location.href = "index.html";
       }
       return res.text();
@@ -237,7 +240,7 @@ function checkValidFirstName() {
   let regPattern = /^(?=.{1,50}$)[a-zZäöåÄÖÅ]+(?:['_.\s][a-zZäöåÄÖÅ]+)*$/i;
   if (firstName.trim() == "") {
     $(inputId).hide();
-    $(invalid).text("förnamn krävs");
+    $(invalid).text("Förnamn krävs");
     $(invalid).show();
     $(inputId).text("");
     $(firstName).addClass("is-invalid").removeClass("is-valid");
@@ -353,7 +356,7 @@ function checkPassword(target) {
     return false;
   } else if (target.id == "validationCustom041" && checkRepeatPassword()) {
     $(validDiv).hide();
-    $(invalidDiv).text("must be same password");
+    $(invalidDiv).text("Måste vara samma lösenord");
     $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
