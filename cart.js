@@ -184,7 +184,8 @@ function confirmBtn(orderRowData) {
     let orderDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
       .toISOString()
       .replaceAll("T", ", Kl: ");
-    let orderPrice = localStorage.getItem("totalPrice").replace(".", ":") + " kr";
+    let orderPrice =
+      localStorage.getItem("totalPrice").replace(".", ":") + " kr";
     let orderNum = orderRowData[0].order.id;
 
     document.getElementById("p-order").innerHTML = "<b>Order nummer: </b>" + orderNum;
@@ -214,7 +215,7 @@ function confirmBtn(orderRowData) {
  * @param {*} customerId
  */
 function createOrder(customerId) {
-  let total = localStorage.getItem("totalPrice");
+  let total = localStorage.getItem("totalPrice"); // Kan modifiera sitt eget local storage och ändra priset
 
   let order = {
     date: currentDate(),
@@ -229,6 +230,7 @@ function createOrder(customerId) {
     body: JSON.stringify(order),
     headers: {
       "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
     },
   })
     .then(function (res) {
@@ -244,7 +246,9 @@ function createOrder(customerId) {
         createOrderRow(orderId);
       } else {
         localStorage.removeItem("customer");
-        alert("Denna profil har blivit borttagen.\nVänligen skapa nytt konto för att beställa.");
+        alert(
+          "Denna profil har blivit borttagen.\nVänligen skapa nytt konto för att beställa."
+        );
         location.reload();
       }
     })
@@ -276,6 +280,7 @@ function createOrderRow(orderId) {
     body: JSON.stringify(orderRowItems),
     headers: {
       "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
     },
   })
     .then(function (response) {
@@ -385,7 +390,9 @@ function htmlGenerator(data) {
                   </div>
                 </td>
               <td>${unitFormatter(data.price)}</td>
-              <td class="cart-table-item-total">${unitFormatter(data.price * data.quantity)}</td>
+              <td class="cart-table-item-total">${unitFormatter(
+                data.price * data.quantity
+              )}</td>
               <td>
                 <button class="cart-remove-product"><i class="far fa-trash-alt" class="trash-bin-image"></i></button>
               </td>
