@@ -38,15 +38,16 @@
   });
 })();
 /**
- *
+ * Function that is used when creating a new profile.
  */
 function createNewUser() {
   if (checkRepeatPassword()) {
     return;
   }
   let user = {
-    firstname: $("#validationCustom01").val(),
-    lastname: $("#validationCustom02").val(),
+    username: $("#validationCustom03").val(),
+    firstName: $("#validationCustom01").val(),
+    lastName: $("#validationCustom02").val(),
     email: $("#validationCustom03").val(),
     password: $("#validationCustom04").val(),
     address: {
@@ -55,10 +56,8 @@ function createNewUser() {
       zipcode: formatZipcodeForDb($("#validationCustom08").val()),
     },
     number: formatPhoneNumberForDb($("#validationCustom05").val()),
-    status: 0,
-    accountType: 0,
   };
-  fetch("https://hakims-webshop.herokuapp.com/user/add", {
+  fetch("https://hakims-webshop.herokuapp.com/user/register", {
     method: "POST",
     body: JSON.stringify(user),
     headers: {
@@ -73,31 +72,55 @@ function createNewUser() {
         $(".register-modal").modal("hide");
       }
     })
-    .then(function (user) {
-      user.status = true;
-      localStorage.setItem("customer", JSON.stringify(user));
+    .then(function (response) {
+      console.log(response);
+      localStorage.setItem("customer", JSON.stringify(response));
       document.querySelector("#logIn").style.display = "none";
       document.querySelector("#mobileLogin").style.display = "none";
-      document.querySelector("#customer-name").innerText = user.firstname;
+      document.querySelector("#customer-name").innerText = response.firstName;
       document.querySelector(".userLoggedIn").style.display = "block";
-      alert(user.firstname + " har registrerats som ny användare.");
+      alert(response.firstName + " har registrerats som ny användare.");
+
+      loginUser(user.username, user.password);
+
       location.reload();
     })
     .catch(function (error) {
       console.log(error);
     });
 }
+
+function loginUser(username, password) {
+  fetch(`https://hakims-webshop.herokuapp.com/user/login`, {
+    method: "POST",
+    body: JSON.stringify({
+      username: username,
+      password: password,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    if (res.status == 200) {
+      console.log(res.headers);
+    } else if (res.status == 400) {
+      return res.text();
+    }
+  });
+}
+
 /**
  *
  */
 function editUser() {
   let localST = JSON.parse(localStorage.getItem("customer"));
+  let token = localStorage.getItem("token");
   let user = {
     id: localST.id,
-    firstname: $("#validationCustom01").val(),
-    lastname: $("#validationCustom02").val(),
+    username: $("#validationCustom03").val(),
+    firstName: $("#validationCustom01").val(),
+    lastName: $("#validationCustom02").val(),
     email: $("#validationCustom03").val(),
-    password: $("#validationCustom04").val(),
     address: {
       id: localST.address.id,
       street: $("#validationCustom06").val(),
@@ -105,17 +128,21 @@ function editUser() {
       zipcode: formatZipcodeForDb($("#validationCustom08").val()),
     },
     number: formatPhoneNumberForDb($("#validationCustom05").val()),
-    status: 0,
-    accountType: 0,
+    active: true,
+    notLocked: true,
+    role: "ROLE_USER",
+    authorities: ["user:read"],
   };
   fetch("https://hakims-webshop.herokuapp.com/user/update", {
     method: "POST",
     body: JSON.stringify(user),
     headers: {
       "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
     },
   })
     .then(function (res) {
+      console.log(res);
       if (res.status == 200) {
         return res.json();
       } else {
@@ -130,7 +157,7 @@ function editUser() {
       } else {
         localStorage.setItem("customer", JSON.stringify(user));
         location.reload();
-        alert(user.firstname + " har blivit uppdaterad!");
+        alert(user.firstName + " har blivit uppdaterat!");
       }
     })
     .catch(function (error) {
@@ -210,18 +237,18 @@ $("#validationCustom08").focusout(function () {
  */
 function checkValidFirstName() {
   let inputId = "#validFirstName";
-  const firstname = $("#validationCustom01").val();
-  let firstName = document.getElementById("validationCustom01");
+  const firstName = $("#validationCustom01").val();
+  // let firstName = document.getElementById("validationCustom01");
   let invalid = "#invalidFirstName";
   let regPattern = /^(?=.{1,50}$)[a-zZäöåÄÖÅ]+(?:['_.\s][a-zZäöåÄÖÅ]+)*$/i;
-  if (firstname.trim() == "") {
+  if (firstName.trim() == "") {
     $(inputId).hide();
     $(invalid).text("Förnamn krävs");
     $(invalid).show();
     $(inputId).text("");
     $(firstName).addClass("is-invalid").removeClass("is-valid");
     return false;
-  } else if (!regPattern.test(firstname)) {
+  } else if (!regPattern.test(firstName)) {
     $(inputId).hide();
     $(invalid).text("Ogiltig! Ange endast bokstäver");
     $(invalid).show();
@@ -492,15 +519,15 @@ function checkPostNr() {
 function setProfileFromLS() {
   if (localStorage.getItem("customer") != null && localStorage.getItem("customer") != "undefined") {
     let localST = JSON.parse(localStorage.getItem("customer"));
-    $("#validationCustom01").val(localST.firstname);
-    $("#validationCustom02").val(localST.lastname);
+    $("#validationCustom01").val(localST.firstName);
+    $("#validationCustom02").val(localST.lastName);
     $("#validationCustom03").val(localST.email);
-    $("#validationCustom04").val(localST.password);
+    $("#validationCustom04").val("*************");
     $("#validationCustom05").val(localST.number);
     $("#validationCustom06").val(localST.address.street);
     $("#validationCustom07").val(localST.address.city);
     $("#validationCustom08").val(localST.address.zipcode);
-    $("#welcomeText").text("Hej " + localST.firstname + " " + localST.lastname);
+    $("#welcomeText").text("Hej " + localST.firstName + " " + localST.lastName);
     $("#welcomeEmail").text(localST.email);
   }
 }

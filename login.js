@@ -8,11 +8,16 @@ $(document).ready(function () {
   loginButton();
   $(document).on("click", "#signOut", function () {
     localStorage.removeItem("customer");
+    localStorage.removeItem("token");
+    localStorage.removeItem("admin");
   });
 });
 
 function loginButton() {
-  let customer = JSON.parse(localStorage.getItem("customer"));
+  let customer = null;
+  if (localStorage.getItem("customer")) {
+    let customer = JSON.parse(localStorage.getItem("customer"));
+  }
   const logInBtn = document.getElementById("logIn");
   const userIcon = document.querySelector(".userLoggedIn");
   const customerName = document.querySelector("#customer-name ");
@@ -21,7 +26,7 @@ function loginButton() {
     document.querySelector("#mobileLogin").style.display = "none";
 
     logInBtn.style.display = "none";
-    customerName.innerText = customer.firstname;
+    customerName.innerText = customer.firstName;
     userIcon.style.display = "block";
   }
 }
@@ -82,10 +87,10 @@ $(document).on("click", "#modal-login-button", function (e) {
 
   if (checkEmail1() && checkPassword1()) {
     let user = {
-      email: emailField.value,
+      username: emailField.value,
       password: passField.value,
     };
-    fetch(`https://hakims-webshop.herokuapp.com/user/authentication`, {
+    fetch(`https://hakims-webshop.herokuapp.com/user/login`, {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
@@ -93,14 +98,19 @@ $(document).on("click", "#modal-login-button", function (e) {
       },
     })
       .then((res) => {
+        console.log(res);
+        console.log(res.headers.get("Authorization"));
+
         if (res.status == 200) {
           return res.json();
-        } else if (res.status == 400) {
-          return res.text();
+        } else {
+          console.log(res.json());
         }
       })
       .then((result) => {
-        if (result != "Incorrect USER or PASSWORD") {
+        console.log(result);
+        if (result != null) {
+          console.log("Inne i första IF");
           msg = "";
           invalidMsg[1].innerHTML = msg;
           invalidMsg[0].innerHTML = msg;
@@ -110,20 +120,26 @@ $(document).on("click", "#modal-login-button", function (e) {
           emailField.classList.add("is-valid");
           passField.classList.remove("is-invalid");
           passField.classList.add("is-valid");
-          if (result.accountType == 1) {
+          if (result.user.role == "ROLE_SUPER_ADMIN") {
+            console.log("Inne i admin IF");
             this.classList.add("was-validated");
             location.href = "admin-panel/index.html";
-          } else if (result.accountType == 0) {
-            localStorage.setItem("customer", JSON.stringify(result));
+            localStorage.setItem("admin", JSON.stringify(result.user));
+            localStorage.setItem("token", result.token);
+          } else if (result.user.role == "ROLE_USER") {
+            console.log("Inne i user IF");
+            localStorage.setItem("customer", JSON.stringify(result.user));
+            localStorage.setItem("token", result.token);
             document.querySelector("#logIn").style.display = "none";
             document.querySelector("#mobileLogin").style.display = "none";
-            document.querySelector("#customer-name").innerText =
-              result.firstname;
+            document.querySelector("#customer-name").innerText = result.user.firstName;
             document.querySelector(".userLoggedIn").style.display = "block";
             $(".login-modal").modal("hide");
             this.classList.add("was-validated");
-            if (location.href == "http://127.0.0.1:5501/order.html"
-             || location.href == "https://maxerling.github.io/webshopMS/order.html") {
+            if (
+              location.href == "http://127.0.0.1:5501/order.html" ||
+              location.href == "https://maxerling.github.io/webshopMS/order.html"
+            ) {
               loadCustomerInfo();
             }
           }

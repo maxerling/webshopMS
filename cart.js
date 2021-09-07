@@ -145,17 +145,12 @@ $(window).on("load", setOrderButtonStatus);
 function loadCustomerInfo() {
   if (localStorage.getItem("customer")) {
     $(".customer-information").show();
-    $(".order-button")
-      .prop("disabled", false)
-      .text("Beställ")
-      .removeClass("disabled-order-button");
+    $(".order-button").prop("disabled", false).text("Beställ").removeClass("disabled-order-button");
 
     let temp = JSON.parse(localStorage.getItem("customer"));
-    $("#customer-information-name").val(temp.firstname + " " + temp.lastname);
+    $("#customer-information-name").val(temp.firstName + " " + temp.lastName);
     $("#customer-information-address").val(temp.address.street);
-    $("#customer-information-zip").val(
-      temp.address.zipcode + ", " + temp.address.city
-    );
+    $("#customer-information-zip").val(temp.address.zipcode + ", " + temp.address.city);
     $("#customer-information-telephone-number").val(temp.number);
   }
 }
@@ -193,12 +188,10 @@ function confirmBtn(orderRowData) {
       localStorage.getItem("totalPrice").replace(".", ":") + " kr";
     let orderNum = orderRowData[0].order.id;
 
-    document.getElementById("p-order").innerHTML =
-      "<b>Order nummer: </b>" + orderNum;
+    document.getElementById("p-order").innerHTML = "<b>Order nummer: </b>" + orderNum;
     document.getElementById("p-date").innerHTML =
       "<b>Beställningsdatum: </b>" + orderDate.substring(0, 21);
-    document.getElementById("p-sum").innerHTML =
-      "<b>Total belopp: </b>" + orderPrice;
+    document.getElementById("p-sum").innerHTML = "<b>Total belopp: </b>" + orderPrice;
     localStorage.removeItem("totalPrice");
   } else {
     let message = `Order ${orderRowData[0].order.id} är mottagen men dessa varor fanns ej i lager:`;
@@ -453,10 +446,7 @@ function setNewQuantity(id, qty) {
   for (let i = 0; i < cartItems.length; i++) {
     if (Number(cartItems[i].id) === id) {
       cartItems[i].quantity = qty;
-      $(`#${id}`)
-        .closest(".quantity-tr")
-        .find("input")
-        .attr("value", cartItems[i].quantity);
+      $(`#${id}`).closest(".quantity-tr").find("input").attr("value", cartItems[i].quantity);
       localStorage.setItem("cart", JSON.stringify(cartItems));
       break;
     }
@@ -488,10 +478,7 @@ function removeFromList(id) {
  */
 function setOrderButtonStatus() {
   if (cartItems.length != 0) {
-    $(".order-button")
-      .prop("disabled", false)
-      .text("Beställ")
-      .removeClass("disabled-order-button");
+    $(".order-button").prop("disabled", false).text("Beställ").removeClass("disabled-order-button");
   } else {
     $(".order-button")
       .prop("disabled", true)
