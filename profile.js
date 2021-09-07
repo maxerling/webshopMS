@@ -38,12 +38,13 @@
   });
 })();
 /**
- *
+ * Function that is used when creating a new profile.
  */
 function createNewUser() {
   let user = {
-    firstname: $("#validationCustom01").val(),
-    lastname: $("#validationCustom02").val(),
+    username: $("#validationCustom03").val(),
+    firstName: $("#validationCustom01").val(),
+    lastName: $("#validationCustom02").val(),
     email: $("#validationCustom03").val(),
     password: $("#validationCustom04").val(),
     address: {
@@ -52,10 +53,8 @@ function createNewUser() {
       zipcode: formatZipcodeForDb($("#validationCustom08").val()),
     },
     number: formatPhoneNumberForDb($("#validationCustom05").val()),
-    status: 0,
-    accountType: 0,
   };
-  fetch("https://hakims-webshop.herokuapp.com/user/add", {
+  fetch("https://hakims-webshop.herokuapp.com/user/register", {
     method: "POST",
     body: JSON.stringify(user),
     headers: {
@@ -65,36 +64,60 @@ function createNewUser() {
     .then(function (res) {
       if (res.status == 200) {
         return res.json();
-      } else{
+      } else {
         alert("Mailadressen används redan");
         $(".register-modal").modal("hide");
       }
     })
-    .then(function (user) {
-      user.status = true;
-      localStorage.setItem("customer", JSON.stringify(user));
+    .then(function (response) {
+      console.log(response);
+      localStorage.setItem("customer", JSON.stringify(response));
       document.querySelector("#logIn").style.display = "none";
       document.querySelector("#mobileLogin").style.display = "none";
-      document.querySelector("#customer-name").innerText = user.firstname;
+      document.querySelector("#customer-name").innerText = response.firstName;
       document.querySelector(".userLoggedIn").style.display = "block";
-      alert(user.firstname + " har registrerats som ny användare.");
+      alert(response.firstName + " har registrerats som ny användare.");
+
+      loginUser(user.username, user.password);
+
       location.reload();
     })
     .catch(function (error) {
       console.log(error);
     });
 }
+
+function loginUser(username, password) {
+  fetch(`https://hakims-webshop.herokuapp.com/user/login`, {
+    method: "POST",
+    body: JSON.stringify({
+      username: username,
+      password: password,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    if (res.status == 200) {
+      console.log(res.headers);
+    } else if (res.status == 400) {
+      return res.text();
+    }
+  });
+}
+
 /**
  *
  */
 function editUser() {
   let localST = JSON.parse(localStorage.getItem("customer"));
+  let token = localStorage.getItem("token");
   let user = {
     id: localST.id,
-    firstname: $("#validationCustom01").val(),
-    lastname: $("#validationCustom02").val(),
+    username: $("#validationCustom03").val(),
+    firstName: $("#validationCustom01").val(),
+    lastName: $("#validationCustom02").val(),
     email: $("#validationCustom03").val(),
-    password: $("#validationCustom04").val(),
     address: {
       id: localST.address.id,
       street: $("#validationCustom06").val(),
@@ -102,17 +125,18 @@ function editUser() {
       zipcode: formatZipcodeForDb($("#validationCustom08").val()),
     },
     number: formatPhoneNumberForDb($("#validationCustom05").val()),
-    status: 0,
-    accountType: 0,
   };
+  console.log(user);
   fetch("https://hakims-webshop.herokuapp.com/user/update", {
     method: "POST",
     body: JSON.stringify(user),
     headers: {
       "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
     },
   })
     .then(function (res) {
+      console.log(res.json());
       if (res.status == 200) {
         return res.json();
       } else {
@@ -123,13 +147,11 @@ function editUser() {
       if (user == "user not exists") {
         localStorage.removeItem("customer");
         location.href = "index.html";
-        alert(
-          "Profilen har blivit borttagen eller något annat fel har inträffat."
-        );
+        alert("Profilen har blivit borttagen eller något annat fel har inträffat.");
       } else {
         localStorage.setItem("customer", JSON.stringify(user));
         location.reload();
-        alert(user.firstname + " har blivit uppdaterat!");
+        alert(user.firstName + " har blivit uppdaterat!");
       }
     })
     .catch(function (error) {
@@ -209,18 +231,18 @@ $("#validationCustom08").focusout(function () {
  */
 function checkValidFirstName() {
   let inputId = "#validFirstName";
-  const firstname = $("#validationCustom01").val();
-  let firstName = document.getElementById("validationCustom01");
+  const firstName = $("#validationCustom01").val();
+  // let firstName = document.getElementById("validationCustom01");
   let invalid = "#invalidFirstName";
   let regPattern = /^(?=.{1,50}$)[a-zZäöåÄÖÅ]+(?:['_.\s][a-zZäöåÄÖÅ]+)*$/i;
-  if (firstname.trim() == "") {
+  if (firstName.trim() == "") {
     $(inputId).hide();
     $(invalid).text("förnamn krävs");
     $(invalid).show();
     $(inputId).text("");
     $(firstName).addClass("is-invalid").removeClass("is-valid");
     return false;
-  } else if (!regPattern.test(firstname)) {
+  } else if (!regPattern.test(firstName)) {
     $(inputId).hide();
     $(invalid).text("Ogiltig! Ange endast bokstäver");
     $(invalid).show();
@@ -324,9 +346,7 @@ function checkPassword(target) {
     return false;
   } else if (!regPattern.test(password)) {
     $(validDiv).hide();
-    $(invalidDiv).text(
-      "Lösenordet ska innehålla minst 6 tecken och får inte innehålla Å,Ä,Ö."
-    );
+    $(invalidDiv).text("Lösenordet ska innehålla minst 6 tecken och får inte innehålla Å,Ä,Ö.");
     $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
@@ -366,7 +386,7 @@ function checkStreet() {
   let invalidDiv = "#invalidGata";
   let address = $("#validationCustom06").val();
   // let regPattern = /^[A-Za-z0-9ZäöåÄÖÅ ]*$/;
-  let regPattern = /^(?=.*[0-9])(?=.*[a-zA-ZåäöÅÄÖ])(?=.*[\s])[0-9a-zA-ZåäöÅÄÖ\s]+$/
+  let regPattern = /^(?=.*[0-9])(?=.*[a-zA-ZåäöÅÄÖ])(?=.*[\s])[0-9a-zA-ZåäöÅÄÖ\s]+$/;
   let input = document.getElementById("validationCustom06");
   if (address.trim() == "") {
     $(validDiv).hide();
@@ -395,16 +415,15 @@ function checkStreet() {
  * @returns true if the input is valid otherwise false.
  */
 function checkPhone() {
-  let regPattern = /(^07([\s-]*\d[\s-]*){8})$|^(\+46([\s-]*\d[\s-]*){9})$|^(0046([\s-]*\d[\s-]*){9})$/;
+  let regPattern =
+    /(^07([\s-]*\d[\s-]*){8})$|^(\+46([\s-]*\d[\s-]*){9})$|^(0046([\s-]*\d[\s-]*){9})$/;
   let validDiv = "#validPhone";
   let invalidDiv = "#invalidPhone";
   let phoneNumber = $("#validationCustom05").val();
   let input = document.getElementById("validationCustom05");
   if (phoneNumber == "") {
     $(validDiv).hide();
-    $(invalidDiv).text(
-      "Telefon krävs för att leverantören kunna kontakta dig när hen är framme"
-    );
+    $(invalidDiv).text("Telefon krävs för att leverantören kunna kontakta dig när hen är framme");
     $(validDiv).text("");
     $(invalidDiv).show();
     $(input).addClass("is-invalid").removeClass("is-valid");
@@ -492,20 +511,17 @@ function checkPostNr() {
  * Writes information about the customer to the page from localstorage
  */
 function setProfileFromLS() {
-  if (
-    localStorage.getItem("customer") != null &&
-    localStorage.getItem("customer") != "undefined"
-  ) {
+  if (localStorage.getItem("customer") != null && localStorage.getItem("customer") != "undefined") {
     let localST = JSON.parse(localStorage.getItem("customer"));
-    $("#validationCustom01").val(localST.firstname);
-    $("#validationCustom02").val(localST.lastname);
+    $("#validationCustom01").val(localST.firstName);
+    $("#validationCustom02").val(localST.lastName);
     $("#validationCustom03").val(localST.email);
-    $("#validationCustom04").val(localST.password);
+    $("#validationCustom04").val("*************");
     $("#validationCustom05").val(localST.number);
     $("#validationCustom06").val(localST.address.street);
     $("#validationCustom07").val(localST.address.city);
     $("#validationCustom08").val(localST.address.zipcode);
-    $("#welcomeText").text("Hej " + localST.firstname + " " + localST.lastname);
+    $("#welcomeText").text("Hej " + localST.firstName + " " + localST.lastName);
     $("#welcomeEmail").text(localST.email);
   }
 }
@@ -536,10 +552,7 @@ function formatPhoneNumberForDb(phoneNumber) {
     .replace("+46", "0")
     .replace(/^(0046)/, "0");
 
-  return `${output.slice(0, 3)}-${output.slice(3, 6)} ${output.slice(
-    6,
-    8
-  )} ${output.slice(8)}`;
+  return `${output.slice(0, 3)}-${output.slice(3, 6)} ${output.slice(6, 8)} ${output.slice(8)}`;
 }
 
 // Formats incoming zipcode to proper format as specified by PO.

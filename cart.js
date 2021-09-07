@@ -6,7 +6,6 @@ let vat = 1.12;
 
 /** *************************document *************************/
 $(document).ready(function () {
-  
   /**
    *
    */
@@ -34,7 +33,10 @@ $(document).ready(function () {
     if (isQuantityEnough) {
       setNewQuantity(id, q);
       $(this).closest(".quantity-td").find("input").val(q);
-      $(this).closest('tr').find('.cart-table-item-total').html(unitFormatter(item.price * q));
+      $(this)
+        .closest("tr")
+        .find(".cart-table-item-total")
+        .html(unitFormatter(item.price * q));
     }
   });
 
@@ -52,7 +54,10 @@ $(document).ready(function () {
     q--;
     setNewQuantity(id, q);
     $(this).closest(".quantity-td").find("input").val(q);
-    $(this).closest('tr').find('.cart-table-item-total').html(unitFormatter(item.price * q));
+    $(this)
+      .closest("tr")
+      .find(".cart-table-item-total")
+      .html(unitFormatter(item.price * q));
   });
 
   /**
@@ -72,21 +77,18 @@ $(document).ready(function () {
    */
   $(document).on("click", ".td-title", function () {
     if (window.innerWidth < 576) {
-      let id = Number($(this).closest(".quantity-tr").attr("id"));      
+      let id = Number($(this).closest(".quantity-tr").attr("id"));
       loadProductCard(id);
       $(".product-card").modal("show");
     }
   });
 
   $(document).on("click", ".cart-image", function () {
-    
     if (window.innerWidth >= 576) {
-      let id = Number($(this).closest(".quantity-tr").attr("id"));      
+      let id = Number($(this).closest(".quantity-tr").attr("id"));
       loadProductCard(id);
       $(".product-card").modal("show");
     }
-    
-
   });
 
   $(".modal-btn-close").click(function () {
@@ -113,7 +115,7 @@ $(document).ready(function () {
   $(document).on("click", ".order-modal-cancel-button", function () {
     location.href = "index.html";
   });
-  $('#orderModal').modal({backdrop: 'static', keyboard: false})  
+  $("#orderModal").modal({ backdrop: "static", keyboard: false });
 
   // MODAL SKAPA KONTO BUTTON
   $(document).on("click", ".register-new-user-button", function () {
@@ -131,7 +133,6 @@ $(document).ready(function () {
   });
 });
 
-
 /********************************Runs on page load******************************************** */
 getDataFromLocalStorage();
 calcPrice();
@@ -139,22 +140,17 @@ $(window).on("load", loadCustomerInfo);
 $(window).on("load", setOrderButtonStatus);
 /*********************ALL FUNCTIONS**************************************** */
 /**
- * 
+ *
  */
 function loadCustomerInfo() {
   if (localStorage.getItem("customer")) {
     $(".customer-information").show();
-    $(".order-button")
-      .prop("disabled", false)
-      .text("Beställ")
-      .removeClass("disabled-order-button");
+    $(".order-button").prop("disabled", false).text("Beställ").removeClass("disabled-order-button");
 
     let temp = JSON.parse(localStorage.getItem("customer"));
-    $("#customer-information-name").val(temp.firstname + " " + temp.lastname);
+    $("#customer-information-name").val(temp.firstName + " " + temp.lastName);
     $("#customer-information-address").val(temp.address.street);
-    $("#customer-information-zip").val(
-      temp.address.zipcode + ", " + temp.address.city
-    );
+    $("#customer-information-zip").val(temp.address.zipcode + ", " + temp.address.city);
     $("#customer-information-telephone-number").val(temp.number);
   }
 }
@@ -177,14 +173,11 @@ function getDataFromLocalStorage() {
 }
 
 /**
- * 
+ *
  * @param {*} orderRowData Added function to show order modal, remove ls, show info in order modal
  */
 function confirmBtn(orderRowData) {
-
-
-  if(JSON.parse(localStorage.getItem("cart")).length == orderRowData.length){
-    
+  if (JSON.parse(localStorage.getItem("cart")).length == orderRowData.length) {
     $("#orderModal").modal("show");
 
     let date = new Date();
@@ -194,20 +187,17 @@ function confirmBtn(orderRowData) {
     let orderPrice = localStorage.getItem("totalPrice").replace(".", ":") + " kr";
     let orderNum = orderRowData[0].order.id;
 
-    document.getElementById("p-order").innerHTML =
-      "<b>Order nummer: </b>" + orderNum;
+    document.getElementById("p-order").innerHTML = "<b>Order nummer: </b>" + orderNum;
     document.getElementById("p-date").innerHTML =
       "<b>Beställningsdatum: </b>" + orderDate.substring(0, 21);
-    document.getElementById("p-sum").innerHTML =
-      "<b>Total belopp: </b>" + orderPrice;
+    document.getElementById("p-sum").innerHTML = "<b>Total belopp: </b>" + orderPrice;
     localStorage.removeItem("totalPrice");
-  }
-  else{
+  } else {
     let message = `Order ${orderRowData[0].order.id} är mottagen men dessa varor fanns ej i lager:`;
-    let cartArray = JSON.parse(localStorage.getItem("cart"))
-    for(let i = 0; i < orderRowData.length; i++){
-      for(let j = 0; j < cartArray.length; j++){
-        if(orderRowData[i].product.id == cartArray[j].id){
+    let cartArray = JSON.parse(localStorage.getItem("cart"));
+    for (let i = 0; i < orderRowData.length; i++) {
+      for (let j = 0; j < cartArray.length; j++) {
+        if (orderRowData[i].product.id == cartArray[j].id) {
           message += `\n${cartArray[j].title}`;
         }
       }
@@ -219,9 +209,9 @@ function confirmBtn(orderRowData) {
   localStorage.removeItem("cart");
 }
 /**
- * Creates and order that is sent to the database which 
+ * Creates and order that is sent to the database which
  * responds with an object with information about status
- * @param {*} customerId 
+ * @param {*} customerId
  */
 function createOrder(customerId) {
   let total = localStorage.getItem("totalPrice");
@@ -242,23 +232,21 @@ function createOrder(customerId) {
     },
   })
     .then(function (res) {
-      if(res.status == 200){
+      if (res.status == 200) {
         return res.json();
-      }else{
+      } else {
         return res.text();
       }
-     
     })
     .then(function (result) {
-      if(result != "The customer does not exist"){
+      if (result != "The customer does not exist") {
         let orderId = result.id;
         createOrderRow(orderId);
-      }else{
+      } else {
         localStorage.removeItem("customer");
         alert("Denna profil har blivit borttagen.\nVänligen skapa nytt konto för att beställa.");
         location.reload();
       }
-      
     })
     .catch(function (error) {
       console.log(error);
@@ -266,7 +254,7 @@ function createOrder(customerId) {
 }
 /**
  * Creates orderRows in database for all items customer have in local storage
- * @param {*} orderId 
+ * @param {*} orderId
  */
 function createOrderRow(orderId) {
   let orderRowItems = [];
@@ -293,16 +281,14 @@ function createOrderRow(orderId) {
     .then(function (response) {
       if (response.status == 200) {
         return response.json();
-      }
-      else{
+      } else {
         return response.text();
       }
     })
     .then((data) => {
-      if(data == "Lagersaldona var mindre i lager än i beställningen"){
+      if (data == "Lagersaldona var mindre i lager än i beställningen") {
         alert(data);
-      }
-      else{
+      } else {
         confirmBtn(data);
       }
     })
@@ -320,38 +306,49 @@ function checkInputField() {
     let id = Number($(this).closest(".quantity-tr").attr("id"));
     let inStock = checkQuantity(id);
     let item = allProducts.find((item) => item.id == id);
-    
-    if(newValue == 0){
+
+    if (newValue == 0) {
       setNewQuantity(id, 1);
       $(this).closest(".quantity-td").find("input").val(1);
       newValue = 1;
-      $(this).closest('tr').find('.cart-table-item-total').html(unitFormatter(item.price * newValue))
-    } 
-    else if(newValue <= 99 && inStock >= newValue) {
+      $(this)
+        .closest("tr")
+        .find(".cart-table-item-total")
+        .html(unitFormatter(item.price * newValue));
+    } else if (newValue <= 99 && inStock >= newValue) {
       setNewQuantity(id, newValue);
       $(this).closest(".quantity-td").find("input").val(newValue);
-      $(this).closest('tr').find('.cart-table-item-total').html(unitFormatter(item.price * newValue))
-    } 
-    else if(inStock <= 99){
+      $(this)
+        .closest("tr")
+        .find(".cart-table-item-total")
+        .html(unitFormatter(item.price * newValue));
+    } else if (inStock <= 99) {
       setNewQuantity(id, inStock);
       $(this).closest(".quantity-td").find("input").val(inStock);
       newValue = inStock;
-      $(this).closest('tr').find('.cart-table-item-total').html(unitFormatter(item.price * newValue))
+      $(this)
+        .closest("tr")
+        .find(".cart-table-item-total")
+        .html(unitFormatter(item.price * newValue));
       alert("Aktuella lagersaldot för denna produkt är: " + inStock);
-    }
-    else{
+    } else {
       setNewQuantity(id, checkQuantity(id));
       newValue = 99;
       $(this).closest(".quantity-td").find("input").val(99);
-      $(this).closest('tr').find('.cart-table-item-total').html(unitFormatter(item.price * newValue))
-      alert("Högsta kvantitet man kan beställa online är 99.\nFör större kvantitet kontakta butiken.");
+      $(this)
+        .closest("tr")
+        .find(".cart-table-item-total")
+        .html(unitFormatter(item.price * newValue));
+      alert(
+        "Högsta kvantitet man kan beställa online är 99.\nFör större kvantitet kontakta butiken."
+      );
     }
   });
 }
 /**
  * Checks what the current quantity status if for a specific product
  * @param {*} id of the product that is to be checked
- * @returns 
+ * @returns
  */
 function checkQuantity(id) {
   for (p of allProducts) {
@@ -426,8 +423,8 @@ function calcPrice() {
 
 /**
  * Calculates VAT for total amount on order
- * @param {*} sum 
- * @returns 
+ * @param {*} sum
+ * @returns
  */
 function calcVat(sum) {
   return sum == 0 ? 0 : sum - sum / vat;
@@ -442,10 +439,7 @@ function setNewQuantity(id, qty) {
   for (let i = 0; i < cartItems.length; i++) {
     if (Number(cartItems[i].id) === id) {
       cartItems[i].quantity = qty;
-      $(`#${id}`)
-        .closest(".quantity-tr")
-        .find("input")
-        .attr("value", cartItems[i].quantity);
+      $(`#${id}`).closest(".quantity-tr").find("input").attr("value", cartItems[i].quantity);
       localStorage.setItem("cart", JSON.stringify(cartItems));
       break;
     }
@@ -476,18 +470,12 @@ function removeFromList(id) {
  * otherwise enables it
  */
 function setOrderButtonStatus() {
-  if (cartItems.length != 0 ) {
-    $(".order-button")
-      .prop("disabled", false)
-      .text("Beställ")
-      .removeClass("disabled-order-button");
+  if (cartItems.length != 0) {
+    $(".order-button").prop("disabled", false).text("Beställ").removeClass("disabled-order-button");
   } else {
     $(".order-button")
       .prop("disabled", true)
-      .text(
-      "Kundvagnen är tom"
-          
-      )
+      .text("Kundvagnen är tom")
       .addClass("disabled-order-button");
   }
 }

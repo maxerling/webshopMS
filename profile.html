@@ -7,12 +7,7 @@
     <title>Profile settings</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="all" />
     <link rel="stylesheet" href="sidebar.css" type="text/css" media="all" />
-    <link
-      rel="stylesheet"
-      href="profile-style.css"
-      type="text/css"
-      media="all"
-    />
+    <link rel="stylesheet" href="profile-style.css" type="text/css" media="all" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
@@ -55,9 +50,7 @@
         <div class="row">
           <!-- START Image -->
           <div class="col-md-3 border-right">
-            <div
-              class="d-flex flex-column align-items-center text-center p-3 py-5"
-            >
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
               <img
                 class="rounded-circle"
                 width="150"
@@ -108,9 +101,7 @@
                     required
                     onpaste="return false;"
                   />
-                  <label for="validationCustom02" class="form-lable ms-2"
-                    >Efternamn</label
-                  >
+                  <label for="validationCustom02" class="form-lable ms-2">Efternamn</label>
                   <div id="validLastName" class="valid-feedback"></div>
                   <div id="invalidLastName" class="invalid-feedback"></div>
                 </div>
@@ -127,9 +118,7 @@
                     readonly
                     onpaste="return false;"
                   />
-                  <label for="validationCustom03" class="form-lable ms-2"
-                    >Email</label
-                  >
+                  <label for="validationCustom03" class="form-lable ms-2">Email</label>
                   <!-- <div id="validEmail" class="valid-feedback">
 
                 </div>
@@ -146,19 +135,12 @@
                     value=""
                     maxlength="100"
                     required
+                    disabled
                     onpaste="return false;"
                   />
-                  <label for="validationCustom04" class="form-lable ms-2"
-                    >Lösenord</label
-                  >
-                  <div
-                    id="validLösenord"
-                    class="valid-feedback validLösenord"
-                  ></div>
-                  <div
-                    id="invalidLösenord"
-                    class="invalid-feedback invalidLösenord"
-                  ></div>
+                  <label for="validationCustom04" class="form-lable ms-2">Lösenord</label>
+                  <div id="validLösenord" class="valid-feedback validLösenord"></div>
+                  <div id="invalidLösenord" class="invalid-feedback invalidLösenord"></div>
                 </div>
                 <div class="col-md-12 mt-3 form-floating">
                   <input
@@ -171,9 +153,7 @@
                     required
                     onpaste="return false;"
                   />
-                  <label for="validationCustom05" class="form-lable ms-2"
-                    >Telefon</label
-                  >
+                  <label for="validationCustom05" class="form-lable ms-2">Telefon</label>
                   <div id="validPhone" class="valid-feedback"></div>
                   <div id="invalidPhone" class="invalid-feedback"></div>
                 </div>
@@ -188,9 +168,7 @@
                     required
                     onpaste="return false;"
                   />
-                  <label for="validationCustom06" class="form-lable ms-2"
-                    >Adress</label
-                  >
+                  <label for="validationCustom06" class="form-lable ms-2">Adress</label>
                   <div id="validGata" class="valid-feedback"></div>
                   <div id="invalidGata" class="invalid-feedback"></div>
                 </div>
@@ -207,9 +185,7 @@
                     required
                     onpaste="return false;"
                   />
-                  <label for="validationCustom07" class="form-lable ms-2"
-                    >Ort</label
-                  >
+                  <label for="validationCustom07" class="form-lable ms-2">Ort</label>
                   <div id="validOrt" class="valid-feedback"></div>
                   <div id="invalidOrt" class="invalid-feedback"></div>
                 </div>
@@ -224,9 +200,7 @@
                     required
                     onpaste="return false;"
                   />
-                  <label for="validationCustom08" class="form-lable ms-2"
-                    >Post nummer</label
-                  >
+                  <label for="validationCustom08" class="form-lable ms-2">Post nummer</label>
                   <div id="validPostNr" class="valid-feedback"></div>
                   <div id="invalidPostNr" class="invalid-feedback"></div>
                 </div>
@@ -240,10 +214,7 @@
                     >
                       Radera konto
                     </button>
-                    <button
-                      class="btn btn-primary profile-button"
-                      type="submit"
-                    >
+                    <button class="btn btn-primary profile-button" type="submit">
                       Uppdatera Profil
                     </button>
                   </div>
@@ -263,9 +234,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="deleteModalLabel">
-                    Radera konto
-                  </h5>
+                  <h5 class="modal-title" id="deleteModalLabel">Radera konto</h5>
                   <button
                     type="button"
                     class="btn-close"
@@ -273,22 +242,12 @@
                     aria-label="Close"
                   ></button>
                 </div>
-                <div class="modal-body">
-                  Vill du verkligen ta bort ditt konto !!!!
-                </div>
+                <div class="modal-body">Vill du verkligen ta bort ditt konto !!!!</div>
                 <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     Stäng
                   </button>
-                  <button
-                    onClick="deleteUser()"
-                    type="button"
-                    class="btn btn-danger"
-                  >
+                  <button onClick="deleteUser()" type="button" class="btn btn-danger">
                     Bekräfta
                   </button>
                 </div>
@@ -307,9 +266,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="confirmationModalLabel">
-                    Uppdatera konto
-                  </h5>
+                  <h5 class="modal-title" id="confirmationModalLabel">Uppdatera konto</h5>
                   <button
                     type="button"
                     class="btn-close"
@@ -321,18 +278,10 @@
                   Vill du ändra ditt konto !!!!
                 </div>
                 <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     Stäng
                   </button>
-                  <button
-                    onClick="editUser()"
-                    type="button"
-                    class="btn btn-danger"
-                  >
+                  <button onClick="editUser()" type="button" class="btn btn-danger">
                     Bekräfta
                   </button>
                 </div>
