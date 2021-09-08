@@ -523,7 +523,6 @@ function getJmfPrice(price, unit) {
  *
  */
 function updateCartBtnQtn() {
-  console.log("Update cart btn qty");
   if (
     location.href == "http://127.0.0.1:5501/index.html" ||
     location.href == "https://maxerling.github.io/webshopMS/index.html"
@@ -622,7 +621,6 @@ $(document).on("click", "#mobileLogin", function () {
  * Disables cart button if the cartArray is empty or null else it will rederict to order.html
  */
 function disableOrEnableCartButton() {
-  console.log("Disable enable acrt button");
   if (
     (localStorage.getItem("cart") != null && location.href == "http://127.0.0.1:5501/index.html") ||
     location.href == "https://maxerling.github.io/webshopMS/index.html"
@@ -654,7 +652,6 @@ function disableOrEnableCartButton() {
  *
  */
 function loginButton() {
-  console.log("In loginButton function");
   let customer = JSON.parse(localStorage.getItem("customer"));
   const logInBtn = document.getElementById("logIn");
   const userIcon = document.querySelector(".userLoggedIn");
