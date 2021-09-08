@@ -2,10 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <title>Cart</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="all" />
     <link rel="stylesheet" href="sidebar.css" type="text/css" media="all" />
@@ -103,7 +100,7 @@
         ></button>
         <div class="btn-group" role="group">
           <button
-            onclick= "location.href='https://maxerling.github.io/webshopMS/index.html'"
+            onclick="location.href='https://maxerling.github.io/webshopMS/index.html'"
             id="btnGroupDrop1"
             class="btn btn-warning fas fa-store-alt"
             aria-haspopup="true"
@@ -146,9 +143,7 @@
 
         <div class="row">
           <div class="col-md-6 customer-information">
-            <div class="person-content-title text-center mb-3">
-              Dina uppgifter
-            </div>
+            <div class="person-content-title text-center mb-3">Dina uppgifter</div>
             <div class="customer-info" id="customer-cart-info">
               <label for="customer-information-name">Ditt namn:</label>
               <input
@@ -177,9 +172,7 @@
                 readonly
                 disabled
               />
-              <label for="customer-information-telephone-number"
-                >Ditt telefonnummer:</label
-              >
+              <label for="customer-information-telephone-number">Ditt telefonnummer:</label>
               <input
                 class="form-control mx-auto mb-1"
                 id="customer-information-telephone-number"
@@ -212,8 +205,27 @@
                 </tr>
               </tbody>
             </table>
-            <div class="d-flex justify-content-center">
-              <button class="mb-4 order-button">Beställ</button>
+            <p>Betalningsalternativ</p>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault1"
+                checked
+              />
+              <label class="form-check-label" for="flexRadioDefault1"> Faktura </label>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+              <button id="orderBtn" class="mb-4 order-button">Beställ</button>
+              <button id="spinnerBtn" class="btn btn-primary d-none" type="button" disabled>
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Loading...
+              </button>
             </div>
           </div>
         </div>
@@ -251,22 +263,11 @@
       <!-- END PRODUCT INFORMATION MODAL -->
 
       <!-- START PRODUCT CARD MODAL from index.html-->
-      <div
-        class="card-modal modal fade product-card"
-        tabindex="-1"
-        role="dialog"
-      >
-        <div
-          class="modal-dialog modal-dialog-centered modal-lg"
-          role="document"
-        >
+      <div class="card-modal modal fade product-card" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
           <div class="modal-content">
             <button class="card-modal-cancel-button">
-              <img
-                src="images/icons/cancel-icon.png"
-                alt="Cancel button"
-                aria-hidden="true"
-              />
+              <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true" />
             </button>
             <div class="modal-body">
               <div class="container">
@@ -274,24 +275,13 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div>
-                        <img
-                          src="#"
-                          alt=""
-                          class="product-card-img img-fluid"
-                        />
+                        <img src="#" alt="" class="product-card-img img-fluid" />
                       </div>
                     </div>
                     <div class="col-lg-6">
-                      <h2
-                        class="sm-modal-title d-block d-sm-block product-card-title"
-                      >
-                        -
-                      </h2>
+                      <h2 class="sm-modal-title d-block d-sm-block product-card-title">-</h2>
                       <div>
-                        <p
-                          style="font-weight: 700"
-                          class="product-specs text-left"
-                        ></p>
+                        <p style="font-weight: 700" class="product-specs text-left"></p>
                       </div>
                       <hr />
                       <div class="product-card-desc"></div>
@@ -314,31 +304,20 @@
     <!-- Displays products end-->
 
     <!-- ORDER CONFIRMATION MODAL START-->
-    <div
-      class="order-modal modal fade"
-      id="orderModal"
-      tabindex="-1"
-      role="dialog"
-    >
+    <div class="order-modal modal fade" id="orderModal" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <button class="order-modal-cancel-button">
-            <img
-              src="images/icons/cancel-icon.png"
-              alt="Cancel button"
-              aria-hidden="true"
-            />
+            <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true" />
           </button>
           <div class="modal-body">
             <div class="modal-title d-none d-sm-block order-modal-title">
               Tack för din beställning!
             </div>
-            <div class="sm-modal-title d-block d-sm-none">
-              Tack för din beställning!
-            </div>
+            <div class="sm-modal-title d-block d-sm-none">Tack för din beställning!</div>
             <div class="order-modal-subtitle">
-              Din beställning är mottagen och behandlas. Du kommer att motta ett
-              mejl med beställningsinformation!
+              Din beställning är mottagen och behandlas. Du kommer att motta ett mejl med
+              beställningsinformation!
             </div>
             <div>
               <p class="order-modal-p" id="p-order"></p>
@@ -346,10 +325,7 @@
               <p class="order-modal-p" id="p-sum"></p>
             </div>
             <div class="shop-again-btn">
-              <button
-                id="shop-again-btn"
-                onclick="window.location.href='index.html'"
-              >
+              <button id="shop-again-btn" onclick="window.location.href='index.html'">
                 Handla igen
               </button>
             </div>
@@ -376,10 +352,7 @@
             </div>
           </div>
         </div>
-        <div
-          class="text-center p-3"
-          style="background-color: rgba(0, 0, 0, 0.2)"
-        >
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
           © 2021 Copyright: Hakims Livs
         </div>
       </footer>
@@ -389,18 +362,12 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <button class="login-modal-cancel-button">
-            <img
-              src="images/icons/cancel-icon.png"
-              alt="Cancel button"
-              aria-hidden="true"
-            />
+            <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true" />
           </button>
           <div class="modal-body">
             <div class="modal-title d-none d-sm-block">Välkommen!</div>
             <div class="sm-modal-title d-block d-sm-none">Välkommen!</div>
-            <div class="modal-subtitle pb-2">
-              Logga in för att få ut mer av din vardag!
-            </div>
+            <div class="modal-subtitle pb-2">Logga in för att få ut mer av din vardag!</div>
             <form id="form1" class="needs-validation" novalidate>
               <div class="modal-input-username mx-auto pt-2">
                 <input
@@ -446,22 +413,14 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <button class="register-modal-cancel-button">
-            <img
-              src="images/icons/cancel-icon.png"
-              alt="Cancel button"
-              aria-hidden="true"
-            />
+            <img src="images/icons/cancel-icon.png" alt="Cancel button" aria-hidden="true" />
           </button>
           <div class="modal-body px-5">
             <div class="modal-title pb-1 d-none d-sm-block">Skapa konto!</div>
             <div class="sm-modal-title d-block d-sm-none">Skapa konto!</div>
             <div class="modal-subtitle pb-3">"Din närlivs - vart du vill"</div>
             <div class="create-new-account-forms">
-              <form
-                id="CreateNewAccount-form"
-                class="row g-3 needs-validation"
-                novalidate
-              >
+              <form id="CreateNewAccount-form" class="row g-3 needs-validation" novalidate>
                 <div class="col-md-6">
                   <input
                     class="form-control"
@@ -538,14 +497,8 @@
                     maxlength="100"
                     onpaste="return false;"
                   />
-                  <div
-                    id="validLösenord"
-                    class="valid-feedback validLösenord"
-                  ></div>
-                  <div
-                    id="invalidLösenord"
-                    class="invalid-feedback invalidLösenord"
-                  ></div>
+                  <div id="validLösenord" class="valid-feedback validLösenord"></div>
+                  <div id="invalidLösenord" class="invalid-feedback invalidLösenord"></div>
                 </div>
                 <div class="col-md-12">
                   <input
@@ -587,9 +540,7 @@
                   <div id="invalidOrt" class="invalid-feedback"></div>
                 </div>
                 <div class="register-new-account pb-4 pt-2">
-                  <button type="submit" class="create-new-account-button">
-                    Skapa konto
-                  </button>
+                  <button type="submit" class="create-new-account-button">Skapa konto</button>
                 </div>
               </form>
             </div>
