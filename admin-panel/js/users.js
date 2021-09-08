@@ -1,35 +1,41 @@
-
 /**
- * fetch all users from the database JSON object! 
+ * fetch all users from the database JSON object!
  * call createCustomerElements method to create customers table
  */
 function getData() {
-  const url = "https://hakims-webshop.herokuapp.com/user/get";
+  const url = "https://hakims-webshop.herokuapp.com/user/list";
 
-  fetch(url)
+  fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  })
     .then((resp) => resp.json())
     .then((data) => {
-      if(document.querySelector("h2").innerText == "VIP-Customers"){
-        createVIPCustomerElements(data)
-      }else{
+      if (document.querySelector("h2").innerText == "VIP-Customers") {
+        createVIPCustomerElements(data);
+      } else {
         createCustomerElements(data);
       }
     })
     .catch((err) => console.log(err));
 }
+
 /**
  * create elements based on customer data
  * @param {object} users all of customers info
  */
 function createCustomerElements(users) {
+  console.log(users);
   let output = "";
   let tbody = document.querySelector("tbody");
   let trTable = "";
   users.forEach((user) => {
-    if (user.accountType == 0){
+    if (user.role == "ROLE_USER") {
       trTable = `
       <tr> 
-      <td class="cut">${user.firstname} ${user.lastname}</td>
+      <td class="cut">${user.firstName} ${user.lastName}</td>
       <td class="cut" title="${user.email}">${user.email}</td>
       <td class="cut">${user.address.city}</td>
       <td class="cut">${user.address.street}</td>
@@ -51,27 +57,26 @@ function createCustomerElements(users) {
       </td>
     </tr>
           `;
-    output += trTable;
+      output += trTable;
     }
-    
   });
-    tbody.innerHTML = output;
+  tbody.innerHTML = output;
 }
 
 /**
  * create elements based on customer data
  * @param {object} users all of customers info
  */
- function createVIPCustomerElements(users) {
+function createVIPCustomerElements(users) {
   let output = "";
   let tbody = document.querySelector("tbody");
   let trTable = "";
   users.forEach((user) => {
-    if (user.accountType == 0 && user.status){
+    if (user.role == "ROLE_USER") {
       trTable = `
       <tr> 
       <td class="cut">${user.id}</td>
-      <td class="cut">${user.firstname} ${user.lastname}</td>
+      <td class="cut">${user.firstName} ${user.lastName}</td>
       <td class="cut" title="${user.email}">${user.email}</td>
       <td class="cut">${user.address.city}</td>
       <td class="cut">${user.address.street}</td>
@@ -79,20 +84,17 @@ function createCustomerElements(users) {
       <td class="cut" title="${user.number}">${user.number}</td>
     </tr>
           `;
-    output += trTable;
+      output += trTable;
     }
-    
   });
-    tbody.innerHTML = output;
+  tbody.innerHTML = output;
 }
-
 
 $(document).ready(function () {
   getData();
 
   $('[data-toggle="tooltip"]').tooltip();
-  
-  
+
   /**************************************Listeners for CRUD operations comment away************************************ 
    // Append table with add row form on add new button click
   $(".add-new").click(function () {
@@ -166,5 +168,3 @@ $(document).ready(function () {
   });
   *************************************************************************************************/
 });
-
-
