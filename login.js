@@ -98,8 +98,8 @@ $(document).on("click", "#modal-login-button", function (e) {
       },
     })
       .then((res) => {
-        console.log(res);
-        console.log(res.headers.get("Authorization"));
+        const token = res.headers.get("Jwt-Token");
+        localStorage.setItem("token", token);
 
         if (res.status == 200) {
           return res.json();
@@ -107,9 +107,9 @@ $(document).on("click", "#modal-login-button", function (e) {
           console.log(res.json());
         }
       })
-      .then((result) => {
-        console.log(result);
-        if (result != null) {
+      .then((user) => {
+        console.log(user);
+        if (user != null) {
           console.log("Inne i första IF");
           msg = "";
           invalidMsg[1].innerHTML = msg;
@@ -120,19 +120,17 @@ $(document).on("click", "#modal-login-button", function (e) {
           emailField.classList.add("is-valid");
           passField.classList.remove("is-invalid");
           passField.classList.add("is-valid");
-          if (result.user.role == "ROLE_SUPER_ADMIN") {
+          if (user.role == "ROLE_SUPER_ADMIN") {
             console.log("Inne i admin IF");
             this.classList.add("was-validated");
             location.href = "admin-panel/index.html";
-            localStorage.setItem("admin", JSON.stringify(result.user));
-            localStorage.setItem("token", result.token);
-          } else if (result.user.role == "ROLE_USER") {
+            localStorage.setItem("admin", JSON.stringify(user));
+          } else if (user.role == "ROLE_USER") {
             console.log("Inne i user IF");
-            localStorage.setItem("customer", JSON.stringify(result.user));
-            localStorage.setItem("token", result.token);
+            localStorage.setItem("customer", JSON.stringify(user));
             document.querySelector("#logIn").style.display = "none";
             document.querySelector("#mobileLogin").style.display = "none";
-            document.querySelector("#customer-name").innerText = result.user.firstName;
+            document.querySelector("#customer-name").innerText = user.firstName;
             document.querySelector(".userLoggedIn").style.display = "block";
             $(".login-modal").modal("hide");
             this.classList.add("was-validated");
