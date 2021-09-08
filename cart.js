@@ -214,7 +214,7 @@ function confirmBtn(orderRowData) {
  * @param {*} customerId
  */
 function createOrder(customerId) {
-  let total = localStorage.getItem("totalPrice"); // Kan modifiera sitt eget local storage och ändra priset
+  let total = calcPrice();
 
   let order = {
     date: currentDate(),
@@ -430,6 +430,7 @@ function calcPrice() {
   $(".total-price").html(unitFormatter(sum));
   $(".vat").html(unitFormatter(tempVat));
   localStorage.setItem("totalPrice", sum);
+  return sum;
 }
 
 /**
