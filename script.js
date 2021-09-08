@@ -4,30 +4,28 @@ let products = document.getElementById("products");
 let allProducts = [];
 /********************************************************* */
 
-
 /* ************************************************************** */
 $(document).ready(function () {
   const url = "https://hakims-webshop.herokuapp.com/product/get";
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => {
-      allProducts = data
+      allProducts = data;
       storeData(data);
       loadCategories();
     })
     .catch((err) => console.log(err));
-});
-/* ************************************************************** */
 
-
-/* ************************************************************** */
-window.addEventListener("load", function () {
-  loginButton();
   disableOrEnableCartButton();
   updateCartBtnQtn();
 });
 /* ************************************************************** */
+loginButton();
+/* ************************************************************** */
+// window.addEventListener("load", function () {
 
+// });
+/* ************************************************************** */
 
 /* ****************************FUNCTIONS********************************** */
 /**
@@ -80,8 +78,7 @@ function storeData(data) {
   document.getElementById("category").innerText = cat;
   cat = categoryOrignalFormatter(cat);
   data.forEach((product) => createElementsForProduct(product));
-  setNumberProduct()
-
+  setNumberProduct();
 }
 /**
  * Map data to createCategory function.
@@ -173,7 +170,7 @@ function createElementsForProduct(product) {
   addClass(p4, "qyt-error");
   const btn = createNode("button");
   const quantityInput = createNode("input");
-  quantityInput.setAttribute("onpaste", "return false;")
+  quantityInput.setAttribute("onpaste", "return false;");
   addClass(quantityInput, "");
   const plusBtn = createNode("button");
   const minusBtn = createNode("button");
@@ -263,11 +260,9 @@ function createElementsForProduct(product) {
         disableOrEnableCartButton();
       }, 500);
     } else {
-      quantityInput.setCustomValidity(
-        "Tyvärr har vi inte så många produkter i lager"
-      );
+      quantityInput.setCustomValidity("Tyvärr har vi inte så många produkter i lager");
       p4.style.display = "inline-block";
-      e.target.value = 1
+      e.target.value = 1;
     }
   });
 
@@ -287,8 +282,6 @@ function createElementsForProduct(product) {
     let idNmberSearchProduct = "#ns" + product.id;
     $(idNmberSearchProduct).val(quantityInput.value);
   });
-
-  
 }
 /**
  *
@@ -344,7 +337,6 @@ function minusButton(e, product) {
   }
 }
 
-
 /**
  *
  * @param {*} e
@@ -384,13 +376,12 @@ function focusOutNumber(e, id) {
  * @param {number} productid
  * @param {string} inputValue - value from input[type="tel"]
  */
- function addProductIfDontExist(cartArray, productid, inputValue) {
-
+function addProductIfDontExist(cartArray, productid, inputValue) {
   if (!findMatch(cartArray, productid)) {
     let productThatWillBeAdded;
-    for (let i = 0; i < allProducts.length; i++){
-      if(allProducts[i].id == productid){
-        productThatWillBeAdded= {
+    for (let i = 0; i < allProducts.length; i++) {
+      if (allProducts[i].id == productid) {
+        productThatWillBeAdded = {
           id: allProducts[i].id,
           brand: allProducts[i].brand,
           featured: allProducts[i].featured,
@@ -511,10 +502,7 @@ function unitFormatter(format) {
   } else {
     const spaceIndex = format.toString().indexOf(" ");
     const value = Number(format.slice(0, spaceIndex));
-    return (
-      value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") +
-      format.slice(spaceIndex)
-    );
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + format.slice(spaceIndex);
   }
 }
 
@@ -528,14 +516,18 @@ function getJmfPrice(price, unit) {
   const spaceIndex = unit.toString().indexOf(" ");
   const unitValue = Number(unit.slice(0, spaceIndex));
   const outUnit = unit.slice(spaceIndex + 1) == "g" ? "kg" : "l";
-  return unitFormatter((price / unitValue) * 1000) + '/' + outUnit;
+  return unitFormatter((price / unitValue) * 1000) + "/" + outUnit;
 }
 
 /**
  *
  */
 function updateCartBtnQtn() {
-  if(location.href == "http://127.0.0.1:5501/index.html" || location.href == "https://maxerling.github.io/webshopMS/index.html"){
+  console.log("Update cart btn qty");
+  if (
+    location.href == "http://127.0.0.1:5501/index.html" ||
+    location.href == "https://maxerling.github.io/webshopMS/index.html"
+  ) {
     let cartArray = JSON.parse(localStorage.getItem("cart"));
     const btn = document.getElementById("cart");
     const mobileCartBtn = document.getElementById("btnGroupDrop1");
@@ -544,7 +536,7 @@ function updateCartBtnQtn() {
       for (let i = 0; i < cartArray.length; i++) {
         sum += 1 * cartArray[i].quantity;
       }
-  
+
       btn.innerHTML = `<i class="fas fa-shopping-cart"></i> Antal produkter: ${sum}`;
       mobileCartBtn.innerHTML = `${sum}`;
     }
@@ -566,10 +558,7 @@ $(document).on("click", ".modal-cancel-button", function () {
  */
 
 function categoryFormatter(category) {
-  category = category.replace(
-    category.charAt(0),
-    category.charAt(0).toUpperCase()
-  );
+  category = category.replace(category.charAt(0), category.charAt(0).toUpperCase());
 
   category = category.replace("-", " och ");
 
@@ -584,10 +573,7 @@ function categoryFormatter(category) {
  */
 
 function categoryOrignalFormatter(category) {
-  category = category.replace(
-    category.charAt(0),
-    category.charAt(0).toLowerCase()
-  );
+  category = category.replace(category.charAt(0), category.charAt(0).toLowerCase());
 
   category = category.replace(" och ", "-");
 
@@ -635,13 +621,12 @@ $(document).on("click", "#mobileLogin", function () {
 /**
  * Disables cart button if the cartArray is empty or null else it will rederict to order.html
  */
-
-/**
- *
- */
 function disableOrEnableCartButton() {
-  if (localStorage.getItem("cart") != null && location.href == "http://127.0.0.1:5501/index.html" || 
-  location.href == "https://maxerling.github.io/webshopMS/index.html") {
+  console.log("Disable enable acrt button");
+  if (
+    (localStorage.getItem("cart") != null && location.href == "http://127.0.0.1:5501/index.html") ||
+    location.href == "https://maxerling.github.io/webshopMS/index.html"
+  ) {
     let cartArray = JSON.parse(localStorage.getItem("cart"));
     cartArray = cartArray.filter((product) => product.quantity > 0);
     const cartBtn = document.getElementById("cart");
@@ -659,7 +644,7 @@ function disableOrEnableCartButton() {
       });
       mobileCartBtn.disabled = false;
       mobileCartBtn.addEventListener("click", () => {
-      window.location.href = "order.html";
+        window.location.href = "order.html";
       });
     }
   }
@@ -669,6 +654,7 @@ function disableOrEnableCartButton() {
  *
  */
 function loginButton() {
+  console.log("In loginButton function");
   let customer = JSON.parse(localStorage.getItem("customer"));
   const logInBtn = document.getElementById("logIn");
   const userIcon = document.querySelector(".userLoggedIn");
@@ -678,7 +664,7 @@ function loginButton() {
     document.querySelector("#mobileLogin").style.display = "none";
 
     logInBtn.style.display = "none";
-    customerName.innerText = customer.firstname;
+    customerName.innerText = customer.firstName;
     userIcon.style.display = "block";
   }
 }
@@ -688,7 +674,7 @@ function loginButton() {
  * Uses a for-loop to confirm correct product.
  * @param {number} itemID gets correct id of product and compares to products in i cart.
  */
- function loadProductCard(itemID) {
+function loadProductCard(itemID) {
   let item = allProducts.find((item) => item.id == itemID);
   if (item != undefined) {
     $(".product-card-title").text(item.title);
@@ -697,9 +683,7 @@ function loginButton() {
     $(".card-modal").modal("show");
     $(".product-specs").text(`${item.brand} | ${unitFormatter(item.unit)}`);
     $(".product-price").text("Pris: " + unitFormatter(item.price));
-    $(".product-jmf-price").text(
-      "Jämförpris: " + getJmfPrice(item.price, item.unit)
-    );
+    $(".product-jmf-price").text("Jämförpris: " + getJmfPrice(item.price, item.unit));
     $(".product-warehouse-quantity").text(
       "Antal kvar: " + (item.quantity > 100 ? "100+" : item.quantity) + " st"
     );
@@ -707,23 +691,23 @@ function loginButton() {
 }
 
 /**
- * 
+ *
  */
-function setNumberProduct(){
-  let cartArray=[]
-  if(JSON.parse(localStorage.getItem("cart"))==null){
-      $('.value-changer').hide()
-  }else{
+function setNumberProduct() {
+  let cartArray = [];
+  if (JSON.parse(localStorage.getItem("cart")) == null) {
+    $(".value-changer").hide();
+  } else {
     cartArray = JSON.parse(localStorage.getItem("cart"));
     //cartArray = cartArray.filter((product) => product.quantity > 0)
-    cartArray.map(item => {
-          let id = '#number' + item.id
-          let btn = '#' + item.id + ' .btn-product'
-          if( $(id) != undefined ){
-              $(id).val(item.quantity)
-              $(btn).hide()
-              $(id).parent().show()
-          }
-      })
-    }
+    cartArray.map((item) => {
+      let id = "#number" + item.id;
+      let btn = "#" + item.id + " .btn-product";
+      if ($(id) != undefined) {
+        $(id).val(item.quantity);
+        $(btn).hide();
+        $(id).parent().show();
+      }
+    });
+  }
 }
