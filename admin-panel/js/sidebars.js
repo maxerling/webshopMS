@@ -36,3 +36,7 @@ function parseJwt(token) {
 
   return JSON.parse(jsonPayload)
 }
+
+$('#signOut').click(() => {
+  localStorage.clear()
+})
