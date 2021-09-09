@@ -33,7 +33,7 @@ $(document).ready(function () {
     getProductById(id);
     editAndCreateProduct(id);
   } else {
-    editAndCreateProduct(null);
+                  editAndCreateProduct(null);
   }
 });
 /**

@@ -3,23 +3,23 @@
  * call createCustomerElements method to create customers table
  */
 function getData() {
-  const url = "https://hakims-webshop.herokuapp.com/user/list";
+  const url = 'https://hakims-webshop.herokuapp.com/user/list'
 
   fetch(url, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      Authorization: "Bearer " + localStorage.getItem("token"),
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
     },
   })
     .then((resp) => resp.json())
     .then((data) => {
-      if (document.querySelector("h2").innerText == "VIP-Customers") {
-        createVIPCustomerElements(data);
+      if (document.querySelector('h2').innerText == 'VIP-Customers') {
+        createVIPCustomerElements(data)
       } else {
-        createCustomerElements(data);
+        createCustomerElements(data)
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
 }
 
 /**
@@ -27,12 +27,12 @@ function getData() {
  * @param {object} users all of customers info
  */
 function createCustomerElements(users) {
-  console.log(users);
-  let output = "";
-  let tbody = document.querySelector("tbody");
-  let trTable = "";
+  console.log(users)
+  let output = ''
+  let tbody = document.querySelector('tbody')
+  let trTable = ''
   users.forEach((user) => {
-    if (user.role == "ROLE_USER") {
+    if (user.role == 'ROLE_USER') {
       trTable = `
       <tr> 
       <td class="cut">${user.firstName} ${user.lastName}</td>
@@ -56,11 +56,11 @@ function createCustomerElements(users) {
         >
       </td>
     </tr>
-          `;
-      output += trTable;
+          `
+      output += trTable
     }
-  });
-  tbody.innerHTML = output;
+  })
+  tbody.innerHTML = output
 }
 
 /**
@@ -68,11 +68,11 @@ function createCustomerElements(users) {
  * @param {object} users all of customers info
  */
 function createVIPCustomerElements(users) {
-  let output = "";
-  let tbody = document.querySelector("tbody");
-  let trTable = "";
+  let output = ''
+  let tbody = document.querySelector('tbody')
+  let trTable = ''
   users.forEach((user) => {
-    if (user.role == "ROLE_USER") {
+    if (user.role == 'ROLE_USER') {
       trTable = `
       <tr> 
       <td class="cut">${user.id}</td>
@@ -83,17 +83,17 @@ function createVIPCustomerElements(users) {
       <td class="cut">${user.address.zipcode}</td>
       <td class="cut" title="${user.number}">${user.number}</td>
     </tr>
-          `;
-      output += trTable;
+          `
+      output += trTable
     }
-  });
-  tbody.innerHTML = output;
+  })
+  tbody.innerHTML = output
 }
 
 $(document).ready(function () {
-  getData();
+  getData()
 
-  $('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="tooltip"]').tooltip()
 
   /**************************************Listeners for CRUD operations comment away************************************ 
    // Append table with add row form on add new button click
@@ -167,4 +167,4 @@ $(document).ready(function () {
     $(".add-new").removeAttr("disabled");
   });
   *************************************************************************************************/
-});
+})
