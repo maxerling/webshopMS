@@ -300,7 +300,7 @@ function createOrderRow(orderId) {
     .then((data) => {
       if (data == "Lagersaldona var mindre i lager än i beställningen") {
         alert(data);
-      } else if ((data == data) == "Produkt data är korrumperad") {
+      } else if (data == "Produkt data är korrumperad") {
         localStorage.removeItem("cart");
         localStorage.removeItem("totalPrice");
         alert(data);
