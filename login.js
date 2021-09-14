@@ -81,7 +81,7 @@ function checkPassword1() {
   }
 }
 
-$(document).on("click", "#modal-login-button", function (e) {
+$(document).on("click", "#modal-login-button", async function (e) {
   // let result =''
   e.preventDefault();
 
@@ -90,7 +90,7 @@ $(document).on("click", "#modal-login-button", function (e) {
       username: emailField.value,
       password: passField.value,
     };
-    fetch(`https://hakims-webshop.herokuapp.com/user/login`, {
+     await fetch(`https://hakims-webshop.herokuapp.com/user/login`, {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
@@ -98,19 +98,21 @@ $(document).on("click", "#modal-login-button", function (e) {
       },
     })
       .then((res) => {
-        const token = res.headers.get("Jwt-Token");
-        localStorage.setItem("token", token);
+       
 
         if (res.status == 200) {
+          const token = res.headers.get("Jwt-Token");
+          localStorage.setItem("token", token);
           return res.json();
-        } else {
-          console.log(res.json());
+        }else if (res.status == 400) {
+          return res.json();
+        }
+        else if(res.status == 401){
+          return res.json();
         }
       })
-      .then((user) => {
-        console.log(user);
-        if (user != null) {
-          console.log("Inne i första IF");
+      .then((response) => {
+         if (response.username == user.username) {
           msg = "";
           invalidMsg[1].innerHTML = msg;
           invalidMsg[0].innerHTML = msg;
@@ -120,17 +122,15 @@ $(document).on("click", "#modal-login-button", function (e) {
           emailField.classList.add("is-valid");
           passField.classList.remove("is-invalid");
           passField.classList.add("is-valid");
-          if (user.role == "ROLE_SUPER_ADMIN") {
-            console.log("Inne i admin IF");
+          if (response.role == "ROLE_SUPER_ADMIN") {
             this.classList.add("was-validated");
             location.href = "admin-panel/index.html";
-            localStorage.setItem("admin", JSON.stringify(user));
-          } else if (user.role == "ROLE_USER") {
-            console.log("Inne i user IF");
-            localStorage.setItem("customer", JSON.stringify(user));
+            localStorage.setItem("admin", JSON.stringify(response));
+          } else if (response.role == "ROLE_USER") {
+            localStorage.setItem("customer", JSON.stringify(response));
             document.querySelector("#logIn").style.display = "none";
             document.querySelector("#mobileLogin").style.display = "none";
-            document.querySelector("#customer-name").innerText = user.firstName;
+            document.querySelector("#customer-name").innerText = response.firstName;
             document.querySelector(".userLoggedIn").style.display = "block";
             $(".login-modal").modal("hide");
             this.classList.add("was-validated");
@@ -143,7 +143,7 @@ $(document).on("click", "#modal-login-button", function (e) {
           }
         } else {
           e.stopPropagation();
-          msg = "Felaktig e-post eller lösenord!";
+          msg = response.message;
           invalidMsg[0].innerHTML = msg;
           invalidMsg[1].innerHTML = msg;
           invalidMsg[0].style.display = "block";
@@ -152,6 +152,7 @@ $(document).on("click", "#modal-login-button", function (e) {
           passField.classList.remove("is-valid");
           emailField.classList.add("is-invalid");
           passField.classList.add("is-invalid");
+          
         }
       })
       .catch((err) => console.log(err));
@@ -168,3 +169,4 @@ $(document).on("click", "#modal-login-button", function (e) {
     passField.classList.add("is-invalid");
   }
 });
+

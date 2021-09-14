@@ -176,7 +176,7 @@ function getDataFromLocalStorage() {
  *
  * @param {*} orderRowData Added function to show order modal, remove ls, show info in order modal
  */
-function confirmBtn(orderRowData) {
+function confirmBtn(orderRowData,totalPrice) {
   if (JSON.parse(localStorage.getItem("cart")).length == orderRowData.length) {
     $("#orderModal").modal("show");
 
@@ -184,14 +184,13 @@ function confirmBtn(orderRowData) {
     let orderDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
       .toISOString()
       .replaceAll("T", ", Kl: ");
-    let orderPrice = localStorage.getItem("totalPrice").replace(".", ":") + " kr";
+    let orderPrice = totalPrice.toString().replace(".", ":") + " kr";
     let orderNum = orderRowData[0].order.id;
 
     document.getElementById("p-order").innerHTML = "<b>Order nummer: </b>" + orderNum;
     document.getElementById("p-date").innerHTML =
       "<b>Beställningsdatum: </b>" + orderDate.substring(0, 21);
     document.getElementById("p-sum").innerHTML = "<b>Total belopp: </b>" + orderPrice;
-    localStorage.removeItem("totalPrice");
   } else {
     let message = `Order ${orderRowData[0].order.id} är mottagen men dessa varor fanns ej i lager:`;
     let cartArray = JSON.parse(localStorage.getItem("cart"));
@@ -202,7 +201,6 @@ function confirmBtn(orderRowData) {
         }
       }
     }
-    localStorage.removeItem("totalPrice");
     location.href = "index.html";
     alert(message);
   }
@@ -245,7 +243,7 @@ function createOrder(customerId) {
     .then(function (result) {
       if (result != "The customer does not exist") {
         let orderId = result.id;
-        createOrderRow(orderId);
+        createOrderRow(orderId , total);
       } else {
         localStorage.removeItem("customer");
         alert("Denna profil har blivit borttagen.\nVänligen skapa nytt konto för att beställa.");
@@ -266,7 +264,7 @@ function StartCartSpinner() {
  * Creates orderRows in database for all items customer have in local storage
  * @param {*} orderId
  */
-function createOrderRow(orderId) {
+function createOrderRow(orderId , totalPrice) {
   let orderRowItems = [];
   for (let i = 0; i < cartItems.length; i++) {
     let orderRow = {
@@ -302,11 +300,10 @@ function createOrderRow(orderId) {
         alert(data);
       } else if (data == "Produkt data är korrumperad") {
         localStorage.removeItem("cart");
-        localStorage.removeItem("totalPrice");
         alert(data);
         location.href = "index.html";
       } else {
-        confirmBtn(data);
+        confirmBtn(data,totalPrice);
       }
     })
     .catch(function (error) {
@@ -435,7 +432,6 @@ function calcPrice() {
   $(".shipping-cost").html(unitFormatter(shippingCost));
   $(".total-price").html(unitFormatter(sum));
   $(".vat").html(unitFormatter(tempVat));
-  localStorage.setItem("totalPrice", sum);
   return sum;
 }
 
