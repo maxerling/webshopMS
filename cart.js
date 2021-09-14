@@ -275,6 +275,7 @@ function createOrderRow(orderId) {
       },
       product: {
         id: cartItems[i].id,
+        price: cartItems[i].price,
       },
       quantity: cartItems[i].quantity,
       status: 0,
