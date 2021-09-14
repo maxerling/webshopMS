@@ -1,18 +1,20 @@
-let invoiceList = [];
+let invoiceList = []
 /**
  * Create elements based on order data (object data)
  * @param {object} json all orders
  */
 function createOrderElements(json) {
-  let output = "";
-  let tbody = document.querySelector("tbody");
-  let trTable = "";
+  let output = ''
+  let tbody = document.querySelector('tbody')
+  let trTable = ''
   json.forEach((order) => {
     trTable = `
         <tr>
             <td class="cut">${order.id}</td>
             <td class="cut">${order.date}</td>
-            <td class="cut">${order.users != null ? order.users.email : "----"}</td>
+            <td class="cut">${
+              order.users != null ? order.users.email : '----'
+            }</td>
             <td class="cut">${order.totalPrice} KR</td>
             <td class="cut">
 
@@ -51,10 +53,10 @@ function createOrderElements(json) {
             </td>
             
         </tr>
-        `;
-    output += trTable;
-  });
-  tbody.innerHTML = output;
+        `
+    output += trTable
+  })
+  tbody.innerHTML = output
 }
 /**
  * Create Modal based on order data
@@ -62,21 +64,21 @@ function createOrderElements(json) {
  */
 function createModal(id) {
   fetch(`https://hakims-webshop.herokuapp.com/orderRow/get/byOrderID/${id}`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      Authorization: "Bearer " + localStorage.getItem("token"),
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
     },
   })
     .then((response) => response.json())
     .then((orderRow) => {
-      let trModal = "";
-      let output = "";
-      let shippingCost = "";
-      $(".invoice-info").html(`
+      let trModal = ''
+      let output = ''
+      let shippingCost = ''
+      $('.invoice-info').html(`
     <span class=""> ON.: ${orderRow[0].order.id}</span>
     <span class="ps-3"> Date: ${orderRow[0].order.date}</span>
   
-  `);
+  `)
       orderRow.forEach((item) => {
         trModal = `
                 <tr>
@@ -96,42 +98,43 @@ function createModal(id) {
                         >
                     </td>
                     </tr>
-                    `;
-        output += trModal;
-      });
+                    `
+        output += trModal
+      })
       shippingCost = `
       <tr>
         <td colspan="3">Frakt</td>
         <td colspan="1">49 kr</td>
       </tr>
-      `;
-      if (orderRow[0].order.totalPrice < 250) {
-        output += shippingCost;
+      `
+      if (orderRow[0].order.totalPrice <= 299) {
+        output += shippingCost
       }
 
-      document.getElementById("modal-tbody").innerHTML = output;
-      document.getElementById("totalPrice").innerText = orderRow[0].order.totalPrice;
+      document.getElementById('modal-tbody').innerHTML = output
+      document.getElementById('totalPrice').innerText =
+        orderRow[0].order.totalPrice
     })
-    .catch((error) => console.error(error));
+    .catch((error) => console.error(error))
 }
 
 $(document).ready(function () {
-  $(".printme").click(function () {
-    print();
-  });
+  $('.printme').click(function () {
+    print()
+  })
 
   // fetch order and call render function
-  fetch("https://hakims-webshop.herokuapp.com/order/get", {
-    method: "GET",
+  fetch('https://hakims-webshop.herokuapp.com/order/get', {
+    method: 'GET',
     headers: {
-      Authorization: "Bearer " + localStorage.getItem("token"),
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
     },
   })
     .then((response) => response.json())
     .then((data) => createOrderElements(data))
-    .catch((error) => console.error(error));
+    .catch((error) => console.error(error))
 
-  $('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="tooltip"]').tooltip()
 
   /* *****************************Listeners for CRUD operations comment away******************************************* 
   // Append table with add row form on add new button click
@@ -221,4 +224,4 @@ $(document).ready(function () {
     $(".add-new").removeAttr("disabled");
   });
   ********************************************************************************* */
-});
+})

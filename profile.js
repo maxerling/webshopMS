@@ -11,6 +11,7 @@
       "submit",
       (event) => {
         event.preventDefault();
+       
         if (!form.checkValidity()) {
           event.preventDefault();
           event.stopPropagation();
@@ -27,6 +28,7 @@
           event.preventDefault();
           // form.classList.add("was-validated"); // Kommenterade bort denna för att behålla vissa felformateringar när man skapar kontot
           if (event.target.id == "profile-form") {
+            console.log("formmmmmmmmmmm")
             $("#confirmationModal").modal("show");
           } else if (event.target.id == "CreateNewAccount-form") {
             createNewUser();
@@ -73,7 +75,6 @@ function createNewUser() {
       }
     })
     .then(function (response) {
-      console.log(response);
       localStorage.setItem("customer", JSON.stringify(response));
       document.querySelector("#logIn").style.display = "none";
       document.querySelector("#mobileLogin").style.display = "none";
@@ -102,11 +103,13 @@ function loginUser(username, password) {
     },
   }).then((res) => {
     if (res.status == 200) {
-      console.log(res.headers);
+      const token = res.headers.get("Jwt-Token");
+      localStorage.setItem("token", token);
+      return res.json();
     } else if (res.status == 400) {
-      return res.text();
+      alert(res.json().message);
     }
-  });
+  }).then((user)=>localStorage.setItem("customer", JSON.stringify(user)));
 }
 
 /**
