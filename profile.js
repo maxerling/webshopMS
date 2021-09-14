@@ -569,3 +569,42 @@ function formatZipcodeForDb(zipcode) {
 }
 
 setProfileFromLS();
+
+$("#changePasswordBtn").click(function () {
+  $("#changePassDiv").toggle().removeClass("d-none");
+});
+
+$("#validationCustom09").keyup(function (event) {
+  const ok = checkPassword(event.target);
+  if (ok) {
+    $("#sendPasswordBtn").attr("disabled", false);
+  } else $("#sendPasswordBtn").attr("disabled", true);
+});
+
+$("#sendPasswordBtn").click(function () {
+  const email = $("#validationCustom03").val();
+  const password = $("#validationCustom09").val();
+  const token = localStorage.getItem("token");
+
+  fetch(
+    `https://hakims-webshop.herokuapp.com/user/resetpassword?email=${email}&newPassword=${password}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    }
+  )
+    .then(function (response) {
+      if (response.status == 200) {
+        return response.json();
+      } else alert("Nånting gick fel...");
+    })
+    .then(function (data) {
+      alert(data.message + " - Logga in igen med ditt nya lösenord");
+      localStorage.removeItem("customer");
+      localStorage.removeItem("token");
+      location.href = "/index.html";
+    });
+});
