@@ -98,8 +98,6 @@ $(document).on("click", "#modal-login-button", async function (e) {
       },
     })
       .then((res) => {
-       
-
         if (res.status == 200) {
           const token = res.headers.get("Jwt-Token");
           localStorage.setItem("token", token);
