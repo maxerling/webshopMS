@@ -289,26 +289,20 @@ function createOrderRow(orderId, totalPrice) {
     },
   })
     .then(function (response) {
-      console.log(response);
       if (response.status == 200) {
-        console.log("Response 200");
         return response.json();
       } else {
-        console.log("Response annat");
         return response.text();
       }
     })
     .then((data) => {
       if (data == "Lagersaldona var mindre i lager än i beställningen") {
-        console.log("If 1");
         alert(data);
       } else if (data == "Produkt data är korrumperad" || data == "Kvantitet måste vara heltal!") {
-        console.log("Else If 2");
         localStorage.removeItem("cart");
         alert(data);
         location.href = "index.html";
       } else {
-        console.log("Else 3");
         confirmBtn(data, totalPrice);
       }
     })
