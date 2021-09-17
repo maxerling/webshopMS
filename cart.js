@@ -176,7 +176,7 @@ function getDataFromLocalStorage() {
  *
  * @param {*} orderRowData Added function to show order modal, remove ls, show info in order modal
  */
-function confirmBtn(orderRowData,totalPrice) {
+function confirmBtn(orderRowData, totalPrice) {
   if (JSON.parse(localStorage.getItem("cart")).length == orderRowData.length) {
     $("#orderModal").modal("show");
 
@@ -243,7 +243,7 @@ function createOrder(customerId) {
     .then(function (result) {
       if (result != "The customer does not exist") {
         let orderId = result.id;
-        createOrderRow(orderId , total);
+        createOrderRow(orderId, total);
       } else {
         localStorage.removeItem("customer");
         alert("Denna profil har blivit borttagen.\nVänligen skapa nytt konto för att beställa.");
@@ -264,7 +264,7 @@ function StartCartSpinner() {
  * Creates orderRows in database for all items customer have in local storage
  * @param {*} orderId
  */
-function createOrderRow(orderId , totalPrice) {
+function createOrderRow(orderId, totalPrice) {
   let orderRowItems = [];
   for (let i = 0; i < cartItems.length; i++) {
     let orderRow = {
@@ -298,12 +298,12 @@ function createOrderRow(orderId , totalPrice) {
     .then((data) => {
       if (data == "Lagersaldona var mindre i lager än i beställningen") {
         alert(data);
-      } else if (data == "Produkt data är korrumperad") {
+      } else if (data == "Produkt data är korrumperad" || "Kvantitet måste vara heltal!") {
         localStorage.removeItem("cart");
         alert(data);
         location.href = "index.html";
       } else {
-        confirmBtn(data,totalPrice);
+        confirmBtn(data, totalPrice);
       }
     })
     .catch(function (error) {
