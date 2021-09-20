@@ -236,12 +236,17 @@ function createOrder(customerId) {
     .then(function (res) {
       if (res.status == 200) {
         return res.json();
+      } else if (res.status == 403) {
+        return "forbidden";
       } else {
         return res.text();
       }
     })
     .then(function (result) {
-      if (result != "The customer does not exist") {
+      if (result == "forbidden") {
+        alert("Token saknas!");
+        location.reload();
+      } else if (result != "The customer does not exist") {
         let orderId = result.id;
         createOrderRow(orderId, total);
       } else {
